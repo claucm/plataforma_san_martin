@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Definición y apertura de Convocatorias</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+      <div class="row">
+        <!-- Columna Izquierda -->
+        <div class="col-md-6">
+          <!-- Campo Título de la Convocatoria -->
+          <div class="mb-3">
+            <label for="titulo" class="form-label fw-bold">Título de la Convocatoria</label>
+            <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título de la convocatoria" required>
+          </div>
+  
+          <!-- Campo Fecha de Inicio -->
+          <div class="mb-3">
+            <label for="fechaInicio" class="form-label fw-bold">Fecha de Inicio</label>
+            <input type="date" class="form-control" id="fechaInicio" required>
+          </div>
+  
+          <!-- Campo Fecha de Finalización -->
+          <div class="mb-3">
+            <label for="fechaFin" class="form-label fw-bold">Fecha de Finalización</label>
+            <input type="date" class="form-control" id="fechaFin" required>
+          </div>
+  
+          <!-- Campo Presupuesto -->
+          <div class="mb-3">
+            <label for="presupuesto" class="form-label fw-bold">Presupuesto</label>
+            <input type="number" class="form-control" id="presupuesto" placeholder="Ingrese el presupuesto" required>
+          </div>
+        </div>
+  
+        <!-- Columna Derecha -->
+        <div class="col-md-6">
+          <!-- Campo Descripción -->
+          <div class="mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea class="form-control" id="descripcion" rows="4" placeholder="Ingrese una descripción detallada" required></textarea>
+          </div>
+  
+          <!-- Campo Documento de Convocatoria -->
+          <div class="mb-3">
+            <label for="documento" class="form-label fw-bold">Documento de Convocatoria</label>
+            <input type="file" class="form-control" id="documento" required>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botón Crear Convocatoria -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-4 mt-3">Crear Convocatoria</button>
+        </div>
+      </div>
+    </form>
+  </div>

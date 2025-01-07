@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Modificar Usuario</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+      <div class="row">
+        <!-- Columna Izquierda -->
+        <div class="col-md-6">
+          <!-- Campo ID del Usuario -->
+          <div class="mb-3">
+            <label for="id" class="form-label fw-bold">ID del Usuario</label>
+            <input type="text" class="form-control" id="id" placeholder="ID del usuario" value="12345" readonly>
+          </div>
+  
+          <!-- Campo Nombre -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-bold">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre del usuario" value="Juan Pérez" required>
+          </div>
+  
+          <!-- Campo Contraseña -->
+          <div class="mb-3">
+            <label for="password" class="form-label fw-bold">Nueva Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Ingrese nueva contraseña">
+          </div>
+        </div>
+  
+        <!-- Columna Derecha -->
+        <div class="col-md-6">
+          <!-- Campo Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Correo electrónico" value="juan.perez@example.com" required>
+          </div>
+  
+          <!-- Campo Rol -->
+          <div class="mb-3">
+            <label for="rol" class="form-label fw-bold">Rol</label>
+            <select class="form-select" id="rol" required>
+              <option value="admin-general" selected>Administrador General de Investigación</option>
+              <option value="admin-tecnico">Administrador Técnico</option>
+              <option value="coordinador-investigacion">Coordinador de Investigación</option>
+              <option value="investigador">Investigador</option>
+              <option value="estudiante">Estudiante</option>
+              <option value="directivo">Directivo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botón Modificar Usuario -->
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-4 me-2">Modificar Usuario</button>
+          
+        </div>
+      </div>
+    </form>
+  </div>

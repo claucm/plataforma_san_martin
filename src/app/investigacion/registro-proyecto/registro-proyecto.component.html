@@ -1,0 +1,136 @@
+<div class="container mt-5">
+    <h2 class="text-left mb-4">Registro del proyecto</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+      <!-- Primer Bloque: Convocatoria y Documento -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="convocatoria" class="form-label fw-bold">Convocatoria</label>
+          <input type="text" class="form-control" id="convocatoria" placeholder="Ingrese el nombre de la convocatoria" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="documento_convocatoria" class="form-label fw-bold">Documento Convocatoria</label>
+          <input type="file" class="form-control" id="documento_convocatoria" required>
+        </div>
+      </div>
+  
+      <!-- Titulo, Codigo y Estado -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="titulo" class="form-label fw-bold">Título</label>
+          <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="codigo" class="form-label fw-bold">Código</label>
+          <input type="text" class="form-control" id="codigo" placeholder="Ingrese el código" required>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="estado" class="form-label fw-bold">Estado</label>
+          <select class="form-select" id="estado" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="aprobado">Aprobado</option>
+            <option value="rechazado">Rechazado</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="duracion" class="form-label fw-bold">Duración Prevista (Meses)</label>
+          <input type="number" class="form-control" id="duracion" placeholder="Ingrese la duración prevista" required>
+        </div>
+      </div>
+  
+      <!-- Área del Conocimiento -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="area_conocimiento" class="form-label fw-bold">Área del Conocimiento</label>
+          <select class="form-select" id="area_conocimiento" required>
+            <option value="">Seleccione un área</option>
+            <!-- Agrega las opciones de áreas según sea necesario -->
+            <option value="ciencias-sociales">Ciencias Sociales</option>
+            <option value="ingenieria">Ingeniería</option>
+            <option value="salud">Salud</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Características del Proyecto -->
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="caracteristicas" class="form-label fw-bold">Características</label>
+          <textarea class="form-control" id="caracteristicas" rows="5" placeholder="Escriba las características del proyecto" required></textarea>
+        </div>
+      </div>
+  
+      <!--Objetivos -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="objetivo_general" class="form-label fw-bold">Objetivo General</label>
+          <textarea class="form-control" id="objetivo_general" rows="3" placeholder="Escriba el objetivo general" required></textarea>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="objetivos_especificos" class="form-label fw-bold">Objetivos Específicos</label>
+          <textarea class="form-control" id="objetivos_especificos" rows="3" placeholder="Escriba los objetivos específicos" required></textarea>
+        </div>
+      </div>
+  
+      <!-- Resumen del Proyecto -->
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="resumen" class="form-label fw-bold">Resumen</label>
+          <textarea class="form-control" id="resumen" rows="5" placeholder="Escriba el resumen del proyecto" required></textarea>
+        </div>
+      </div>
+  
+      <!-- Tipo de Producto y Producto -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="tipo_producto" class="form-label fw-bold">Tipo de Producto</label>
+          <select class="form-select" id="tipo_producto" required>
+            <option value="articulo">Artículo</option>
+            <option value="libro">Libro</option>
+            <option value="informe">Informe</option>
+            <option value="patente">Patente</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="producto" class="form-label fw-bold">Producto</label>
+          <select class="form-select" id="producto" required>
+            <option value="producto1">Producto 1</option>
+            <option value="producto2">Producto 2</option>
+            <option value="producto3">Producto 3</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Cronograma -->
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="cronograma" class="form-label fw-bold">Cronograma</label>
+          <textarea class="form-control" id="cronograma" rows="5" placeholder="Escriba el cronograma del proyecto" required></textarea>
+        </div>
+      </div>
+  
+      <!-- Presupuesto -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="total_solicitado" class="form-label fw-bold">Total Solicitado</label>
+          <input type="number" class="form-control" id="total_solicitado" placeholder="Ingrese el total solicitado" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="presupuesto_anual" class="form-label fw-bold">Presupuesto Anual Solicitado</label>
+          <input type="number" class="form-control" id="presupuesto_anual" placeholder="Ingrese el presupuesto anual solicitado" required>
+        </div>
+      </div>
+  
+      <!-- Botones -->
+      <div class="row">
+        <div class="col-6 text-center">
+          <button type="submit" class="btn btn-primary px-4 mt-3">Guardar Parcial</button>
+        </div>
+        <div class="col-6 text-center">
+          <button type="submit" class="btn btn-success px-4 mt-3">Guardar y Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>

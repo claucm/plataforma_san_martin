@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Asignar Roles y Permisos</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+      <div class="row">
+        <!-- Columna Izquierda -->
+        <div class="col-md-6">
+          <!-- Campo ID del Usuario -->
+          <div class="mb-3">
+            <label for="user-id" class="form-label fw-bold">ID del Usuario</label>
+            <input type="text" class="form-control" id="user-id" placeholder="Ingrese el ID del usuario" required>
+          </div>
+        </div>
+  
+        <!-- Columna Derecha -->
+        <div class="col-md-6">
+          <!-- Campo Rol -->
+          <div class="mb-3">
+            <label for="rol" class="form-label fw-bold">Rol</label>
+            <select class="form-select" id="rol" required>
+              <option value="" disabled selected>Seleccione un rol</option>
+              <option value="admin-general">Administrador General de Investigación</option>
+              <option value="admin-tecnico">Administrador Técnico</option>
+              <option value="coordinador-investigacion">Coordinador de Investigación</option>
+              <option value="investigador">Investigador</option>
+              <option value="estudiante">Estudiante</option>
+              <option value="directivo">Directivo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botón Asignar Rol -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-4 mt-3">Asignar Rol</button>
+        </div>
+      </div>
+    </form>
+  </div>

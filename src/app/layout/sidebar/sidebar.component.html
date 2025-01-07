@@ -1,0 +1,106 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-primary text-white" style="width: 250px; min-height: 100%; position: relative;background: linear-gradient(to bottom, #1A558D, #0097B2);">
+  <a href="/" class="d-flex justify-content-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <img src="assets/logo_sm.png" alt="Universidad San Martín" style="width: 200px; height: auto;">
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a [routerLink]="'/dashboard'" class="nav-link text-white active">
+        <i class="fas fa-chart-line me-2"></i> Inicio
+      </a>
+    </li>
+
+    <!-- General Module -->
+    <li>
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#generalMenu" role="button" aria-expanded="false" aria-controls="generalMenu">
+        <i class="fas fa-users me-2"></i> General
+      </a>
+      <div class="collapse" id="generalMenu">
+        <ul class="nav nav-pills flex-column ms-3">
+          <li>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#userManagement" role="button" aria-expanded="false" aria-controls="userManagement">
+              <i class="fas fa-user-cog me-2"></i> Gestión de Usuario
+            </a>
+            <div class="collapse" id="userManagement">
+              <ul class="nav nav-pills flex-column ms-3">
+                <li>
+                  <a [routerLink]="'/crear-usuario'" class="nav-link text-white">
+                    <i class="fas fa-user-plus me-2"></i> Crear
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="'/modificar-usuario'" class="nav-link text-white">
+                    <i class="fas fa-user-edit me-2"></i> Modificar
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="'/eliminar-usuario'" class="nav-link text-white">
+                    <i class="fas fa-user-times me-2"></i> Eliminar
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="'/roles-usuario'" class="nav-link text-white">
+                    <i class="fas fa-user-tag me-2"></i> Asignar Roles
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Investigación Modulo -->
+    <!-- Investigación Module -->
+    <li>
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#investigationMenu" role="button" aria-expanded="false" aria-controls="investigationMenu">
+        <i class="fas fa-file-alt me-2"></i> Investigación
+      </a>
+      <div class="collapse" id="investigationMenu">
+        <ul class="nav nav-pills flex-column ms-3">
+          <li>
+            <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
+              <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
+              <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
+              <i class="fas fa-file-signature me-2"></i> Actas de Inicio
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Grupos Investigación
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
+              <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/tablas-basicas'" class="nav-link text-white">
+              <i class="fas fa-table me-2"></i> Tablas Básicas
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+
+    <li>
+      <a [routerLink]="'/settings'" class="nav-link text-white">
+        <i class="fas fa-cogs me-2"></i> Extensión
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="text-center">
+    <button class="btn btn-outline-light btn-sm w-100" (click)="toggleDarkMode()">Modo Oscuro</button>
+  </div>
+</div>
