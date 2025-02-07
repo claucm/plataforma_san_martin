@@ -16,6 +16,10 @@ import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { AperturaConvocatoriaComponent } from './investigacion/apertura-convocatoria/apertura-convocatoria.component';
 import { RegistroProyectoComponent } from './investigacion/registro-proyecto/registro-proyecto.component';
 import { ActasInicioComponent } from './investigacion/actas-inicio/actas-inicio.component';
+import { GruposInvestigacionComponent } from './investigacion/grupos-investigacion/grupos-investigacion.component';
+import { ProyectosInvestigacionComponent } from './investigacion/proyectos-investigacion/proyectos-investigacion.component';
+import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consulta-tablas.component';
+import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
 
 
 export const routes: Routes = [
@@ -32,6 +36,10 @@ export const routes: Routes = [
   { path: 'apertura-convocatoria', component: AperturaConvocatoriaComponent },
   { path: 'registro-proyecto', component: RegistroProyectoComponent  },
   { path: 'actas-inicio', component: ActasInicioComponent  },
+  { path: 'grupos-investigacion', component: GruposInvestigacionComponent },
+  { path: 'proyectos-investigacion', component: ProyectosInvestigacionComponent },
+  { path: 'consulta-tablas', component: ConsultaTablasComponent },
+  { path: 'modulo-extension', component: ModuloExtensionComponent },
 
 ];
 

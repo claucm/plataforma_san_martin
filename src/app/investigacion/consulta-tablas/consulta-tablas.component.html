@@ -1,0 +1,156 @@
+<div class="container mt-5">
+    <h2 class="text-center">Consulta de Información sobre Tablas Básicas</h2>
+    
+    <div class="card text-center mt-4">
+        <div class="card-body">
+            <p class="card-text">
+                Estas tablas contienen información esencial para la consulta de datos sobre proyectos, productos y semilleros. 
+                Utiliza los botones a continuación para acceder a cada sección.
+            </p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <!-- Botón modal de Proyectos  -->
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalProyectos1">
+            Consulta de Proyectos
+        </button>
+        
+        <!-- Botón  modal de Proyectos  -->
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProyectos2">Consulta de Productos</button>
+
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalSemilleros">
+            Consulta de Semilleros
+        </button>
+    </div>
+</div>
+
+<!-- Modal de Consulta de Proyectos  -->
+<div class="modal fade" id="modalProyectos1" tabindex="-1" aria-labelledby="modalProyectos1Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProyectos1Label">Consulta de Proyectos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Nombre de Proyecto</th>
+                            <th>Código</th>
+                            <th>Estado</th>
+                            <th>Políticas Públicas</th>
+                            <th>Ingreso</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Proyecto de Innovación</td>
+                            <td>12345</td>
+                            <td>Activo</td>
+                            <td>XXX</td>
+                            <td>Activo</td>
+                            <td class="text-center">
+                                <input type="checkbox">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Consulta de Prodcutos -->
+<div class="modal fade" id="modalProyectos2" tabindex="-1" aria-labelledby="modalProyectos2Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProyectos2Label">Consulta de Productos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Derivado</th>
+                            <th>Producto</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Políticas Públicas</th>
+                            <th>Ingreso</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Derivado 1</td>
+                            <td>Producto A</td>
+                            <td>Producto 1</td>
+                            <td>2024-01-15</td>
+                            <td>Activo</td>
+                            <td>XXX</td>
+                            <td>Activo</td>
+                            <td class="text-center">
+                                <input type="checkbox">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Consulta de Semilleros -->
+<div class="modal fade" id="modalSemilleros" tabindex="-1" aria-labelledby="modalSemillerosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSemillerosLabel">Consulta de Semilleros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Tabla con 6 columnas -->
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Nombre de Semillero</th>
+                            <th>Integrantes</th>
+                            <th>Productos</th>
+                            <th>Estado</th>
+                            <th>Ingreso</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Semillero A</td>
+                            <td>Juan</td>
+                            <td>Producto A</td>
+                            <td>Activo</td>
+                            <td>Activo</td>
+                            <td class="text-center">
+                                <input type="checkbox">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

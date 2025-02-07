@@ -1,0 +1,324 @@
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Creación y Gestión de Grupos de Investigación</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+        <div class="row">
+            <!-- Columna Izquierda -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="codigoFUSM" class="form-label fw-bold">Código FUSM</label>
+                    <input type="text" class="form-control" id="codigoFUSM" placeholder="Ingrese el código FUSM" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="estado" class="form-label fw-bold">Estado</label>
+                    <select class="form-select" id="estado">
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="clasificacion" class="form-label fw-bold">Clasificación</label>
+                    <select class="form-select" id="clasificacion">
+                        <option>A1</option>
+                        <option>A2</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lineaInvestigacion" class="form-label fw-bold">Línea de Investigación FUSM</label>
+                    <select multiple class="form-select" id="lineaInvestigacion">
+                        <option>Línea 1</option>
+                        <option>Línea 2</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="nombreGrupo" class="form-label fw-bold">Nombre del Grupo</label>
+                    <input type="text" class="form-control" id="nombreGrupo" placeholder="Ingrese el nombre del grupo" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
+                    <input type="date" class="form-control" id="fechaCreacion" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                    <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingrese una descripción" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="areaEstrategica" class="form-label fw-bold">Área Estratégica</label>
+                    <select class="form-select" id="areaEstrategica">
+                        <option>Área 1</option>
+                        <option>Área 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="nombreProducto" class="form-label fw-bold">Nombre Producto</label>
+            <input type="text" class="form-control" id="nombreProducto" placeholder="Ingrese el nombre del producto">
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary px-4 mt-3">Crear Grupo</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Botones -->
+    <div class="row mt-4 text-center">
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalDatosBasicos">Datos Básicos</button>
+        </div>
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalLineaInvestigacion">Línea de Investigación</button>
+        </div>
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalIntegrantes">Integrantes</button>
+        </div>
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalProductos">Productos</button>
+        </div>
+
+    
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalVinculos">Vínculos Externos</button>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalRedes">Redes</button>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalDocumentos">Documentos</button>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalSolicitudes">Solicitudes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Documentos -->
+<div class="modal fade" id="modalDocumentos" tabindex="-1" aria-labelledby="modalDocumentosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalDocumentosLabel">Cargar Documentos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="documentoGeneral" class="form-label fw-bold">Seleccionar Archivo</label>
+                    <input type="file" class="form-control" id="documentoGeneral">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Integrantes -->
+<div class="modal fade" id="modalIntegrantes" tabindex="-1" aria-labelledby="modalIntegrantesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalIntegrantesLabel">Agregar Integrante</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="nombreIntegrante" class="form-label fw-bold">Nombre del Integrante</label>
+                    <input type="text" class="form-control" id="nombreIntegrante" placeholder="Ingrese el nombre del integrante" required>
+                </div>
+                <div class="mb-3">
+                    <label for="documentoIdentidad" class="form-label fw-bold">Documento de Identidad</label>
+                    <input type="text" class="form-control" id="documentoIdentidad" placeholder="Ingrese el número de documento" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Solicitudes -->
+<div class="modal fade" id="modalSolicitudes" tabindex="-1" aria-labelledby="modalSolicitudesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalSolicitudesLabel">Solicitudes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="textareaSolicitudes" class="form-label fw-bold">Escribe tu solicitud:</label>
+                    <textarea class="form-control" id="textareaSolicitudes" rows="4" placeholder="Describe tu solicitud aquí..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Vínculos Externos -->
+<div class="modal fade" id="modalVinculos" tabindex="-1" aria-labelledby="modalVinculosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalVinculosLabel">Agregar Vínculo Externo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="entidadExterna" class="form-label fw-bold">Entidad Externa</label>
+                    <input type="text" class="form-control" id="entidadExterna" placeholder="Ingrese el nombre de la entidad" required>
+                </div>
+                <div class="mb-3">
+                    <label for="codigoProyecto" class="form-label fw-bold">Código de Proyecto</label>
+                    <input type="text" class="form-control" id="codigoProyecto" placeholder="Ingrese el código del proyecto" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Redes -->
+<div class="modal fade" id="modalRedes" tabindex="-1" aria-labelledby="modalRedesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalRedesLabel">Cargar Documentos de Redes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="documentoRedes" class="form-label fw-bold">Seleccionar Archivo</label>
+                    <input type="file" class="form-control" id="documentoRedes">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Línea de Investigación -->
+<div class="modal fade" id="modalLineaInvestigacion" tabindex="-1" aria-labelledby="modalLineaInvestigacionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalLineaInvestigacionLabel">Línea de Investigación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="modalLineaInvestigacionSelect" class="form-label fw-bold">Seleccione Línea(s) de Investigación:</label>
+                    <select multiple class="form-select" id="modalLineaInvestigacionSelect">
+                        <option>Línea 1</option>
+                        <option>Línea 2</option>
+                        <option>Línea 3</option>
+                        <option>Línea 4</option>
+                    </select>
+                    <small class="text-muted">Mantenga presionada la tecla Ctrl (Cmd en Mac) para seleccionar múltiples opciones.</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Datos Básicos -->
+<div class="modal fade" id="modalDatosBasicos" tabindex="-1" aria-labelledby="modalDatosBasicosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalDatosBasicosLabel">Datos Básicos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Línea de Investigación FUSM:</label>
+                    <ul class="list-group">
+                        <li class="list-group-item">Línea 1</li>
+                        <li class="list-group-item">Línea 2</li>
+                    </ul>
+                </div>
+
+                <div class="mb-3">
+                    <label for="modalAreaEstrategica" class="form-label fw-bold">Área Estratégica:</label>
+                    <select class="form-select" id="modalAreaEstrategica">
+                        <option>Área 1</option>
+                        <option>Área 2</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="modalNombreProducto" class="form-label fw-bold">Nombre del Producto:</label>
+                    <input type="text" class="form-control" id="modalNombreProducto" placeholder="Ingrese el nombre del producto">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Productos -->
+
+<div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="modalProductosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalProductosLabel">Agregar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="tituloProducto" class="form-label fw-bold">Título del Producto</label>
+                    <input type="text" class="form-control" id="tituloProducto" placeholder="Ingrese el título del producto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="estadoProducto" class="form-label fw-bold">Estado del Producto</label>
+                    <select class="form-select" id="estadoProducto">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Gestión de Proyectos de Investigación</h2>
+    <form class="p-4 border rounded shadow-sm bg-white">
+        <div class="row">
+            <!-- Columna Izquierda -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="nombreProyecto" class="form-label fw-bold">Nombre del Proyecto</label>
+                    <input type="text" class="form-control" id="nombreProyecto" placeholder="Ingrese el nombre del proyecto" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="codigo" class="form-label fw-bold">Código</label>
+                    <input type="text" class="form-control" id="codigo" placeholder="Ingrese el código" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="estado" class="form-label fw-bold">Estado</label>
+                    <select class="form-select" id="estado">
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="politicasPublicas" class="form-label fw-bold">Políticas Públicas</label>
+                    <input type="text" class="form-control" id="politicasPublicas" placeholder="Ingrese las políticas públicas">
+                </div>
+
+                <div class="mb-3">
+                    <label for="ingreso" class="form-label fw-bold">Ingreso</label>
+                    <select class="form-select" id="ingreso">
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="proyectoSeleccionado">
+                    <label class="form-check-label fw-bold" for="proyectoSeleccionado">Proyecto Seleccionado</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary px-4 mt-3">Guardar Proyecto</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Botones en dos filas de cinco y uno debajo centrado -->
+    <div class="container mt-4">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <button class="btn btn-primary">Datos Básicos</button>
+            <button class="btn btn-primary">Entidades</button>
+            <button class="btn btn-primary">Integrantes</button>
+            <button class="btn btn-primary">Presupuesto</button>
+            <button class="btn btn-primary">Legalización</button>
+            <button class="btn btn-primary">Seguimiento</button>
+            <button class="btn btn-primary">Productos</button>
+            <button class="btn btn-primary">Documentos</button>
+            <button class="btn btn-primary">Informe Avance</button>
+            <button class="btn btn-primary">Informe Final</button>
+            <button class="btn btn-primary">Solicitudes</button>
+        </div>
+    </div>
+</div>
