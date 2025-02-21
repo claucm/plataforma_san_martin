@@ -21,6 +21,14 @@ import { ProyectosInvestigacionComponent } from './investigacion/proyectos-inves
 import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consulta-tablas.component';
 import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
 
+//Extensión
+import { PracticasPasantiasComponent } from './extension/practicas/practicas-pasantias/practicas-pasantias.component';
+import { ConveniosFormComponent } from './extension/practicas/convenios-form/convenios-form.component';
+import { ConveniosDocenciaComponent } from './extension/practicas/convenios-docencia/convenios-docencia.component';
+import { ComiteDocenciaComponent } from './extension/practicas/comite-docencia/comite-docencia.component';
+import { PracticasProfesionalesComponent } from './extension/practicas/practicas-profesionales/practicas-profesionales.component';
+import { FichaResumenComponent } from './extension/practicas/ficha-resumen/ficha-resumen.component';
+import { ProyeccionSocialComponent } from './extension/practicas/proyeccion-social/proyeccion-social.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -40,6 +48,14 @@ export const routes: Routes = [
   { path: 'proyectos-investigacion', component: ProyectosInvestigacionComponent },
   { path: 'consulta-tablas', component: ConsultaTablasComponent },
   { path: 'modulo-extension', component: ModuloExtensionComponent },
+
+{ path: 'practicas-pasantias', component: PracticasPasantiasComponent },
+{ path: 'convenios-form', component: ConveniosFormComponent },
+{ path: 'convenios-docencia', component: ConveniosDocenciaComponent },
+{ path: 'comite-docencia', component: ComiteDocenciaComponent },
+{ path: 'practicas-profesionales', component: PracticasProfesionalesComponent },
+{ path: 'ficha-resumen', component: FichaResumenComponent },
+{ path: 'proyeccion-social', component: ProyeccionSocialComponent }
 
 ];
 

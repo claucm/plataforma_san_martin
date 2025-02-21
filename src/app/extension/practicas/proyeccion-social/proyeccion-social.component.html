@@ -1,0 +1,94 @@
+<div class="container mt-5">
+   
+    <form [formGroup]="proyeccionForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- Fecha de diligenciamiento -->
+        <div class="col-md-6 mb-3">
+          <label for="fechaDiligenciamiento" class="form-label">Fecha de Diligenciamiento</label>
+          <input type="date" formControlName="fechaDiligenciamiento" class="form-control" [ngClass]="{'is-invalid': isInvalid('fechaDiligenciamiento')}"/>
+          <div *ngIf="isInvalid('fechaDiligenciamiento')" class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+  
+        <!-- Periodo académico -->
+        <div class="col-md-6 mb-3">
+          <label for="periodoAcademico" class="form-label">Periodo Académico</label>
+          <input type="text" formControlName="periodoAcademico" class="form-control" [ngClass]="{'is-invalid': isInvalid('periodoAcademico')}"/>
+          <div *ngIf="isInvalid('periodoAcademico')" class="invalid-feedback">Ingrese el periodo académico.</div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Tipo de Actividad -->
+        <div class="col-md-6 mb-3">
+          <label for="tipoActividad" class="form-label">Tipo de Actividad</label>
+          <select formControlName="tipoActividad" class="form-select" [ngClass]="{'is-invalid': isInvalid('tipoActividad')}">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option *ngFor="let option of tiposActividad" [value]="option">{{ option }}</option>
+          </select>
+          <div *ngIf="isInvalid('tipoActividad')" class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+  
+        <!-- Tipo de Proyección Social -->
+        <div class="col-md-6 mb-3">
+          <label for="tipo" class="form-label">Tipo de Proyección Social</label>
+          <select formControlName="tipo" class="form-select" [ngClass]="{'is-invalid': isInvalid('tipo')}">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option *ngFor="let option of tipos" [value]="option">{{ option }}</option>
+          </select>
+          <div *ngIf="isInvalid('tipo')" class="invalid-feedback">Seleccione un tipo válido.</div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Facultad -->
+        <div class="col-md-6 mb-3">
+          <label for="facultad" class="form-label">Facultad</label>
+          <input type="text" formControlName="facultad" class="form-control" [ngClass]="{'is-invalid': isInvalid('facultad')}"/>
+          <div *ngIf="isInvalid('facultad')" class="invalid-feedback">Ingrese una facultad válida (mínimo 3 caracteres).</div>
+        </div>
+  
+        <!-- Programa -->
+        <div class="col-md-6 mb-3">
+          <label for="programa" class="form-label">Programa</label>
+          <input type="text" formControlName="programa" class="form-control" [ngClass]="{'is-invalid': isInvalid('programa')}"/>
+          <div *ngIf="isInvalid('programa')" class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Sede -->
+        <div class="col-md-6 mb-3">
+          <label for="sede" class="form-label">Sede</label>
+          <input type="text" formControlName="sede" class="form-control" [ngClass]="{'is-invalid': isInvalid('sede')}"/>
+          <div *ngIf="isInvalid('sede')" class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+  
+        <!-- Actividad Extracurricular -->
+        <div class="col-md-6 mb-3">
+          <label for="actividadExtracurricular" class="form-label">Actividad Extracurricular</label>
+          <input type="text" formControlName="actividadExtracurricular" class="form-control" [ngClass]="{'is-invalid': isInvalid('actividadExtracurricular')}"/>
+          <div *ngIf="isInvalid('actividadExtracurricular')" class="invalid-feedback">Este campo es obligatorio.</div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Celular -->
+        <div class="col-md-6 mb-3">
+          <label for="celular" class="form-label">Número de Celular</label>
+          <input type="text" formControlName="celular" class="form-control" [ngClass]="{'is-invalid': isInvalid('celular')}"/>
+          <div *ngIf="isInvalid('celular')" class="invalid-feedback">Ingrese un número de 10 dígitos.</div>
+        </div>
+  
+        <!-- Correo Electrónico -->
+        <div class="col-md-6 mb-3">
+          <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+          <input type="email" formControlName="correoElectronico" class="form-control" [ngClass]="{'is-invalid': isInvalid('correoElectronico')}"/>
+          <div *ngIf="isInvalid('correoElectronico')" class="invalid-feedback">Ingrese un correo válido.</div>
+        </div>
+      </div>
+ 
+<button type="submit" class="btn btn-primary mt-4 d-block mx-auto w-auto">Enviar</button>
+
+    </form>
+  </div>
+  

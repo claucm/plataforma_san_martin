@@ -1,0 +1,56 @@
+<form [formGroup]="convenioForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- Primera columna -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label>Área de Práctica</label>
+          <input type="text" formControlName="areaPractica" class="form-control" />
+          <div *ngIf="convenioForm.get('areaPractica')?.invalid && convenioForm.get('areaPractica')?.touched" class="text-danger">
+            Este campo es obligatorio.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label>Código REPS</label>
+          <input type="text" formControlName="codigoReps" class="form-control" />
+          <div *ngIf="convenioForm.get('codigoReps')?.invalid && convenioForm.get('codigoReps')?.touched" class="text-danger">
+            Solo se permiten números.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label>Anexos Técnicos</label>
+          <input type="file" (change)="onFileChange($event, 'anexosTecnicos')" class="form-control" />
+          <div *ngIf="convenioForm.get('anexosTecnicos')?.invalid && convenioForm.get('anexosTecnicos')?.touched" class="text-danger">
+            El archivo es obligatorio.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Segunda columna -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label>No. Hospitales</label>
+          <input type="number" formControlName="numeroHospitales" class="form-control" />
+          <div *ngIf="convenioForm.get('numeroHospitales')?.invalid && convenioForm.get('numeroHospitales')?.touched" class="text-danger">
+            Debe ser al menos 1.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label>Observaciones</label>
+          <textarea formControlName="observaciones" class="form-control"></textarea>
+          <div *ngIf="convenioForm.get('observaciones')?.invalid && convenioForm.get('observaciones')?.touched" class="text-danger">
+            Este campo es obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary" [disabled]="!convenioForm.valid">Enviar</button>
+    </div>
+  </form>
+  
+  
+  

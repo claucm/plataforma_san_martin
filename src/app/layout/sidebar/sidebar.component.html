@@ -92,12 +92,24 @@
       </div>
     </li>
 
+        <!-- Extensión Modulo -->
 
-    <li>
-      <a [routerLink]="'/modulo-extension'" class="nav-link text-white">
-        <i class="fas fa-cogs me-2"></i> Extensión
-      </a>
-    </li>
+        <li>
+          <a class="nav-link text-white" data-bs-toggle="collapse" href="#extensionMenu" role="button" aria-expanded="false" aria-controls="extensionMenu">
+            <i class="fas fa-cogs me-2"></i> Extensión
+          </a>
+          <div class="collapse" id="extensionMenu">
+            <ul class="nav nav-pills flex-column ms-3">
+              <li>
+                <a [routerLink]="'/practicas-pasantias'" class="nav-link text-white">
+                  <i class="fas fa-briefcase me-2"></i> Prácticas y Pasantías Universitarias
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        
+        
   </ul>
   <hr>
   <div class="text-center">

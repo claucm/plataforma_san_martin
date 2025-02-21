@@ -1,0 +1,48 @@
+<form [formGroup]="fichaForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3" *ngFor="let field of [
+          { label: 'Fecha de diligenciamiento', name: 'fechaDiligenciamiento', type: 'date' },
+          { label: 'Periodo académico', name: 'periodoAcademico', type: 'number' },
+          { label: 'Código unidad organizacional', name: 'codigoUnidad', type: 'number' },
+          { label: 'Facultad', name: 'facultad', type: 'text' },
+          { label: 'Programa', name: 'programa', type: 'text' },
+          { label: 'Sede', name: 'sede', type: 'text' },
+          { label: 'Unidad organizacional', name: 'unidadOrganizacional', type: 'number' },
+          { label: 'Coordinador(es) o supervisor(es)', name: 'coordinador', type: 'text' },
+          { label: 'Nombre de la Entidad', name: 'nombreEntidad', type: 'text' },
+          { label: 'Número de practicantes', name: 'numeroPracticantes', type: 'number' }
+        ]">
+          <label>{{ field.label }}</label>
+          <input [type]="field.type" class="form-control" [formControlName]="field.name" [ngClass]="{'is-invalid': isInvalid(field.name)}" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Nivel de estudio</label>
+          <select class="form-control" formControlName="nivelEstudio" [ngClass]="{'is-invalid': isInvalid('nivelEstudio')}">
+            <option value="">Selecciona</option>
+            <option *ngFor="let nivel of nivelesEstudio" [value]="nivel">{{ nivel }}</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Tipo de entidad</label>
+          <select class="form-control" formControlName="tipoEntidad" [ngClass]="{'is-invalid': isInvalid('tipoEntidad')}">
+            <option value="">Selecciona</option>
+            <option *ngFor="let tipo of tiposEntidad" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Tipo de práctica</label>
+          <select class="form-control" formControlName="tipoPractica" [ngClass]="{'is-invalid': isInvalid('tipoPractica')}">
+            <option value="">Selecciona</option>
+            <option *ngFor="let practica of tiposPractica" [value]="practica">{{ practica }}</option>
+          </select>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Observaciones generales</label>
+          <textarea class="form-control" formControlName="observaciones"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+    </div>
+  </form>
+  

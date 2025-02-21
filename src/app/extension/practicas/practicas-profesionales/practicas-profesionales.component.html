@@ -1,0 +1,99 @@
+<form [formGroup]="practicasForm" (ngSubmit)="onSubmit()" class="container mt-4">
+
+    <div class="row g-3">
+  
+      <div class="col-md-6">
+        <label class="form-label">Fecha de diligenciamiento:</label>
+        <input type="date" formControlName="fechaDiligenciamiento" class="form-control" [class.is-invalid]="isInvalid('fechaDiligenciamiento')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Periodo académico:</label>
+        <input type="number" formControlName="periodoAcademico" class="form-control" [class.is-invalid]="isInvalid('periodoAcademico')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Código unidad organizacional:</label>
+        <input type="number" formControlName="codigoUnidad" class="form-control" [class.is-invalid]="isInvalid('codigoUnidad')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Nivel de estudio:</label>
+        <select formControlName="nivelEstudio" class="form-select" [class.is-invalid]="isInvalid('nivelEstudio')">
+          <option value="">Selecciona</option>
+          <option *ngFor="let nivel of nivelesEstudio" [value]="nivel">{{ nivel }}</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Facultad:</label>
+        <input type="text" formControlName="facultad" class="form-control" [class.is-invalid]="isInvalid('facultad')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Programa:</label>
+        <input type="text" formControlName="programa" class="form-control" [class.is-invalid]="isInvalid('programa')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Sede:</label>
+        <input type="text" formControlName="sede" class="form-control" [class.is-invalid]="isInvalid('sede')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Unidad organizacional:</label>
+        <input type="number" formControlName="unidadOrganizacional" class="form-control" [class.is-invalid]="isInvalid('unidadOrganizacional')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Nombre del convenio:</label>
+        <input type="text" formControlName="nombreConvenio" class="form-control" [class.is-invalid]="isInvalid('nombreConvenio')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">No. de cupos:</label>
+        <input type="number" formControlName="cupos" class="form-control" [class.is-invalid]="isInvalid('cupos')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">No. de estudiantes que aplicaron:</label>
+        <input type="number" formControlName="estudiantesAplicaron" class="form-control" [class.is-invalid]="isInvalid('estudiantesAplicaron')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Semestre:</label>
+        <input type="number" formControlName="semestre" class="form-control" [class.is-invalid]="isInvalid('semestre')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Tipo de práctica:</label>
+        <select formControlName="tipoPractica" class="form-select" [class.is-invalid]="isInvalid('tipoPractica')">
+          <option value="">Selecciona</option>
+          <option *ngFor="let tipo of tiposPractica" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6" *ngIf="practicasForm.get('tipoPractica')?.value === 'Otro'">
+        <label class="form-label">¿Cuál otro tipo de práctica?</label>
+        <input type="text" formControlName="otroTipoPractica" class="form-control" [class.is-invalid]="isInvalid('otroTipoPractica')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Área del conocimiento:</label>
+        <input type="text" formControlName="areaConocimiento" class="form-control" [class.is-invalid]="isInvalid('areaConocimiento')" />
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Asignatura - Módulo:</label>
+        <input type="text" formControlName="asignaturaModulo" class="form-control" [class.is-invalid]="isInvalid('asignaturaModulo')" />
+      </div>
+  
+    </div>
+  
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+  
+  </form>
+  
+  
