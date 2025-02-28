@@ -1,0 +1,165 @@
+<form [formGroup]="datosBasicosForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Datos básicos -->
+    <div class="col-md-3">
+      <label class="form-label">Código *</label>
+      <input type="number" class="form-control" formControlName="codigo">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Título *</label>
+      <input type="text" class="form-control" formControlName="titulo">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Página Web</label>
+      <input type="text" class="form-control" formControlName="paginaWeb">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Año probable de inicio *</label>
+      <input type="date" class="form-control" formControlName="anioInicio">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Convocatoria *</label>
+      <input type="text" class="form-control" formControlName="convocatoria">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Año convocatoria *</label>
+      <input type="date" class="form-control" formControlName="anioConvocatoria">
+    </div>
+  
+   
+    <div class="col-md-3">
+      <label class="form-label">Duración prevista (meses) *</label>
+      <input type="number" class="form-control" formControlName="duracionPrevista">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Duración más prórrogas (meses) *</label>
+      <input type="number" class="form-control" formControlName="duracionProrrogas">
+    </div>
+  
+    
+    <div class="col-md-3">
+      <label class="form-label">Fecha inicio *</label>
+      <input type="date" class="form-control" formControlName="fechaInicio">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Fecha terminación *</label>
+      <input type="date" class="form-control" formControlName="fechaTerminacion">
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Código Externo</label>
+      <input type="number" class="form-control" formControlName="codigoExterno">
+    </div>
+  
+ 
+    <div class="col-md-3">
+      <label class="form-label">Formación investigativa *</label>
+      <select class="form-select" formControlName="formacionInvestigativa">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Interdisciplinaria *</label>
+      <select class="form-select" formControlName="interdisciplinaria">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  
+    <div class="col-md-3">
+      <label class="form-label">Intergrupos *</label>
+      <select class="form-select" formControlName="intergrupos">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Tesis doctoral o trabajo de maestría</label>
+      <input type="text" class="form-control" formControlName="tesisDoctoral">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Rol FUSM *</label>
+      <select class="form-select" formControlName="rolFUSM">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let rol of roles" [value]="rol">{{rol}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Centro de costo *</label>
+      <select class="form-select" formControlName="centroCosto">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let centro of centrosCosto" [value]="centro">{{centro}}</option>
+      </select>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">¿Tiene potencial de desarrollo tecnológico? *</label>
+      <select class="form-select" formControlName="potencialDesarrollo">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  
+    
+    <div class="col-12">
+      <label class="form-label">Objetivo General *</label>
+      <textarea class="form-control" rows="3" formControlName="objetivoGeneral"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Palabras clave *</label>
+      <textarea class="form-control" rows="2" formControlName="palabrasClave"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Resumen *</label>
+      <textarea class="form-control" rows="4" formControlName="resumen"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Observaciones</label>
+      <textarea class="form-control" rows="3" formControlName="observaciones"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Objetivos específicos *</label>
+      <textarea class="form-control" rows="4" formControlName="objetivosEspecificos"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Área del conocimiento *</label>
+      <select class="form-select" formControlName="areaConocimiento">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let area of areasConocimiento" [value]="area">{{area}}</option>
+      </select>
+    </div>
+  
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!datosBasicosForm.valid">
+        Guardar Datos Básicos
+      </button>
+    </div>
+  </form>
