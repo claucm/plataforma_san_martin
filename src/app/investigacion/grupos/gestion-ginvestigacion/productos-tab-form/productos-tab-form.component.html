@@ -1,0 +1,108 @@
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Información básica del producto -->
+    <div class="col-md-6">
+      <label class="form-label">Producto *</label>
+      <select class="form-select" formControlName="producto">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let tipo of tiposProducto" [value]="tipo">{{tipo}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Tipo de producto *</label>
+      <select class="form-select" formControlName="tipoProducto">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let tipo of tiposProducto" [value]="tipo">{{tipo}}</option>
+      </select>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Título *</label>
+      <input type="text" class="form-control" formControlName="titulo">
+    </div>
+  
+    <!-- Fechas -->
+    <div class="col-md-6">
+      <label class="form-label">Fecha inicio *</label>
+      <input type="date" class="form-control" formControlName="fechaInicio">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Fecha terminación *</label>
+      <input type="date" class="form-control" formControlName="fechaTerminacion">
+    </div>
+  
+    <!-- Detalles de publicación -->
+    <div class="col-md-6">
+      <label class="form-label">Contenido publicado *</label>
+      <select class="form-select" formControlName="contenidoPublicado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of contenidosPublicados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">ISBN/ISSN</label>
+      <input type="text" class="form-control" formControlName="isbn">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">ISI</label>
+      <input type="text" class="form-control" formControlName="isi">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">SCOPUS</label>
+      <input type="text" class="form-control" formControlName="scopus">
+    </div>
+  
+    <!-- Páginas -->
+    <div class="col-md-6">
+      <label class="form-label">Página inicial</label>
+      <input type="text" class="form-control" formControlName="paginaInicial">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Página final</label>
+      <input type="text" class="form-control" formControlName="paginaFinal">
+    </div>
+  
+    <!-- Información de memorias -->
+    <div class="col-md-6">
+      <label class="form-label">Fecha publicación memorias</label>
+      <input type="date" class="form-control" formControlName="fechaPublicacionMemorias">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Editorial de las memorias</label>
+      <input type="text" class="form-control" formControlName="editorialMemorias">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">País *</label>
+      <select class="form-select" formControlName="pais">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let pais of paises" [value]="pais">{{pais}}</option>
+      </select>
+    </div>
+  
+    <!-- Anexos -->
+    <div class="col-12">
+      <label class="form-label">Cargar anexos</label>
+      <input type="file" 
+             class="form-control" 
+             multiple
+             (change)="onFileSelected($event)"
+             accept=".pdf,.doc,.docx,.xls,.xlsx">
+      <div class="form-text">Puede seleccionar múltiples archivos</div>
+    </div>
+  
+    <!-- Botón de envío -->
+    <div class="col-12 mt-4">
+      <button type="submit" 
+              class="btn btn-primary" 
+              [disabled]="!productoForm.valid">
+        Guardar Producto
+      </button>
+    </div>
+  </form>

@@ -1,0 +1,70 @@
+/* Estilos para las pestañas */
+.nav-tabs .nav-link {
+    color: #0d6efd;
+    background-color: transparent;
+    border: 1px solid transparent;
+    margin-right: 2px;
+    transition: none !important; /* Remove transition */
+    transform: none !important; /* Prevent any transform */
+    animation: none !important; /* Remove any animation */
+}
+  
+  .nav-tabs .nav-link:hover {
+    color: #0a4fb9; /* Azul oscuro para el hover */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo más claro para contraste */
+    border-bottom-color: transparent;
+    font-weight: 500;
+  }
+  
+  .nav-tabs .nav-link.active {
+    color: #0d6efd !important;
+    background-color: #fff;
+    border-bottom-color: transparent;
+    font-weight: 500;
+  }
+  
+  .tab-content {
+    background-color: #f8f9fa; /* Color de fondo del contenido */
+    border-radius: 0 0 0.375rem 0.375rem;
+    padding: 1.5rem;
+    transition: none !important;
+    border: 1px solid #dee2e6;
+  }
+  
+  /* Estilo para el contenedor del formulario */
+  .card-body {
+    background-color: #f0f2f5; /* Color de fondo más claro para el contenedor */
+  }
+  
+  .tab-pane {
+    background-color: #ffffff; /* Color de fondo blanco para los formularios */
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  /* Estilos para la tabla */
+  .table-dark {
+    background-color: #0d6efd;
+  }
+  
+  .badge {
+    padding: 0.5em 1em;
+  }
+  
+  /* Estilos para la card */
+  .card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .card-header {
+    background-color: #0d6efd;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .nav-tabs .nav-link {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+  }

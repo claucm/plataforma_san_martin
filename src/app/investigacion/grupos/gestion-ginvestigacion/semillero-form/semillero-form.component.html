@@ -1,0 +1,46 @@
+<form [formGroup]="semilleroForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Información básica del semillero -->
+    <div class="col-md-6">
+      <label class="form-label">Nombre semillero *</label>
+      <input type="text" class="form-control" formControlName="nombre">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option value="Inactivo">Inactivo</option>
+        <option value="Cerrado">Cerrado</option>
+      </select>
+    </div>
+  
+    <!-- Integrantes -->
+    <div class="col-12">
+      <label class="form-label">Integrantes *</label>
+      <select class="form-select" formControlName="integrantes" multiple>
+        <option *ngFor="let integrante of listaIntegrantes" [value]="integrante">
+          {{integrante}}
+        </option>
+      </select>
+    </div>
+  
+    <!-- Productos -->
+    <div class="col-12">
+      <label class="form-label">Productos *</label>
+      <select class="form-select" formControlName="productos" multiple>
+        <option *ngFor="let producto of productosMinciencias" [value]="producto">
+          {{producto}}
+        </option>
+      </select>
+      <small class="form-text text-muted">
+        Puede seleccionar múltiples productos manteniendo presionada la tecla Ctrl
+      </small>
+    </div>
+  
+    <!-- Botón de envío -->
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!semilleroForm.valid">
+        Guardar Semillero
+      </button>
+    </div>
+  </form>

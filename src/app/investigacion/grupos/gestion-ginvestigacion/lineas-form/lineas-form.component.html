@@ -1,0 +1,73 @@
+<form [formGroup]="lineasForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Información básica de la línea -->
+    <div class="col-md-6">
+      <label class="form-label">Nombre *</label>
+      <input type="text" class="form-control" formControlName="nombre">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Descripción *</label>
+      <textarea class="form-control" rows="3" formControlName="descripcion"></textarea>
+    </div>
+  
+    <!-- Sección de proyectos -->
+    <div class="col-12 mt-4">
+      <h4>Proyectos de la línea</h4>
+      <div formArrayName="proyectos">
+        <div *ngFor="let proyecto of proyectos.controls; let i=index" 
+             [formGroupName]="i" 
+             class="row g-3 mb-3 pb-3 border-bottom">
+          <div class="col-md-2">
+            <label class="form-label">Código *</label>
+            <input type="number" class="form-control" formControlName="codigo">
+          </div>
+          
+          <div class="col-md-6">
+            <label class="form-label">Título *</label>
+            <input type="text" class="form-control" formControlName="titulo">
+          </div>
+  
+          <div class="col-md-3">
+            <label class="form-label">Estado *</label>
+            <select class="form-select" formControlName="estado">
+              <option value="">Seleccione...</option>
+              <option *ngFor="let estado of estadosProyecto" [value]="estado">
+                {{estado}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="button" 
+                    class="btn btn-danger" 
+                    (click)="removerProyecto(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <button type="button" 
+              class="btn btn-secondary mt-3" 
+              (click)="agregarProyecto()">
+        Agregar Proyecto
+      </button>
+    </div>
+  
+    <!-- Botón submit -->
+    <div class="col-12 mt-4">
+      <button type="submit" 
+              class="btn btn-primary" 
+              [disabled]="!lineasForm.valid">
+        Guardar Línea de Investigación
+      </button>
+    </div>
+  </form>

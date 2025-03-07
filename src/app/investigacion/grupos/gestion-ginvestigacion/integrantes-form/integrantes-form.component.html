@@ -1,0 +1,48 @@
+<form [formGroup]="integrantesForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre *</label>
+      <input type="text" 
+             class="form-control" 
+             formControlName="nombre"
+             placeholder="Nombre completo">
+    </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Documento de identidad *</label>
+      <input type="number" 
+             class="form-control" 
+             formControlName="documento"
+             placeholder="Número de documento">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Fecha de vinculación *</label>
+      <input type="date" 
+             class="form-control" 
+             formControlName="fechaVinculacion">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Rol *</label>
+      <select class="form-select" formControlName="rol">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let rol of roles" [value]="rol">{{rol}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-12 mt-4">
+      <button type="submit" 
+              class="btn btn-primary" 
+              [disabled]="!integrantesForm.valid">
+        Guardar Integrante
+      </button>
+    </div>
+  </form>

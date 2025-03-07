@@ -1,0 +1,131 @@
+<form [formGroup]="proyectoForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Información básica -->
+    <div class="col-md-4">
+      <label class="form-label">Código Proyecto *</label>
+      <input type="number" class="form-control" formControlName="codigoProyecto">
+    </div>
+  
+    <div class="col-md-8">
+      <label class="form-label">Título *</label>
+      <input type="text" class="form-control" formControlName="titulo">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-8">
+      <label class="form-label">Página Web</label>
+      <input type="text" class="form-control" formControlName="paginaWeb">
+    </div>
+  
+    <!-- Información de duración -->
+    <div class="col-md-4">
+      <label class="form-label">Convocatoria *</label>
+      <input type="text" class="form-control" formControlName="convocatoria">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Duración prevista (meses) *</label>
+      <input type="number" class="form-control" formControlName="duracionPrevista">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Duración más prórrogas (meses) *</label>
+      <input type="number" class="form-control" formControlName="duracionProrrogas">
+    </div>
+  
+    <!-- Fechas -->
+    <div class="col-md-4">
+      <label class="form-label">Fecha inicio *</label>
+      <input type="date" class="form-control" formControlName="fechaInicio">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Fecha terminación *</label>
+      <input type="date" class="form-control" formControlName="fechaTerminacion">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Cumplimiento *</label>
+      <input type="text" class="form-control" formControlName="cumplimiento">
+    </div>
+  
+    <!-- Campos adicionales -->
+    <div class="col-md-4">
+      <label class="form-label">Código Externo</label>
+      <input type="number" class="form-control" formControlName="codigoExterno">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Investigación formativa *</label>
+      <select class="form-select" formControlName="investigacionFormativa">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let opcion of opcionesSiNo" [value]="opcion">{{opcion}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Interdisciplinario *</label>
+      <select class="form-select" formControlName="interdisciplinario">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let opcion of opcionesSiNo" [value]="opcion">{{opcion}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Intergrupos *</label>
+      <select class="form-select" formControlName="intergrupos">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let opcion of opcionesSiNo" [value]="opcion">{{opcion}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Monografías</label>
+      <select class="form-select" formControlName="monografias">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let monografia of monografias" [value]="monografia">{{monografia}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Rol FUSM *</label>
+      <select class="form-select" formControlName="rolFUSM">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let rol of rolesProyecto" [value]="rol">{{rol}}</option>
+      </select>
+    </div>
+  
+    <!-- Campos de texto largo -->
+    <div class="col-12">
+      <label class="form-label">Objetivo General *</label>
+      <textarea class="form-control" rows="3" formControlName="objetivoGeneral"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Palabras clave *</label>
+      <textarea class="form-control" rows="2" formControlName="palabrasClave"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Resumen *</label>
+      <textarea class="form-control" rows="4" formControlName="resumen"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Observaciones generales</label>
+      <textarea class="form-control" rows="3" formControlName="observaciones"></textarea>
+    </div>
+  
+    <!-- Botón de envío -->
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!proyectoForm.valid">
+        Guardar Proyecto
+      </button>
+    </div>
+  </form>

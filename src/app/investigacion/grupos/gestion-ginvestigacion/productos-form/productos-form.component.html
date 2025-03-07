@@ -1,0 +1,84 @@
+<form [formGroup]="productosForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Sección de Proyecto -->
+    <div class="col-12">
+      <h4>Información del Proyecto</h4>
+    </div>
+  
+    <div class="row align-items-end g-3">
+      <div class="col-md-3">
+        <label class="form-label">Código Proyecto *</label>
+        <input type="number" class="form-control" formControlName="codigoProyecto">
+      </div>
+  
+      <div class="col-md-6">
+        <label class="form-label">Título *</label>
+        <input type="text" class="form-control" formControlName="titulo">
+      </div>
+  
+      <div class="col-md-3">
+        <label class="form-label">Estado *</label>
+        <select class="form-select" formControlName="estado">
+          <option value="">Seleccione...</option>
+          <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Sistema de pestañas secundario -->
+    <div class="col-12 mt-4">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" 
+             [class.active]="subTabActiva === 'productos'"
+             (click)="cambiarSubTab('productos')"
+             href="javascript:void(0)">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" 
+             [class.active]="subTabActiva === 'proyectos'"
+             (click)="cambiarSubTab('proyectos')"
+             href="javascript:void(0)">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" 
+             [class.active]="subTabActiva === 'semilleros'"
+             (click)="cambiarSubTab('semilleros')"
+             href="javascript:void(0)">Semilleros</a>
+        </li>
+      </ul>
+  
+      <!-- Contenido de las pestañas -->
+      <div class="tab-content p-3 border border-top-0">
+        <!-- Productos -->
+        <div class="tab-pane fade" [class.show]="subTabActiva === 'productos'" [class.active]="subTabActiva === 'productos'">
+          <app-productos-tab-form
+            [productoData]="productoData"
+            (formSubmit)="handleProductoSubmit($event)">
+          </app-productos-tab-form>
+        </div>
+  
+        <!-- Proyectos -->
+        <div class="tab-pane fade" [class.show]="subTabActiva === 'proyectos'" [class.active]="subTabActiva === 'proyectos'">
+          <app-proyecto-form
+            [proyectoData]="proyectoData"
+            (formSubmit)="handleProyectoSubmit($event)">
+          </app-proyecto-form>
+        </div>
+  
+        <!-- Semilleros -->
+        <div class="tab-pane fade" [class.show]="subTabActiva === 'semilleros'" [class.active]="subTabActiva === 'semilleros'">
+            <app-semillero-form
+              [semilleroData]="semilleroData"
+              (formSubmit)="handleSemilleroSubmit($event)">
+            </app-semillero-form>
+          </div>
+      </div>
+    </div>
+  
+    <!-- Botón de envío -->
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!productosForm.valid">
+        Guardar Información
+      </button>
+    </div>
+  </form>

@@ -1,0 +1,143 @@
+<form [formGroup]="datosBasicosForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <!-- Información básica -->
+    <div class="col-md-4">
+      <label class="form-label">Código FUSM *</label>
+      <input type="number" class="form-control" formControlName="codigoFUSM">
+    </div>
+  
+    <div class="col-md-8">
+      <label class="form-label">Nombre grupo *</label>
+      <input type="text" class="form-control" formControlName="nombreGrupo">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Estado *</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Fecha creación *</label>
+      <input type="date" class="form-control" formControlName="fechaCreacion">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Clasificación *</label>
+      <select class="form-select" formControlName="clasificacion">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let clas of clasificaciones" [value]="clas">{{clas}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Fecha clasificación *</label>
+      <input type="date" class="form-control" formControlName="fechaClasificacion">
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Código Minciencias *</label>
+      <input type="number" class="form-control" formControlName="codigoMinciencias">
+    </div>
+  
+    <div class="col-md-8">
+      <label class="form-label">Link GrupLac *</label>
+      <input type="text" class="form-control" formControlName="linkGrupLac">
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Institución *</label>
+      <input type="text" class="form-control" formControlName="institucion">
+    </div>
+  
+    <!-- Campos de texto largo -->
+    <div class="col-12">
+      <label class="form-label">Descripción *</label>
+      <textarea class="form-control" rows="3" formControlName="descripcion"></textarea>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Observaciones</label>
+      <textarea class="form-control" rows="2" formControlName="observaciones"></textarea>
+    </div>
+  
+    <!-- Líneas de investigación -->
+    <div class="col-12">
+      <label class="form-label">Líneas de investigación FUSM *</label>
+      <div formArrayName="lineasInvestigacionFUSM">
+        <div class="input-group mb-2" *ngFor="let linea of lineasInvestigacionFUSM.controls; let i=index">
+          <select class="form-select" [formControlName]="i">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let linea of lineasInvestigacion" [value]="linea">{{linea}}</option>
+          </select>
+          <button type="button" class="btn btn-danger" (click)="removerLineaInvestigacion(i)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="agregarLineaInvestigacion()">
+        Agregar línea
+      </button>
+    </div>
+  
+    <!-- Áreas y líneas -->
+    <div class="col-md-4">
+      <label class="form-label">Área estratégica *</label>
+      <select class="form-select" formControlName="areaEstrategica">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let area of areasEstrategicas" [value]="area">{{area}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Línea del grupo *</label>
+      <select class="form-select" formControlName="lineaGrupo">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let linea of lineasGrupo" [value]="linea">{{linea}}</option>
+      </select>
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Línea institucional *</label>
+      <select class="form-select" formControlName="lineaInstitucional">
+        <option value="">Seleccione...</option>
+        <option *ngFor="let linea of lineasInstitucionales" [value]="linea">{{linea}}</option>
+      </select>
+    </div>
+  
+    <!-- Productos -->
+    <div class="col-12">
+      <label class="form-label">Productos</label>
+      <div formArrayName="productos">
+        <div class="row g-3 mb-2" *ngFor="let producto of productos.controls; let i=index" [formGroupName]="i">
+          <div class="col-md-8">
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del producto">
+          </div>
+          <div class="col-md-3">
+            <input type="number" class="form-control" formControlName="cantidad" placeholder="Cantidad">
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-danger" (click)="removerProducto(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="agregarProducto()">
+        Agregar producto
+      </button>
+    </div>
+  
+    <div class="col-12">
+      <label class="form-label">Programa y unidad académica *</label>
+      <input type="text" class="form-control" formControlName="programaUnidadAcademica">
+    </div>
+  
+    <!-- Botón de envío -->
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="!datosBasicosForm.valid">
+        Guardar Datos Básicos
+      </button>
+    </div>
+  </form>
