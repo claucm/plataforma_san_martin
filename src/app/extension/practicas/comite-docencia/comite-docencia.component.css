@@ -1,0 +1,13 @@
+.form-control, .form-select {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border: 1px solid #ced4da !important;
+}
+
+.form-label {
+    color: #212529;
+}
+
+.text-justify {
+    color: #212529;
+}

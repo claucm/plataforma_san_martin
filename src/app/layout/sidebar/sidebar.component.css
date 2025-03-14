@@ -1,0 +1,26 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar-content {
+    min-height: 100vh;
+    padding: 1rem;
+    background: linear-gradient(to bottom, #1A558D, #0097B2);
+  }
+  
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .sidebar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }

@@ -19,13 +19,49 @@
         </div>
         <div class="col-md-3">
           <label for="facultad" class="form-label">Facultad</label>
-          <input type="text" id="facultad" class="form-control">
+          <select id="facultad" class="form-select">
+            <option value="">Seleccione una facultad</option>
+            <option value="mvz">Facultad Medicina Veterinaria y Zootecnia</option>
+            <option value="fcsa">Facultad de Ciencias Sociales y Administrativas</option>
+            <option value="fcs-bogota">Facultad de Ciencias de la Salud – Sede Bogotá</option>
+            <option value="fcs-cali">Facultad de Ciencias de la Salud – Sede Cali</option>
+            <option value="fcs-pasto">Facultad de Ciencias de la Salud – Sede Pasto</option>
+            <option value="fcs-puerto-colombia">Facultad de Ciencias de la Salud – Sede Puerto Colombia</option>
+            <option value="fcs-sabaneta">Facultad de Ciencias de la Salud – Sede Sabaneta</option>
+          </select>
         </div>
   
-        <div class="col-md-3">
-          <label for="programa" class="form-label">Programa</label>
-          <input type="text" id="programa" class="form-control">
+        <div class="col-md-6">
+          <label class="form-label">Programas</label>
+          <div class="card">
+            <div class="card-body">
+              <div class="row g-3">
+                <!-- Programas de Pregrado -->
+                <div class="col-md-6">
+                  <label for="pregrado" class="form-label">Pregrado</label>
+                  <select id="pregrado" class="form-select">
+                    <option value="">Seleccione un programa</option>
+                    <option *ngFor="let programa of programasPregrado" [value]="programa">
+                      {{programa}}
+                    </option>
+                  </select>
+                </div>
+        
+                <!-- Programas de Posgrado -->
+                <div class="col-md-6">
+                  <label for="posgrado" class="form-label">Posgrado</label>
+                  <select id="posgrado" class="form-select">
+                    <option value="">Seleccione un programa</option>
+                    <option *ngFor="let programa of programasPosgrado" [value]="programa">
+                      {{programa}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="col-md-3">
           <label for="nombreEntidad" class="form-label">Nombre de la Entidad</label>
           <input type="text" id="nombreEntidad" class="form-control">

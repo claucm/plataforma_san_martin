@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-comite-docencia',
@@ -13,6 +13,34 @@ export class ComiteDocenciaComponent {
   comiteForm: FormGroup;
   actaComite: File | null = null;
 
+  programasPregrado = [
+    'Administración de Empresas',
+    'Contaduría Pública',
+    'Derecho',
+    'Medicina Bogotá',
+    'Medicina Cali',
+    'Medicina Pasto',
+    'Medicina Puerto Colombia',
+    'Medicina Sabaneta',
+    'Medicina Veterinaria y Zootecnia – Bogotá',
+    'Medicina Veterinaria y Zootecnia – Cali',
+    'Medicina Veterinaria y Zootecnia – Puerto Colombia',
+    'Negocios Internacionales',
+    'Nutrición y Dietética',
+    'Odontología Bogotá',
+    'Odontología Puerto Colombia',
+    'Optometría',
+    'Psicología',
+    'Publicidad y Mercadeo'
+  ];
+
+  programasPosgrado = [
+    'Especialización de Cirugía en Tejidos Blandos de Pequeños Animales',
+    'Especialización en Medicina de Fauna Silvestre',
+    'Especialización en Medicina Interna',
+    'Especialización en Producción Animal'
+  ];
+
   constructor(private fb: FormBuilder) {
     this.comiteForm = this.fb.group({
       fechaDiligenciamiento: ['', Validators.required],
@@ -20,9 +48,10 @@ export class ComiteDocenciaComponent {
       codigoUnidad: ['', [Validators.required, Validators.min(1)]],
       nivelEstudio: ['', Validators.required],
       facultad: ['', Validators.required],
-      programa: ['', Validators.required],
+      programaPregrado: [''],  // Added this line
+      programaPosgrado: [''],  // Added this line
       sede: ['', Validators.required],
-      nombreComite: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s]+$/)]],
+      nombreComite: ['', Validators.required],
       fechaComite: ['', Validators.required],
       duracion: ['', [Validators.required, Validators.min(1)]],
       participantes: ['', [Validators.required, Validators.min(1)]],

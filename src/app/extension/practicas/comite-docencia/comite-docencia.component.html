@@ -1,86 +1,131 @@
-<form [formGroup]="comiteForm" (ngSubmit)="onSubmit()" class="p-4 bg-dark text-white rounded shadow">
-   
-    <p class="text-justify mb-4">
-      De acuerdo con el decreto 2376 del 2010 y al Decreto 0780 del 2016, artículo 2.7.1.1.11, 
-      los comités están conformados por el Director, gerente o jefe del área de educación de la institución del escenario de práctica, 
-      Representante de la institución educativa, Representante de los estudiantes que estén rotando en el escenario y los invitados que ellos consideren.
-    </p>
-  
-    <div class="row">
-      <!-- Columna izquierda -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="form-label">Fecha de diligenciamiento</label>
-          <input type="date" formControlName="fechaDiligenciamiento" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('fechaDiligenciamiento')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Periodo Académico</label>
-          <input type="number" formControlName="periodoAcademico" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('periodoAcademico')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Código Unidad Organizacional</label>
-          <input type="number" formControlName="codigoUnidad" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('codigoUnidad')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Nivel de Estudio</label>
-          <select formControlName="nivelEstudio" class="form-select bg-secondary text-white border-0" [class.is-invalid]="isInvalid('nivelEstudio')">
-            <option value="">Seleccionar</option>
-            <option value="Pregrado">Pregrado</option>
-            <option value="Posgrado">Posgrado</option>
-          </select>
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Facultad</label>
-          <input type="text" formControlName="facultad" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('facultad')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Programa</label>
-          <input type="text" formControlName="programa" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('programa')" />
-        </div>
+<form [formGroup]="comiteForm" (ngSubmit)="onSubmit()" class="p-4 bg-light rounded shadow">
+  <p class="text-justify mb-4">
+    De acuerdo con el decreto 2376 del 2010 y al Decreto 0780 del 2016, artículo 2.7.1.1.11, 
+    los comités están conformados por el Director, gerente o jefe del área de educación de la institución del escenario de práctica, 
+    Representante de la institución educativa, Representante de los estudiantes que estén rotando en el escenario y los invitados que ellos consideren.
+  </p>
+
+  <div class="row">
+    <!-- Columna izquierda -->
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Fecha de diligenciamiento</label>
+        <input type="date" formControlName="fechaDiligenciamiento" class="form-control" [class.is-invalid]="isInvalid('fechaDiligenciamiento')" />
       </div>
-  
-      <!-- Columna derecha -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="form-label">Sede</label>
-          <input type="text" formControlName="sede" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('sede')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Nombre del Comité Docencia Servicio</label>
-          <input type="text" formControlName="nombreComite" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('nombreComite')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Fecha de Realización del Comité</label>
-          <input type="date" formControlName="fechaComite" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('fechaComite')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Duración (horas)</label>
-          <input type="number" formControlName="duracion" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('duracion')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Número de Participantes</label>
-          <input type="number" formControlName="participantes" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('participantes')" />
-        </div>
-  
-        <div class="mb-3">
-          <label class="form-label">Adjuntar Acta del Comité</label>
-          <input type="file" (change)="onFileChange($event)" class="form-control bg-secondary text-white border-0" [class.is-invalid]="isInvalid('actaComite')" />
+
+      <div class="mb-3">
+        <label class="form-label">Periodo Académico</label>
+        <input type="number" formControlName="periodoAcademico" class="form-control" [class.is-invalid]="isInvalid('periodoAcademico')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Código Unidad Organizacional</label>
+        <input type="number" formControlName="codigoUnidad" class="form-control" [class.is-invalid]="isInvalid('codigoUnidad')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nivel de Estudio</label>
+        <select formControlName="nivelEstudio" class="form-select" [class.is-invalid]="isInvalid('nivelEstudio')">
+          <option value="">Seleccionar</option>
+          <option value="Pregrado">Pregrado</option>
+          <option value="Posgrado">Posgrado</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Facultad</label>
+        <select formControlName="facultad" class="form-select" [class.is-invalid]="isInvalid('facultad')">
+          <option value="">Seleccione una facultad</option>
+          <option value="mvz">Facultad Medicina Veterinaria y Zootecnia</option>
+          <option value="fcsa">Facultad de Ciencias Sociales y Administrativas</option>
+          <option value="fcs-bogota">Facultad de Ciencias de la Salud – Sede Bogotá</option>
+          <option value="fcs-cali">Facultad de Ciencias de la Salud – Sede Cali</option>
+          <option value="fcs-pasto">Facultad de Ciencias de la Salud – Sede Pasto</option>
+          <option value="fcs-puerto-colombia">Facultad de Ciencias de la Salud – Sede Puerto Colombia</option>
+          <option value="fcs-sabaneta">Facultad de Ciencias de la Salud – Sede Sabaneta</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Programas</label>
+        <div class="card">
+          <div class="card-body">
+            <div class="row g-3">
+              <!-- Programas de Pregrado -->
+              <div class="col-md-6">
+                <label for="pregrado" class="form-label">Pregrado</label>
+                <select id="pregrado" formControlName="programaPregrado" class="form-select" [class.is-invalid]="isInvalid('programaPregrado')">
+                  <option value="">Seleccione un programa</option>
+                  <option *ngFor="let programa of programasPregrado" [value]="programa">
+                    {{programa}}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Programas de Posgrado -->
+              <div class="col-md-6">
+                <label for="posgrado" class="form-label">Posgrado</label>
+                <select id="posgrado" formControlName="programaPosgrado" class="form-select" [class.is-invalid]="isInvalid('programaPosgrado')">
+                  <option value="">Seleccione un programa</option>
+                  <option *ngFor="let programa of programasPosgrado" [value]="programa">
+                    {{programa}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary w-50" [disabled]="!comiteForm.valid">Enviar</button>
+
+    <!-- Columna derecha -->
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Sede</label>
+        <select formControlName="sede" class="form-select" [class.is-invalid]="isInvalid('sede')">
+          <option value="">Seleccione una sede</option>
+          <option value="Barranquilla">Barranquilla</option>
+          <option value="Bogotá">Bogotá</option>
+          <option value="Cali">Cali</option>
+          <option value="Cartagena">Cartagena</option>
+          <option value="Ipiales">Ipiales</option>
+          <option value="Montería">Montería</option>
+          <option value="Pasto">Pasto</option>
+          <option value="Puerto Colombia">Puerto Colombia</option>
+          <option value="Sabaneta">Sabaneta</option>
+          <option value="Valledupar">Valledupar</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nombre del Comité Docencia Servicio</label>
+        <input type="text" formControlName="nombreComite" class="form-control" [class.is-invalid]="isInvalid('nombreComite')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fecha de Realización del Comité</label>
+        <input type="date" formControlName="fechaComite" class="form-control" [class.is-invalid]="isInvalid('fechaComite')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Duración (horas)</label>
+        <input type="number" formControlName="duracion" class="form-control" [class.is-invalid]="isInvalid('duracion')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Número de Participantes</label>
+        <input type="number" formControlName="participantes" class="form-control" [class.is-invalid]="isInvalid('participantes')" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Adjuntar Acta del Comité</label>
+        <input type="file" (change)="onFileChange($event)" class="form-control" [class.is-invalid]="isInvalid('actaComite')" />
+      </div>
     </div>
-  </form>
-  
+  </div>
+
+  <div class="text-center mt-4">
+    <button type="submit" class="btn btn-primary w-50" [disabled]="!comiteForm.valid">Enviar</button>
+  </div>
+</form>
   
