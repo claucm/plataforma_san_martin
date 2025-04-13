@@ -1,0 +1,114 @@
+<div class="card">
+    <div class="card-body">
+      
+      <form [formGroup]="servicioForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <!-- Primera fila -->
+          <div class="col-md-6">
+            <label class="form-label">Año</label>
+            <select formControlName="ano" class="form-select" [class.is-invalid]="isInvalid('ano')">
+              <option value="">Seleccione año</option>
+              <option *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Semestre</label>
+            <select formControlName="semestre" class="form-select" [class.is-invalid]="isInvalid('semestre')">
+              <option value="">Seleccione semestre</option>
+              <option *ngFor="let sem of semestres" [value]="sem">{{sem}}</option>
+            </select>
+          </div>
+  
+          <!-- Segunda fila -->
+          <div class="col-md-6">
+            <label class="form-label">Código Unidad Organizacional</label>
+            <input type="text" formControlName="codigoUnidad" class="form-control" [class.is-invalid]="isInvalid('codigoUnidad')" maxlength="30">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Código Servicio</label>
+            <input type="text" formControlName="codigoServicio" class="form-control" [class.is-invalid]="isInvalid('codigoServicio')" maxlength="15">
+          </div>
+  
+          <!-- Tercera fila -->
+          <div class="col-12">
+            <label class="form-label">Nombre Servicio</label>
+            <input type="text" formControlName="nombreServicio" class="form-control" [class.is-invalid]="isInvalid('nombreServicio')" maxlength="400">
+          </div>
+  
+          <div class="col-12">
+            <label class="form-label">Descripción Servicio</label>
+            <textarea formControlName="descripcionServicio" class="form-control" [class.is-invalid]="isInvalid('descripcionServicio')" maxlength="250" rows="3"></textarea>
+          </div>
+  
+          <!-- Cuarta fila -->
+          <div class="col-md-6">
+            <label class="form-label">Valor Servicio</label>
+            <input type="number" formControlName="valorServicio" class="form-control" [class.is-invalid]="isInvalid('valorServicio')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Área de Extensión</label>
+            <select formControlName="idAreaExtension" class="form-select" [class.is-invalid]="isInvalid('idAreaExtension')">
+              <option value="">Seleccione área</option>
+              <option *ngFor="let area of areasExtension" [value]="area.id">{{area.nombre}}</option>
+            </select>
+          </div>
+  
+          <!-- Quinta fila -->
+          <div class="col-md-6">
+            <label class="form-label">Fecha Inicio</label>
+            <input type="date" formControlName="fechaInicio" class="form-control" [class.is-invalid]="isInvalid('fechaInicio')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Fecha Final</label>
+            <input type="date" formControlName="fechaFinal" class="form-control" [class.is-invalid]="isInvalid('fechaFinal')">
+          </div>
+  
+          <!-- Sexta fila - Información de contacto -->
+          <div class="col-md-6">
+            <label class="form-label">Nombre Contacto</label>
+            <input type="text" formControlName="nombreContacto" class="form-control" [class.is-invalid]="isInvalid('nombreContacto')" maxlength="50">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Apellido Contacto</label>
+            <input type="text" formControlName="apellidoContacto" class="form-control" [class.is-invalid]="isInvalid('apellidoContacto')" maxlength="50">
+          </div>
+  
+          <!-- Séptima fila -->
+          <div class="col-md-6">
+            <label class="form-label">Teléfono Contacto</label>
+            <input type="text" formControlName="telefonoContacto" class="form-control" [class.is-invalid]="isInvalid('telefonoContacto')" maxlength="15">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Email Contacto</label>
+            <input type="email" formControlName="emailContacto" class="form-control" [class.is-invalid]="isInvalid('emailContacto')" maxlength="50">
+          </div>
+  
+          <!-- Octava fila -->
+          <div class="col-md-6">
+            <label class="form-label">Tiene Costo</label>
+            <select formControlName="tieneCosto" class="form-select" [class.is-invalid]="isInvalid('tieneCosto')">
+              <option value="">Seleccione</option>
+              <option value="si">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Criterio Elegibilidad</label>
+            <textarea formControlName="criterioElegibilidad" class="form-control" [class.is-invalid]="isInvalid('criterioElegibilidad')" maxlength="200" rows="2"></textarea>
+          </div>
+  
+          <!-- Botón de envío -->
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

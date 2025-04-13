@@ -113,9 +113,31 @@
                 </a>
               </li>
               <li>
-                <a [routerLink]="'/servicios-docentes'" class="nav-link text-white">
+                <a class="nav-link text-white" data-bs-toggle="collapse" href="#serviciosDocentesMenu" role="button" aria-expanded="false" aria-controls="serviciosDocentesMenu">
                   <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
                 </a>
+                <div class="collapse" id="serviciosDocentesMenu">
+                  <ul class="nav nav-pills flex-column ms-3">
+                    <li>
+                      <a [routerLink]="'/caracterizacion-participantes'" class="nav-link text-white">
+                        <i class="fas fa-users me-2"></i> Caracterización de Participantes
+                      </a>
+                    </li>
+                    <li>
+                      <a [routerLink]="'/servicios-extension'" class="nav-link text-white">
+                        <i class="fas fa-hand-holding-medical me-2"></i> Servicios de Extensión
+                      </a>
+                    </li>
+
+                    <li>
+                      <a [routerLink]="'/participante'" class="nav-link text-white">
+                        <i class="fas fa-user me-2"></i> Participante SNIES
+                      </a>
+                    </li>
+
+
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>

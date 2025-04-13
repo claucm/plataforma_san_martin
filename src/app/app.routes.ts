@@ -32,6 +32,18 @@ import { PracticasProfesionalesComponent } from './extension/practicas/practicas
 import { FichaResumenComponent } from './extension/practicas/ficha-resumen/ficha-resumen.component';
 import { ProyeccionSocialComponent } from './extension/practicas/proyeccion-social/proyeccion-social.component';
 
+//Extension-servicios docentes
+import { CaracterizacionParticipantesComponent } from './extension/servicios-docentes/caracterizacion-participantes/caracterizacion-participantes.component';
+import { ServiciosExtensionComponent } from './extension/servicios-docentes/servicios-extension/servicios-extension.component';
+import { ServiciosDeExtensionComponent } from './extension/servicios-docentes/servicios-extension/servicios-de-extension/servicios-de-extension.component';
+import { AreaTrabajoComponent } from './extension/servicios-docentes/servicios-extension/area-trabajo/area-trabajo.component';
+import { CicloVitalComponent } from './extension/servicios-docentes/servicios-extension/ciclo-vital/ciclo-vital.component';
+import { EntidadNacionalComponent } from './extension/servicios-docentes/servicios-extension/entidad-nacional/entidad-nacional.component';
+import { FuenteInternacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-internacional/fuente-internacional.component';
+import { FuenteNacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-nacional/fuente-nacional.component';
+import { ParticipanteComponent } from './extension/servicios-docentes/participante/participante.component';
+
+
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
  { path: 'dashboard', component: DashboardComponent },
@@ -58,7 +70,19 @@ export const routes: Routes = [
 { path: 'comite-docencia', component: ComiteDocenciaComponent },
 { path: 'practicas-profesionales', component: PracticasProfesionalesComponent },
 { path: 'ficha-resumen', component: FichaResumenComponent },
-{ path: 'proyeccion-social', component: ProyeccionSocialComponent }
+{ path: 'proyeccion-social', component: ProyeccionSocialComponent },
+
+//Extension-servicios docentes
+{ path: 'caracterizacion-participantes', component: CaracterizacionParticipantesComponent },
+{ path: 'servicios-extension', component: ServiciosExtensionComponent },
+{ path: 'servicios-de-extension', component: ServiciosDeExtensionComponent },
+{ path: 'area-trabajo', component: AreaTrabajoComponent },
+{ path: 'ciclo-vital', component: CicloVitalComponent },
+{ path: 'entidad-nacional', component: EntidadNacionalComponent },
+{ path: 'fuente-internacional', component: FuenteInternacionalComponent },
+{ path: 'fuente-nacional', component: FuenteNacionalComponent },
+{ path: 'participante', component: ParticipanteComponent },
+
 
 ];
 

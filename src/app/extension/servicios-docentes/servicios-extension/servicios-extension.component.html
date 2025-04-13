@@ -1,0 +1,116 @@
+<div class="container mt-5">
+    <h2 class="text-center">Servicios Docentes</h2>
+  
+    <!-- Pestañas de navegación -->
+    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="servicios-tab" data-bs-toggle="tab" data-bs-target="#servicios" type="button" role="tab">
+          Servicios de Extensión 
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="area-tab" data-bs-toggle="tab" data-bs-target="#area" type="button" role="tab">
+          Área de Trabajo
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ciclo-tab" data-bs-toggle="tab" data-bs-target="#ciclo" type="button" role="tab">
+          Ciclo Vital
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="entidad-tab" data-bs-toggle="tab" data-bs-target="#entidad" type="button" role="tab">
+          Entidad Nacional
+        </button>
+      </li>
+     
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="internacional-tab" data-bs-toggle="tab" data-bs-target="#internacional" type="button" role="tab" aria-controls="internacional" aria-selected="false">
+          Fuente Internacional
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="nacional-tab" data-bs-toggle="tab" data-bs-target="#nacional" type="button" role="tab" aria-controls="nacional" aria-selected="false">
+          Fuente Nacional
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="otras-tab" data-bs-toggle="tab" data-bs-target="#otras" type="button" role="tab">
+          Otras Entidades
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="condicion-tab" data-bs-toggle="tab" data-bs-target="#condicion" type="button" role="tab">
+          Población Condición
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="grupo-tab" data-bs-toggle="tab" data-bs-target="#grupo" type="button" role="tab">
+          Población Grupo
+        </button>
+      </li>
+    </ul>
+  
+    <!-- Contenido de las pestañas -->
+    <div class="tab-content mt-3" id="myTabContent">
+      <!-- Pestaña Servicios de Extensión -->
+      <div class="tab-pane fade show active" id="servicios" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-center">Servicios de Extensión</h4>
+            <app-servicios-de-extension></app-servicios-de-extension>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pestaña Área de Trabajo -->
+      <div class="tab-pane fade" id="area" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-center">Área de Trabajo</h4>
+            <app-area-trabajo></app-area-trabajo>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pestaña Ciclo Vital -->
+      <div class="tab-pane fade" id="ciclo" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-center">Ciclo Vital</h4>
+            <app-ciclo-vital></app-ciclo-vital>
+          </div>
+        </div>
+      </div>
+  
+    
+        <!-- Pestaña Entidad Nacional -->
+        <div class="tab-pane fade" id="entidad" role="tabpanel">
+            <div class="card">
+                <div class="card-body">
+                <h4 class="text-center">Entidad Nacional</h4>
+                <app-entidad-nacional></app-entidad-nacional>
+                </div>
+            </div>
+
+      <!-- Pestaña Fuente Internacional -->
+      <div class="tab-pane fade" id="internacional" role="tabpanel" aria-labelledby="internacional-tab">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="text-center">Fuente Internacional</h4>
+            <app-fuente-internacional></app-fuente-internacional>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="entidad" role="tabpanel">
+        <div class="card">
+            <div class="card-body">
+            <h4 class="text-center">Entidad Nacional</h4>
+            <app-entidad-nacional></app-entidad-nacional>
+            </div>
+        </div>
+        
+  </div>

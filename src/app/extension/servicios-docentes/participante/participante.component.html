@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">Participante - SNIES</h4>
+      
+      <form [formGroup]="participanteForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <!-- Datos de identificación -->
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Documento</label>
+            <select formControlName="tipoDocumento" class="form-select" [class.is-invalid]="isInvalid('tipoDocumento')">
+              <option value="">Seleccione tipo de documento</option>
+              <option *ngFor="let tipo of tiposDocumento" [value]="tipo.id">{{tipo.nombre}}</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Número de Documento</label>
+            <input type="text" formControlName="numeroDocumento" class="form-control" [class.is-invalid]="isInvalid('numeroDocumento')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Fecha de Expedición</label>
+            <input type="date" formControlName="fechaExpedicion" class="form-control" [class.is-invalid]="isInvalid('fechaExpedicion')">
+          </div>
+  
+          <!-- Nombres y Apellidos -->
+          <div class="col-md-6">
+            <label class="form-label">Primer Nombre</label>
+            <input type="text" formControlName="primerNombre" class="form-control" [class.is-invalid]="isInvalid('primerNombre')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Segundo Nombre</label>
+            <input type="text" formControlName="segundoNombre" class="form-control">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Primer Apellido</label>
+            <input type="text" formControlName="primerApellido" class="form-control" [class.is-invalid]="isInvalid('primerApellido')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Segundo Apellido</label>
+            <input type="text" formControlName="segundoApellido" class="form-control">
+          </div>
+  
+          <!-- Información Personal -->
+          <div class="col-md-6">
+            <label class="form-label">Sexo Biológico</label>
+            <select formControlName="idSexoBiologico" class="form-select" [class.is-invalid]="isInvalid('idSexoBiologico')">
+              <option value="">Seleccione sexo biológico</option>
+              <option *ngFor="let sexo of sexoBiologico" [value]="sexo.id">{{sexo.nombre}}</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Estado Civil</label>
+            <select formControlName="idEstadoCivil" class="form-select" [class.is-invalid]="isInvalid('idEstadoCivil')">
+              <option value="">Seleccione estado civil</option>
+              <option *ngFor="let estado of estadoCivil" [value]="estado.id">{{estado.nombre}}</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Fecha de Nacimiento</label>
+            <input type="date" formControlName="fechaNacimiento" class="form-control" [class.is-invalid]="isInvalid('fechaNacimiento')">
+          </div>
+  
+          <!-- Ubicación y Contacto -->
+          <div class="col-md-6">
+            <label class="form-label">ID País</label>
+            <input type="number" formControlName="idPais" class="form-control" [class.is-invalid]="isInvalid('idPais')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">ID Municipio (DIVIPOLA)</label>
+            <input type="number" formControlName="idMunicipio" class="form-control" [class.is-invalid]="isInvalid('idMunicipio')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Teléfono de Contacto</label>
+            <input type="tel" formControlName="telefonoContacto" class="form-control" [class.is-invalid]="isInvalid('telefonoContacto')">
+          </div>
+  
+          <!-- Información de Contacto -->
+          <div class="col-md-6">
+            <label class="form-label">Email Personal</label>
+            <input type="email" formControlName="emailPersonal" class="form-control" [class.is-invalid]="isInvalid('emailPersonal')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Email Institucional</label>
+            <input type="email" formControlName="emailInstitucional" class="form-control" [class.is-invalid]="isInvalid('emailInstitucional')">
+          </div>
+  
+          <div class="col-12">
+            <label class="form-label">Dirección Institucional</label>
+            <input type="text" formControlName="direccionInstitucional" class="form-control" [class.is-invalid]="isInvalid('direccionInstitucional')">
+          </div>
+  
+          <!-- Botón de envío -->
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

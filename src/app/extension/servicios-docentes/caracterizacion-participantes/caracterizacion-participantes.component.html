@@ -1,0 +1,251 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Caracterización Participantes – Consultorio Jurídico</h2>
+  
+    <!-- Progress Bar -->
+    <div class="stepper-wrapper mb-4">
+        <div class="stepper-item" [class.completed]="currentStep > 1" [class.active]="currentStep === 1">
+          <div class="step-counter">1</div>
+          <div class="step-name">Información Básica</div>
+        </div>
+        <div class="stepper-item" [class.completed]="currentStep > 2" [class.active]="currentStep === 2">
+          <div class="step-counter">2</div>
+          <div class="step-name">Identificación</div>
+        </div>
+        <div class="stepper-item" [class.completed]="currentStep > 3" [class.active]="currentStep === 3">
+          <div class="step-counter">3</div>
+          <div class="step-name">Contacto</div>
+        </div>
+      </div>
+  
+    <form [formGroup]="caracterizacionForm" (ngSubmit)="onSubmit()" class="row g-3">
+      <!-- Step 1: Información Básica -->
+      <div *ngIf="currentStep === 1" class="row">
+        <h4>Información Básica</h4>
+        
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Periodo académico</label>
+          <select formControlName="periodoAcademico" class="form-select" [class.is-invalid]="isInvalid('periodoAcademico')">
+            <option value="">Seleccione periodo</option>
+          </select>
+        </div>
+      
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Ciudad</label>
+            <select formControlName="ciudad" class="form-select" [class.is-invalid]="isInvalid('ciudad')">
+              <option value="">Seleccione ciudad</option>
+              <option value="barranquilla">Barranquilla</option>
+              <option value="bogota">Bogotá</option>
+              <option value="cali">Cali</option>
+              <option value="cartagena">Cartagena</option>
+              <option value="ipiales">Ipiales</option>
+              <option value="monteria">Montería</option>
+              <option value="pasto">Pasto</option>
+              <option value="puerto-colombia">Puerto Colombia</option>
+              <option value="sabaneta">Sabaneta</option>
+              <option value="valledupar">Valledupar</option>
+            </select>
+          </div>
+      
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Fecha de consulta</label>
+          <input type="date" formControlName="fechaConsulta" class="form-control" [class.is-invalid]="isInvalid('fechaConsulta')">
+        </div>
+      
+        <!-- Separador para datos personales -->
+        <div class="col-12 mt-4 mb-3">
+          <h5 class="border-bottom pb-2">Datos Personales</h5>
+        </div>
+      
+        <!-- Datos personales en un card -->
+        <div class="col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <label class="form-label">Primer nombre</label>
+                  <input type="text" formControlName="primerNombre" class="form-control" [class.is-invalid]="isInvalid('primerNombre')">
+                </div>
+      
+                <div class="col-md-3">
+                  <label class="form-label">Segundo nombre</label>
+                  <input type="text" formControlName="segundoNombre" class="form-control">
+                </div>
+      
+                <div class="col-md-3">
+                  <label class="form-label">Primer apellido</label>
+                  <input type="text" formControlName="primerApellido" class="form-control" [class.is-invalid]="isInvalid('primerApellido')">
+                </div>
+      
+                <div class="col-md-3">
+                  <label class="form-label">Segundo apellido</label>
+                  <input type="text" formControlName="segundoApellido" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Step 2: Información de Identificación -->
+      <div *ngIf="currentStep === 2" class="row">
+        <h4>Información de Identificación</h4>
+  
+        <div class="col-md-4">
+          <label class="form-label">Tipo de documento</label>
+          <select formControlName="tipoDocumento" class="form-select" [class.is-invalid]="isInvalid('tipoDocumento')">
+            <option value="">Seleccione tipo</option>
+            <option *ngFor="let tipo of tiposDocumento" [value]="tipo.id">{{tipo.nombre}}</option>
+          </select>
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">Número de documento</label>
+          <input type="text" formControlName="numeroDocumento" class="form-control" [class.is-invalid]="isInvalid('numeroDocumento')">
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">Fecha de expedición</label>
+          <input type="date" formControlName="fechaExpedicion" class="form-control" [class.is-invalid]="isInvalid('fechaExpedicion')">
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">País</label>
+          <select formControlName="idPais" class="form-select" [class.is-invalid]="isInvalid('idPais')">
+            <option value="170">Colombia</option>
+          </select>
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">Municipio</label>
+          <select formControlName="idMunicipio" class="form-select" [class.is-invalid]="isInvalid('idMunicipio')">
+            <option value="">Seleccione municipio</option>
+          </select>
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">Sexo Biológico</label>
+          <select formControlName="idSexoBiologico" class="form-select" [class.is-invalid]="isInvalid('idSexoBiologico')">
+            <option value="">Seleccione</option>
+            <option *ngFor="let sexo of sexoBiologico" [value]="sexo.id">{{sexo.nombre}}</option>
+          </select>
+        </div>
+  
+        <div class="col-md-4">
+          <label class="form-label">Estado Civil</label>
+          <select formControlName="idEstadoCivil" class="form-select" [class.is-invalid]="isInvalid('idEstadoCivil')">
+            <option value="">Seleccione</option>
+            <option *ngFor="let estado of estadoCivil" [value]="estado.id">{{estado.nombre}}</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Step 3: Información de Contacto -->
+      <div *ngIf="currentStep === 3" class="row">
+        <h4>Información de Contacto y Adicional</h4>
+  
+        <div class="col-md-6">
+          <label class="form-label">Dirección de domicilio</label>
+          <input type="text" formControlName="direccionDomicilio" class="form-control" [class.is-invalid]="isInvalid('direccionDomicilio')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Localidad</label>
+          <select formControlName="localidad" class="form-select" [class.is-invalid]="isInvalid('localidad')">
+            <option value="">Seleccione localidad</option>
+          </select>
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Correo electrónico</label>
+          <input type="email" formControlName="correoElectronico" class="form-control" [class.is-invalid]="isInvalid('correoElectronico')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Correo institucional</label>
+          <input type="email" formControlName="correoInstitucional" class="form-control" [class.is-invalid]="isInvalid('correoInstitucional')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Dirección institucional</label>
+          <input type="text" formControlName="direccionInstitucional" class="form-control" [class.is-invalid]="isInvalid('direccionInstitucional')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Número de contacto</label>
+          <input type="number" formControlName="numeroContacto" class="form-control" [class.is-invalid]="isInvalid('numeroContacto')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Profesión u oficio</label>
+          <input type="text" formControlName="profesionOficio" class="form-control" [class.is-invalid]="isInvalid('profesionOficio')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Estrato socioeconómico</label>
+          <input type="number" formControlName="estratoSocioeconomico" class="form-control" [class.is-invalid]="isInvalid('estratoSocioeconomico')">
+        </div>
+  
+        <div class="col-md-6">
+          <label class="form-label">Vivienda</label>
+          <select formControlName="vivienda" class="form-select" [class.is-invalid]="isInvalid('vivienda')">
+            <option value="">Seleccione tipo</option>
+            <option *ngFor="let tipo of tiposVivienda" [value]="tipo">{{tipo}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Condición de discapacidad</label>
+        <select formControlName="condicionDiscapacidad" class="form-select" [class.is-invalid]="isInvalid('condicionDiscapacidad')">
+          <option value="">Seleccione</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      
+      <div class="col-md-6" *ngIf="caracterizacionForm.get('condicionDiscapacidad')?.value === 'si'">
+        <label class="form-label">¿Cuál es su condición de discapacidad?</label>
+        <input type="text" formControlName="cualDiscapacidad" class="form-control" [class.is-invalid]="isInvalid('cualDiscapacidad')">
+      </div>
+      
+      <div class="col-md-6">
+        <label class="form-label">Estudiante a cargo del caso</label>
+        <input type="text" formControlName="estudianteACargo" class="form-control" [class.is-invalid]="isInvalid('estudianteACargo')">
+      </div>
+      
+      <div class="col-md-6">
+        <label class="form-label">Tipo de proceso a adelantar</label>
+        <select formControlName="tipoProceso" class="form-select" [class.is-invalid]="isInvalid('tipoProceso')">
+          <option value="">Seleccione tipo de proceso</option>
+          <option value="representacion">Representación jurídica</option>
+          <option value="consultoria">Consultoría jurídica</option>
+        </select>
+      </div>
+      
+      <div class="col-md-6">
+        <label class="form-label">Área del derecho de consulta</label>
+        <select formControlName="areaDerechoConsulta" class="form-select" [class.is-invalid]="isInvalid('areaDerechoConsulta')">
+          <option value="">Seleccione área</option>
+          <option value="laboral">Derecho laboral y seguridad en el trabajo</option>
+          <option value="privado">Derecho privado</option>
+          <option value="penal">Derecho penal</option>
+          <option value="publico">Derecho público</option>
+        </select>
+      </div>
+  
+      <!-- Navigation Buttons -->
+      <div class="col-12 mt-4 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="previousStep()" *ngIf="currentStep > 1">
+          <i class="fas fa-arrow-left me-2"></i>Anterior
+        </button>
+        <button type="button" class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep < totalSteps">
+          Siguiente<i class="fas fa-arrow-right ms-2"></i>
+        </button>
+        <button type="submit" class="btn btn-success" *ngIf="currentStep === totalSteps">
+          <i class="fas fa-save me-2"></i>Guardar
+        </button>
+      </div>
+    </form>
+ 
+    
+    </div>
