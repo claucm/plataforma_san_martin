@@ -1,73 +1,72 @@
 <div class="card">
-    <div class="card-body">
-      <h4 class="card-title text-center mb-4">Fuente Internacional - SNIES</h4>
-      
-      <form [formGroup]="fuenteInternacionalForm" (ngSubmit)="onSubmit()">
-        <div class="row g-3">
-          <!-- Primera fila -->
-          <div class="col-md-6">
-            <label class="form-label">Año</label>
-            <input type="date" formControlName="ano" class="form-control" [class.is-invalid]="isInvalid('ano')">
-          </div>
-  
-          <div class="col-md-6">
-            <label class="form-label">Semestre</label>
-            <select formControlName="semestre" class="form-select" [class.is-invalid]="isInvalid('semestre')">
-              <option value="">Seleccione semestre</option>
-              <option *ngFor="let sem of semestres" [value]="sem">{{sem}}</option>
-            </select>
-          </div>
-  
-          <!-- Segunda fila -->
-          <div class="col-md-6">
-            <label class="form-label">Código Unidad Organizacional</label>
-            <input type="text" formControlName="codigoUnidad" class="form-control" 
-                   [class.is-invalid]="isInvalid('codigoUnidad')" maxlength="30">
-          </div>
-  
-          <div class="col-md-6">
-            <label class="form-label">Código Servicio</label>
-            <input type="text" formControlName="codigoServicio" class="form-control" 
-                   [class.is-invalid]="isInvalid('codigoServicio')" maxlength="15">
-          </div>
-  
-          <!-- Tercera fila -->
-          <div class="col-12">
-            <label class="form-label">Nombre de Institución</label>
-            <input type="text" formControlName="nombreInstitucion" class="form-control" 
-                   [class.is-invalid]="isInvalid('nombreInstitucion')" maxlength="200">
-          </div>
-  
-          <!-- Cuarta fila -->
-          <div class="col-md-6">
-            <label class="form-label">ID País Financiador</label>
-            <input type="number" formControlName="idPaisFinanciador" class="form-control" 
-                   [class.is-invalid]="isInvalid('idPaisFinanciador')" max="999">
-          </div>
-  
-          <div class="col-md-6">
-            <label class="form-label">Fuente Internacional</label>
-            <select formControlName="idFuenteInternacional" class="form-select" 
-                    [class.is-invalid]="isInvalid('idFuenteInternacional')">
-              <option value="">Seleccione fuente internacional</option>
-              <option *ngFor="let fuente of fuentesInternacionales" [value]="fuente.id">
-                {{fuente.nombre}}
-              </option>
-            </select>
-          </div>
-  
-          <!-- Quinta fila -->
-          <div class="col-12">
-            <label class="form-label">Valor Financiado</label>
-            <input type="number" formControlName="valorFinanciado" class="form-control" 
-                   [class.is-invalid]="isInvalid('valorFinanciado')">
-          </div>
-  
-          <!-- Botón de envío -->
-          <div class="col-12 text-center mt-4">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
+  <div class="card-body">
+
+    <form [formGroup]="fuenteInternacionalForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <!-- Primera fila -->
+        <div class="col-md-6">
+          <label class="form-label">Año</label>
+          <input type="date" formControlName="ano" class="form-control" [class.is-invalid]="isInvalid('ano')">
         </div>
-      </form>
-    </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Semestre</label>
+          <select formControlName="semestre" class="form-select" [class.is-invalid]="isInvalid('semestre')">
+            <option value="">Seleccione semestre</option>
+            <option *ngFor="let sem of semestres" [value]="sem">{{sem}}</option>
+          </select>
+        </div>
+
+        <!-- Segunda fila -->
+        <div class="col-md-6">
+          <label class="form-label">Código Unidad Organizacional</label>
+          <input type="text" formControlName="codigoUnidad" class="form-control" 
+                 [class.is-invalid]="isInvalid('codigoUnidad')" maxlength="30">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Código Servicio</label>
+          <input type="text" formControlName="codigoServicio" class="form-control" 
+                 [class.is-invalid]="isInvalid('codigoServicio')" maxlength="15">
+        </div>
+
+        <!-- Tercera fila -->
+        <div class="col-12">
+          <label class="form-label">Nombre de Institución</label>
+          <input type="text" formControlName="nombreInstitucion" class="form-control" 
+                 [class.is-invalid]="isInvalid('nombreInstitucion')" maxlength="200">
+        </div>
+
+        <!-- Cuarta fila -->
+        <div class="col-md-6">
+          <label class="form-label">ID País Financiador</label>
+          <input type="number" formControlName="idPaisFinanciador" class="form-control" 
+                 [class.is-invalid]="isInvalid('idPaisFinanciador')" max="999">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Fuente Internacional</label>
+          <select formControlName="idFuenteInternacional" class="form-select" 
+                  [class.is-invalid]="isInvalid('idFuenteInternacional')">
+            <option value="">Seleccione fuente internacional</option>
+            <option *ngFor="let fuente of fuentesInternacionales" [value]="fuente.id">
+              {{fuente.nombre}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Quinta fila -->
+        <div class="col-12">
+          <label class="form-label">Valor Financiado</label>
+          <input type="number" formControlName="valorFinanciado" class="form-control" 
+                 [class.is-invalid]="isInvalid('valorFinanciado')" max="999999999999999">
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="col-12 text-center mt-4">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
   </div>
+</div>

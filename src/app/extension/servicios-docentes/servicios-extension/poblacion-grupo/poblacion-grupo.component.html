@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-body">
+     
+        
+      <form [formGroup]="poblacionGrupoForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <!-- Primera fila -->
+          <div class="col-md-6">
+            <label class="form-label">Año</label>
+            <input type="date" formControlName="ano" class="form-control" [class.is-invalid]="isInvalid('ano')">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Semestre</label>
+            <select formControlName="semestre" class="form-select" [class.is-invalid]="isInvalid('semestre')">
+              <option value="">Seleccione semestre</option>
+              <option *ngFor="let sem of semestres" [value]="sem">{{sem}}</option>
+            </select>
+          </div>
+  
+          <!-- Segunda fila -->
+          <div class="col-md-6">
+            <label class="form-label">Código Unidad Organizacional</label>
+            <input type="text" formControlName="codigoUnidad" class="form-control" 
+                   [class.is-invalid]="isInvalid('codigoUnidad')" maxlength="30">
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Código Servicio</label>
+            <input type="text" formControlName="codigoServicio" class="form-control" 
+                   [class.is-invalid]="isInvalid('codigoServicio')" maxlength="15">
+          </div>
+  
+          <!-- Tercera fila -->
+          <div class="col-md-6">
+            <label class="form-label">Población por Grupo</label>
+            <select formControlName="idPoblacionGrupo" class="form-select" 
+                    [class.is-invalid]="isInvalid('idPoblacionGrupo')">
+              <option value="">Seleccione grupo</option>
+              <option *ngFor="let grupo of poblacionGrupos" [value]="grupo.id">
+                {{grupo.nombre}}
+              </option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="form-label">Cantidad</label>
+            <input type="number" formControlName="cantidad" class="form-control" 
+                   [class.is-invalid]="isInvalid('cantidad')" min="0" max="9999999999">
+          </div>
+  
+          <!-- Botón de envío -->
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

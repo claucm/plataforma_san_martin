@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
-      <h4 class="card-title text-center mb-4">Fuente Nacional - SNIES</h4>
       
+
       <form [formGroup]="fuenteNacionalForm" (ngSubmit)="onSubmit()">
         <div class="row g-3">
           <!-- Primera fila -->
@@ -29,25 +29,26 @@
             <input type="text" formControlName="codigoServicio" class="form-control" [class.is-invalid]="isInvalid('codigoServicio')" maxlength="15">
           </div>
   
-          <!-- Tercera fila -->
-          <div class="col-12">
-            <label class="form-label">Fuente Nacional</label>
-            <select formControlName="idFuenteNacional" class="form-select" [class.is-invalid]="isInvalid('idFuenteNacional')">
-              <option value="">Seleccione fuente nacional</option>
-              <option *ngFor="let fuente of fuentesNacionales" [value]="fuente.id">{{fuente.nombre}}</option>
-            </select>
-          </div>
-  
-          <!-- Cuarta fila -->
-          <div class="col-12">
-            <label class="form-label">Valor Financiado</label>
-            <input type="number" formControlName="valorFinanciado" class="form-control" [class.is-invalid]="isInvalid('valorFinanciado')">
-          </div>
-  
-          <!-- Botón de envío -->
-          <div class="col-12 text-center mt-4">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
+         <!-- Tercera fila -->
+<div class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Fuente Nacional</label>
+    <select formControlName="idFuenteNacional" class="form-select" [class.is-invalid]="isInvalid('idFuenteNacional')">
+      <option value="">Seleccione fuente nacional</option>
+      <option *ngFor="let fuente of fuentesNacionales" [value]="fuente.id">{{fuente.nombre}}</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Valor Financiado</label>
+    <input type="number" formControlName="valorFinanciado" class="form-control" [class.is-invalid]="isInvalid('valorFinanciado')">
+  </div>
+</div>
+
+<!-- Botón de envío -->
+<div class="col-12 text-center mt-4">
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</div>
         </div>
       </form>
     </div>

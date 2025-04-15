@@ -39,10 +39,12 @@ import { ServiciosDeExtensionComponent } from './extension/servicios-docentes/se
 import { AreaTrabajoComponent } from './extension/servicios-docentes/servicios-extension/area-trabajo/area-trabajo.component';
 import { CicloVitalComponent } from './extension/servicios-docentes/servicios-extension/ciclo-vital/ciclo-vital.component';
 import { EntidadNacionalComponent } from './extension/servicios-docentes/servicios-extension/entidad-nacional/entidad-nacional.component';
-import { FuenteInternacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-internacional/fuente-internacional.component';
 import { FuenteNacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-nacional/fuente-nacional.component';
 import { ParticipanteComponent } from './extension/servicios-docentes/participante/participante.component';
-
+import { FuenteInternacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-internacional/fuente-internacional.component';
+import { OtrasEntidadesComponent } from './extension/servicios-docentes/servicios-extension/otras-entidades/otras-entidades.component';
+import { PoblacionCondicionComponent } from './extension/servicios-docentes/servicios-extension/poblacion-condicion/poblacion-condicion.component';
+import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicios-extension/poblacion-grupo/poblacion-grupo.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -79,9 +81,13 @@ export const routes: Routes = [
 { path: 'area-trabajo', component: AreaTrabajoComponent },
 { path: 'ciclo-vital', component: CicloVitalComponent },
 { path: 'entidad-nacional', component: EntidadNacionalComponent },
-{ path: 'fuente-internacional', component: FuenteInternacionalComponent },
-{ path: 'fuente-nacional', component: FuenteNacionalComponent },
 { path: 'participante', component: ParticipanteComponent },
+{ path: 'fuente-internacional', component: FuenteInternacionalComponent },
+{ path: 'participante', component: ParticipanteComponent },
+{path: 'fuente-nacional', component: FuenteNacionalComponent},
+{path: 'otras-entidades', component: OtrasEntidadesComponent},
+{path: 'poblacion-condicion', component: PoblacionCondicionComponent},
+{path: 'poblacion-grupo', component: PoblacionGrupoComponent},
 
 
 ];

@@ -35,3 +35,42 @@
 .card-body {
     padding: 1.5rem;
 }
+
+.nav-tabs-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: -17px;
+    padding-bottom: 17px;
+  }
+  
+  .nav-tabs {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    min-width: min-content;
+  }
+  
+  .nav-item {
+    float: none;
+    display: inline-block;
+  }
+  
+  /* Estilo para la barra de scroll */
+  .nav-tabs-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .nav-tabs-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .nav-tabs-wrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .nav-tabs-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  

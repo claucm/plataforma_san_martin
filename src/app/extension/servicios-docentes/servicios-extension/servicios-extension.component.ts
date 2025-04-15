@@ -5,7 +5,12 @@ import { AreaTrabajoComponent } from './area-trabajo/area-trabajo.component';
 import { CicloVitalComponent } from './ciclo-vital/ciclo-vital.component';
 import { EntidadNacionalComponent } from './entidad-nacional/entidad-nacional.component';
 import { FuenteInternacionalComponent } from './fuente-internacional/fuente-internacional.component';
-import { ParticipanteComponent } from '../participante/participante.component';
+import { FuenteNacionalComponent } from './fuente-nacional/fuente-nacional.component';
+import { OtrasEntidadesComponent } from './otras-entidades/otras-entidades.component';
+import { PoblacionCondicionComponent } from './poblacion-condicion/poblacion-condicion.component';
+import { PoblacionGrupoComponent } from './poblacion-grupo/poblacion-grupo.component';
+
+
 
 
 @Component({
@@ -18,7 +23,11 @@ import { ParticipanteComponent } from '../participante/participante.component';
     CicloVitalComponent,
     EntidadNacionalComponent,
     FuenteInternacionalComponent,
-    ParticipanteComponent,
+    FuenteNacionalComponent,
+    OtrasEntidadesComponent,
+    PoblacionCondicionComponent,
+    PoblacionGrupoComponent
+   
    
   ],
   templateUrl: './servicios-extension.component.html',

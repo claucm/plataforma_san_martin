@@ -1,116 +1,157 @@
 <div class="container mt-5">
-    <h2 class="text-center">Servicios Docentes</h2>
-  
-    <!-- Pestañas de navegación -->
-    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="servicios-tab" data-bs-toggle="tab" data-bs-target="#servicios" type="button" role="tab">
-          Servicios de Extensión 
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="area-tab" data-bs-toggle="tab" data-bs-target="#area" type="button" role="tab">
-          Área de Trabajo
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="ciclo-tab" data-bs-toggle="tab" data-bs-target="#ciclo" type="button" role="tab">
-          Ciclo Vital
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="entidad-tab" data-bs-toggle="tab" data-bs-target="#entidad" type="button" role="tab">
-          Entidad Nacional
-        </button>
-      </li>
-     
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="internacional-tab" data-bs-toggle="tab" data-bs-target="#internacional" type="button" role="tab" aria-controls="internacional" aria-selected="false">
-          Fuente Internacional
-        </button>
-      </li>
+  <h2 class="text-center">Servicios Docentes</h2>
 
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="nacional-tab" data-bs-toggle="tab" data-bs-target="#nacional" type="button" role="tab" aria-controls="nacional" aria-selected="false">
-          Fuente Nacional
-        </button>
-      </li>
+  <!-- Pestañas de navegación -->
+  <div class="nav-tabs-wrapper">
+  <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="servicios-tab" data-bs-toggle="tab" data-bs-target="#servicios" type="button" role="tab" aria-controls="servicios" aria-selected="true">
+        Servicios de Extensión
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="area-tab" data-bs-toggle="tab" data-bs-target="#area" type="button" role="tab" aria-controls="area" aria-selected="false">
+        Área de Trabajo
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="ciclo-tab" data-bs-toggle="tab" data-bs-target="#ciclo" type="button" role="tab" aria-controls="ciclo" aria-selected="false">
+        Ciclo Vital
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="entidad-tab" data-bs-toggle="tab" data-bs-target="#entidad" type="button" role="tab" aria-controls="entidad" aria-selected="false">
+        Entidad Nacional
+      </button>
+    </li>
 
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="otras-tab" data-bs-toggle="tab" data-bs-target="#otras" type="button" role="tab">
-          Otras Entidades
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="condicion-tab" data-bs-toggle="tab" data-bs-target="#condicion" type="button" role="tab">
-          Población Condición
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="grupo-tab" data-bs-toggle="tab" data-bs-target="#grupo" type="button" role="tab">
-          Población Grupo
-        </button>
-      </li>
-    </ul>
-  
-    <!-- Contenido de las pestañas -->
-    <div class="tab-content mt-3" id="myTabContent">
-      <!-- Pestaña Servicios de Extensión -->
-      <div class="tab-pane fade show active" id="servicios" role="tabpanel">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="text-center">Servicios de Extensión</h4>
-            <app-servicios-de-extension></app-servicios-de-extension>
-          </div>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="internacional-tab" data-bs-toggle="tab" data-bs-target="#internacional" type="button" role="tab" aria-controls="internacional" aria-selected="false">
+        Fuente Internacional
+      </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="nacional-tab" data-bs-toggle="tab" data-bs-target="#nacional" type="button" role="tab" aria-controls="nacional" aria-selected="false">
+        Fuente Nacional
+      </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="otras-entidades-tab" data-bs-toggle="tab" data-bs-target="#otras-entidades" type="button" role="tab" aria-controls="otras-entidades" aria-selected="false">
+        Otras Entidades
+      </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="poblacion-tab" data-bs-toggle="tab" data-bs-target="#poblacion" type="button" role="tab" aria-controls="poblacion" aria-selected="false">
+        Población por Condición
+      </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="poblacion-grupo-tab" data-bs-toggle="tab" data-bs-target="#poblacion-grupo" type="button" role="tab" aria-controls="poblacion-grupo" aria-selected="false">
+        Población por Grupo
+      </button>
+    </li>
+
+
+  </ul>
+</div>
+
+  <!-- Contenido de las pestañas -->
+  <div class="tab-content mt-3" id="myTabContent">
+    <!-- Pestaña Servicios de Extensión -->
+    <div class="tab-pane fade show active" id="servicios" role="tabpanel" aria-labelledby="servicios-tab">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center">Servicios de Extensión</h4>
+          <app-servicios-de-extension></app-servicios-de-extension>
         </div>
       </div>
-  
-      <!-- Pestaña Área de Trabajo -->
-      <div class="tab-pane fade" id="area" role="tabpanel">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="text-center">Área de Trabajo</h4>
-            <app-area-trabajo></app-area-trabajo>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Pestaña Ciclo Vital -->
-      <div class="tab-pane fade" id="ciclo" role="tabpanel">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="text-center">Ciclo Vital</h4>
-            <app-ciclo-vital></app-ciclo-vital>
-          </div>
-        </div>
-      </div>
-  
-    
-        <!-- Pestaña Entidad Nacional -->
-        <div class="tab-pane fade" id="entidad" role="tabpanel">
-            <div class="card">
-                <div class="card-body">
-                <h4 class="text-center">Entidad Nacional</h4>
-                <app-entidad-nacional></app-entidad-nacional>
-                </div>
-            </div>
+    </div>
 
-      <!-- Pestaña Fuente Internacional -->
-      <div class="tab-pane fade" id="internacional" role="tabpanel" aria-labelledby="internacional-tab">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="text-center">Fuente Internacional</h4>
-            <app-fuente-internacional></app-fuente-internacional>
-          </div>
+    <!-- Pestaña Área de Trabajo -->
+    <div class="tab-pane fade" id="area" role="tabpanel" aria-labelledby="area-tab">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center">Área de Trabajo</h4>
+          <app-area-trabajo></app-area-trabajo>
         </div>
       </div>
+    </div>
 
-      <div class="tab-pane fade" id="entidad" role="tabpanel">
-        <div class="card">
-            <div class="card-body">
-            <h4 class="text-center">Entidad Nacional</h4>
-            <app-entidad-nacional></app-entidad-nacional>
-            </div>
+    <!-- Pestaña Ciclo Vital -->
+    <div class="tab-pane fade" id="ciclo" role="tabpanel" aria-labelledby="ciclo-tab">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center">Ciclo Vital</h4>
+          <app-ciclo-vital></app-ciclo-vital>
         </div>
-        
+      </div>
+    </div>
+
+    <!-- Pestaña Entidad Nacional -->
+    <div class="tab-pane fade" id="entidad" role="tabpanel" aria-labelledby="entidad-tab">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center">Entidad Nacional</h4>
+          <app-entidad-nacional></app-entidad-nacional>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña Fuente Internacional -->
+    <div class="tab-pane fade" id="internacional" role="tabpanel" aria-labelledby="internacional-tab">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="text-center">Fuente Internacional</h4>
+          <app-fuente-internacional></app-fuente-internacional>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña Fuente Nacional -->
+<div class="tab-pane fade" id="nacional" role="tabpanel" aria-labelledby="nacional-tab">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Fuente Nacional</h4>
+      <app-fuente-nacional></app-fuente-nacional>
+    </div>
   </div>
+</div>
+
+<div class="tab-pane fade" id="otras-entidades" role="tabpanel" aria-labelledby="otras-entidades-tab">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Otras Entidades</h4>
+      <app-otras-entidades></app-otras-entidades>
+    </div>
+  </div>
+</div>
+    
+
+<!-- Pestaña Población por Condición -->
+<div class="tab-pane fade" id="poblacion" role="tabpanel" aria-labelledby="poblacion-tab">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Población por Condición</h4>
+      <app-poblacion-condicion></app-poblacion-condicion>
+    </div>
+  </div>
+</div>
+
+<!-- Pestaña Población por Grupo -->
+<div class="tab-pane fade" id="poblacion-grupo" role="tabpanel" aria-labelledby="poblacion-grupo-tab">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Población por Grupo</h4>
+      <app-poblacion-grupo></app-poblacion-grupo>
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+</div>
