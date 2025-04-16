@@ -73,13 +73,6 @@
               <i class="fas fa-file-signature me-2"></i> Actas de Inicio
             </a>
           </li>
-
-          <li>
-            <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
-              <i class="fas fa-users me-2"></i> Grupos Investigación
-            </a>
-          </li>
-
           <li>
             <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
               <i class="fas fa-users me-2"></i> Grupos Investigación
@@ -91,7 +84,7 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
+            <a [routerLink]="'/tablas-basicas'" class="nav-link text-white">
               <i class="fas fa-table me-2"></i> Tablas Básicas
             </a>
           </li>
@@ -99,51 +92,94 @@
       </div>
     </li>
 
-        <!-- Extensión Modulo -->
+    <!-- Tablero de Indicadores Module -->
+    <li>
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#indicadoresMenu" role="button" aria-expanded="false" aria-controls="indicadoresMenu">
+        <i class="fas fa-chart-bar me-2"></i> Tablero de Indicadores
+      </a>
+      <div class="collapse" id="indicadoresMenu">
+        <ul class="nav nav-pills flex-column ms-3">
+          <!-- Formación -->
+          <li>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#formacionMenu" role="button" aria-expanded="false" aria-controls="formacionMenu">
+              <i class="fas fa-graduation-cap me-2"></i> 1. Formación
+            </a>
+            <div class="collapse" id="formacionMenu">
+              <ul class="nav nav-pills flex-column ms-3">
+                <!-- Programas Académicos -->
+                <li><a [routerLink]="'/indicadores/oferta-academica'" class="nav-link text-white">1.1.1 Oferta académica</a></li>
+                <li><a [routerLink]="'/indicadores/especializaciones-medicas'" class="nav-link text-white">1.1.2 Especializaciones médicas</a></li>
+                <li><a [routerLink]="'/indicadores/programas-total'" class="nav-link text-white">1.1.3 Total programas</a></li>
+                <li><a [routerLink]="'/indicadores/programas-inactivos'" class="nav-link text-white">1.1.4 Programas inactivos</a></li>
+                <li><a [routerLink]="'/indicadores/programas-modalidad'" class="nav-link text-white">1.1.5 Programas por modalidad</a></li>
+                <li><a [routerLink]="'/indicadores/registro-programas'" class="nav-link text-white">1.1.6 Registro de programas</a></li>
+                <li><a [routerLink]="'/indicadores/planes-estudio'" class="nav-link text-white">1.1.7 Planes de estudio</a></li>
+              </ul>
+            </div>
+          </li>
 
-        <li>
-          <a class="nav-link text-white" data-bs-toggle="collapse" href="#extensionMenu" role="button" aria-expanded="false" aria-controls="extensionMenu">
-            <i class="fas fa-cogs me-2"></i> Extensión
-          </a>
-          <div class="collapse" id="extensionMenu">
-            <ul class="nav nav-pills flex-column ms-3">
-              <li>
-                <a [routerLink]="'/practicas-pasantias'" class="nav-link text-white">
-                  <i class="fas fa-briefcase me-2"></i> Prácticas y Pasantías Universitarias
-                </a>
-              </li>
-              <li>
-                <a class="nav-link text-white" data-bs-toggle="collapse" href="#serviciosDocentesMenu" role="button" aria-expanded="false" aria-controls="serviciosDocentesMenu">
-                  <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
-                </a>
-                <div class="collapse" id="serviciosDocentesMenu">
-                  <ul class="nav nav-pills flex-column ms-3">
-                    <li>
-                      <a [routerLink]="'/caracterizacion-participantes'" class="nav-link text-white">
-                        <i class="fas fa-users me-2"></i> Caracterización de Participantes
-                      </a>
-                    </li>
-                    <li>
-                      <a [routerLink]="'/servicios-extension'" class="nav-link text-white">
-                        <i class="fas fa-hand-holding-medical me-2"></i> Servicios de Extensión
-                      </a>
-                    </li>
+          <!-- Estudiantes -->
+          <li>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#estudiantesMenu" role="button" aria-expanded="false" aria-controls="estudiantesMenu">
+              <i class="fas fa-user-graduate me-2"></i> 1.2 Estudiantes
+            </a>
+            <div class="collapse" id="estudiantesMenu">
+              <ul class="nav nav-pills flex-column ms-3">
+                <li><a [routerLink]="'/indicadores/estudiantes-total'" class="nav-link text-white">1.2.1 Total estudiantes</a></li>
+                <li><a [routerLink]="'/indicadores/estudiantes-programa'" class="nav-link text-white">1.2.2 Por programa</a></li>
+                <li><a [routerLink]="'/indicadores/desercion'" class="nav-link text-white">1.2.3 Deserción</a></li>
+                <li><a [routerLink]="'/indicadores/becas'" class="nav-link text-white">1.2.4 Becas</a></li>
+                <li><a [routerLink]="'/indicadores/ingles'" class="nav-link text-white">1.2.5 Nivel inglés</a></li>
+                <li><a [routerLink]="'/indicadores/creditos'" class="nav-link text-white">1.2.6 Por créditos</a></li>
+                <li><a [routerLink]="'/indicadores/doble-programa'" class="nav-link text-white">1.2.7 Doble programa</a></li>
+                <li><a [routerLink]="'/indicadores/premedico'" class="nav-link text-white">1.2.8 Premédico</a></li>
+              </ul>
+            </div>
+          </li>
 
-                    <li>
-                      <a [routerLink]="'/participante'" class="nav-link text-white">
-                        <i class="fas fa-user me-2"></i> Participante SNIES
-                      </a>
-                    </li>
+          <!-- Profesores -->
+          <li>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#profesoresMenu" role="button" aria-expanded="false" aria-controls="profesoresMenu">
+              <i class="fas fa-chalkboard-teacher me-2"></i> 1.3 Profesores
+            </a>
+            <div class="collapse" id="profesoresMenu">
+              <ul class="nav nav-pills flex-column ms-3">
+                <li><a [routerLink]="'/indicadores/profesores-total'" class="nav-link text-white">1.3.1 Total profesores</a></li>
+                <li><a [routerLink]="'/indicadores/instructores-practica'" class="nav-link text-white">1.3.2 Instructores práctica</a></li>
+                <li><a [routerLink]="'/indicadores/distribucion-docentes'" class="nav-link text-white">1.3.3 Distribución docentes</a></li>
+                <li><a [routerLink]="'/indicadores/distribucion-demografica'" class="nav-link text-white">1.3.4 Distribución demográfica</a></li>
+                <li><a [routerLink]="'/indicadores/distinciones-docentes'" class="nav-link text-white">1.3.5 Distinciones</a></li>
+                <li><a [routerLink]="'/indicadores/dedicacion-docentes'" class="nav-link text-white">1.3.6 Dedicación docentes</a></li>
+                <li><a [routerLink]="'/indicadores/historico-profesores'" class="nav-link text-white">1.3.7 Histórico</a></li>
+              </ul>
+            </div>
+          </li>
+    
+          <!-- Evaluación de Profesores -->
+          <li>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#evaluacionMenu" role="button" aria-expanded="false" aria-controls="evaluacionMenu">
+              <i class="fas fa-star me-2"></i> 1.4 Evaluación de Profesores
+            </a>
+            <div class="collapse" id="evaluacionMenu">
+              <ul class="nav nav-pills flex-column ms-3">
+                <li><a [routerLink]="'/indicadores/docentes-evaluados'" class="nav-link text-white">1.4.1 Docentes evaluados</a></li>
+                <li><a [routerLink]="'/indicadores/docentes-no-evaluados'" class="nav-link text-white">1.4.2 Docentes no evaluados</a></li>
+                <li><a [routerLink]="'/indicadores/calificacion-evaluaciones'" class="nav-link text-white">1.4.3 Calificaciones</a></li>
+                <li><a [routerLink]="'/indicadores/historico-evaluaciones'" class="nav-link text-white">1.4.4 Históricos</a></li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </li>
 
 
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-        
-        
+    <li>
+      <a [routerLink]="'/settings'" class="nav-link text-white">
+        <i class="fas fa-cogs me-2"></i> Extensión
+      </a>
+    </li>
   </ul>
   <hr>
   <div class="text-center">

@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Planes de Estudio</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="facultadSelect" class="form-label">Facultad:</label>
+            <select class="form-select" id="facultadSelect" [(ngModel)]="selectedFacultad">
+                <option value="">Todas las Facultades</option>
+                <option value="Medicina">Medicina</option>
+                <option value="Ingeniería">Ingeniería</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="programaSelect" class="form-label">Programa:</label>
+            <select class="form-select" id="programaSelect" [(ngModel)]="selectedPrograma">
+                <option value="">Todos los Programas</option>
+                <option *ngFor="let plan of planesEstudio" [value]="plan.programa">{{plan.programa}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="nivelSelect" class="form-label">Nivel:</label>
+            <select class="form-select" id="nivelSelect" [(ngModel)]="selectedNivel">
+                <option value="">Todos los Niveles</option>
+                <option value="Pregrado">Pregrado</option>
+                <option value="Posgrado">Posgrado</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="estadoSelect" class="form-label">Estado:</label>
+            <select class="form-select" id="estadoSelect" [(ngModel)]="selectedEstado">
+                <option value="">Todos</option>
+                <option value="Activo">Activo</option>
+                <option value="En Revisión">En Revisión</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Planes</h5>
+                    <p class="card-text h2">{{totalPlanes}}</p>
+                    <p class="text-muted">registrados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Planes Activos</h5>
+                    <p class="card-text h2">{{planesActivos}}</p>
+                    <p class="text-muted">en vigencia</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">En Revisión</h5>
+                    <p class="card-text h2">{{planesEnRevision}}</p>
+                    <p class="text-muted">pendientes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Actualizados</h5>
+                    <p class="card-text h2">{{planesActualizados}}</p>
+                    <p class="text-muted">último año</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Facultad</h3>
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="distribucionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Estado de Planes</h3>
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="estadoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Planes -->
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Listado de Planes de Estudio</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Programa</th>
+                            <th>Facultad</th>
+                            <th>Nivel</th>
+                            <th>Versión</th>
+                            <th>Fecha Actualización</th>
+                            <th>Créditos</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let plan of filteredPlanes">
+                            <td>{{plan.programa}}</td>
+                            <td>{{plan.facultad}}</td>
+                            <td>{{plan.nivel}}</td>
+                            <td>{{plan.version}}</td>
+                            <td>{{plan.fechaActualizacion}}</td>
+                            <td>{{plan.creditos}}</td>
+                            <td>
+                                <span [class]="'badge ' + getEstadoClass(plan.estado)">
+                                    {{plan.estado}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-info me-1">Ver Detalle</button>
+                                <button class="btn btn-sm btn-secondary">Descargar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

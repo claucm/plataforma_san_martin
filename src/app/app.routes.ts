@@ -16,35 +16,40 @@ import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 import { AperturaConvocatoriaComponent } from './investigacion/apertura-convocatoria/apertura-convocatoria.component';
 import { RegistroProyectoComponent } from './investigacion/registro-proyecto/registro-proyecto.component';
 import { ActasInicioComponent } from './investigacion/actas-inicio/actas-inicio.component';
-import { GruposInvestigacionComponent } from './investigacion/grupos-investigacion/grupos-investigacion.component';
-import { GestionGinvestigacionComponent } from './investigacion/grupos/gestion-ginvestigacion/gestion-ginvestigacion.component';
 
-import { ProyectosInvestigacionComponent } from './investigacion/proyectos-investigacion/proyectos-investigacion.component';
-import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consulta-tablas.component';
-import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
+// Tablero de Indicadores - Formación
+import { OfertaAcademicaComponent } from './TableroDeIndicadores/formacion/oferta-academica/oferta-academica.component';
+import { EspecializacionesMedicasComponent } from './TableroDeIndicadores/formacion/especializaciones-medicas/especializaciones-medicas.component';
+import { TotalProgramasComponent } from './TableroDeIndicadores/formacion/total-programas/total-programas.component';
+import { ProgramasInactivosComponent } from './TableroDeIndicadores/formacion/programas-inactivos/programas-inactivos.component';
+import { ProgramasModalidadComponent } from './TableroDeIndicadores/formacion/programas-modalidad/programas-modalidad.component';
+import { RegistroProgramasComponent } from './TableroDeIndicadores/formacion/registro-programas/registro-programas.component';
+import { PlanesEstudioComponent } from './TableroDeIndicadores/formacion/planes-estudio/planes-estudio.component';
 
-//Extensión
-import { PracticasPasantiasComponent } from './extension/practicas/practicas-pasantias/practicas-pasantias.component';
-import { ConveniosFormComponent } from './extension/practicas/convenios-form/convenios-form.component';
-import { ConveniosDocenciaComponent } from './extension/practicas/convenios-docencia/convenios-docencia.component';
-import { ComiteDocenciaComponent } from './extension/practicas/comite-docencia/comite-docencia.component';
-import { PracticasProfesionalesComponent } from './extension/practicas/practicas-profesionales/practicas-profesionales.component';
-import { FichaResumenComponent } from './extension/practicas/ficha-resumen/ficha-resumen.component';
-import { ProyeccionSocialComponent } from './extension/practicas/proyeccion-social/proyeccion-social.component';
+// Tablero de Indicadores - Estudiantes
+import { TotalEstudiantesComponent } from './TableroDeIndicadores/estudiantes/total-estudiantes/total-estudiantes.component';
+import { PorProgramaComponent } from './TableroDeIndicadores/estudiantes/por-programa/por-programa.component';
+import { DesercionComponent } from './TableroDeIndicadores/estudiantes/desercion/desercion.component';
+import { BecasComponent } from './TableroDeIndicadores/estudiantes/becas/becas.component';
+import { NivelInglesComponent } from './TableroDeIndicadores/estudiantes/nivel-ingles/nivel-ingles.component';
+import { PorCreditosComponent } from './TableroDeIndicadores/estudiantes/por-creditos/por-creditos.component';
+import { DobleProgramaComponent } from './TableroDeIndicadores/estudiantes/doble-programa/doble-programa.component';
+import { PremedicoComponent } from './TableroDeIndicadores/estudiantes/premedico/premedico.component';
 
-//Extension-servicios docentes
-import { CaracterizacionParticipantesComponent } from './extension/servicios-docentes/caracterizacion-participantes/caracterizacion-participantes.component';
-import { ServiciosExtensionComponent } from './extension/servicios-docentes/servicios-extension/servicios-extension.component';
-import { ServiciosDeExtensionComponent } from './extension/servicios-docentes/servicios-extension/servicios-de-extension/servicios-de-extension.component';
-import { AreaTrabajoComponent } from './extension/servicios-docentes/servicios-extension/area-trabajo/area-trabajo.component';
-import { CicloVitalComponent } from './extension/servicios-docentes/servicios-extension/ciclo-vital/ciclo-vital.component';
-import { EntidadNacionalComponent } from './extension/servicios-docentes/servicios-extension/entidad-nacional/entidad-nacional.component';
-import { FuenteNacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-nacional/fuente-nacional.component';
-import { ParticipanteComponent } from './extension/servicios-docentes/participante/participante.component';
-import { FuenteInternacionalComponent } from './extension/servicios-docentes/servicios-extension/fuente-internacional/fuente-internacional.component';
-import { OtrasEntidadesComponent } from './extension/servicios-docentes/servicios-extension/otras-entidades/otras-entidades.component';
-import { PoblacionCondicionComponent } from './extension/servicios-docentes/servicios-extension/poblacion-condicion/poblacion-condicion.component';
-import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicios-extension/poblacion-grupo/poblacion-grupo.component';
+// Tablero de Indicadores - Profesores
+import { TotalProfesoresComponent } from './TableroDeIndicadores/profesores/total-profesores/total-profesores.component';
+import { InstructoresPracticaComponent } from './TableroDeIndicadores/profesores/instructores-practica/instructores-practica.component';
+import { DistribucionDocentesComponent } from './TableroDeIndicadores/profesores/distribucion-docentes/distribucion-docentes.component';
+import { DistribucionDemograficaComponent } from './TableroDeIndicadores/profesores/distribucion-demografica/distribucion-demografica.component';
+import { DistincionesComponent } from './TableroDeIndicadores/profesores/distinciones/distinciones.component';
+import { DedicacionDocentesComponent } from './TableroDeIndicadores/profesores/dedicacion-docentes/dedicacion-docentes.component';
+import { HistoricoComponent } from './TableroDeIndicadores/profesores/historico/historico.component';
+
+// Tablero de Indicadores - Evaluación Profesores
+import { DocentesEvaluadosComponent } from './TableroDeIndicadores/EvaluacionProfesores/docentes-evaluados/docentes-evaluados.component';
+import { DocentesNoEvaluadosComponent } from './TableroDeIndicadores/EvaluacionProfesores/docentes-no-evaluados/docentes-no-evaluados.component';
+import { CalificacionesComponent } from './TableroDeIndicadores/EvaluacionProfesores/calificaciones/calificaciones.component';
+import { HistoricosComponent } from './TableroDeIndicadores/EvaluacionProfesores/historicos/historicos.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -60,36 +65,40 @@ export const routes: Routes = [
   { path: 'apertura-convocatoria', component: AperturaConvocatoriaComponent },
   { path: 'registro-proyecto', component: RegistroProyectoComponent  },
   { path: 'actas-inicio', component: ActasInicioComponent  },
-  { path: 'gestion-ginvestigacion', component: GestionGinvestigacionComponent },
-  { path: 'grupos-investigacion', component: GruposInvestigacionComponent },
-  { path: 'proyectos-investigacion', component: ProyectosInvestigacionComponent },
-  { path: 'consulta-tablas', component: ConsultaTablasComponent },
-  { path: 'modulo-extension', component: ModuloExtensionComponent },
 
-{ path: 'practicas-pasantias', component: PracticasPasantiasComponent },
-{ path: 'convenios-form', component: ConveniosFormComponent },
-{ path: 'convenios-docencia', component: ConveniosDocenciaComponent },
-{ path: 'comite-docencia', component: ComiteDocenciaComponent },
-{ path: 'practicas-profesionales', component: PracticasProfesionalesComponent },
-{ path: 'ficha-resumen', component: FichaResumenComponent },
-{ path: 'proyeccion-social', component: ProyeccionSocialComponent },
+    // Formación routes
+    { path: 'indicadores/oferta-academica', component: OfertaAcademicaComponent },
+    { path: 'indicadores/especializaciones-medicas', component: EspecializacionesMedicasComponent },
+    { path: 'indicadores/programas-total', component: TotalProgramasComponent },
+    { path: 'indicadores/programas-inactivos', component: ProgramasInactivosComponent },
+    { path: 'indicadores/programas-modalidad', component: ProgramasModalidadComponent },
+    { path: 'indicadores/registro-programas', component: RegistroProgramasComponent },
+    { path: 'indicadores/planes-estudio', component: PlanesEstudioComponent },
 
-//Extension-servicios docentes
-{ path: 'caracterizacion-participantes', component: CaracterizacionParticipantesComponent },
-{ path: 'servicios-extension', component: ServiciosExtensionComponent },
-{ path: 'servicios-de-extension', component: ServiciosDeExtensionComponent },
-{ path: 'area-trabajo', component: AreaTrabajoComponent },
-{ path: 'ciclo-vital', component: CicloVitalComponent },
-{ path: 'entidad-nacional', component: EntidadNacionalComponent },
-{ path: 'participante', component: ParticipanteComponent },
-{ path: 'fuente-internacional', component: FuenteInternacionalComponent },
-{ path: 'participante', component: ParticipanteComponent },
-{path: 'fuente-nacional', component: FuenteNacionalComponent},
-{path: 'otras-entidades', component: OtrasEntidadesComponent},
-{path: 'poblacion-condicion', component: PoblacionCondicionComponent},
-{path: 'poblacion-grupo', component: PoblacionGrupoComponent},
+    // Estudiantes routes
+    { path: 'indicadores/estudiantes-total', component: TotalEstudiantesComponent },
+    { path: 'indicadores/estudiantes-programa', component: PorProgramaComponent },
+    { path: 'indicadores/desercion', component: DesercionComponent },
+    { path: 'indicadores/becas', component: BecasComponent },
+    { path: 'indicadores/ingles', component: NivelInglesComponent },
+    { path: 'indicadores/creditos', component: PorCreditosComponent },
+    { path: 'indicadores/doble-programa', component: DobleProgramaComponent },
+    { path: 'indicadores/premedico', component: PremedicoComponent },
 
+    // Profesores routes
+    { path: 'indicadores/profesores-total', component: TotalProfesoresComponent },
+    { path: 'indicadores/instructores-practica', component: InstructoresPracticaComponent },
+    { path: 'indicadores/distribucion-docentes', component: DistribucionDocentesComponent },
+    { path: 'indicadores/distribucion-demografica', component: DistribucionDemograficaComponent },
+    { path: 'indicadores/distinciones-docentes', component: DistincionesComponent },
+    { path: 'indicadores/dedicacion-docentes', component: DedicacionDocentesComponent },
+    { path: 'indicadores/historico-profesores', component: HistoricoComponent },
 
+    // Evaluación Profesores routes
+    { path: 'indicadores/docentes-evaluados', component: DocentesEvaluadosComponent },
+    { path: 'indicadores/docentes-no-evaluados', component: DocentesNoEvaluadosComponent },
+    { path: 'indicadores/calificacion-evaluaciones', component: CalificacionesComponent },
+    { path: 'indicadores/historico-evaluaciones', component: HistoricosComponent },
 ];
 
 

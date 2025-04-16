@@ -1,0 +1,5 @@
+/* Ajustar el tamaño de los gráficos */
+canvas {
+    width: 100% !important;
+    height: 400px !important;  /* Ajuste la altura si lo necesita */
+  }

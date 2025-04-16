@@ -1,0 +1,162 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Análisis de Deserción Estudiantil</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="cohorteSelect" class="form-label">Cohorte:</label>
+            <select class="form-select" id="cohorteSelect">
+                <option value="">Todas las Cohortes</option>
+                <option value="2024-1">2024-1</option>
+                <option value="2023-2">2023-2</option>
+                <option value="2023-1">2023-1</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="programaSelect" class="form-label">Programa:</label>
+            <select class="form-select" id="programaSelect">
+                <option value="">Todos los Programas</option>
+                <option value="medicina">Medicina</option>
+                <option value="enfermeria">Enfermería</option>
+                <option value="psicologia">Psicología</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="semestreSelect" class="form-label">Semestre:</label>
+            <select class="form-select" id="semestreSelect">
+                <option value="">Todos los Semestres</option>
+                <option value="1">Primer Semestre</option>
+                <option value="2">Segundo Semestre</option>
+                <option value="3">Tercer Semestre</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="periodoSelect" class="form-label">Periodo:</label>
+            <select class="form-select" id="periodoSelect">
+                <option value="anual">Anual</option>
+                <option value="semestral">Semestral</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Gráficas de Dispersión -->
+    <div class="row mb-4">
+        <div class="col-12 mb-4">
+            <!-- Update the chart containers with fixed heights -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Tendencia Histórica de Deserción</h3>
+                    <div style="height: 400px;">
+                        <canvas id="desercionHistoricaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Deserción por Programa</h3>
+                    <div style="height: 350px;">
+                        <canvas id="desercionProgramaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Deserción por Cohorte</h3>
+                    <div style="height: 350px;">
+                        <canvas id="desercionCohorteChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicadores Clave -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Tasa de Deserción Actual</h5>
+                    <p class="card-text h2">8.5%</p>
+                    <p class="text-muted">vs 9.2% año anterior</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Programa con Mayor Deserción</h5>
+                    <p class="card-text h2">12.3%</p>
+                    <p class="text-muted">Ingeniería Industrial</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Semestre Crítico</h5>
+                    <p class="card-text h2">3ro</p>
+                    <p class="text-muted">15.2% deserción</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Tendencia Anual</h5>
+                    <p class="card-text h2">-0.7%</p>
+                    <p class="text-muted">Reducción vs año anterior</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Datos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Detalle de Deserción por Programa y Cohorte</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Cohorte</th>
+                                    <th>Semestre</th>
+                                    <th>Estudiantes Iniciales</th>
+                                    <th>Desertores</th>
+                                    <th>Tasa de Deserción</th>
+                                    <th>Tendencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Medicina</td>
+                                    <td>2023-1</td>
+                                    <td>2</td>
+                                    <td>120</td>
+                                    <td>8</td>
+                                    <td>6.7%</td>
+                                    <td><i class="fas fa-arrow-down text-success"></i> -1.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Enfermería</td>
+                                    <td>2023-1</td>
+                                    <td>3</td>
+                                    <td>85</td>
+                                    <td>10</td>
+                                    <td>11.8%</td>
+                                    <td><i class="fas fa-arrow-up text-danger"></i> +2.3%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Estudiantes por Créditos Académicos</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="sedeSelect" class="form-label">Sede:</label>
+            <select class="form-select" id="sedeSelect" [(ngModel)]="selectedSede">
+                <option value="">Todas las Sedes</option>
+                <option value="Bogotá">Bogotá</option>
+                <option value="Medellín">Medellín</option>
+                <option value="Cali">Cali</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="facultadSelect" class="form-label">Facultad:</label>
+            <select class="form-select" id="facultadSelect" [(ngModel)]="selectedFacultad">
+                <option value="">Todas las Facultades</option>
+                <option value="Medicina">Medicina</option>
+                <option value="Ingeniería">Ingeniería</option>
+                <option value="Derecho">Derecho</option>
+                <option value="Ciencias">Ciencias</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="programaSelect" class="form-label">Programa:</label>
+            <select class="form-select" id="programaSelect" [(ngModel)]="selectedPrograma">
+                <option value="">Todos los Programas</option>
+                <option *ngFor="let est of estudiantes" [value]="est.programa">{{est.programa}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="periodoSelect" class="form-label">Periodo:</label>
+            <select class="form-select" id="periodoSelect" [(ngModel)]="selectedPeriodo">
+                <option value="2024-1">2024-1</option>
+                <option value="2023-2">2023-2</option>
+                <option value="2023-1">2023-1</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Créditos</h3>
+                    <div style="position: relative; height: 350px;">
+                        <canvas id="distribucionCreditosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Promedio por Facultad</h3>
+                    <div style="position: relative; height: 350px;">
+                        <canvas id="promedioFacultadChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Promedio de Créditos</h5>
+                    <p class="card-text h2">16</p>
+                    <p class="text-muted">Institucional</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Estudiantes</h5>
+                    <p class="card-text h2">1,280</p>
+                    <p class="text-muted">Matriculados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Rango más común</h5>
+                    <p class="card-text h2">12-16</p>
+                    <p class="text-muted">créditos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Sobrecarga</h5>
+                    <p class="card-text h2">6%</p>
+                    <p class="text-muted">>20 créditos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Datos -->
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Detalle por Rango de Créditos</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Rango de Créditos</th>
+                            <th>Cantidad de Estudiantes</th>
+                            <th>Facultad</th>
+                            <th>Sede</th>
+                            <th>Programa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let estudiante of filteredEstudiantes">
+                            <td>{{estudiante.creditos}}</td>
+                            <td>{{estudiante.cantidad}}</td>
+                            <td>{{estudiante.facultad}}</td>
+                            <td>{{estudiante.sede}}</td>
+                            <td>{{estudiante.programa}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

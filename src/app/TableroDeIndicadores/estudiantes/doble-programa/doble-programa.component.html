@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Estudiantes en Doble Programa</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="sedeSelect" class="form-label">Sede:</label>
+            <select class="form-select" id="sedeSelect">
+                <option value="">Todas las Sedes</option>
+                <option value="bogota">Bogotá</option>
+                <option value="medellin">Medellín</option>
+                <option value="cali">Cali</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="facultadSelect" class="form-label">Facultad:</label>
+            <select class="form-select" id="facultadSelect">
+                <option value="">Todas las Facultades</option>
+                <option value="medicina">Medicina</option>
+                <option value="ingenieria">Ingeniería</option>
+                <option value="derecho">Derecho</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="programaSelect" class="form-label">Programa Principal:</label>
+            <select class="form-select" id="programaSelect">
+                <option value="">Todos los Programas</option>
+                <option value="medicina">Medicina</option>
+                <option value="derecho">Derecho</option>
+                <option value="ingenieria">Ingeniería Civil</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="periodoSelect" class="form-label">Periodo Académico:</label>
+            <select class="form-select" id="periodoSelect">
+                <option value="2024-1">2024-1</option>
+                <option value="2023-2">2023-2</option>
+                <option value="2023-1">2023-1</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Facultad</h3>
+                    <div style="height: 350px;">
+                        <canvas id="distribucionFacultadChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Tendencia por Periodo</h3>
+                    <div style="height: 350px;">
+                        <canvas id="tendenciaPeriodoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicadores Clave -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Estudiantes</h5>
+                    <p class="card-text h2">245</p>
+                    <p class="text-muted">en doble programa</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Facultad Líder</h5>
+                    <p class="card-text h2">Ingeniería</p>
+                    <p class="text-muted">98 estudiantes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Crecimiento</h5>
+                    <p class="card-text h2">+15%</p>
+                    <p class="text-muted">vs periodo anterior</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Doble Titulación</h5>
+                    <p class="card-text h2">85</p>
+                    <p class="text-muted">estudiantes activos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Datos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Detalle de Estudiantes en Doble Programa</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Programa Principal</th>
+                                    <th>Segundo Programa</th>
+                                    <th>Facultad</th>
+                                    <th>Sede</th>
+                                    <th>Estudiantes</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ingeniería Civil</td>
+                                    <td>Ingeniería Industrial</td>
+                                    <td>Ingeniería</td>
+                                    <td>Bogotá</td>
+                                    <td>35</td>
+                                    <td>Doble Programa</td>
+                                    <td><span class="badge bg-success">Activo</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Medicina</td>
+                                    <td>Bioingeniería</td>
+                                    <td>Medicina</td>
+                                    <td>Bogotá</td>
+                                    <td>28</td>
+                                    <td>Doble Titulación</td>
+                                    <td><span class="badge bg-success">Activo</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

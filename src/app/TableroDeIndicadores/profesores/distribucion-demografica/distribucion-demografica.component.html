@@ -1,0 +1,137 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Distribución Demográfica</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="facultadSelect" class="form-label">Facultad:</label>
+            <select class="form-select" id="facultadSelect" [(ngModel)]="selectedFacultad">
+                <option value="">Todas las Facultades</option>
+                <option *ngFor="let facultad of facultades" [value]="facultad">{{facultad}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="generoSelect" class="form-label">Género:</label>
+            <select class="form-select" id="generoSelect" [(ngModel)]="selectedGenero">
+                <option value="">Todos</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="rangoEdadSelect" class="form-label">Rango de Edad:</label>
+            <select class="form-select" id="rangoEdadSelect" [(ngModel)]="selectedRangoEdad">
+                <option value="">Todos</option>
+                <option value="25-35">25-35 años</option>
+                <option value="36-45">36-45 años</option>
+                <option value="46-55">46-55 años</option>
+                <option value="56+">56+ años</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="periodoSelect" class="form-label">Periodo:</label>
+            <select class="form-select" id="periodoSelect" [(ngModel)]="selectedPeriodo">
+                <option value="2024-1">2024-1</option>
+                <option value="2023-2">2023-2</option>
+                <option value="2023-1">2023-1</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Edad Promedio</h5>
+                    <p class="card-text h2">{{edadPromedio}}</p>
+                    <p class="text-muted">años</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Distribución Género</h5>
+                    <p class="card-text h2">{{porcentajeMujeres}}%</p>
+                    <p class="text-muted">mujeres</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Mayor Grupo</h5>
+                    <p class="card-text h2">{{mayorGrupoEdad}}</p>
+                    <p class="text-muted">años</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Antigüedad Media</h5>
+                    <p class="card-text h2">{{antiguedadMedia}}</p>
+                    <p class="text-muted">años</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Edad</h3>
+                    <div class="chart-container">
+                        <canvas id="edadChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Género y Facultad</h3>
+                    <div class="chart-container">
+                        <canvas id="generoFacultadChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla Demográfica -->
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Detalle Demográfico</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Facultad</th>
+                            <th>Rango Edad</th>
+                            <th>Total</th>
+                            <th>Masculino</th>
+                            <th>Femenino</th>
+                            <th>Edad Promedio</th>
+                            <th>Antigüedad Media</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detalle of filteredDemografico">
+                            <td>{{detalle.facultad}}</td>
+                            <td>{{detalle.rangoEdad}}</td>
+                            <td>{{detalle.total}}</td>
+                            <td>{{detalle.masculino}}</td>
+                            <td>{{detalle.femenino}}</td>
+                            <td>{{detalle.edadPromedio}}</td>
+                            <td>{{detalle.antiguedadMedia}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
