@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Indicadores de Becas y Ayudas Económicas</h1>
+    
+    <!-- Filtro de Becas -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="facultadSelect" class="form-label">Seleccione Facultad:</label>
+        <select id="facultadSelect" class="form-select" aria-label="Facultad">
+          <option selected>Seleccione una facultad</option>
+          <option value="1">Facultad de Ingeniería</option>
+          <option value="2">Facultad de Ciencias Sociales</option>
+        </select>
+      </div>
+  
+      <div class="col-md-6">
+        <label for="programaSelect" class="form-label">Seleccione Programa:</label>
+        <select id="programaSelect" class="form-select" aria-label="Programa">
+          <option selected>Seleccione un programa</option>
+          <option value="1">Ingeniería de Sistemas</option>
+          <option value="2">Psicología</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Indicador de Total de Becas -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3 class="text-center text-success">Total de Becas y Ayudas Económicas</h3>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Total de becas otorgadas en la institución:</h4>
+            <p class="card-text" id="totalBecas">1000 Becas otorgadas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Indicador por Facultad y/o Sede -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3 class="text-center text-warning">Becas por Facultad o Sede</h3>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Becas otorgadas por facultad:</h4>
+            <p class="card-text" id="becasFacultad">500 Becas en la Facultad de Ingeniería</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Indicador por Programa -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3 class="text-center text-info">Becas por Programa</h3>
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Becas otorgadas por programa académico:</h4>
+            <p class="card-text" id="becasPrograma">200 Becas en Ingeniería de Sistemas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Gráficas de Becas -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h3 class="text-center">Distribución de Becas por Facultad</h3>
+        <canvas id="becasChart"></canvas>
+      </div>
+      <div class="col-md-6">
+        <h3 class="text-center">Tendencias de Becas a lo largo del Tiempo</h3>
+        <canvas id="becasTendenciasChart"></canvas>
+      </div>
+    </div>
+  
+    <!-- Tabla de Becas -->
+    <div class="row">
+      <div class="col-12">
+        <h3 class="text-center text-primary">Tabla de Becas por Año y Programa</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Año</th>
+              <th scope="col">Programa</th>
+              <th scope="col">Total Becas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024</td>
+              <td>Ingeniería de Sistemas</td>
+              <td>250</td>
+            </tr>
+            <tr>
+              <td>2024</td>
+              <td>Psicología</td>
+              <td>150</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

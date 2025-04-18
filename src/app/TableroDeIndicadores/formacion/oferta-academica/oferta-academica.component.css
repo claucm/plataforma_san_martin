@@ -1,0 +1,37 @@
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.card.h-100 {
+    height: 100% !important;
+    margin-bottom: 20px;
+}
+
+canvas {
+    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+}
+
+h1 {
+    color: #1A558D;
+}
+
+h3 {
+    color: #005C76;
+    margin-bottom: 20px;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 20px;
+}
+  

@@ -1,0 +1,148 @@
+<div class="container-fluid">
+    <h1 class="my-4 text-center text-primary">Especializaciones Médicas</h1>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <label for="sedeSelect" class="form-label">Sede:</label>
+            <select class="form-select" id="sedeSelect" [(ngModel)]="selectedSede">
+                <option value="">Todas las Sedes</option>
+                <option *ngFor="let sede of sedes" [value]="sede">{{sede}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="areaSelect" class="form-label">Área Médica:</label>
+            <select class="form-select" id="areaSelect" [(ngModel)]="selectedArea">
+                <option value="">Todas las Áreas</option>
+                <option *ngFor="let area of areas" [value]="area">{{area}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="duracionSelect" class="form-label">Duración:</label>
+            <select class="form-select" id="duracionSelect" [(ngModel)]="selectedDuracion">
+                <option value="">Todas</option>
+                <option value="2">2 años</option>
+                <option value="3">3 años</option>
+                <option value="4">4 años</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="estadoSelect" class="form-label">Estado:</label>
+            <select class="form-select" id="estadoSelect" [(ngModel)]="selectedEstado">
+                <option value="">Todos</option>
+                <option value="Activo">Activo</option>
+                <option value="En Proceso">En Proceso</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Especializaciones</h5>
+                    <p class="card-text h2">{{totalEspecializaciones}}</p>
+                    <p class="text-muted">activas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Residentes Activos</h5>
+                    <p class="card-text h2">{{totalResidentes}}</p>
+                    <p class="text-muted">en formación</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Cupos Disponibles</h5>
+                    <p class="card-text h2">{{cuposDisponibles}}</p>
+                    <p class="text-muted">próximo periodo</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Convenios Activos</h5>
+                    <p class="card-text h2">{{conveniosActivos}}</p>
+                    <p class="text-muted">hospitales</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="text-center">Distribución por Área</h3>
+                    <div class="chart-container">
+                        <canvas id="distribucionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="text-center">Residentes por Año</h3>
+                    <div class="chart-container">
+                        <canvas id="residentesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Especializaciones -->
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Listado de Especializaciones</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Especialización</th>
+                            <th>Área</th>
+                            <th>Sede</th>
+                            <th>Duración</th>
+                            <th>Cupos</th>
+                            <th>Residentes</th>
+                            <th>Hospitales</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let esp of filteredEspecializaciones">
+                            <td>{{esp.nombre}}</td>
+                            <td>{{esp.area}}</td>
+                            <td>{{esp.sede}}</td>
+                            <td>{{esp.duracion}} años</td>
+                            <td>{{esp.cupos}}</td>
+                            <td>{{esp.residentes}}</td>
+                            <td>{{esp.hospitales}}</td>
+                            <td>
+                                <span [class]="'badge ' + getEstadoClass(esp.estado)">
+                                    {{esp.estado}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-info me-1">Detalles</button>
+                                <button class="btn btn-sm btn-secondary">Informe</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  
