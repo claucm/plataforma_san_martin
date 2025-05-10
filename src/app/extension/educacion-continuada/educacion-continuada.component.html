@@ -1,0 +1,509 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Educación Continuada</h2>
+
+  <!-- Navegación de pestañas -->
+  <ul class="nav nav-tabs" id="educacionTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" 
+              type="button" role="tab" aria-controls="general" aria-selected="true">
+        General
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="resenia-tab" data-bs-toggle="tab" data-bs-target="#resenia" 
+              type="button" role="tab" aria-controls="resenia" aria-selected="false">
+        Reseña
+      </button>
+    </li>
+     <li class="nav-item" role="presentation">
+    <button class="nav-link" id="personas-tab" data-bs-toggle="tab" data-bs-target="#personas" 
+            type="button" role="tab" aria-controls="personas" aria-selected="false">
+      Personas asignadas
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="periodos-tab" data-bs-toggle="tab" data-bs-target="#periodos" 
+            type="button" role="tab" aria-controls="periodos" aria-selected="false">
+      Periodos por cursos
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="parametros-tab" data-bs-toggle="tab" data-bs-target="#parametros" 
+            type="button" role="tab" aria-controls="parametros" aria-selected="false">
+      Parámetros vigencia
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="calendario-tab" data-bs-toggle="tab" data-bs-target="#calendario" 
+            type="button" role="tab" aria-controls="calendario" aria-selected="false">
+      Calendario académico
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="grupos-tab" data-bs-toggle="tab" data-bs-target="#grupos" 
+            type="button" role="tab" aria-controls="grupos" aria-selected="false">
+      Grupos
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="centros-tab" data-bs-toggle="tab" data-bs-target="#centros" 
+            type="button" role="tab" aria-controls="centros" aria-selected="false">
+      Centros de costo
+    </button>
+  </li>
+
+  </ul>
+
+  <!-- Contenido de las pestañas -->
+  <div class="tab-content" id="educacionTabContent">
+    <!-- Pestaña General -->
+    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+      <div class="card">
+        <div class="card-body">
+         <form *ngIf="generalForm" [formGroup]="generalForm">
+            <div class="accordion" id="generalAccordion">
+              <!-- Información Básica -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#informacionBasica">
+                    Información Básica
+                  </button>
+                </h2>
+                <div id="informacionBasica" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+                      <!-- Nivel de formación -->
+                      <div class="col-md-6">
+                        <label class="form-label">Nivel de formación</label>
+                        <select formControlName="nivelFormacion" class="form-select" 
+                                [class.is-invalid]="isInvalid(generalForm, 'nivelFormacion')">
+                          <option value="">Seleccione nivel</option>
+                          <option *ngFor="let nivel of nivelesFormacion" [value]="nivel.id">
+                            {{nivel.nombre}}
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- Estrategia metodológica -->
+                      <div class="col-md-6">
+                        <label class="form-label">Estrategia metodológica</label>
+                        <select formControlName="estrategiaMetodologica" class="form-select"
+                                [class.is-invalid]="isInvalid(generalForm, 'estrategiaMetodologica')">
+                          <option value="">Seleccione estrategia</option>
+                          <option *ngFor="let estrategia of estrategiasMetodologicas" [value]="estrategia.id">
+                            {{estrategia.nombre}}
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- Fechas de vigencia -->
+                      <div class="col-md-6">
+                        <label class="form-label">Inicia vigencia</label>
+                        <input type="date" formControlName="iniciaVigencia" class="form-control"
+                               [class.is-invalid]="isInvalid(generalForm, 'iniciaVigencia')">
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label">Fin vigencia</label>
+                        <input type="date" formControlName="finVigencia" class="form-control"
+                               [class.is-invalid]="isInvalid(generalForm, 'finVigencia')">
+                      </div>
+
+                      <!-- Duración -->
+                      <div class="col-md-6">
+                        <label class="form-label">Duración de la sesión (minutos)</label>
+                        <input type="number" formControlName="duracionSesion" class="form-control"
+                               [class.is-invalid]="isInvalid(generalForm, 'duracionSesion')">
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label">Número de sesiones semanas</label>
+                        <input type="number" formControlName="numeroSesiones" class="form-control"
+                               [class.is-invalid]="isInvalid(generalForm, 'numeroSesiones')">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Información Académica -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                          data-bs-target="#infoAcademica">
+                    Información Académica
+                  </button>
+                </h2>
+                <div id="infoAcademica" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+                      <!-- Área de conocimiento -->
+                      <div class="col-md-6">
+                        <label class="form-label">Área de conocimiento</label>
+                        <select formControlName="areaConocimiento" class="form-select"
+                                [class.is-invalid]="isInvalid(generalForm, 'areaConocimiento')">
+                          <option value="">Seleccione área</option>
+                          <option *ngFor="let area of areasConocimiento" [value]="area.id">
+                            {{area.nombre}}
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- Tipo de curso -->
+                      <div class="col-md-6">
+                        <label class="form-label">Tipo de curso</label>
+                        <select formControlName="tipoCurso" class="form-select"
+                                [class.is-invalid]="isInvalid(generalForm, 'tipoCurso')">
+                          <option value="">Seleccione tipo</option>
+                          <option *ngFor="let tipo of tiposCurso" [value]="tipo.id">
+                            {{tipo.nombre}}
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- Grupo de formación -->
+                      <div class="col-md-6">
+                        <label class="form-label">Grupo de formación</label>
+                        <select formControlName="grupoFormacion" class="form-select"
+                                [class.is-invalid]="isInvalid(generalForm, 'grupoFormacion')">
+                          <option value="">Seleccione grupo</option>
+                          <option *ngFor="let grupo of gruposFormacion" [value]="grupo.id">
+                            {{grupo.nombre}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Información Financiera -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                          data-bs-target="#infoFinanciera">
+                    Información Financiera
+                  </button>
+                </h2>
+                <div id="infoFinanciera" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+  <!-- Centro de costos -->
+  <div class="col-md-6">
+    <label class="form-label">Centro de costos</label>
+    <select formControlName="centroCostos" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'centroCostos')">
+      <option value="">Seleccione centro de costos</option>
+      <option *ngFor="let centro of centrosCostos" [value]="centro.id">
+        {{centro.nombre}}
+      </option>
+    </select>
+    <div class="form-text text-muted">
+      Centros de costos de la Vicerrectoría Financiera y Administrativa
+    </div>
+  </div>
+
+  <!-- Valor del evento -->
+  <div class="col-md-6">
+    <label class="form-label">Valor del evento</label>
+    <select formControlName="valorEvento" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'valorEvento')">
+      <option value="">Seleccione valor del evento</option>
+      <option *ngFor="let valor of valoresEvento" [value]="valor.id">
+        {{valor.nombre}}
+      </option>
+    </select>
+    <div class="form-text text-muted">
+      Valores establecidos por la Vicerrectoría Financiera y Administrativa
+    </div>
+  </div>
+</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Controles -->
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                          data-bs-target="#controles">
+                    Controles
+                  </button>
+                </h2>
+                <div id="controles" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <div class="row g-3">
+  <!-- Número de notas -->
+  <div class="col-md-6">
+    <label class="form-label">No. de notas</label>
+    <select formControlName="numeroNotas" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'numeroNotas')">
+      <option value="">Seleccione número de notas</option>
+      <option *ngFor="let num of [1,2,3,4,5]" [value]="num">{{num}}</option>
+    </select>
+  </div>
+
+  <!-- Control de asistencia -->
+  <div class="col-md-6">
+    <label class="form-label">Control de asistencia</label>
+    <select formControlName="controlAsistencia" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'controlAsistencia')">
+      <option value="">Seleccione tipo de control</option>
+      <option *ngFor="let control of controlAsistencia" [value]="control.id">
+        {{control.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Porcentaje de fallas -->
+  <div class="col-md-6">
+    <label class="form-label">% fallas</label>
+    <input type="number" formControlName="porcentajeFallas" class="form-control"
+           [class.is-invalid]="isInvalid(generalForm, 'porcentajeFallas')"
+           min="0" max="100">
+  </div>
+
+  <!-- Tipo de nota -->
+  <div class="col-md-6">
+    <label class="form-label">Tipo de nota</label>
+    <select formControlName="tipoNota" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'tipoNota')">
+      <option value="">Seleccione tipo de nota</option>
+      <option *ngFor="let tipo of tiposNota" [value]="tipo.id">
+        {{tipo.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Notas posibles -->
+  <div class="col-md-6">
+    <label class="form-label">Notas posibles</label>
+    <select formControlName="notasPosibles" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'notasPosibles')"
+            (change)="onNotasPosiblesChange($event)">
+      <option value="">Seleccione escala de notas</option>
+      <option *ngFor="let nota of notasPosibles" [value]="nota.id">
+        {{nota.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Nota mínima -->
+  <div class="col-md-6">
+    <label class="form-label">Nota mínima</label>
+    <select formControlName="notaMinima" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'notaMinima')">
+      <option value="">Seleccione nota mínima</option>
+      <option *ngFor="let nota of notasMinimas" [value]="nota.id">
+        {{nota.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Nota máxima -->
+  <div class="col-md-6">
+    <label class="form-label">Nota máxima posible</label>
+    <select formControlName="notaMaxima" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'notaMaxima')">
+      <option value="">Seleccione nota máxima</option>
+      <option *ngFor="let nota of notasMaximas" [value]="nota.id">
+        {{nota.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Nota mínima de aprobación -->
+  <div class="col-md-6">
+    <label class="form-label">Nota mínima de aprobación</label>
+    <select formControlName="notaAprobacion" class="form-select"
+            [class.is-invalid]="isInvalid(generalForm, 'notaAprobacion')">
+      <option value="">Seleccione nota de aprobación</option>
+      <option *ngFor="let nota of notasAprobacion" [value]="nota.id">
+        {{nota.nombre}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Cupo inicial -->
+  <div class="col-md-6">
+    <label class="form-label">Cupo inicial</label>
+    <input type="number" formControlName="cupoInicial" class="form-control"
+           [class.is-invalid]="isInvalid(generalForm, 'cupoInicial')"
+           min="0">
+  </div>
+</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vigencia -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#vigencia">
+      Vigencia
+    </button>
+  </h2>
+  <div id="vigencia" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Estado</label>
+          <select formControlName="estado" class="form-select"
+                  [class.is-invalid]="isInvalid(generalForm, 'estado')">
+            <option value="">Seleccione estado</option>
+            <option *ngFor="let estado of estados" [value]="estado.id">
+              {{estado.nombre}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Palabras Clave -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#palabrasClave">
+      Palabras Clave
+    </button>
+  </h2>
+  <div id="palabrasClave" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label class="form-label">Palabras clave</label>
+          <input type="text" formControlName="palabrasClave" class="form-control"
+                 [class.is-invalid]="isInvalid(generalForm, 'palabrasClave')">
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label">Misión</label>
+          <textarea formControlName="mision" class="form-control" rows="3"
+                   [class.is-invalid]="isInvalid(generalForm, 'mision')"></textarea>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label">Visión</label>
+          <textarea formControlName="vision" class="form-control" rows="3"
+                   [class.is-invalid]="isInvalid(generalForm, 'vision')"></textarea>
+        </div>
+        
+        <div class="col-md-12">
+          <label class="form-label">Perfil</label>
+          <textarea formControlName="perfil" class="form-control" rows="3"
+                   [class.is-invalid]="isInvalid(generalForm, 'perfil')"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Certificación del evento -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#certificacion">
+      Certificación del evento
+    </button>
+  </h2>
+  <div id="certificacion" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="form-check">
+            <input type="checkbox" formControlName="generaCertificado" 
+                   class="form-check-input" id="generaCertificado">
+            <label class="form-check-label" for="generaCertificado">
+              Genera certificado
+            </label>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label">Certificado</label>
+          <select formControlName="certificado" class="form-select"
+                  [class.is-invalid]="isInvalid(generalForm, 'certificado')">
+            <option value="">Seleccione tipo de certificado</option>
+            <option *ngFor="let cert of certificados" [value]="cert.id">
+              {{cert.nombre}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña Reseña -->
+    <!-- Reemplazar la sección de Reseña actual con: -->
+<div class="tab-pane fade" id="resenia" role="tabpanel" aria-labelledby="resenia-tab">
+  <div class="card">
+    <div class="card-body">
+      <form *ngIf="reseniaForm" [formGroup]="reseniaForm">
+        <div class="row g-3">
+          <!-- Primera columna -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Objetivo</label>
+              <textarea formControlName="objetivo" class="form-control" rows="3"
+                       [class.is-invalid]="isInvalid(reseniaForm, 'objetivo')"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Justificación</label>
+              <textarea formControlName="justificacion" class="form-control" rows="3"
+                       [class.is-invalid]="isInvalid(reseniaForm, 'justificacion')"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Metodología</label>
+              <textarea formControlName="metodologia" class="form-control" rows="3"
+                       [class.is-invalid]="isInvalid(reseniaForm, 'metodologia')"></textarea>
+            </div>
+          </div>
+
+          <!-- Segunda columna -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Detalles del evento</label>
+              <textarea formControlName="detallesEvento" class="form-control" rows="3"
+                       [class.is-invalid]="isInvalid(reseniaForm, 'detallesEvento')"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Recursos requeridos</label>
+              <textarea formControlName="recursosRequeridos" class="form-control" rows="3"
+                       [class.is-invalid]="isInvalid(reseniaForm, 'recursosRequeridos')"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Imagen del evento</label>
+              <input type="file" formControlName="imagenEvento" class="form-control"
+                     accept="image/*">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Botones de acción -->
+  <div class="row mt-4">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-primary me-2" (click)="onSubmit()">Guardar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
+    </div>
+  </div>
+</div>

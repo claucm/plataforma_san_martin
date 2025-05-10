@@ -105,43 +105,46 @@
           <a class="nav-link text-white" data-bs-toggle="collapse" href="#extensionMenu" role="button" aria-expanded="false" aria-controls="extensionMenu">
             <i class="fas fa-cogs me-2"></i> Extensión
           </a>
-          <div class="collapse" id="extensionMenu">
-            <ul class="nav nav-pills flex-column ms-3">
-              <li>
-                <a [routerLink]="'/practicas-pasantias'" class="nav-link text-white">
-                  <i class="fas fa-briefcase me-2"></i> Prácticas y Pasantías Universitarias
-                </a>
-              </li>
-              <li>
-                <a class="nav-link text-white" data-bs-toggle="collapse" href="#serviciosDocentesMenu" role="button" aria-expanded="false" aria-controls="serviciosDocentesMenu">
-                  <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
-                </a>
-                <div class="collapse" id="serviciosDocentesMenu">
-                  <ul class="nav nav-pills flex-column ms-3">
-                    <li>
-                      <a [routerLink]="'/caracterizacion-participantes'" class="nav-link text-white">
-                        <i class="fas fa-users me-2"></i> Caracterización de Participantes
-                      </a>
-                    </li>
-                    <li>
-                      <a [routerLink]="'/servicios-extension'" class="nav-link text-white">
-                        <i class="fas fa-hand-holding-medical me-2"></i> Servicios de Extensión
-                      </a>
-                    </li>
-
-                    <li>
-                      <a [routerLink]="'/participante'" class="nav-link text-white">
-                        <i class="fas fa-user me-2"></i> Participante SNIES
-                      </a>
-                    </li>
-
-
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
+          
+<div class="collapse" id="extensionMenu">
+  <ul class="nav nav-pills flex-column ms-3">
+    <li>
+      <a [routerLink]="'/practicas-pasantias'" class="nav-link text-white">
+        <i class="fas fa-briefcase me-2"></i> Prácticas y Pasantías Universitarias
+      </a>
+    </li>
+    <li>
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#serviciosDocentesMenu" role="button" aria-expanded="false" aria-controls="serviciosDocentesMenu">
+        <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
+      </a>
+      <div class="collapse" id="serviciosDocentesMenu">
+        <ul class="nav nav-pills flex-column ms-3">
+          <li>
+            <a [routerLink]="'/caracterizacion-participantes'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Caracterización de Participantes
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/servicios-extension'" class="nav-link text-white">
+              <i class="fas fa-hand-holding-medical me-2"></i> Servicios de Extensión
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/participante'" class="nav-link text-white">
+              <i class="fas fa-user me-2"></i> Participante SNIES
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <!-- Educación Continuada al mismo nivel que Servicios Docentes -->
+    <li>
+      <a [routerLink]="'/educacion-continuada'" class="nav-link text-white">
+        <i class="fas fa-graduation-cap me-2"></i> Educación Continuada
+      </a>
+    </li>
+  </ul>
+</div>
         
         
   </ul>

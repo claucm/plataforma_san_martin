@@ -1,0 +1,66 @@
+.nav-tabs-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: -17px;
+  padding-bottom: 17px;
+}
+
+.nav-tabs {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: min-content;
+}
+
+.nav-item {
+  float: none;
+  display: inline-block;
+}
+
+.nav-tabs .nav-link {
+  color: #495057 !important;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  margin-right: 2px;
+  transition: none;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #0d6efd !important;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0d6efd !important;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+  font-weight: 500;
+}
+
+/* Estilo para la barra de scroll */
+.nav-tabs-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}

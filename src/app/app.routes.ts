@@ -46,6 +46,9 @@ import { OtrasEntidadesComponent } from './extension/servicios-docentes/servicio
 import { PoblacionCondicionComponent } from './extension/servicios-docentes/servicios-extension/poblacion-condicion/poblacion-condicion.component';
 import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicios-extension/poblacion-grupo/poblacion-grupo.component';
 
+//Educación continuada
+import { EducacionContinuadaComponent } from './extension/educacion-continuada/educacion-continuada.component';
+
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
  { path: 'dashboard', component: DashboardComponent },
@@ -89,6 +92,8 @@ export const routes: Routes = [
 {path: 'poblacion-condicion', component: PoblacionCondicionComponent},
 {path: 'poblacion-grupo', component: PoblacionGrupoComponent},
 
+//Educación continuada
+ { path: 'educacion-continuada', component: EducacionContinuadaComponent },
 
 ];
 
