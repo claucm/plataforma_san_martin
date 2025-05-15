@@ -1,0 +1,8 @@
+/* Basic styling for Investigacion Dashboard component */
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}

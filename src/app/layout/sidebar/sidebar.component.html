@@ -50,54 +50,70 @@
       </div>
     </li>
 
-    <!-- Investigación Modulo -->
-    <!-- Investigación Module -->
-    <li>
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#investigationMenu" role="button" aria-expanded="false" aria-controls="investigationMenu">
-        <i class="fas fa-file-alt me-2"></i> Investigación
-      </a>
-      <div class="collapse" id="investigationMenu">
-        <ul class="nav nav-pills flex-column ms-3">
-          <li>
-            <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
-              <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
-              <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
-              <i class="fas fa-file-signature me-2"></i> Actas de Inicio
-            </a>
-          </li>
+  <!-- Tablero de Indicadores Module -->
+  <li>
+    <a class="nav-link text-white" data-bs-toggle="collapse" href="#tableroIndicadoresMenu" role="button" aria-expanded="false" aria-controls="tableroIndicadoresMenu">
+      <i class="fas fa-tachometer-alt me-2"></i> Tablero de Indicadores
+    </a>
+    <div class="collapse" id="tableroIndicadoresMenu">
+      <ul class="nav nav-pills flex-column ms-3">
+        <li>
+          <a [routerLink]="'/tablero-indicadores/investigacion'" class="nav-link text-white">
+            <i class="fas fa-file-alt me-2"></i> Investigación
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
 
-          <li>
-            <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
-              <i class="fas fa-users me-2"></i> Grupos Investigación
-            </a>
-          </li>
+  <!-- Investigación Modulo -->
+  <!-- Investigación Module -->
+  <li>
+    <a class="nav-link text-white" data-bs-toggle="collapse" href="#investigationMenu" role="button" aria-expanded="false" aria-controls="investigationMenu">
+      <i class="fas fa-file-alt me-2"></i> Investigación
+    </a>
+    <div class="collapse" id="investigationMenu">
+      <ul class="nav nav-pills flex-column ms-3">
+        <li>
+          <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
+            <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
+            <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
+            <i class="fas fa-file-signature me-2"></i> Actas de Inicio
+          </a>
+        </li>
 
-          <li>
-            <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
-              <i class="fas fa-users me-2"></i> Grupos Investigación
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
-              <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
-              <i class="fas fa-table me-2"></i> Tablas Básicas
-            </a>
-          </li>
-        </ul>
-      </div>
-    </li>
+        <li>
+          <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
+            <i class="fas fa-users me-2"></i> Grupos Investigación
+          </a>
+        </li>
+
+        <li>
+          <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
+            <i class="fas fa-users me-2"></i> Grupos Investigación
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
+            <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
+            <i class="fas fa-table me-2"></i> Tablas Básicas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
 
         <!-- Extensión Modulo -->
 
