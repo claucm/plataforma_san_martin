@@ -36,8 +36,6 @@ import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,

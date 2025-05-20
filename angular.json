@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bootstraptoangular19": {
+    "research-sanmartin": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/bootstraptoangular19",
+            "outputPath": "dist/research-sanmartin",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "bootstraptoangular19:build:production"
+              "buildTarget": "research-sanmartin:build:production"
             },
             "development": {
-              "buildTarget": "bootstraptoangular19:build:development"
+              "buildTarget": "research-sanmartin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "bootstraptoangular19:build"
+            "buildTarget": "research-sanmartin:build"
           }
         },
         "test": {

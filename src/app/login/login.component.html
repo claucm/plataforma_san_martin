@@ -4,19 +4,15 @@
     <div class="logo-container">
       <img src="assets/logo_sm.png" alt="Logo" class="logo-image" />
       <div class="welcome-text">
-        <h1>Welcome to the website</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla risus quam, eget interdum est tempor at. Nam quis ultricies leo.</p>
+        <h1>Software de Investigación San Martín</h1>
+        <p>Bienvenido(a) ingresa con tu correo institucional.</p>
       </div>
     </div>
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
-      <input type="email" name="email" [(ngModel)]="email" placeholder="Email" required class="input-field" />
-      <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required class="input-field" />
-      <button type="submit" class="btn-login" [disabled]="!loginForm.form.valid">Login</button>
-    </form>
     <div class="login-button-container">
       <button class="btn-google-login" (click)="signInWithGoogle()">
         <i class="fab fa-google"></i> Sign in with Google
       </button>
     </div>
+    <div id="google-signin-button"></div>
   </div>
 </div>
