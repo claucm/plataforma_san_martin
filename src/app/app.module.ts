@@ -10,8 +10,6 @@ import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +18,6 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }

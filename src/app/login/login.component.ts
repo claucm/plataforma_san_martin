@@ -1,9 +1,11 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 import { FormsModule } from '@angular/forms';
+
+declare var google: any;
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
@@ -28,29 +30,17 @@ export class LoginComponent {
     }
   }
 
-  signInWithGoogle(): void {
-    this.authService.signInWithGoogle().then((user) => {
-      if (user) {
-        if (user.email === 'clau.cm77@gmail.com') {
-          localStorage.setItem('isAdmin', 'true');
-        } else {
-          localStorage.setItem('isAdmin', 'false');
-        }
-        this.router.navigate(['/dashboard']);
-      }
-    }).catch((error) => {
-      console.error('Google sign-in error:', error);
-      alert('Google sign-in failed. Please try again.');
-    });
-  }
-
-  onSubmit(): void {
-    if (this.email === 'clau.cm77@hotmail.com' && this.password === '12345678') {
-      localStorage.setItem('isAdmin', 'true');
-      localStorage.setItem('user', JSON.stringify({ email: this.email, name: 'Admin User' }));
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Invalid email or password');
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.authService.renderLoginButton('google-signin-button');
     }
   }
+
+  signInWithGoogle(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      google.accounts.id.prompt();
+    }
+  }
+
+  // Removed onSubmit method
 }
