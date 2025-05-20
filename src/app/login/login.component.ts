@@ -5,8 +5,6 @@ import { AuthService } from '../auth.service';
 
 import { FormsModule } from '@angular/forms';
 
-declare var google: any;
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -32,15 +30,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.authService.renderLoginButton('google-signin-button');
+      this.authService.renderLoginButton('googleSignInDiv');
+      this.authService.user().subscribe((user: any) => {
+        if (user) {
+          if (user.email.toLowerCase() === 'claudia.manrique@sanmartin.edu.co') {
+            localStorage.setItem('isAdmin', 'true');
+          } else {
+            localStorage.setItem('isAdmin', 'false');
+          }
+          this.router.navigate(['/dashboard']);
+        }
+      });
     }
   }
 
   signInWithGoogle(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      google.accounts.id.prompt();
-    }
+    // No longer needed since button is rendered by authService
   }
 
-  // Removed onSubmit method
+  onSubmit(): void {
+    if (this.email === 'clau.cm77@hotmail.com' && this.password === '12345678') {
+      localStorage.setItem('isAdmin', 'true');
+      localStorage.setItem('user', JSON.stringify({ email: this.email, name: 'Admin User' }));
+      this.router.navigate(['/dashboard']);
+    } else {
+      alert('Invalid email or password');
+    }
+  }
 }

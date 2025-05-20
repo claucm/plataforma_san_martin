@@ -93,10 +93,11 @@ body, html, .login-page {
   font-size: 1.5rem;
 }
 
-/* Apply btn-google-login styles to Google button container */
+/* Style Google button container with blue background, yellow border and text */
 #google-signin-button > div {
-  background-color: #f1c40f !important;
-  color: #1e3c72 !important;
+  background-color: #1e3c72 !important;
+  color: #f1c40f !important;
+  border: 2px solid #f1c40f !important;
   border-radius: 24px !important;
   box-shadow: 0 4px 12px rgba(241, 196, 15, 0.6) !important;
   font-weight: 700 !important;
@@ -112,7 +113,7 @@ body, html, .login-page {
 }
 
 #google-signin-button > div:hover {
-  background-color: #d4ac0d !important;
+  background-color: #16325c !important;
 }
 
 @media (max-width: 400px) {

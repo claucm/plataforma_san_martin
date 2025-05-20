@@ -112,7 +112,7 @@ export class AuthService {
     await this.googleScriptLoaded;
     google.accounts.id.renderButton(
       document.getElementById(elementId),
-      { theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill' }
+      { theme: 'filled_blue', size: 'large', text: 'continue_with', shape: 'rectangular' }
     );
   }
 
