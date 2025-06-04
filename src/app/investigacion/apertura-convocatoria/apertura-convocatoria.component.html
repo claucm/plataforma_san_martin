@@ -9,6 +9,12 @@
             <label for="titulo" class="form-label fw-bold">Título de la Convocatoria</label>
             <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título de la convocatoria" required>
           </div>
+
+          <!-- Campo Cantidad de Pares -->
+          <div class="mb-3">
+            <label for="cantidadPares" class="form-label fw-bold">Cantidad de Pares</label>
+            <input type="number" class="form-control" id="cantidadPares" placeholder="Ingrese la cantidad de pares" required>
+          </div>
   
           <!-- Campo Fecha de Inicio -->
           <div class="mb-3">
@@ -27,6 +33,15 @@
             <label for="presupuesto" class="form-label fw-bold">Presupuesto</label>
             <input type="number" class="form-control" id="presupuesto" placeholder="Ingrese el presupuesto" required>
           </div>
+
+          <!-- Campo Tipo de Convocatoria -->
+          <div class="mb-3">
+            <label for="tipoConvocatoria" class="form-label fw-bold">Tipo de Convocatoria</label>
+            <select class="form-select" id="tipoConvocatoria" required>
+              <option value="" selected disabled>Seleccione un tipo</option>
+              <!-- Options to be populated dynamically -->
+            </select>
+          </div>
         </div>
   
         <!-- Columna Derecha -->
@@ -41,6 +56,30 @@
           <div class="mb-3">
             <label for="documento" class="form-label fw-bold">Documento de Convocatoria</label>
             <input type="file" class="form-control" id="documento" required>
+          </div>
+
+          <!-- Campo Requisitos -->
+          <div class="mb-3">
+            <label for="requisitos" class="form-label fw-bold">Requisitos</label>
+            <textarea class="form-control" id="requisitos" rows="3" placeholder="Ingrese los requisitos" required></textarea>
+          </div>
+
+          <!-- Campo Criterios Selección Generales -->
+          <div class="mb-3">
+            <label for="criteriosGenerales" class="form-label fw-bold">Criterios de Selección Generales</label>
+            <textarea class="form-control" id="criteriosGenerales" rows="3" placeholder="Ingrese los criterios generales" required></textarea>
+          </div>
+
+          <!-- Campo Criterios Selección Específicos -->
+          <div class="mb-3">
+            <label for="criteriosEspecificos" class="form-label fw-bold">Criterios de Selección Específicos</label>
+            <textarea class="form-control" id="criteriosEspecificos" rows="3" placeholder="Ingrese los criterios específicos" required></textarea>
+          </div>
+
+          <!-- Campo Criterios Evaluación -->
+          <div class="mb-3">
+            <label for="criteriosEvaluacion" class="form-label fw-bold">Criterios de Evaluación</label>
+            <textarea class="form-control" id="criteriosEvaluacion" rows="3" placeholder="Ingrese los criterios de evaluación" required></textarea>
           </div>
         </div>
       </div>
