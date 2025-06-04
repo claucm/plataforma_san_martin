@@ -50,6 +50,7 @@ import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicio
 import { EducacionContinuadaComponent } from './extension/educacion-continuada/educacion-continuada.component';
 import { InvestigacionDashboardComponent } from './tablero-indicadores/investigacion-dashboard.component';
 
+
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
@@ -92,6 +93,7 @@ export const routes: Routes = [
     { path: 'poblacion-grupo', component: PoblacionGrupoComponent, canActivate: [AuthGuard] },
     { path: 'educacion-continuada', component: EducacionContinuadaComponent, canActivate: [AuthGuard] },
     { path: 'tablero-indicadores/investigacion', component: InvestigacionDashboardComponent, canActivate: [AuthGuard] },
+    { path: 'investigacion/reportes-notificaciones', loadChildren: () => import('./investigacion/reportes-notificaciones/reportes-notificaciones.module').then(m => m.ReportesNotificacionesModule), canActivate: [AuthGuard] }
 ];
 
 

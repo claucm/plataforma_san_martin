@@ -1,4 +1,6 @@
+<!-- investigacion-dashboard.component.html updated to match final design -->
 <div class="investigation-dashboard-container">
+  <!-- City buttons -->
   <div class="city-buttons">
     <button *ngFor="let city of locations"
             (click)="setSelectedCity(city)"
@@ -8,8 +10,9 @@
     </button>
   </div>
 
-  <div class="dashboard-content">
-    <div class="data-cards">
+  <div class="dashboard-content redesigned">
+    <!-- Stats cards on the left -->
+    <div class="data-cards vertical">
       <div class="data-card card-distinctions">
         <h4>Distinciones y reconocimientos</h4>
         <p>{{ mockStats[selectedCity]?.distinctions || 0 }}</p>
@@ -42,11 +45,15 @@
       </div>
     </div>
 
-    <div class="charts-section">
-      <!-- Bar chart for products over years -->
+    <!-- Center: Bar chart and trend table -->
+    <div class="charts-section center">
+      <!-- Chart -->
       <div class="bar-chart">
-        <!-- Placeholder for bar chart -->
-        <p>Bar chart for products over years will be here</p>
+        <canvas baseChart
+                [data]="chartData"
+                [options]="chartOptions"
+                [type]="'bar'">
+        </canvas>
       </div>
 
       <!-- Trend table -->
@@ -73,11 +80,9 @@
       </div>
     </div>
 
+    <!-- Right: Colombia map -->
     <div class="map-section">
       <app-colombia-map [selected]="selectedCity" (selectedChange)="setSelectedCity($event)"></app-colombia-map>
-      <div class="city-photo" *ngIf="selectedCity">
-        <img [src]="cityPhotos[selectedCity]" alt="{{ selectedCity }}" />
-      </div>
     </div>
   </div>
 </div>
