@@ -10,41 +10,22 @@
       </a>
     </li>
 
-    <!-- General Module -->
+    <!-- Administración Module -->
     <li>
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#generalMenu" role="button" aria-expanded="false" aria-controls="generalMenu">
-        <i class="fas fa-users me-2"></i> General
+      <a class="nav-link text-white" data-bs-toggle="collapse" href="#administracionMenu" role="button" aria-expanded="false" aria-controls="administracionMenu">
+        <i class="fas fa-cogs me-2"></i> Administración
       </a>
-      <div class="collapse" id="generalMenu">
+      <div class="collapse" id="administracionMenu">
         <ul class="nav nav-pills flex-column ms-3">
           <li>
-            <a class="nav-link text-white" data-bs-toggle="collapse" href="#userManagement" role="button" aria-expanded="false" aria-controls="userManagement">
-              <i class="fas fa-user-cog me-2"></i> Gestión de Usuario
+            <a [routerLink]="'/users'" class="nav-link text-white">
+              <i class="fas fa-user-cog me-2"></i> Gestión de Usuarios
             </a>
-            <div class="collapse" id="userManagement">
-              <ul class="nav nav-pills flex-column ms-3">
-                <li>
-                  <a [routerLink]="'/crear-usuario'" class="nav-link text-white">
-                    <i class="fas fa-user-plus me-2"></i> Crear
-                  </a>
-                </li>
-                <li>
-                  <a [routerLink]="'/modificar-usuario'" class="nav-link text-white">
-                    <i class="fas fa-user-edit me-2"></i> Modificar
-                  </a>
-                </li>
-                <li>
-                  <a [routerLink]="'/eliminar-usuario'" class="nav-link text-white">
-                    <i class="fas fa-user-times me-2"></i> Eliminar
-                  </a>
-                </li>
-                <li>
-                  <a [routerLink]="'/roles-usuario'" class="nav-link text-white">
-                    <i class="fas fa-user-tag me-2"></i> Asignar Roles
-                  </a>
-                </li>
-              </ul>
-            </div>
+          </li>
+          <li>
+            <a [routerLink]="'/roles-usuario'" class="nav-link text-white">
+              <i class="fas fa-user-shield me-2"></i> Gestión de Roles
+            </a>
           </li>
         </ul>
       </div>
@@ -153,7 +134,7 @@
         </ul>
       </div>
     </li>
-    <!-- Educación Continuada al mismo nivel que Servicios Docentes -->
+    <!-- Educación Continuada al same level as Servicios Docentes -->
     <li>
       <a [routerLink]="'/educacion-continuada'" class="nav-link text-white">
         <i class="fas fa-graduation-cap me-2"></i> Educación Continuada

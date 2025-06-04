@@ -45,7 +45,7 @@
 }
 
 .bg-gradient-primary {
-  background: linear-gradient(45deg, #1e90ff, #00bfff);
+  background: linear-gradient(45deg, #2a727c, #ffb90b);
   color: white;
 }
 
@@ -107,4 +107,99 @@ input.form-control {
   display: block;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dashboard-main-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.dashboard-button {
+  background-color: #0f5c7a;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  padding: 1.5rem 2rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.dashboard-button:hover {
+  background-color: #0a3d52;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.small-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+
+.highlight-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f5b800;
+}
+
+.button-illustration {
+  width: 80px;
+  height: auto;
+  margin-left: 1rem;
+}
+
+.doll-container {
+  flex: 0 0 200px;
+  position: relative;
+  height: 400px;
+}
+
+.doll-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Animations for doll movement */
+.animate-grupos .doll-image {
+  transform: translateX(-10px) rotate(-10deg);
+}
+
+.animate-semilleros .doll-image {
+  transform: translateX(10px) rotate(10deg);
+}
+
+.animate-revistas .doll-image {
+  transform: translateY(-10px) rotate(-5deg);
+}
+
+.animate-produccion .doll-image {
+  transform: translateY(10px) rotate(5deg);
 }

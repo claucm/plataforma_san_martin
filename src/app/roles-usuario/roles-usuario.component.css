@@ -1,0 +1,297 @@
+.role-management-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.role-management-container h2 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.role-list-section {
+  margin-bottom: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.filters input.search-input {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filters button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filters .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.filters .btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.role-table th,
+.role-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.role-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+}
+
+.pagination {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.pagination select {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.pagination button {
+  background-color: white;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.role-form-section {
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #007bff;
+}
+
+.tabs .tab {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: #007bff;
+  border-bottom: 2px solid transparent;
+}
+
+.tabs .tab.active {
+  border-bottom-color: #007bff;
+  color: #0056b3;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  flex: 0 0 150px;
+  font-weight: 600;
+  align-self: center;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  flex: 1 1 auto;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.form-actions button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-actions button[type="reset"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+/* User assignment tab styles */
+.user-assignment-container {
+  display: flex;
+  gap: 1rem;
+  background-color: #c1d9e0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.users-table {
+  flex: 1;
+  background-color: #f9f6f6;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.users-table .table-header {
+  background-color: #f7e6b5;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid #ddd;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.user-assignment-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.user-assignment-buttons button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  background-color: #f7e6b5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.user-assignment-buttons button:hover {
+  background-color: #e0d18a;
+}
+
+/* Permission assignment tab styles */
+.permission-assignment-container {
+  display: flex;
+  gap: 1rem;
+  background-color: #c1d9e0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.permissions-table {
+  flex: 1;
+  background-color: #f9f6f6;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.permissions-table .table-header {
+  background-color: #f7e6b5;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+}
+
+.permissions-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.permissions-table th,
+.permissions-table td {
+  border: 1px solid #ddd;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.permissions-table th {
+  background-color: #f7e6b5;
+  font-weight: 600;
+}
+
+.permission-assignment-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.permission-assignment-buttons button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  background-color: #f7e6b5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.permission-assignment-buttons button:hover {
+  background-color: #e0d18a;
+}

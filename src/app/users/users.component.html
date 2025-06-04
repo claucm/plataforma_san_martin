@@ -1,1 +1,212 @@
-<p> users works!</p>
+<div class="user-management-container">
+  <h2>Gestión de Usuarios</h2>
+  <div class="user-list-section">
+    <div class="filters">
+      <input type="text" placeholder="Search" class="search-input" />
+      <select class="filter-select">
+        <option>Rol</option>
+        <option>Estado</option>
+        <option>Fecha</option>
+      </select>
+      <button class="btn btn-primary export-btn">Export</button>
+      <button class="btn btn-warning create-user-btn">+ Crear Usuario</button>
+    </div>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre Completo</th>
+          <th>Estado</th>
+          <th>Email</th>
+          <th>Fecha Creación</th>
+          <th>Última vez activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- User rows will be dynamically generated here -->
+      </tbody>
+    </table>
+    <div class="pagination">
+      <span>Filas por Hoja</span>
+      <select>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+      <span>de 140 filas</span>
+      <button>&laquo;</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>10</button>
+      <button>&raquo;</button>
+    </div>
+  </div>
+
+  <div class="user-form-section">
+    <ul class="tabs">
+      <li class="tab" [class.active]="activeTab === 'basic-info'" (click)="setActiveTab('basic-info')">Información básica</li>
+      <li class="tab" [class.active]="activeTab === 'role-assignment'" (click)="setActiveTab('role-assignment')">Asignación de roles</li>
+      <li class="tab" [class.active]="activeTab === 'user-permissions'" (click)="setActiveTab('user-permissions')">Permisos por usuario</li>
+    </ul>
+    <div class="tab-content" [class.active]="activeTab === 'basic-info'" id="basic-info">
+      <!-- Basic user info form fields -->
+      <form>
+        <div class="form-row">
+          <label>Código</label>
+          <input type="text" />
+          <label>Fecha de creación</label>
+          <input type="date" />
+        </div>
+        <div class="form-row">
+          <label>Identificación</label>
+          <input type="text" />
+          <label>Estado</label>
+          <select>
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Primer nombre</label>
+          <input type="text" />
+          <label>Segundo nombre</label>
+          <input type="text" />
+        </div>
+        <div class="form-row">
+          <label>Primer apellido</label>
+          <input type="text" />
+          <label>Segundo apellido</label>
+          <input type="text" />
+        </div>
+        <div class="form-row">
+          <label>Correo Electrónico</label>
+          <input type="email" />
+        </div>
+        <div class="form-actions">
+          <button type="reset">Limpiar</button>
+          <button type="submit">Guardar</button>
+        </div>
+        <div class="photo-upload">
+          <label>Cargar foto</label>
+          <input type="file" />
+        </div>
+      </form>
+    </div>
+    <div class="tab-content" [class.active]="activeTab === 'role-assignment'" id="role-assignment">
+      <div class="role-assignment-container">
+        <div class="roles-table unassigned-roles">
+          <div class="table-header">
+            <span>Roles sin asignar</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let role of unassignedRoles">
+                <td>{{ role.code }}</td>
+                <td>{{ role.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="role-assignment-buttons">
+          <button type="button" (click)="assignRole()">></button>
+          <button type="button" (click)="unassignRole()"><</button>
+        </div>
+        <div class="roles-table assigned-roles">
+          <div class="table-header">
+            <span>Roles asignados</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let role of assignedRoles">
+                <td>{{ role.code }}</td>
+                <td>{{ role.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" [class.active]="activeTab === 'user-permissions'" id="user-permissions">
+      <div class="permission-assignment-container">
+        <div class="permissions-table unassigned-permissions">
+          <div class="table-header">
+            <span>Sin asignación</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Tipo" /></th>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let permission of unassignedPermissions">
+                <td>{{ permission.type }}</td>
+                <td>{{ permission.code }}</td>
+                <td>{{ permission.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="permission-assignment-buttons">
+          <button type="button" (click)="assignPermission()">></button>
+          <button type="button" (click)="unassignPermission()"><</button>
+        </div>
+        <div class="permissions-table assigned-permissions">
+          <div class="table-header">
+            <span>Asignado</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Tipo" /></th>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let permission of assignedPermissions">
+                <td>{{ permission.type }}</td>
+                <td>{{ permission.code }}</td>
+                <td>{{ permission.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,39 +1,176 @@
-<div class="container mt-5">
-    <h2 class="text-start mb-4">Asignar Roles y Permisos</h2>
-    <form class="p-4 border rounded shadow-sm bg-white">
-      <div class="row">
-        <!-- Columna Izquierda -->
-        <div class="col-md-6">
-          <!-- Campo ID del Usuario -->
-          <div class="mb-3">
-            <label for="user-id" class="form-label fw-bold">ID del Usuario</label>
-            <input type="text" class="form-control" id="user-id" placeholder="Ingrese el ID del usuario" required>
-          </div>
-        </div>
-  
-        <!-- Columna Derecha -->
-        <div class="col-md-6">
-          <!-- Campo Rol -->
-          <div class="mb-3">
-            <label for="rol" class="form-label fw-bold">Rol</label>
-            <select class="form-select" id="rol" required>
-              <option value="" disabled selected>Seleccione un rol</option>
-              <option value="admin-general">Administrador General de Investigación</option>
-              <option value="admin-tecnico">Administrador Técnico</option>
-              <option value="coordinador-investigacion">Coordinador de Investigación</option>
-              <option value="investigador">Investigador</option>
-              <option value="estudiante">Estudiante</option>
-              <option value="directivo">Directivo</option>
-            </select>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Botón Asignar Rol -->
-      <div class="row">
-        <div class="col-12 text-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">Asignar Rol</button>
-        </div>
-      </div>
-    </form>
+<div class="role-management-container">
+  <h2>Gestión de Roles</h2>
+  <div class="role-list-section">
+    <div class="filters">
+      <input type="text" placeholder="Search" class="search-input" />
+      <button class="btn btn-primary export-btn">Export</button>
+      <button class="btn btn-warning create-role-btn">+ Crear Rol</button>
+    </div>
+    <table class="role-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha de creación</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+        <tr>
+          <th><input type="text" placeholder="Filtrar Código" /></th>
+          <th><input type="text" placeholder="Filtrar Nombre" /></th>
+          <th><input type="text" placeholder="Filtrar Descripción" /></th>
+          <th><input type="text" placeholder="Filtrar Fecha" /></th>
+          <th><input type="text" placeholder="Filtrar Estado" /></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Role rows will be dynamically generated here -->
+      </tbody>
+    </table>
+    <div class="pagination">
+      <span>Filas por Hoja</span>
+      <select>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+      <span>de 50 filas</span>
+      <button>&laquo;</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>10</button>
+      <button>&raquo;</button>
+    </div>
   </div>
+
+  <div class="role-form-section">
+    <ul class="tabs">
+      <li class="tab" [class.active]="activeTab === 'basic-info'" (click)="setActiveTab('basic-info')">Información básica</li>
+      <li class="tab" [class.active]="activeTab === 'user-assignment'" (click)="setActiveTab('user-assignment')">Asignación de Usuarios</li>
+      <li class="tab" [class.active]="activeTab === 'permission-assignment'" (click)="setActiveTab('permission-assignment')">Asignación de permisos</li>
+    </ul>
+    <div class="tab-content" [class.active]="activeTab === 'basic-info'" id="basic-info">
+      <form>
+        <div class="form-row">
+          <label>Código</label>
+          <input type="text" />
+          <label>Fecha de creación</label>
+          <input type="date" />
+        </div>
+        <div class="form-row">
+          <label>Nombre</label>
+          <input type="text" />
+          <label>Estado</label>
+          <select>
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Descripción</label>
+          <textarea></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="reset">Limpiar</button>
+          <button type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+    <div class="tab-content" [class.active]="activeTab === 'user-assignment'" id="user-assignment">
+      <div class="user-assignment-container">
+        <div class="users-table unassigned-users">
+          <div class="table-header">
+            <span>Usuarios sin asignar</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of unassignedUsers">
+                <td>{{ user.code }}</td>
+                <td>{{ user.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="user-assignment-buttons">
+          <button type="button" (click)="assignUser()">></button>
+          <button type="button" (click)="unassignUser()"><</button>
+        </div>
+        <div class="users-table assigned-users">
+          <div class="table-header">
+            <span>Usuarios asignados</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <th><input type="text" placeholder="Filtrar Código" /></th>
+                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of assignedUsers">
+                <td>{{ user.code }}</td>
+                <td>{{ user.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" [class.active]="activeTab === 'permission-assignment'" id="permission-assignment">
+      <div class="permission-assignment-container" style="display: flex; gap: 1rem; background-color: #c1d9e0; padding: 1rem; border-radius: 8px;">
+        <div class="modules-list" style="flex: 1; background-color: #f9f6f6; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); overflow: auto; max-height: 300px; padding: 1rem;">
+          <h5>Módulos del sistema</h5>
+          <ul style="list-style: none; padding-left: 0;">
+            <li><strong>Inicio</strong></li>
+            <li><strong>Seguridad</strong>
+              <ul style="list-style: none; padding-left: 1rem;">
+                <li>Gestión de usuarios</li>
+                <li>Gestión de roles</li>
+                <li>Auditoría</li>
+              </ul>
+            </li>
+            <li><strong>Investigación</strong></li>
+            <li><strong>Extensión</strong></li>
+            <li><strong>Indicadores</strong></li>
+          </ul>
+        </div>
+        <div class="permissions-toggle" style="flex: 1; background-color: #f9f6f6; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); padding: 1rem;">
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" /> Ejecuta Opción
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" checked /> Permiso Lectura
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" /> Permiso Inserción
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" checked /> Permiso Actualización
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" /> Permiso Eliminación
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

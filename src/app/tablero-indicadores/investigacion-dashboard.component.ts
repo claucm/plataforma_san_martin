@@ -128,6 +128,16 @@ export class InvestigacionDashboardComponent {
   selectedYear = 'Todos';
   selectedFaculty = 'Todos';
 
+  cityPhotos: Record<string, string> = {
+    'Bogotá': 'assets/bogota.jpg',
+    'Cali': 'assets/cali.jpg',
+    'Pasto': 'assets/pasto.jpg',
+    'Puerto Colombia': 'assets/puerto_colombia.jpg',
+    'Sabaneta': 'assets/sabaneta.jpg',
+  };
+
+  dollAnimation: string = '';
+
   get allData() {
     return Object.entries(this.mockStats).flatMap(([city, stats]) =>
       stats.productsOverYears.map(d => ({ ...d, city }))
@@ -163,5 +173,13 @@ export class InvestigacionDashboardComponent {
 
   setSelectedFaculty(faculty: string) {
     this.selectedFaculty = faculty;
+  }
+
+  animateDoll(section: string) {
+    this.dollAnimation = 'animate-' + section;
+  }
+
+  stopDollAnimation() {
+    this.dollAnimation = '';
   }
 }

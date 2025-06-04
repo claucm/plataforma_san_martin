@@ -135,4 +135,14 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
       window.speechSynthesis.speak(utterance);
     }
   }
+
+  dollAnimation: string = '';
+
+  animateDoll(section: string): void {
+    this.dollAnimation = 'animate-' + section;
+  }
+
+  stopDollAnimation(): void {
+    this.dollAnimation = '';
+  }
 }
