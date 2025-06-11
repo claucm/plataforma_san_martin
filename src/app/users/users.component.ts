@@ -1,12 +1,78 @@
 import { Component } from '@angular/core';
 
+interface User {
+  fullName: string;
+  status: 'Activo' | 'Inactivo';
+  email: string;
+  creationDate: string; // ISO date string
+  lastActive: string; // ISO time string
+  photoUrl: string;
+}
+
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
   activeTab: string = 'basic-info';
+
+  users: User[] = [
+    {
+      fullName: 'Juan Pérez',
+      status: 'Activo',
+      email: 'juan.perez@example.com',
+      creationDate: '2023-01-15',
+      lastActive: '14:30',
+      photoUrl: 'assets/perfil1.jpg'
+    },
+    {
+      fullName: 'María Gómez',
+      status: 'Inactivo',
+      email: 'maria.gomez@example.com',
+      creationDate: '2022-11-20',
+      lastActive: '09:15',
+      photoUrl: 'assets/perfil2.jpeg'
+    },
+    {
+      fullName: 'Carlos López',
+      status: 'Activo',
+      email: 'carlos.lopez@example.com',
+      creationDate: '2023-03-05',
+      lastActive: '16:45',
+      photoUrl: 'assets/perfil3.jpg'
+    }
+  ];
+
+  filterName: string = '';
+  filterStatus: string = '';
+  filterEmail: string = '';
+  filterCreationDate: string = '';
+  filterLastActive: string = '';
+
+  get filteredUsers(): User[] {
+    return this.users.filter(user => {
+      const matchesName = user.fullName.toLowerCase().includes(this.filterName.toLowerCase());
+      const matchesStatus = this.filterStatus ? user.status === this.filterStatus : true;
+      const matchesEmail = user.email.toLowerCase().includes(this.filterEmail.toLowerCase());
+      const matchesCreationDate = this.filterCreationDate ? user.creationDate === this.filterCreationDate : true;
+      const matchesLastActive = this.filterLastActive ? user.lastActive === this.filterLastActive : true;
+      return matchesName && matchesStatus && matchesEmail && matchesCreationDate && matchesLastActive;
+    });
+  }
+
+  selectedUser: User | null = null;
+
+  selectUser(user: User) {
+    this.selectedUser = user;
+    console.log('Seleccionar usuario:', user);
+    // TODO: Implement additional user selection logic
+  }
 
   unassignedRoles = [
     { code: '0001', name: 'Administrador técnico' },
@@ -51,5 +117,10 @@ export class UsersComponent {
   unassignPermission() {
     // TODO: Implement logic to unassign selected permission from assignedPermissions to unassignedPermissions
     console.log('Unassign permission clicked');
+  }
+
+  deleteUser(user: User) {
+    console.log('Eliminar usuario:', user);
+    // TODO: Implement user deletion logic
   }
 }

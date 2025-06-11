@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -33,15 +33,17 @@ import './models/user.model';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { routes } from './app.routes';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
     RouterModule.forRoot(routes),
+    AppComponent,
+    LoginComponent,
+    UsersComponent
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor]))
@@ -49,3 +51,7 @@ import { routes } from './app.routes';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function bootstrap() {
+  throw new Error('bootstrapApplication is not available. Please use traditional Angular bootstrap method.');
+}

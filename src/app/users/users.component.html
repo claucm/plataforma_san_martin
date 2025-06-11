@@ -15,16 +15,52 @@
       <thead>
         <tr>
           <th></th>
-          <th>Nombre Completo</th>
-          <th>Estado</th>
-          <th>Email</th>
-          <th>Fecha Creación</th>
-          <th>Última vez activo</th>
+          <th>
+            Nombre Completo<br />
+            <input type="text" [(ngModel)]="filterName" placeholder="Filtrar Nombre" />
+          </th>
+          <th>
+            Estado<br />
+            <select [(ngModel)]="filterStatus">
+              <option value="">Todos</option>
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </th>
+          <th>
+            Email<br />
+            <input type="text" [(ngModel)]="filterEmail" placeholder="Filtrar Email" />
+          </th>
+          <th>
+            Fecha Creación<br />
+            <input type="date" [(ngModel)]="filterCreationDate" />
+          </th>
+          <th>
+            Última vez activo<br />
+            <input type="time" [(ngModel)]="filterLastActive" />
+          </th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <!-- User rows will be dynamically generated here -->
+        <tr *ngFor="let user of filteredUsers">
+          <td>
+            <img [src]="user.photoUrl" alt="Foto de {{user.fullName}}" class="user-photo-circle" />
+          </td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.status }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.creationDate }}</td>
+          <td>{{ user.lastActive }}</td>
+          <td>
+            <button type="button" title="Seleccionar usuario" (click)="selectUser(user)" class="icon-button">
+              <i class="fa fa-user-check" aria-hidden="true"></i>
+            </button>
+            <button type="button" title="Eliminar usuario" (click)="deleteUser(user)" class="icon-button">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
     <div class="pagination">
@@ -83,6 +119,9 @@
         <div class="form-row">
           <label>Correo Electrónico</label>
           <input type="email" />
+        </div>
+        <div class="photo-display-container">
+          <img *ngIf="selectedUser" [src]="selectedUser.photoUrl" alt="Foto de {{selectedUser.fullName}}" class="user-photo-large" />
         </div>
         <div class="form-actions">
           <button type="reset">Limpiar</button>

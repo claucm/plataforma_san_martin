@@ -1,169 +1,244 @@
 .user-management-container {
-  padding: 1rem;
   font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f8fafc;
 }
 
 .user-management-container h2 {
-  margin-bottom: 1rem;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .user-list-section {
-  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
 
 .filters {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.filters input.search-input {
-  padding: 0.3rem 0.5rem;
+.search-input {
+  padding: 6px 12px;
+  border-radius: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 200px;
+  width: 180px;
+  font-size: 14px;
 }
 
-.filters select.filter-select {
-  padding: 0.3rem 0.5rem;
+.filter-select {
+  padding: 6px 12px;
+  border-radius: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 14px;
+  min-width: 100px;
 }
 
-.filters button {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 4px;
+.btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.filters .btn-primary {
-  background-color: #007bff;
+.btn-primary {
+  background-color: #0d6efd;
   color: white;
 }
 
-.filters .btn-warning {
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-warning {
   background-color: #ffc107;
-  color: black;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
 }
 
 .user-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
 }
 
-.user-table th,
-.user-table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-}
-
-.user-table th {
-  background-color: #007bff;
+.user-table thead tr {
+  background-color: #0d6efd;
   color: white;
   font-weight: 600;
+  border-radius: 8px;
 }
 
-.pagination {
-  margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
+.user-table thead th {
+  padding: 12px 15px;
+  text-align: left;
+  border: none;
 }
 
-.pagination select {
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.user-table tbody tr {
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  transition: background-color 0.3s ease;
 }
 
-.pagination button {
-  background-color: white;
-  border: 1px solid #007bff;
-  color: #007bff;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+.user-table tbody tr:hover {
+  background-color: #e2e8f0;
+}
+
+.user-table tbody td {
+  padding: 12px 15px;
+  border: none;
+  vertical-align: middle;
+}
+
+.icon-button {
+  border: 1px solid #000;
+  background-color: transparent;
+  padding: 4px 6px;
+  margin-left: 4px;
   cursor: pointer;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pagination button:hover {
-  background-color: #007bff;
-  color: white;
+.icon-button i {
+  font-size: 14px;
+  line-height: 1;
 }
 
-.user-form-section {
-  border-top: 1px solid #ccc;
-  padding-top: 1rem;
+.user-photo-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 8px;
+  border: 2px solid white;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+.user-photo-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+  margin-left: 16px;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.photo-display-container {
+  position: relative;
+  min-height: 130px;
 }
 
 .tabs {
-  list-style: none;
   display: flex;
-  gap: 1rem;
+  border-bottom: 2px solid #0d6efd;
+  margin-bottom: 16px;
   padding-left: 0;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #007bff;
+  list-style: none;
 }
 
-.tabs .tab {
+.tab {
+  padding: 10px 20px;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-right: 20px;
   font-weight: 600;
-  color: #007bff;
-  border-bottom: 2px solid transparent;
+  user-select: none;
+  color: #0d6efd;
+  font-size: 16px;
 }
 
-.tabs .tab.active {
-  border-bottom-color: #007bff;
-  color: #0056b3;
+.tab.active {
+  border-bottom: 3px solid #0d6efd;
+  font-weight: 700;
+  color: #0b5ed7;
+  background-color: transparent;
 }
 
 .tab-content {
   display: none;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 0 4px 4px 4px;
+  background-color: #fff;
 }
 
 .tab-content.active {
   display: block;
 }
 
+form {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  color: #333;
+}
+
 .form-row {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 24px 16px;
 }
 
 .form-row label {
-  flex: 0 0 150px;
+  width: 140px;
   font-weight: 600;
-  align-self: center;
+  min-width: 140px;
 }
 
-.form-row input,
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="date"],
+.form-row input[type="time"],
 .form-row select {
-  flex: 1 1 auto;
-  padding: 0.3rem 0.5rem;
+  flex: 1 1 200px;
+  min-width: 200px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 .form-actions {
-  margin-top: 1rem;
+  margin-top: 20px;
   display: flex;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .form-actions button {
-  padding: 0.4rem 1rem;
-  border: none;
+  padding: 8px 20px;
   border-radius: 4px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .form-actions button[type="reset"] {
@@ -172,147 +247,136 @@
 }
 
 .form-actions button[type="submit"] {
-  background-color: #007bff;
+  background-color: #0d6efd;
   color: white;
 }
 
 .photo-upload {
-  margin-top: 1rem;
+  margin-top: 20px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .photo-upload label {
   font-weight: 600;
+  min-width: 140px;
 }
 
-/* Permission assignment tab styles */
+.photo-upload input[type="file"] {
+  cursor: pointer;
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.role-assignment-container,
 .permission-assignment-container {
   display: flex;
-  gap: 1rem;
-  background-color: #c1d9e0;
-  padding: 1rem;
-  border-radius: 8px;
+  gap: 16px;
+  margin-top: 20px;
 }
 
+.roles-table,
 .permissions-table {
   flex: 1;
-  background-color: #f9f6f6;
-  border-radius: 6px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  overflow: hidden;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
 }
 
-.permissions-table .table-header {
-  background-color: #f7e6b5;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  border-bottom: 1px solid #ccc;
+.table-header {
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
+.roles-table table,
 .permissions-table table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
 }
 
+.roles-table th,
+.roles-table td,
 .permissions-table th,
 .permissions-table td {
-  border: 1px solid #ddd;
-  padding: 0.4rem 0.6rem;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
   text-align: left;
+  font-size: 14px;
 }
 
-.permissions-table th {
-  background-color: #f7e6b5;
+.roles-table thead tr,
+.permissions-table thead tr {
+  background-color: #0d6efd;
+  color: white;
   font-weight: 600;
 }
 
+.role-assignment-buttons,
 .permission-assignment-buttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
+.role-assignment-buttons button,
 .permission-assignment-buttons button {
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  background-color: #f7e6b5;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 0 3px rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease;
-}
-
-.permission-assignment-buttons button:hover {
-  background-color: #e0d18a;
-}
-
-/* Role assignment tab styles */
-.role-assignment-container {
-  display: flex;
-  gap: 1rem;
-  background-color: #c1d9e0;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.roles-table {
-  flex: 1;
-  background-color: #f9f6f6;
+  padding: 6px 12px;
   border-radius: 6px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-
-.roles-table .table-header {
-  background-color: #f7e6b5;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  border-bottom: 1px solid #ccc;
-}
-
-.roles-table table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.roles-table th,
-.roles-table td {
-  border: 1px solid #ddd;
-  padding: 0.4rem 0.6rem;
-  text-align: left;
-}
-
-.roles-table th {
-  background-color: #f7e6b5;
-  font-weight: 600;
-}
-
-.role-assignment-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.role-assignment-buttons button {
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  background-color: #f7e6b5;
   border: none;
-  border-radius: 4px;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
-.role-assignment-buttons button:hover {
-  background-color: #e0d18a;
+.role-assignment-buttons button:hover,
+.permission-assignment-buttons button:hover {
+  background-color: #0b5ed7;
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.pagination span {
+  font-size: 14px;
+}
+
+.pagination select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.pagination button {
+  border: 1px solid #0d6efd;
+  background-color: white;
+  color: #0d6efd;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: #0d6efd;
+  color: white;
+  cursor: default;
 }
