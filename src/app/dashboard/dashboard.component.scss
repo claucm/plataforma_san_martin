@@ -128,7 +128,7 @@ input.form-control {
   border: none;
   border-radius: 15px;
   color: white;
-  padding: 1.5rem 2rem;
+  padding: 0.8rem 1.2rem; /* Reduced padding for smaller buttons */
   text-align: left;
   cursor: pointer;
   display: flex;
@@ -167,9 +167,10 @@ input.form-control {
 }
 
 .button-illustration {
-  width: 80px;
+  width: 90px; /* Reduced width */
   height: auto;
-  margin-left: 1rem;
+  margin-left: -15px; /* Negative margin to move image outside button border */
+  position: relative;
 }
 
 .doll-container {
