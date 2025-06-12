@@ -1,6 +1,6 @@
 <div class="dashboard-main-container">
   <div class="buttons-container">
-    <button class="dashboard-button" (mouseenter)="animateDoll('grupos')" (mouseleave)="stopDollAnimation()">
+    <button class="dashboard-button" (click)="animateDoll('grupos')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Grupos de</span>
@@ -9,7 +9,7 @@
         <img src="assets/grupos.png" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (mouseenter)="animateDoll('semilleros')" (mouseleave)="stopDollAnimation()">
+    <button class="dashboard-button" (click)="animateDoll('semilleros')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Semilleros</span>
@@ -18,7 +18,7 @@
         <img src="assets/semilleros.png" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (mouseenter)="animateDoll('revistas')" (mouseleave)="stopDollAnimation()">
+    <button class="dashboard-button" (click)="animateDoll('revistas')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Revistas</span>
@@ -27,7 +27,7 @@
         <img src="assets/revista.jpg" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (mouseenter)="animateDoll('produccion')" (mouseleave)="stopDollAnimation()">
+    <button class="dashboard-button" (click)="animateDoll('produccion')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Producción</span>
@@ -38,6 +38,9 @@
     </button>
   </div>
   <div class="doll-container" [ngClass]="dollAnimation">
-    <img src="assets/student.png" alt="Doll" class="doll-image" />
+    <video autoplay muted loop playsinline class="doll-video">
+      <source src="assets/inicio.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   </div>
 </div>

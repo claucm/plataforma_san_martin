@@ -8,7 +8,7 @@
 :host {
   display: block;
   padding: 20px;
-  background-color: #fff8ee;
+  background-color: #ECEBEC;
   width: 100%;
   min-height: 100vh;
 }
@@ -90,7 +90,7 @@ h3 {
 }
 
 .table-striped tbody tr:nth-child(odd) {
-  background-color: #f9f9f9;
+  background-color: #ECEBEC;
 }
 
 input.form-control {
@@ -174,18 +174,32 @@ input.form-control {
 }
 
 .doll-container {
-  flex: 0 0 200px;
+  flex: 0 0 300px; /* Increased width */
   position: relative;
   height: 400px;
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center;
 }
 
-.doll-image {
+.doll-video {
   width: 100%;
+  max-width: 280px; /* Larger video width */
   height: auto;
-  transition: transform 0.5s ease;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  border-radius: 12px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  max-width: 700px; /* Increased width to elongate buttons */
+  margin-right: 40px; /* Add more space before the video */
+}
+
+.dashboard-button {
+  max-width: 100%; /* Ensure buttons fit container */
 }
 
 /* Animations for doll movement */
