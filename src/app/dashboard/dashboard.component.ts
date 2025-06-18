@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartComponent, ApexChart, ApexAxisChartSeries, ApexXAxis } from 'ng-apexcharts';
 import * as THREE from 'three';
@@ -12,6 +12,8 @@ import { AnimationMixer, Clock } from 'three';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('videoRef') videoRef!: ElementRef<HTMLVideoElement>;
+
   users = [
     { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'Editor' }
@@ -60,6 +62,17 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.initThreeJS();
     this.speakWelcome();
+
+    if (this.videoRef && this.videoRef.nativeElement) {
+      const video = this.videoRef.nativeElement;
+      video.muted = false;
+      video.loop = false;
+      video.play();
+
+      video.addEventListener('ended', () => {
+        this.handleVideoEnded();
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -68,6 +81,21 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     }
     if (this.renderer) {
       this.renderer.dispose();
+    }
+  }
+
+  muteVideo(): void {
+    if (this.videoRef && this.videoRef.nativeElement) {
+      this.videoRef.nativeElement.muted = true;
+    }
+  }
+
+  handleVideoEnded(): void {
+    if (this.videoRef && this.videoRef.nativeElement) {
+      const video = this.videoRef.nativeElement;
+      video.muted = true;
+      video.loop = true;
+      video.play();
     }
   }
 

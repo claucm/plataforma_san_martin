@@ -40,6 +40,22 @@ export class AuthService {
     }
   }
 
+  loginManual(cedula: string, password: string): boolean {
+    if (cedula === '1020775340' && password === '123456') {
+      const user = { cedula, name: 'Admin User' };
+      this._user.set(user);
+      this._isLoggedIn.set(true);
+      this._isAdmin.set(true);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('isAdmin', 'true');
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private loadGoogleScript(): Promise<void> {
     return new Promise((resolve, reject) => {
       if (!isPlatformBrowser(this.platformId)) {

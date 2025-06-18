@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as XLSX from 'xlsx';
 
 interface User {
   fullName: string;
@@ -29,7 +30,7 @@ export class UsersComponent {
       email: 'juan.perez@example.com',
       creationDate: '2023-01-15',
       lastActive: '14:30',
-      photoUrl: 'assets/perfil1.jpg'
+      photoUrl: 'assets/perfil2.jpeg'
     },
     {
       fullName: 'María Gómez',
@@ -37,7 +38,7 @@ export class UsersComponent {
       email: 'maria.gomez@example.com',
       creationDate: '2022-11-20',
       lastActive: '09:15',
-      photoUrl: 'assets/perfil2.jpeg'
+      photoUrl: 'assets/perfil1.jpg'
     },
     {
       fullName: 'Carlos López',
@@ -54,6 +55,19 @@ export class UsersComponent {
   filterEmail: string = '';
   filterCreationDate: string = '';
   filterLastActive: string = '';
+
+  showCreateUserModal: boolean = false;
+
+  newUser = {
+    tipoIdentificacion: 'CC',
+    identificacion: '',
+    estado: 'Activo',
+    primerNombre: '',
+    segundoNombre: '',
+    primerApellido: '',
+    segundoApellido: '',
+    email: ''
+  };
 
   get filteredUsers(): User[] {
     return this.users.filter(user => {
@@ -72,6 +86,46 @@ export class UsersComponent {
     this.selectedUser = user;
     console.log('Seleccionar usuario:', user);
     // TODO: Implement additional user selection logic
+  }
+
+  openCreateUserModal() {
+    this.showCreateUserModal = true;
+  }
+
+  closeCreateUserModal() {
+    this.showCreateUserModal = false;
+  }
+
+  createUser() {
+    console.log('Crear usuario:', this.newUser);
+    // TODO: Implement user creation logic
+    this.closeCreateUserModal();
+  }
+
+  getFirstNames(fullName: string): string {
+    const parts = fullName.trim().split(' ');
+    if (parts.length <= 1) return fullName;
+    return parts.slice(0, parts.length - 1).join(' ');
+  }
+
+  getLastNames(fullName: string): string {
+    const parts = fullName.trim().split(' ');
+    if (parts.length <= 1) return '';
+    return parts[parts.length - 1];
+  }
+
+  exportToExcel(): void {
+    const dataToExport = this.filteredUsers.map(user => ({
+      Nombres: this.getFirstNames(user.fullName),
+      Apellidos: this.getLastNames(user.fullName),
+      Estado: user.status,
+      Email: user.email,
+      'Fecha Creación': user.creationDate
+    }));
+
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Usuarios': worksheet }, SheetNames: ['Usuarios'] };
+    XLSX.writeFile(workbook, 'usuarios.xlsx');
   }
 
   unassignedRoles = [

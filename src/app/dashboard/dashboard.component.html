@@ -1,6 +1,6 @@
-<div class="dashboard-main-container">
-  <div class="buttons-container">
-    <button class="dashboard-button" (click)="animateDoll('grupos')">
+<div class="dashboard-main-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; padding-top: 60px;">
+  <div class="buttons-container left-buttons" style="display: flex; flex-direction: column; gap: 10px;">
+    <button class="dashboard-button short-button" (click)="animateDoll('grupos')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Grupos de</span>
@@ -9,7 +9,7 @@
         <img src="assets/grupos.png" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (click)="animateDoll('semilleros')">
+    <button class="dashboard-button short-button" (click)="animateDoll('semilleros')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Semilleros</span>
@@ -18,7 +18,15 @@
         <img src="assets/semilleros.png" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (click)="animateDoll('revistas')">
+  </div>
+  <div class="doll-container" [ngClass]="dollAnimation" style="flex-shrink: 0;">
+    <video autoplay playsinline class="doll-video" style="display: block; margin: 0 auto;" #videoRef (ended)="handleVideoEnded()">
+      <source src="assets/inicio6.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="buttons-container right-buttons" style="display: flex; flex-direction: column; gap: 10px;">
+    <button class="dashboard-button short-button" (click)="animateDoll('revistas')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Revistas</span>
@@ -27,7 +35,7 @@
         <img src="assets/revista.jpg" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-    <button class="dashboard-button" (click)="animateDoll('produccion')">
+    <button class="dashboard-button short-button" (click)="animateDoll('produccion')">
       <div class="button-content">
         <div class="button-text">
           <span class="small-text">Producción</span>
@@ -36,11 +44,5 @@
         <img src="assets/produccion.png" alt="Investigacion" class="button-illustration" />
       </div>
     </button>
-  </div>
-  <div class="doll-container" [ngClass]="dollAnimation">
-    <video autoplay muted loop playsinline class="doll-video">
-      <source src="assets/inicio.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
   </div>
 </div>

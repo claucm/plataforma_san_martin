@@ -2,22 +2,20 @@
   <h2>Gestión de Usuarios</h2>
   <div class="user-list-section">
     <div class="filters">
-      <input type="text" placeholder="Search" class="search-input" />
-      <select class="filter-select">
-        <option>Rol</option>
-        <option>Estado</option>
-        <option>Fecha</option>
-      </select>
-      <button class="btn btn-primary export-btn">Export</button>
-      <button class="btn btn-warning create-user-btn">+ Crear Usuario</button>
+      <button class="btn btn-primary export-btn" (click)="exportToExcel()">Exportar</button>
+      <button class="btn btn-warning create-user-btn" (click)="openCreateUserModal()">+ Crear Usuario</button>
     </div>
     <table class="user-table">
       <thead>
         <tr>
           <th></th>
           <th>
-            Nombre Completo<br />
-            <input type="text" [(ngModel)]="filterName" placeholder="Filtrar Nombre" />
+            Nombres<br />
+            <input type="text" [(ngModel)]="filterName" placeholder="Filtrar Nombres" />
+          </th>
+          <th>
+            Apellidos<br />
+            <input type="text" [(ngModel)]="filterName" placeholder="Filtrar Apellidos" />
           </th>
           <th>
             Estado<br />
@@ -35,11 +33,6 @@
             Fecha Creación<br />
             <input type="date" [(ngModel)]="filterCreationDate" />
           </th>
-          <th>
-            Última vez activo<br />
-            <input type="time" [(ngModel)]="filterLastActive" />
-          </th>
-          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -47,19 +40,11 @@
           <td>
             <img [src]="user.photoUrl" alt="Foto de {{user.fullName}}" class="user-photo-circle" />
           </td>
-          <td>{{ user.fullName }}</td>
+          <td (click)="selectUser(user)" class="clickable-name-column">{{ getFirstNames(user.fullName) }}</td>
+          <td (click)="selectUser(user)" class="clickable-name-column">{{ getLastNames(user.fullName) }}</td>
           <td>{{ user.status }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.creationDate }}</td>
-          <td>{{ user.lastActive }}</td>
-          <td>
-            <button type="button" title="Seleccionar usuario" (click)="selectUser(user)" class="icon-button">
-              <i class="fa fa-user-check" aria-hidden="true"></i>
-            </button>
-            <button type="button" title="Eliminar usuario" (click)="deleteUser(user)" class="icon-button">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -77,7 +62,6 @@
       <button>3</button>
       <button>10</button>
       <button>&raquo;</button>
-    </div>
   </div>
 
   <div class="user-form-section">
@@ -90,10 +74,16 @@
       <!-- Basic user info form fields -->
       <form>
         <div class="form-row">
-          <label>Código</label>
-          <input type="text" />
+          <label>Tipo de Identificación</label>
+          <select>
+            <option value="CC">CC - Cedula de Ciudadanía</option>
+            <option value="TE">TE - Tarjeta de Extranjería</option>
+            <option value="CE">CE - Cedula de Extranjería</option>
+            <option value="NIT">NIT</option>
+            <option value="Pasaporte">Pasaporte</option>
+          </select>
           <label>Fecha de creación</label>
-          <input type="date" />
+          <input type="date" readonly />
         </div>
         <div class="form-row">
           <label>Identificación</label>
@@ -246,6 +236,113 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-title {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #0a2e4c;
+  margin-bottom: 20px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clickable-name-column {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+</style>
+
+  <!-- Create User Modal -->
+  <div class="modal" *ngIf="showCreateUserModal">
+  <div class="modal-content">
+      <span class="close" (click)="closeCreateUserModal()">&times;</span>
+      <h3 class="modal-title">Crear Usuario</h3>
+      <form (ngSubmit)="createUser()">
+        <div class="form-row">
+          <label>Tipo de Identificación</label>
+          <select [(ngModel)]="newUser.tipoIdentificacion" name="tipoIdentificacion" required>
+            <option value="CC">CC - Cedula de Ciudadanía</option>
+            <option value="TE">TE - Tarjeta de Extranjería</option>
+            <option value="CE">CE - Cedula de Extranjería</option>
+            <option value="NIT">NIT</option>
+            <option value="Pasaporte">Pasaporte</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Identificación</label>
+          <input type="text" [(ngModel)]="newUser.identificacion" name="identificacion" required />
+        </div>
+        <div class="form-row">
+          <label>Estado</label>
+          <select [(ngModel)]="newUser.estado" name="estado" required>
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Primer nombre</label>
+          <input type="text" [(ngModel)]="newUser.primerNombre" name="primerNombre" required />
+          <label>Segundo nombre</label>
+          <input type="text" [(ngModel)]="newUser.segundoNombre" name="segundoNombre" />
+        </div>
+        <div class="form-row">
+          <label>Primer apellido</label>
+          <input type="text" [(ngModel)]="newUser.primerApellido" name="primerApellido" required />
+          <label>Segundo apellido</label>
+          <input type="text" [(ngModel)]="newUser.segundoApellido" name="segundoApellido" />
+        </div>
+        <div class="form-row">
+          <label>Correo Electrónico</label>
+          <input type="email" [(ngModel)]="newUser.email" name="email" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
+          <button type="submit">Crear</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

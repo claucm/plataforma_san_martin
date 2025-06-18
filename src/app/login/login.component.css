@@ -1,125 +1,99 @@
-body, html, .login-page {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  background: #000;
-  overflow: hidden;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/assets/fondo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: brightness(0.6);
-  z-index: 0;
-}
-
 .login-box {
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background-color: #2a727c; /* Updated background color */
+  border: 2px solid #f7b733; /* Yellow border */
   border-radius: 15px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-  border: 2px solid #f1c40f;
-  width: 360px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   padding: 30px 40px;
+  width: 30vw;
+  max-width: 400px;
+  margin: 40px auto;
+  color: #f7b733;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo-container img.logo-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+@media (max-width: 768px) {
+  .login-box {
+    width: 90vw;
+    padding: 20px 25px;
+    margin: 20px auto;
+  }
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  color: #f1c40f;
-  backdrop-filter: saturate(180%) blur(10px);
-  margin-bottom: 40px;
+  gap: 20px;
 }
 
-.logo-container {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.logo-image {
-  max-width: 120px;
-  margin-bottom: 15px;
-}
-
-.welcome-text h1 {
-  font-size: 1.8rem;
-  margin: 0 0 10px 0;
-  font-weight: 700;
-}
-
-.welcome-text p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #f9d71ccc;
-}
-
-.login-button-container {
-  width: 100%;
+.form-group {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-.btn-google-login {
-  background-color: #f1c40f;
-  color: #1e3c72;
+.form-group label {
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  padding: 10px 15px;
+  border-radius: 10px;
   border: none;
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  border-radius: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.6);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 8px 2px #f7b733;
+}
+
+button[type="submit"] {
+  background-color: #f7b733;
+  color: #1a2a6c;
   font-weight: 700;
+  padding: 12px 0;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(247, 183, 51, 0.6);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
 }
 
-.btn-google-login:hover {
-  background-color: #d4ac0d;
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #e6a800;
 }
 
-.btn-google-login i {
-  font-size: 1.5rem;
+button[type="submit"]:disabled {
+  background-color: #bfbfbf;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* Style Google button container with blue background, yellow border and text */
-#google-signin-button > div {
-  background-color: #1e3c72 !important;
-  color: #f1c40f !important;
-  border: 2px solid #f1c40f !important;
-  border-radius: 24px !important;
-  box-shadow: 0 4px 12px rgba(241, 196, 15, 0.6) !important;
-  font-weight: 700 !important;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-  padding: 12px 24px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  cursor: pointer !important;
-  font-size: 1.2rem !important;
-  transition: background-color 0.3s ease !important;
-  justify-content: center !important;
+.forgot-password-btn {
+  background-color: transparent;
+  color: #f7b733;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(247, 183, 51, 0.4);
+  transition: background-color 0.3s ease;
 }
 
-#google-signin-button > div:hover {
-  background-color: #16325c !important;
-}
-
-@media (max-width: 400px) {
-  .login-box {
-    width: 90%;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
+.forgot-password-btn:hover {
+  background-color: rgba(247, 183, 51, 0.2);
 }

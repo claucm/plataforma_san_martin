@@ -52,12 +52,12 @@
 }
 
 .btn-primary {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0b5ed7;
+  background-color: #0a2e4c;
 }
 
 .btn-warning {
@@ -79,7 +79,7 @@
 }
 
 .user-table thead tr {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
   font-weight: 600;
   border-radius: 8px;
@@ -154,7 +154,7 @@
 
 .tabs {
   display: flex;
-  border-bottom: 2px solid #0d6efd;
+  border-bottom: 2px solid #2a727c;
   margin-bottom: 16px;
   padding-left: 0;
   list-style: none;
@@ -168,14 +168,14 @@
   margin-right: 20px;
   font-weight: 600;
   user-select: none;
-  color: #0d6efd;
+  color: #2a727c;
   font-size: 16px;
 }
 
 .tab.active {
-  border-bottom: 3px solid #0d6efd;
+  border-bottom: 3px solid #2a727c;
   font-weight: 700;
-  color: #0b5ed7;
+  color: #0a2e4c;
   background-color: transparent;
 }
 
@@ -247,7 +247,7 @@ form {
 }
 
 .form-actions button[type="submit"] {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
 }
 
@@ -309,7 +309,7 @@ form {
 
 .roles-table thead tr,
 .permissions-table thead tr {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
   font-weight: 600;
 }
@@ -327,7 +327,7 @@ form {
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -337,7 +337,7 @@ form {
 
 .role-assignment-buttons button:hover,
 .permission-assignment-buttons button:hover {
-  background-color: #0b5ed7;
+  background-color: #0a2e4c;
 }
 
 .pagination {
@@ -360,9 +360,9 @@ form {
 }
 
 .pagination button {
-  border: 1px solid #0d6efd;
+  border: 1px solid #2a727c;
   background-color: white;
-  color: #0d6efd;
+  color: #2a727c;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 6px;
@@ -371,12 +371,12 @@ form {
 }
 
 .pagination button:hover {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
 }
 
 .pagination button.active {
-  background-color: #0d6efd;
+  background-color: #2a727c;
   color: white;
   cursor: default;
 }

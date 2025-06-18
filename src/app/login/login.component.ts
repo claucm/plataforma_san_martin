@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email: string = '';
+  cedula: string = '';
   password: string = '';
 
   constructor(
@@ -29,32 +29,21 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.authService.renderLoginButton('googleSignInDiv');
-      this.authService.user().subscribe((user: any) => {
-        if (user) {
-          if (user.email.toLowerCase() === 'claudia.manrique@sanmartin.edu.co') {
-            localStorage.setItem('isAdmin', 'true');
-          } else {
-            localStorage.setItem('isAdmin', 'false');
-          }
-          this.router.navigate(['/dashboard']);
-        }
-      });
-    }
+    // Removed Google login rendering
   }
 
   signInWithGoogle(): void {
-    // No longer needed since button is rendered by authService
+    // No longer needed since button is removed
   }
 
   onSubmit(): void {
-    if (this.email === 'clau.cm77@hotmail.com' && this.password === '12345678') {
-      localStorage.setItem('isAdmin', 'true');
-      localStorage.setItem('user', JSON.stringify({ email: this.email, name: 'Admin User' }));
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Invalid email or password');
+    const success = this.authService.loginManual(this.cedula, this.password);
+    if (!success) {
+      alert('Cédula o contraseña inválidos');
     }
+  }
+
+  forgotPassword(): void {
+    alert('Funcionalidad de recuperación de contraseña no implementada.');
   }
 }
