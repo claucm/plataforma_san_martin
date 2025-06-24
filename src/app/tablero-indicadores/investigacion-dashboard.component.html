@@ -1,47 +1,34 @@
-<!-- investigacion-dashboard.component.html updated to match final design -->
 <div class="investigation-dashboard-container">
   <!-- City buttons -->
   <div class="city-buttons">
-    <button *ngFor="let city of locations"
-            (click)="setSelectedCity(city)"
-            [class.active]="selectedCity === city"
+    <button *ngFor="let sede of sedes"
+            (click)="seleccionarSede(sede)"
+            [class.selected]="sedeSeleccionada?.id === sede.id"
             class="city-button">
-      {{ city }}
+      {{ sede.nombre }}
     </button>
   </div>
 
   <div class="dashboard-content redesigned">
-    <!-- Stats cards on the left -->
+    <!-- Left: Sede stats cards -->
     <div class="data-cards vertical">
-      <div class="data-card card-distinctions">
+      <div *ngIf="sedeSeleccionada" class="data-card card-distinctions">
         <h4>Distinciones y reconocimientos</h4>
-        <p>{{ mockStats[selectedCity]?.distinctions || 0 }}</p>
+        <p>{{ getDistincionesTotales() }}</p>
         <small>Estudiantes</small>
-        <small>{{ selectedCity }}</small>
+        <small>{{ sedeSeleccionada.nombre }}</small>
       </div>
-      <div class="data-card card-seedbeds">
+      <div *ngIf="sedeSeleccionada" class="data-card card-seedbeds">
         <h4>Semilleros de Investigación</h4>
-        <p>{{ mockStats[selectedCity]?.seedbeds || 0 }}</p>
+        <p>{{ getSemillerosTotales() }}</p>
         <small>Sede</small>
-        <small>{{ selectedCity }}</small>
+        <small>{{ sedeSeleccionada.nombre }}</small>
       </div>
-      <div class="data-card card-groups">
+      <div *ngIf="sedeSeleccionada" class="data-card card-groups">
         <h4>Grupos de Investigación</h4>
-        <p>{{ mockStats[selectedCity]?.researchGroups || 0 }}</p>
+        <p>{{ getGruposTotales() }}</p>
         <small>Investigación</small>
-        <small>{{ selectedCity }}</small>
-      </div>
-      <div class="data-card card-projects">
-        <h4>Proyectos de Investigación</h4>
-        <p>{{ mockStats[selectedCity]?.researchProjects || 0 }}</p>
-        <small>Estudiantes</small>
-        <small>{{ selectedCity }}</small>
-      </div>
-      <div class="data-card card-products">
-        <h4>Productos de Investigación</h4>
-        <p>{{ mockStats[selectedCity]?.researchProducts || 0 }}</p>
-        <small>Investigación</small>
-        <small>{{ selectedCity }}</small>
+        <small>{{ sedeSeleccionada.nombre }}</small>
       </div>
     </div>
 
@@ -69,11 +56,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let trend of mockStats[selectedCity]?.trends; let i = index">
+            <tr *ngFor="let dato of getTendencias(); let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ trend.name }}</td>
-              <td>{{ trend.value }}</td>
-              <td>{{ trend.value }}%</td>
+              <td>{{ dato.name }}</td>
+              <td>{{ dato.value }}</td>
+              <td>
+                <div class="bar" [style.width.%]="dato.value" [style.backgroundColor]="dato.color"></div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -82,7 +71,12 @@
 
     <!-- Right: Colombia map -->
     <div class="map-section">
-      <app-colombia-map [selected]="selectedCity" (selectedChange)="setSelectedCity($event)"></app-colombia-map>
+      <app-colombia-map [sedes]="sedes" [selected]="selectedCity" (selectedChange)="setSelectedCity($event)"></app-colombia-map>
+      <div class="map-tooltip" *ngIf="sedeSeleccionada">
+        <img [src]="'assets/' + sedeSeleccionada.nombre.toLowerCase() + '.png'" alt="City Image" />
+        <p>{{ sedeSeleccionada.nombre }}</p>
+        <p>Programas: {{ sedeSeleccionada.facultades.length }}</p>
+      </div>
     </div>
   </div>
 </div>
