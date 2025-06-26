@@ -1,13 +1,65 @@
 .user-management-container {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  padding: 10px 0;
   background-color: #f8fafc;
+  max-width: 100vw;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-title {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #0a2e4c;
+  margin-bottom: 20px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .user-management-container h2 {
   font-weight: 700;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .user-list-section {
@@ -52,7 +104,7 @@
 }
 
 .btn-primary {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
 }
 
@@ -79,7 +131,7 @@
 }
 
 .user-table thead tr {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
   font-weight: 600;
   border-radius: 8px;
@@ -154,7 +206,7 @@
 
 .tabs {
   display: flex;
-  border-bottom: 2px solid #2a727c;
+  border-bottom: 2px solid #0a2e4c;
   margin-bottom: 16px;
   padding-left: 0;
   list-style: none;
@@ -168,12 +220,12 @@
   margin-right: 20px;
   font-weight: 600;
   user-select: none;
-  color: #2a727c;
+  color: #0a2e4c;
   font-size: 16px;
 }
 
 .tab.active {
-  border-bottom: 3px solid #2a727c;
+  border-bottom: 3px solid #0a2e4c;
   font-weight: 700;
   color: #0a2e4c;
   background-color: transparent;
@@ -207,10 +259,24 @@ form {
   gap: 24px 16px;
 }
 
+.form-row.two-columns {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.form-row.two-columns .form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
 .form-row label {
-  width: 140px;
+  width: 200px;
   font-weight: 600;
   min-width: 140px;
+  align-self: flex-start;
+  margin-bottom: 4px;
 }
 
 .form-row input[type="text"],
@@ -218,12 +284,14 @@ form {
 .form-row input[type="date"],
 .form-row input[type="time"],
 .form-row select {
-  flex: 1 1 200px;
-  min-width: 200px;
-  padding: 8px 12px;
+  flex: 1 1 36px;
+  min-width: 80px;
+  height: 32px;
+  padding: 4px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .form-actions {
@@ -247,7 +315,7 @@ form {
 }
 
 .form-actions button[type="submit"] {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
 }
 
@@ -275,6 +343,13 @@ form {
   display: flex;
   gap: 16px;
   margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.permissions-table {
+  min-width: 300px;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .roles-table,
@@ -289,6 +364,10 @@ form {
 .table-header {
   font-weight: 700;
   margin-bottom: 8px;
+}
+
+.table-header span {
+  font-weight: normal;
 }
 
 .roles-table table,
@@ -309,7 +388,7 @@ form {
 
 .roles-table thead tr,
 .permissions-table thead tr {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
   font-weight: 600;
 }
@@ -327,7 +406,7 @@ form {
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -360,9 +439,9 @@ form {
 }
 
 .pagination button {
-  border: 1px solid #2a727c;
+  border: 1px solid #0a2e4c;
   background-color: white;
-  color: #2a727c;
+  color: #0a2e4c;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 6px;
@@ -371,12 +450,12 @@ form {
 }
 
 .pagination button:hover {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
 }
 
 .pagination button.active {
-  background-color: #2a727c;
+  background-color: #0a2e4c;
   color: white;
   cursor: default;
 }

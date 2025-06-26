@@ -2,6 +2,16 @@ import { Component } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 interface User {
+  codigo: number;
+  documento: string;
+  tipoIdentificacion: string;
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  sede: string;
+  facultad: string;
+  cargo: string;
   fullName: string;
   status: 'Activo' | 'Inactivo';
   email: string;
@@ -25,31 +35,62 @@ export class UsersComponent {
 
   users: User[] = [
     {
+      codigo: 1,
+      documento: '123456789',
       fullName: 'Juan Pérez',
+      tipoIdentificacion: 'CC',
+      primerNombre: 'Juan',
+      segundoNombre: '',
+      primerApellido: 'Pérez',
+      segundoApellido: '',
       status: 'Activo',
       email: 'juan.perez@example.com',
       creationDate: '2023-01-15',
       lastActive: '14:30',
+      sede: '',
+      facultad: '',
+      cargo: '',
       photoUrl: 'assets/perfil2.jpeg'
     },
     {
+      codigo: 2,
+      documento: '987654321',
       fullName: 'María Gómez',
+      tipoIdentificacion: 'CC',
+      primerNombre: 'María',
+      segundoNombre: '',
+      primerApellido: 'Gómez',
+      segundoApellido: '',
       status: 'Inactivo',
       email: 'maria.gomez@example.com',
       creationDate: '2022-11-20',
       lastActive: '09:15',
+      sede: '',
+      facultad: '',
+      cargo: '',
       photoUrl: 'assets/perfil1.jpg'
     },
     {
+      codigo: 3,
+      documento: '456789123',
       fullName: 'Carlos López',
+      tipoIdentificacion: 'CC',
+      primerNombre: 'Carlos',
+      segundoNombre: '',
+      primerApellido: 'López',
+      segundoApellido: '',
       status: 'Activo',
       email: 'carlos.lopez@example.com',
       creationDate: '2023-03-05',
       lastActive: '16:45',
+      sede: '',
+      facultad: '',
+      cargo: '',
       photoUrl: 'assets/perfil3.jpg'
     }
   ];
 
+  filterDocumento: string = '';
   filterName: string = '';
   filterStatus: string = '';
   filterEmail: string = '';
@@ -59,9 +100,13 @@ export class UsersComponent {
   showCreateUserModal: boolean = false;
 
   newUser = {
+    codigo: 0,
     tipoIdentificacion: 'CC',
     identificacion: '',
     estado: 'Activo',
+    sede: '',
+    facultad: '',
+    cargo: '',
     primerNombre: '',
     segundoNombre: '',
     primerApellido: '',
@@ -69,112 +114,272 @@ export class UsersComponent {
     email: ''
   };
 
+  facultadesBySede: { [key: string]: string[] } = {
+    'Bogotá': ['Facultad de Ingeniería', 'Facultad de Ciencias Sociales', 'Facultad de Medicina'],
+    'Cali': ['Facultad de Derecho', 'Facultad de Ciencias Económicas'],
+    'Pasto': ['Facultad de Ciencias Agrarias', 'Facultad de Educación'],
+    'Puerto Colombia': ['Facultad de Ciencias Básicas'],
+    'Sabaneta': ['Facultad de Arquitectura', 'Facultad de Artes']
+  };
+  
+  facultadesFiltered: string[] = [];
+  facultadesFilteredForSelectedUser: string[] = [];
+  
+  onSedeChange() {
+    if (this.newUser.sede && this.facultadesBySede[this.newUser.sede]) {
+      this.facultadesFiltered = this.facultadesBySede[this.newUser.sede];
+      // Reset facultad if it is not in the new list
+      if (!this.facultadesFiltered.includes(this.newUser.facultad)) {
+        this.newUser.facultad = '';
+      }
+    } else {
+      this.facultadesFiltered = [];
+      this.newUser.facultad = '';
+    }
+  }
+  
+  onSelectedUserSedeChange() {
+    if (this.selectedUser && this.selectedUser.sede && this.facultadesBySede[this.selectedUser.sede]) {
+      this.facultadesFilteredForSelectedUser = this.facultadesBySede[this.selectedUser.sede];
+      if (!this.facultadesFilteredForSelectedUser.includes(this.selectedUser.facultad)) {
+        this.selectedUser.facultad = '';
+      }
+    } else {
+      this.facultadesFilteredForSelectedUser = [];
+      if (this.selectedUser) {
+        this.selectedUser.facultad = '';
+      }
+    }
+  }
+
   get filteredUsers(): User[] {
     return this.users.filter(user => {
+      const matchesDocumento = this.filterDocumento ? user.documento.toLowerCase().includes(this.filterDocumento.toLowerCase()) : true;
       const matchesName = user.fullName.toLowerCase().includes(this.filterName.toLowerCase());
       const matchesStatus = this.filterStatus ? user.status === this.filterStatus : true;
       const matchesEmail = user.email.toLowerCase().includes(this.filterEmail.toLowerCase());
       const matchesCreationDate = this.filterCreationDate ? user.creationDate === this.filterCreationDate : true;
       const matchesLastActive = this.filterLastActive ? user.lastActive === this.filterLastActive : true;
-      return matchesName && matchesStatus && matchesEmail && matchesCreationDate && matchesLastActive;
+      return matchesDocumento && matchesName && matchesStatus && matchesEmail && matchesCreationDate && matchesLastActive;
     });
   }
 
   selectedUser: User | null = null;
 
   selectUser(user: User) {
-    this.selectedUser = user;
-    console.log('Seleccionar usuario:', user);
-    // TODO: Implement additional user selection logic
+    this.selectedUser = {
+      ...user,
+      sede: user.sede || '',
+      cargo: user.cargo || ''
+    };
+    console.log('Seleccionar usuario:', this.selectedUser);
   }
 
   openCreateUserModal() {
+    console.log('openCreateUserModal called');
     this.showCreateUserModal = true;
   }
 
   closeCreateUserModal() {
+    console.log('closeCreateUserModal called');
     this.showCreateUserModal = false;
   }
 
   createUser() {
+    const maxCodigo = this.users.reduce((max, user) => user.codigo > max ? user.codigo : max, 0);
+    this.newUser.codigo = maxCodigo + 1;
+
+    const fullName = [this.newUser.primerNombre, this.newUser.segundoNombre, this.newUser.primerApellido, this.newUser.segundoApellido]
+      .filter(name => !!name)
+      .join(' ');
+
+    this.users.push({
+      codigo: this.newUser.codigo,
+      documento: this.newUser.identificacion,
+      sede: this.newUser.sede,
+      facultad: this.newUser.facultad,
+      cargo: this.newUser.cargo,
+      fullName: fullName,
+      tipoIdentificacion: this.newUser.tipoIdentificacion,
+      primerNombre: this.newUser.primerNombre,
+      segundoNombre: this.newUser.segundoNombre,
+      primerApellido: this.newUser.primerApellido,
+      segundoApellido: this.newUser.segundoApellido,
+      status: this.newUser.estado === 'Activo' ? 'Activo' : 'Inactivo',
+      email: this.newUser.email,
+      creationDate: new Date().toISOString().split('T')[0],
+      lastActive: new Date().toLocaleTimeString(),
+      photoUrl: 'assets/student.png'
+    });
+
     console.log('Crear usuario:', this.newUser);
-    // TODO: Implement user creation logic
     this.closeCreateUserModal();
+
+    this.newUser = {
+      codigo: 0,
+      tipoIdentificacion: 'CC',
+      identificacion: '',
+      estado: 'Activo',
+      sede: '',
+      facultad: '',
+      cargo: '',
+      primerNombre: '',
+      segundoNombre: '',
+      primerApellido: '',
+      segundoApellido: '',
+      email: ''
+    };
+  }
+
+  saveUser() {
+    if (!this.selectedUser) return;
+
+    this.selectedUser.fullName = [
+      this.selectedUser.primerNombre,
+      this.selectedUser.segundoNombre,
+      this.selectedUser.primerApellido,
+      this.selectedUser.segundoApellido
+    ].filter(name => !!name).join(' ');
+
+    const index = this.users.findIndex(u => u.codigo === this.selectedUser!.codigo);
+    if (index !== -1) {
+      this.users[index] = { ...this.selectedUser };
+    }
+    console.log('Usuario guardado:', this.selectedUser);
+  }
+
+  cancelEdit() {
+    if (!this.selectedUser) return;
+    const original = this.users.find(u => u.codigo === this.selectedUser!.codigo);
+    if (original) {
+      this.selectedUser = { ...original };
+    }
+  }
+
+  // New properties for roles and permissions
+  unassignedRoles = [
+    { code: 'R1', name: 'Admin' },
+    { code: 'R2', name: 'Editor' },
+    { code: 'R3', name: 'Viewer' }
+  ];
+  assignedRoles = [
+    { code: 'R4', name: 'Contributor' }
+  ];
+
+  unassignedPermissions = [
+    { type: 'Read', code: 'P1', name: 'Read Articles' },
+    { type: 'Write', code: 'P2', name: 'Write Articles' },
+    { type: 'Delete', code: 'P3', name: 'Delete Articles' }
+  ];
+  assignedPermissions = [
+    { type: 'Read', code: 'P4', name: 'Read Comments' }
+  ];
+
+  selectedUnassignedRoles: any[] = [];
+  selectedAssignedRoles: any[] = [];
+  selectedUnassignedPermissions: any[] = [];
+  selectedAssignedPermissions: any[] = [];
+
+  exportToExcel() {
+    const worksheet = XLSX.utils.json_to_sheet(this.users);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+    XLSX.writeFile(workbook, 'users.xlsx');
+  }
+
+  isUnassignedRoleSelected(role: any): boolean {
+    return this.selectedUnassignedRoles.includes(role);
+  }
+
+  isAssignedRoleSelected(role: any): boolean {
+    return this.selectedAssignedRoles.includes(role);
+  }
+
+  onUnassignedRoleCheckboxChange(event: any, role: any) {
+    if (event.target.checked) {
+      this.selectedUnassignedRoles.push(role);
+    } else {
+      this.selectedUnassignedRoles = this.selectedUnassignedRoles.filter(r => r !== role);
+    }
+  }
+
+  onAssignedRoleCheckboxChange(event: any, role: any) {
+    if (event.target.checked) {
+      this.selectedAssignedRoles.push(role);
+    } else {
+      this.selectedAssignedRoles = this.selectedAssignedRoles.filter(r => r !== role);
+    }
+  }
+
+  assignRole() {
+    if (this.selectedUnassignedRoles.length > 0) {
+      this.assignedRoles.push(...this.selectedUnassignedRoles);
+      this.unassignedRoles = this.unassignedRoles.filter(role => !this.selectedUnassignedRoles.includes(role));
+      this.selectedUnassignedRoles = [];
+    }
+  }
+
+  unassignRole() {
+    if (this.selectedAssignedRoles.length > 0) {
+      this.unassignedRoles.push(...this.selectedAssignedRoles);
+      this.assignedRoles = this.assignedRoles.filter(role => !this.selectedAssignedRoles.includes(role));
+      this.selectedAssignedRoles = [];
+    }
   }
 
   getFirstNames(fullName: string): string {
-    const parts = fullName.trim().split(' ');
-    if (parts.length <= 1) return fullName;
+    if (!fullName) return '';
+    const parts = fullName.split(' ');
     return parts.slice(0, parts.length - 1).join(' ');
   }
 
   getLastNames(fullName: string): string {
-    const parts = fullName.trim().split(' ');
-    if (parts.length <= 1) return '';
-    return parts[parts.length - 1];
+    if (!fullName) return '';
+    const parts = fullName.split(' ');
+    return parts.length > 1 ? parts[parts.length - 1] : '';
   }
-
-  exportToExcel(): void {
-    const dataToExport = this.filteredUsers.map(user => ({
-      Nombres: this.getFirstNames(user.fullName),
-      Apellidos: this.getLastNames(user.fullName),
-      Estado: user.status,
-      Email: user.email,
-      'Fecha Creación': user.creationDate
-    }));
-
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
-    const workbook: XLSX.WorkBook = { Sheets: { 'Usuarios': worksheet }, SheetNames: ['Usuarios'] };
-    XLSX.writeFile(workbook, 'usuarios.xlsx');
-  }
-
-  unassignedRoles = [
-    { code: '0001', name: 'Administrador técnico' },
-    { code: '0002', name: 'Investigador' },
-    { code: '0003', name: 'Vicerrector Académico' }
-  ];
-
-  assignedRoles = [
-    { code: '0004', name: 'Director Investigación' }
-  ];
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
 
-  assignRole() {
-    // TODO: Implement logic to assign selected role from unassignedRoles to assignedRoles
-    console.log('Assign role clicked');
-  }
-
-  unassignRole() {
-    // TODO: Implement logic to unassign selected role from assignedRoles to unassignedRoles
-    console.log('Unassign role clicked');
-  }
-
-  unassignedPermissions = [
-    { type: 'Sede', code: '11', name: 'Bogotá' },
-    { type: 'Sede', code: '12', name: 'Cali' },
-    { type: 'Facultad', code: '1', name: 'Ciencias sociales' },
-    { type: 'Programa', code: '10', name: 'Medicina' }
-  ];
-
-  assignedPermissions = [
-    { type: 'Sede', code: '13', name: 'Puerto Colombia' }
-  ];
-
   assignPermission() {
-    // TODO: Implement logic to assign selected permission from unassignedPermissions to assignedPermissions
-    console.log('Assign permission clicked');
+    if (this.selectedUnassignedPermissions.length > 0) {
+      this.assignedPermissions.push(...this.selectedUnassignedPermissions);
+      this.unassignedPermissions = this.unassignedPermissions.filter(permission => !this.selectedUnassignedPermissions.includes(permission));
+      this.selectedUnassignedPermissions = [];
+    }
   }
 
   unassignPermission() {
-    // TODO: Implement logic to unassign selected permission from assignedPermissions to unassignedPermissions
-    console.log('Unassign permission clicked');
+    if (this.selectedAssignedPermissions.length > 0) {
+      this.unassignedPermissions.push(...this.selectedAssignedPermissions);
+      this.assignedPermissions = this.assignedPermissions.filter(permission => !this.selectedAssignedPermissions.includes(permission));
+      this.selectedAssignedPermissions = [];
+    }
   }
 
-  deleteUser(user: User) {
-    console.log('Eliminar usuario:', user);
-    // TODO: Implement user deletion logic
+  isUnassignedPermissionSelected(permission: any): boolean {
+    return this.selectedUnassignedPermissions.includes(permission);
+  }
+
+  isAssignedPermissionSelected(permission: any): boolean {
+    return this.selectedAssignedPermissions.includes(permission);
+  }
+
+  onUnassignedPermissionCheckboxChange(event: any, permission: any) {
+    if (event.target.checked) {
+      this.selectedUnassignedPermissions.push(permission);
+    } else {
+      this.selectedUnassignedPermissions = this.selectedUnassignedPermissions.filter(p => p !== permission);
+    }
+  }
+
+  onAssignedPermissionCheckboxChange(event: any, permission: any) {
+    if (event.target.checked) {
+      this.selectedAssignedPermissions.push(permission);
+    } else {
+      this.selectedAssignedPermissions = this.selectedAssignedPermissions.filter(p => p !== permission);
+    }
   }
 }

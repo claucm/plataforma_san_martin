@@ -27,7 +27,7 @@ export class AuthService {
     // Efecto para redirigir cuando el estado de autenticación cambie
     effect(() => {
       if (this._isLoggedIn()) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/welcome']);
       } else {
         this.router.navigate(['/login']);
       }

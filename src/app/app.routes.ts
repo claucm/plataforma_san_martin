@@ -5,6 +5,8 @@ import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+
 
 //Gestión de usuarios
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
@@ -60,6 +62,7 @@ export const routes: Routes = [
     { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
+    { path: 'welcome', component: WelcomeComponent },
     { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'eliminar-usuario', component: EliminarUsuarioComponent, canActivate: [AuthGuard] },

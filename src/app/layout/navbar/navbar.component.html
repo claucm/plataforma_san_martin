@@ -3,15 +3,24 @@
     <div class="d-flex align-items-center justify-content-between">
       <!-- Logo y Título -->
       <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4 fw-bold" style="color:#1A558D;" >Software de Investigación</span>
+        <span class="fs-4 fw-bold" style="color:#0a2e4c;" >Software de Investigación</span>
       </a>
 
       <!-- Barra de búsqueda, Notificaciones, Profile y Logout -->
       <div class="d-flex align-items-center">
-        <!-- Barra de búsqueda -->
-        <form class="d-flex me-3" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
+        <!-- Hamburger Menu Button -->
+        <div class="dropdown me-3">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="hamburgerMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenuButton">
+            <li><a class="dropdown-item" (click)="navigateTo('users')">Gestión de Usuarios</a></li>
+            <li><a class="dropdown-item" (click)="navigateTo('investigacion')">Investigación</a></li>
+            <li><a class="dropdown-item" (click)="navigateTo('extension')">Extensión</a></li>
+            <li><a class="dropdown-item" (click)="navigateTo('login')">SGD Sistema de Gestión Docente</a></li>
+            <li><a class="dropdown-item" (click)="navigateTo('tablero-indicadores/investigacion')">Tablero de Indicadores</a></li>
+          </ul>
+        </div>
 
         <!-- Ícono de Notificaciones -->
         <button class="btn btn-outline-secondary position-relative me-3">
@@ -22,10 +31,9 @@
         </button>
 
         <!-- Botón Profile -->
-        <a href="#" class="btn btn-outline-primary me-3">Perfil</a>
-
+        <!-- Removed profile button as requested -->
         <!-- Botón Logout -->
-        <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+        <button class="btn logout-btn" (click)="logout()">Cerrar Sesión</button>
       </div>
     </div>
   </div>

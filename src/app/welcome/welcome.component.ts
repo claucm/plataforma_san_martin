@@ -1,28 +1,17 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-import { ModuleSelectionService } from '../../services/module-selection.service';
+import { Router } from '@angular/router';
+import { ModuleSelectionService } from '../services/module-selection.service';
 
 @Component({
-  selector: 'app-navbar',
-  imports: [CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css']
 })
-export class NavbarComponent {
-  showNavbar: boolean = true;
-
+export class WelcomeComponent {
   constructor(
     private router: Router,
     private moduleSelectionService: ModuleSelectionService
-  ) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.showNavbar = event.url !== '/login';
-    });
-  }
+  ) {}
 
   navigateTo(route: string): void {
     if (route === 'login') {
@@ -44,9 +33,5 @@ export class NavbarComponent {
 
     // Navigate to route
     this.router.navigate([actualRoute]);
-  }
-
-  logout() {
-    this.router.navigate(['/login']);
   }
 }

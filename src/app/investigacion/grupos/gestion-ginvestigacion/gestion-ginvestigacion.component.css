@@ -1,6 +1,6 @@
 /* Estilos para las pestañas */
 .nav-tabs .nav-link {
-    color: #2a727c;
+    color: #0a2e4c;
     background-color: transparent;
     border: 1px solid transparent;
     margin-right: 2px;
@@ -17,7 +17,7 @@
   }
   
   .nav-tabs .nav-link.active {
-    color: #2a727c !important;
+    color: #0a2e4c !important;
     background-color: #fff;
     border-bottom-color: transparent;
     font-weight: 500;
@@ -45,7 +45,7 @@
   
   /* Estilos para la tabla */
   .table-dark {
-    background-color: #2a727c;
+    background-color: #0a2e4c;
   }
   
   .badge {
@@ -58,7 +58,7 @@
   }
   
   .card-header {
-    background-color: #2a727c;
+    background-color: #0a2e4c;
   }
   
   /* Responsive adjustments */

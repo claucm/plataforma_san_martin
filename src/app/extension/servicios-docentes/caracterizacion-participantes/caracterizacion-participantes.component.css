@@ -60,12 +60,12 @@
   }
   
   .stepper-item.completed .step-counter {
-    background: #1A558D;
+    background: #0a2e4c;
     color: white;
   }
   
   .stepper-item.completed .step-name {
-    color: #1A558D;
+    color: #0a2e4c;
   }
 
   .progress {
@@ -79,7 +79,7 @@
   }
   
   h4 {
-    color: #1A558D;
+    color: #0a2e4c;
     margin-bottom: 1.5rem;
   }
   
@@ -102,7 +102,7 @@
   }
   
   h5 {
-    color: #1A558D;
+    color: #0a2e4c;
     font-weight: 500;
   }
   

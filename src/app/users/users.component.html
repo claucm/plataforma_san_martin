@@ -3,12 +3,100 @@
   <div class="user-list-section">
     <div class="filters">
       <button class="btn btn-primary export-btn" (click)="exportToExcel()">Exportar</button>
-      <button class="btn btn-warning create-user-btn" (click)="openCreateUserModal()">+ Crear Usuario</button>
-    </div>
+<button class="btn btn-warning create-user-btn" (click)="openCreateUserModal()">Crear Usuario</button>
+</div>
+
+<div class="modal" *ngIf="showCreateUserModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeCreateUserModal()">&times;</span>
+    <h3 class="modal-title">Crear Usuario</h3>
+    <form (ngSubmit)="createUser()">
+      <div class="form-row">
+        <label>Código</label>
+        <input type="number" [(ngModel)]="newUser.codigo" name="codigo" readonly />
+      </div>
+      <div class="form-row">
+        <label>Tipo de Identificación</label>
+        <select [(ngModel)]="newUser.tipoIdentificacion" name="tipoIdentificacion" required>
+          <option value="CC">CC - Cedula de Ciudadanía</option>
+          <option value="TE">TE - Tarjeta de Extranjería</option>
+          <option value="CE">CE - Cedula de Extranjería</option>
+          <option value="NIT">NIT</option>
+          <option value="Pasaporte">Pasaporte</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Identificación</label>
+        <input type="text" [(ngModel)]="newUser.identificacion" name="identificacion" required />
+      </div>
+      <div class="form-row">
+        <label>Estado</label>
+        <select [(ngModel)]="newUser.estado" name="estado" required>
+          <option>Activo</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Sede</label>
+        <select [(ngModel)]="newUser.sede" name="sede" required (ngModelChange)="onSedeChange()">
+          <option value="Bogotá">Bogotá</option>
+          <option value="Cali">Cali</option>
+          <option value="Pasto">Pasto</option>
+          <option value="Puerto Colombia">Puerto Colombia</option>
+          <option value="Sabaneta">Sabaneta</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Facultad</label>
+        <select [(ngModel)]="newUser.facultad" name="facultad" required [disabled]="facultadesFiltered.length === 0">
+          <option value="" disabled selected>Seleccione una facultad</option>
+          <option *ngFor="let facultad of facultadesFiltered" [value]="facultad">{{ facultad }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Cargo</label>
+        <select [(ngModel)]="newUser.cargo" name="cargo" required>
+          <option value="Docente">Docente</option>
+          <option value="Administrativo">Administrativo</option>
+          <option value="Investigación">Investigación</option>
+          <option value="Financiera">Financiera</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Primer nombre</label>
+        <input type="text" [(ngModel)]="newUser.primerNombre" name="primerNombre" required />
+      </div>
+      <div class="form-row">
+        <label>Segundo nombre</label>
+        <input type="text" [(ngModel)]="newUser.segundoNombre" name="segundoNombre" />
+      </div>
+      <div class="form-row">
+        <label>Primer apellido</label>
+        <input type="text" [(ngModel)]="newUser.primerApellido" name="primerApellido" required />
+      </div>
+      <div class="form-row">
+        <label>Segundo apellido</label>
+        <input type="text" [(ngModel)]="newUser.segundoApellido" name="segundoApellido" />
+      </div>
+      <div class="form-row">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="newUser.email" name="email" required />
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
+        <button type="submit">Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
     <table class="user-table">
       <thead>
         <tr>
           <th></th>
+          <th>
+            Documento<br />
+            <input type="text" [(ngModel)]="filterDocumento" placeholder="Filtrar Documento" />
+          </th>
           <th>
             Nombres<br />
             <input type="text" [(ngModel)]="filterName" placeholder="Filtrar Nombres" />
@@ -36,12 +124,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of filteredUsers">
+        <tr *ngFor="let user of filteredUsers" (click)="selectUser(user)" style="cursor: pointer;">
           <td>
             <img [src]="user.photoUrl" alt="Foto de {{user.fullName}}" class="user-photo-circle" />
           </td>
-          <td (click)="selectUser(user)" class="clickable-name-column">{{ getFirstNames(user.fullName) }}</td>
-          <td (click)="selectUser(user)" class="clickable-name-column">{{ getLastNames(user.fullName) }}</td>
+          <td>{{ user.documento }}</td>
+          <td class="clickable-name-column">{{ getFirstNames(user.fullName) }}</td>
+          <td class="clickable-name-column">{{ getLastNames(user.fullName) }}</td>
           <td>{{ user.status }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.creationDate }}</td>
@@ -72,56 +161,106 @@
     </ul>
     <div class="tab-content" [class.active]="activeTab === 'basic-info'" id="basic-info">
       <!-- Basic user info form fields -->
-      <form>
-        <div class="form-row">
-          <label>Tipo de Identificación</label>
-          <select>
-            <option value="CC">CC - Cedula de Ciudadanía</option>
-            <option value="TE">TE - Tarjeta de Extranjería</option>
-            <option value="CE">CE - Cedula de Extranjería</option>
-            <option value="NIT">NIT</option>
-            <option value="Pasaporte">Pasaporte</option>
-          </select>
-          <label>Fecha de creación</label>
-          <input type="date" readonly />
+      <form *ngIf="selectedUser" (ngSubmit)="saveUser()">
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Código</label>
+            <input type="number" [(ngModel)]="selectedUser.codigo" name="codigo" readonly />
+          </div>
+          <div class="form-group">
+            <label>Fecha de creación</label>
+            <input type="date" [(ngModel)]="selectedUser.creationDate" name="creationDate" readonly />
+          </div>
         </div>
-        <div class="form-row">
-          <label>Identificación</label>
-          <input type="text" />
-          <label>Estado</label>
-          <select>
-            <option>Activo</option>
-            <option>Inactivo</option>
-          </select>
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Tipo de Identificación</label>
+            <select [(ngModel)]="selectedUser.tipoIdentificacion" name="tipoIdentificacion" required>
+              <option value="CC">CC - Cedula de Ciudadanía</option>
+              <option value="TE">TE - Tarjeta de Extranjería</option>
+              <option value="CE">CE - Cedula de Extranjería</option>
+              <option value="NIT">NIT</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <select [(ngModel)]="selectedUser.status" name="status" required>
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
         </div>
-        <div class="form-row">
-          <label>Primer nombre</label>
-          <input type="text" />
-          <label>Segundo nombre</label>
-          <input type="text" />
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Identificación</label>
+            <input type="text" [(ngModel)]="selectedUser.documento" name="documento" required />
+          </div>
+          <div class="form-group">
+            <label>Sede</label>
+            <select [(ngModel)]="selectedUser.sede" name="sede" (ngModelChange)="onSelectedUserSedeChange()">
+              <option value="Bogotá">Bogotá</option>
+              <option value="Cali">Cali</option>
+              <option value="Pasto">Pasto</option>
+              <option value="Puerto Colombia">Puerto Colombia</option>
+              <option value="Sabaneta">Sabaneta</option>
+            </select>
+          </div>
         </div>
-        <div class="form-row">
-          <label>Primer apellido</label>
-          <input type="text" />
-          <label>Segundo apellido</label>
-          <input type="text" />
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Facultad</label>
+            <select [(ngModel)]="selectedUser.facultad" name="facultad" [disabled]="facultadesFilteredForSelectedUser.length === 0" required>
+              <option value="" disabled selected>Seleccione una facultad</option>
+              <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Cargo</label>
+            <select [(ngModel)]="selectedUser.cargo" name="cargo">
+              <option value="Docente">Docente</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Investigación">Investigación</option>
+              <option value="Financiera">Financiera</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Primer nombre</label>
+            <input type="text" [(ngModel)]="selectedUser.primerNombre" name="primerNombre" required />
+          </div>
+          <div class="form-group">
+            <label>Segundo nombre</label>
+            <input type="text" [(ngModel)]="selectedUser.segundoNombre" name="segundoNombre" />
+          </div>
+        </div>
+        <div class="form-row two-columns">
+          <div class="form-group">
+            <label>Primer apellido</label>
+            <input type="text" [(ngModel)]="selectedUser.primerApellido" name="primerApellido" required />
+          </div>
+          <div class="form-group">
+            <label>Segundo apellido</label>
+            <input type="text" [(ngModel)]="selectedUser.segundoApellido" name="segundoApellido" />
+          </div>
         </div>
         <div class="form-row">
           <label>Correo Electrónico</label>
-          <input type="email" />
-        </div>
-        <div class="photo-display-container">
-          <img *ngIf="selectedUser" [src]="selectedUser.photoUrl" alt="Foto de {{selectedUser.fullName}}" class="user-photo-large" />
+          <input type="email" [(ngModel)]="selectedUser.email" name="email" required />
         </div>
         <div class="form-actions">
-          <button type="reset">Limpiar</button>
+          <button type="reset" (click)="cancelEdit()">Cancelar</button>
           <button type="submit">Guardar</button>
         </div>
-        <div class="photo-upload">
-          <label>Cargar foto</label>
-          <input type="file" />
-        </div>
       </form>
+      <div class="photo-display-container" *ngIf="selectedUser">
+        <img [src]="selectedUser.photoUrl" alt="Foto de {{selectedUser.fullName}}" class="user-photo-large" />
+      </div>
+      <div class="photo-upload" *ngIf="selectedUser">
+        <label>Cargar foto</label>
+        <input type="file" />
+      </div>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'role-assignment'" id="role-assignment">
       <div class="role-assignment-container">
@@ -132,16 +271,19 @@
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
               </tr>
               <tr>
+                <th></th>
                 <th><input type="text" placeholder="Filtrar Código" /></th>
                 <th><input type="text" placeholder="Filtrar Nombre" /></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let role of unassignedRoles">
+                <td><input type="checkbox" [value]="role" (change)="onUnassignedRoleCheckboxChange($event, role)" [checked]="isUnassignedRoleSelected(role)" /></td>
                 <td>{{ role.code }}</td>
                 <td>{{ role.name }}</td>
               </tr>
@@ -159,16 +301,19 @@
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Código</th>
                 <th>Nombre</th>
               </tr>
               <tr>
+                <th></th>
                 <th><input type="text" placeholder="Filtrar Código" /></th>
                 <th><input type="text" placeholder="Filtrar Nombre" /></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let role of assignedRoles">
+                <td><input type="checkbox" [value]="role" (change)="onAssignedRoleCheckboxChange($event, role)" [checked]="isAssignedRoleSelected(role)" /></td>
                 <td>{{ role.code }}</td>
                 <td>{{ role.name }}</td>
               </tr>
@@ -186,11 +331,13 @@
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Tipo</th>
                 <th>Código</th>
                 <th>Nombre</th>
               </tr>
               <tr>
+                <th></th>
                 <th><input type="text" placeholder="Filtrar Tipo" /></th>
                 <th><input type="text" placeholder="Filtrar Código" /></th>
                 <th><input type="text" placeholder="Filtrar Nombre" /></th>
@@ -198,6 +345,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let permission of unassignedPermissions">
+                <td><input type="checkbox" [value]="permission" (change)="onUnassignedPermissionCheckboxChange($event, permission)" [checked]="isUnassignedPermissionSelected(permission)" /></td>
                 <td>{{ permission.type }}</td>
                 <td>{{ permission.code }}</td>
                 <td>{{ permission.name }}</td>
@@ -216,11 +364,13 @@
           <table>
             <thead>
               <tr>
+                <th></th>
                 <th>Tipo</th>
                 <th>Código</th>
                 <th>Nombre</th>
               </tr>
               <tr>
+                <th></th>
                 <th><input type="text" placeholder="Filtrar Tipo" /></th>
                 <th><input type="text" placeholder="Filtrar Código" /></th>
                 <th><input type="text" placeholder="Filtrar Nombre" /></th>
@@ -228,6 +378,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let permission of assignedPermissions">
+                <td><input type="checkbox" [value]="permission" (change)="onAssignedPermissionCheckboxChange($event, permission)" [checked]="isAssignedPermissionSelected(permission)" /></td>
                 <td>{{ permission.type }}</td>
                 <td>{{ permission.code }}</td>
                 <td>{{ permission.name }}</td>
@@ -236,113 +387,6 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<style>
-.modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border-radius: 5px;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.modal-title {
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: #0a2e4c;
-  margin-bottom: 20px;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.clickable-name-column {
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
-}
-</style>
-
-  <!-- Create User Modal -->
-  <div class="modal" *ngIf="showCreateUserModal">
-  <div class="modal-content">
-      <span class="close" (click)="closeCreateUserModal()">&times;</span>
-      <h3 class="modal-title">Crear Usuario</h3>
-      <form (ngSubmit)="createUser()">
-        <div class="form-row">
-          <label>Tipo de Identificación</label>
-          <select [(ngModel)]="newUser.tipoIdentificacion" name="tipoIdentificacion" required>
-            <option value="CC">CC - Cedula de Ciudadanía</option>
-            <option value="TE">TE - Tarjeta de Extranjería</option>
-            <option value="CE">CE - Cedula de Extranjería</option>
-            <option value="NIT">NIT</option>
-            <option value="Pasaporte">Pasaporte</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label>Identificación</label>
-          <input type="text" [(ngModel)]="newUser.identificacion" name="identificacion" required />
-        </div>
-        <div class="form-row">
-          <label>Estado</label>
-          <select [(ngModel)]="newUser.estado" name="estado" required>
-            <option>Activo</option>
-            <option>Inactivo</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label>Primer nombre</label>
-          <input type="text" [(ngModel)]="newUser.primerNombre" name="primerNombre" required />
-          <label>Segundo nombre</label>
-          <input type="text" [(ngModel)]="newUser.segundoNombre" name="segundoNombre" />
-        </div>
-        <div class="form-row">
-          <label>Primer apellido</label>
-          <input type="text" [(ngModel)]="newUser.primerApellido" name="primerApellido" required />
-          <label>Segundo apellido</label>
-          <input type="text" [(ngModel)]="newUser.segundoApellido" name="segundoApellido" />
-        </div>
-        <div class="form-row">
-          <label>Correo Electrónico</label>
-          <input type="email" [(ngModel)]="newUser.email" name="email" required />
-        </div>
-        <div class="form-actions">
-          <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
-          <button type="submit">Crear</button>
-        </div>
-      </form>
     </div>
   </div>
 </div>

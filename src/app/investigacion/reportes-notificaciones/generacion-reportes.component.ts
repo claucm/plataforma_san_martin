@@ -38,7 +38,7 @@ import { FormsModule } from '@angular/forms';
       font-family: Arial, sans-serif;
     }
     h2 {
-      color: #2a727c;
+      color: #0a2e4c;
       margin-bottom: 20px;
       text-align: center;
     }
@@ -71,7 +71,7 @@ import { FormsModule } from '@angular/forms';
       display: block;
       width: 100%;
       padding: 10px 0;
-      background-color: #2a727c;
+      background-color: #0a2e4c;
       border: none;
       border-radius: 4px;
       color: white;

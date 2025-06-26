@@ -1,0 +1,68 @@
+.logout-btn {
+  color: #ffb90b;
+  border: 2px solid #0a2e4c;
+  background-color: #0a2e4c;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.btn-outline-secondary.position-relative.me-3 {
+  color: #ffb90b;
+  border: 2px solid #0a2e4c;
+  background-color: #0a2e4c;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+  background-color: #ffb90b;
+  color: #0a2e4c;
+  border-color: #0a2e4c;
+  outline: none;
+}
+
+.btn-outline-secondary.dropdown-toggle {
+  color: #ffb90b;
+  border-color: #0a2e4c;
+  background-color: #0a2e4c;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.btn-outline-secondary.dropdown-toggle:hover,
+.btn-outline-secondary.dropdown-toggle:focus,
+.btn-outline-secondary.dropdown-toggle[aria-expanded="true"] {
+  background-color: #ffb90b;
+  color: #0a2e4c;
+  border-color: #0a2e4c;
+  outline: none;
+}
+
+.dropdown-menu.dropdown-menu-end {
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #0a2e4c;
+  text-align: left;
+  list-style: none;
+  background-color: #0a2e4c;
+  background-clip: padding-box;
+  border: 2px solid #ffb90b;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.175);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu.dropdown-menu-end .dropdown-item {
+  color: #ffb90b;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu.dropdown-menu-end .dropdown-item:hover,
+.dropdown-menu.dropdown-menu-end .dropdown-item:focus {
+  background-color: #ffb90b;
+  color: #0a2e4c;
+}

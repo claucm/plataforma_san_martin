@@ -1,34 +1,34 @@
-<div *ngIf="showSidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-primary text-white" style="width: 250px; min-height: 100%; position: relative;background: linear-gradient(to bottom, #1A558D, #0097B2);">
+<div *ngIf="showSidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-primary text-white sidebar-with-lines" style="width: 250px; min-height: 100%; position: relative;background: linear-gradient(to bottom, #0a2e4c);">
   <a href="/" class="d-flex justify-content-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <img src="assets/logo_sm.png" alt="Universidad San Martín" style="width: 200px; height: auto;">
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
+    <li *ngIf="!selectedModule || selectedModule === 'users'" class="nav-item">
       <a [routerLink]="'/dashboard'" class="nav-link text-white active">
         <i class="fas fa-chart-line me-2"></i> Inicio
       </a>
     </li>
 
     <!-- Administración Module -->
-    <li>
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#administracionMenu" role="button" aria-expanded="false" aria-controls="administracionMenu">
+    <li *ngIf="!selectedModule || selectedModule === 'users'">
+      <a class="nav-link text-white">
         <i class="fas fa-cogs me-2"></i> Administración
       </a>
-      <div class="collapse" id="administracionMenu">
+      <div class="collapse show" id="administracionMenu">
         <ul class="nav nav-pills flex-column ms-3">
           <li>
-            <a [routerLink]="'/users'" class="nav-link text-white">
+            <a *ngIf="!selectedModule || selectedModule === 'users'" [routerLink]="'/users'" class="nav-link text-white">
               <i class="fas fa-user-cog me-2"></i> Gestión de Usuarios
             </a>
           </li>
           <li>
-            <a [routerLink]="'/roles-usuario'" class="nav-link text-white">
+            <a *ngIf="!selectedModule || selectedModule === 'users'" [routerLink]="'/roles-usuario'" class="nav-link text-white">
               <i class="fas fa-user-shield me-2"></i> Gestión de Roles
             </a>
           </li>
           <li>
-            <a [routerLink]="'/investigacion/reportes-notificaciones'" class="nav-link text-white">
+            <a *ngIf="!selectedModule || selectedModule === 'users'" [routerLink]="'/investigacion/reportes-notificaciones'" class="nav-link text-white">
               <i class="fas fa-file-alt me-2"></i> Reportes y Notificaciones
             </a>
           </li>
@@ -37,11 +37,11 @@
     </li>
 
   <!-- Tablero de Indicadores Module -->
-  <li>
-    <a class="nav-link text-white" data-bs-toggle="collapse" href="#tableroIndicadoresMenu" role="button" aria-expanded="false" aria-controls="tableroIndicadoresMenu">
-      <i class="fas fa-tachometer-alt me-2"></i> Tablero de Indicadores
-    </a>
-    <div class="collapse" id="tableroIndicadoresMenu">
+  <li *ngIf="!selectedModule || selectedModule === 'tablero-indicadores/investigacion'">
+  <a class="nav-link text-white" >
+    <i class="fas fa-tachometer-alt me-2"></i> Tablero de Indicadores
+  </a>
+  <div class="collapse show" id="tableroIndicadoresMenu">
       <ul class="nav nav-pills flex-column ms-3">
         <li>
           <a [routerLink]="'/tablero-indicadores/investigacion'" class="nav-link text-white">
@@ -53,11 +53,11 @@
   </li>
 
   <!-- Investigación Modulo -->
-  <li>
-    <a class="nav-link text-white" data-bs-toggle="collapse" href="#investigationMenu" role="button" aria-expanded="false" aria-controls="investigationMenu">
-      <i class="fas fa-file-alt me-2"></i> Investigación
-    </a>
-    <div class="collapse" id="investigationMenu">
+  <li *ngIf="!selectedModule || selectedModule === 'investigacion'">
+  <a class="nav-link text-white" >
+    <i class="fas fa-file-alt me-2"></i> Investigación
+  </a>
+  <div class="collapse show" id="investigationMenu">
       <ul class="nav nav-pills flex-column ms-3">
         <li>
           <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
@@ -102,12 +102,12 @@
 
         <!-- Extensión Modulo -->
 
-        <li>
-          <a class="nav-link text-white" data-bs-toggle="collapse" href="#extensionMenu" role="button" aria-expanded="false" aria-controls="extensionMenu">
-            <i class="fas fa-cogs me-2"></i> Extensión
-          </a>
-          
-<div class="collapse" id="extensionMenu">
+        <li *ngIf="!selectedModule || selectedModule === 'extension'">
+  <a class="nav-link text-white" >
+    <i class="fas fa-cogs me-2"></i> Extensión
+  </a>
+  
+<div class="collapse show" id="extensionMenu">
   <ul class="nav nav-pills flex-column ms-3">
     <li>
       <a [routerLink]="'/practicas-pasantias'" class="nav-link text-white">
@@ -115,10 +115,10 @@
       </a>
     </li>
     <li>
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#serviciosDocentesMenu" role="button" aria-expanded="false" aria-controls="serviciosDocentesMenu">
-        <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
-      </a>
-      <div class="collapse" id="serviciosDocentesMenu">
+  <a class="nav-link text-white" >
+    <i class="fas fa-chalkboard-teacher me-2"></i> Servicios Docentes
+  </a>
+  <div class="collapse show" id="serviciosDocentesMenu">
         <ul class="nav nav-pills flex-column ms-3">
           <li>
             <a [routerLink]="'/caracterizacion-participantes'" class="nav-link text-white">
@@ -139,11 +139,13 @@
       </div>
     </li>
     <!-- Educación Continuada al same level as Servicios Docentes -->
+    <!--
     <li>
       <a [routerLink]="'/educacion-continuada'" class="nav-link text-white">
         <i class="fas fa-graduation-cap me-2"></i> Educación Continuada
       </a>
     </li>
+    -->
   </ul>
 </div>
         

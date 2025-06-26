@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
   `,
   styles: [`
     h1 {
-      color: #2a727c;
+      color: #0a2e4c;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -38,7 +38,7 @@ import { RouterModule } from '@angular/router';
     .nav-link {
       display: block;
       padding: 0.5rem 1rem;
-      color: #2a727c;
+      color: #0a2e4c;
       text-decoration: none;
       border: 1px solid transparent;
       border-bottom: none;
@@ -53,8 +53,8 @@ import { RouterModule } from '@angular/router';
     }
     .nav-link.active {
       color: white;
-      background-color: #2a727c;
-      border-color: #2a727c #2a727c transparent;
+      background-color: #0a2e4c;
+      border-color: #0a2e4c #0a2e4c transparent;
       cursor: default;
     }
     .tab-content {

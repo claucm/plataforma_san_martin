@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
     const success = this.authService.loginManual(this.cedula, this.password);
     if (!success) {
       alert('Cédula o contraseña inválidos');
+    } else {
+      this.router.navigate(['/welcome']);
     }
   }
 

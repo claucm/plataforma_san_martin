@@ -4,7 +4,7 @@
 
   
   .nav-link.active {
-    background-color: #2a727c;
+    background-color: #0a2e4c;
     color: white !important;
   }
   
@@ -19,7 +19,7 @@
   }
   
   .bg-gradient-primary {
-    background: linear-gradient(90deg, #2a727c, #ffb90b);
+    background: linear-gradient(90deg, #0a2e4c, #ffb90b);
   }
   
   .bg-gradient-success {
@@ -47,7 +47,7 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
   .bg-primary {
-    background: linear-gradient(90deg, #2a727c, #ffb90b); /* Matches dashboard card colors */
+    background: linear-gradient(90deg, #0a2e4c, #ffb90b); /* Matches dashboard card colors */
   }
   body.dark-mode {
     background-color: #0a2e4c; /* Dark mode background */
@@ -55,11 +55,11 @@
   }
   
   body.dark-mode .bg-primary {
-    background: linear-gradient(90deg, #0a2e4c, #2a727c); /* Dark gradient */
+    background: linear-gradient(90deg, #0a2e4c, #0a2e4c); /* Dark gradient */
   }
   
   body.dark-mode .card {
-    background-color: #2a727c; /* Dark card background */
+    background-color: #0a2e4c; /* Dark card background */
     color: #FFFFFF;
   }
   
