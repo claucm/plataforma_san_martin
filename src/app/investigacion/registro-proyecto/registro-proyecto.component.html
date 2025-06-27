@@ -1,8 +1,19 @@
 <div class="container mt-5">
   <h2 class="text-left mb-4">Registro del proyecto</h2>
   <form class="p-4 border rounded shadow-sm bg-white" (ngSubmit)="saveProject()">
+    <!-- Tipo de convocatoria -->
+    <div class="row mb-3">
+      <div class="col-md-6 mb-3">
+        <label for="tipo_convocatoria" class="form-label fw-bold">Tipo de convocatoria</label>
+        <select class="form-select" id="tipo_convocatoria" [(ngModel)]="tipoConvocatoria" name="tipoConvocatoria" required>
+          <option value="" disabled>Seleccione un tipo</option>
+          <option *ngFor="let tipo of tipoConvocatoriaOptions" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+    </div>
+
     <!-- Convocatoria y Documento -->
-    <div class="row">
+    <div class="row" *ngIf="tipoConvocatoria === 'Interna'">
       <div class="col-md-6 mb-3">
         <label for="convocatoria" class="form-label fw-bold">Convocatoria</label>
         <select class="form-select" id="convocatoria" [(ngModel)]="convocatoria" name="convocatoria" required>
@@ -14,6 +25,21 @@
         <label for="documento_convocatoria" class="form-label fw-bold">Documento Convocatoria</label>
         <input type="file" class="form-control" id="documento_convocatoria" (change)="onFileSelected($event)" accept="application/pdf" required>
       </div>
+    </div>
+
+    <div class="row" *ngIf="tipoConvocatoria === 'Externa'">
+      <div class="col-md-6 mb-3">
+        <label for="convocatoria_text" class="form-label fw-bold">Convocatoria</label>
+        <input type="text" class="form-control" id="convocatoria_text" [(ngModel)]="convocatoriaText" name="convocatoriaText" placeholder="Ingrese la convocatoria" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="documentos_adicionales" class="form-label fw-bold">Documentos adicionales (opcional)</label>
+        <input type="file" class="form-control" id="documentos_adicionales" (change)="onDocumentosAdicionalesSelected($event)" accept="application/pdf">
+      </div>
+    </div>
+
+    <div *ngIf="tipoConvocatoria === 'No aplica'">
+      <!-- No convocatoria field, rest of form as is -->
     </div>
 
     <!-- Título, Código y Estado -->

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ConvocatoriasComponent } from '../convocatorias/convocatorias.component';
 
 interface Investigador {
   nroIdentificacion: string;
@@ -43,8 +45,15 @@ interface EvaluadorSugerido {
   templateUrl: './registro-proyecto.component.html',
   styleUrls: ['./registro-proyecto.component.css']
 })
+
 export class RegistroProyectoComponent implements OnInit {
+  tipoConvocatoria: string = '';
+  tipoConvocatoriaOptions: string[] = ['Interna', 'Externa', 'No aplica'];
+
   convocatoria: string = '';
+  convocatoriaText: string = '';
+  documentosAdicionales: File | null = null;
+
   codigo: string = '';
   fechaCreacion: string = new Date().toISOString().split('T')[0];
   fechaPresentacion: string = '';
@@ -77,7 +86,8 @@ export class RegistroProyectoComponent implements OnInit {
   financiacionEntidadesExternas: number | null = null;
   contrapartida: number | null = null;
 
-  convocatorias: string[] = ['Convocatoria 1', 'Convocatoria 2', 'Convocatoria 3'];
+  convocatorias: string[] = [];
+
   estados: string[] = ['Guardado', 'Pendiente', 'Aprobado', 'Rechazado'];
   areasConocimiento: string[] = ['Ciencias Sociales', 'Ingeniería', 'Salud'];
   facultades: string[] = ['Facultad 1', 'Facultad 2', 'Facultad 3'];
@@ -91,6 +101,38 @@ export class RegistroProyectoComponent implements OnInit {
     // Implement file handling logic here
     console.log('Archivo seleccionado:', file);
   };
+
+  onDocumentosAdicionalesSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.documentosAdicionales = file;
+    } else {
+      alert('Por favor seleccione un archivo PDF válido.');
+      event.target.value = null;
+      this.documentosAdicionales = null;
+    }
+  }
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.generarCodigo();
+    this.loadConvocatorias();
+  }
+
+  loadConvocatorias() {
+    // Load convocatorias from ConvocatoriasComponent mock data
+    const convocatoriasComponent = new ConvocatoriasComponent(this.router);
+    this.convocatorias = convocatoriasComponent.convocatorias.map(c => c.titulo);
+  }
+
+  generarCodigo() {
+    const year = new Date().getFullYear();
+    const incremental = 1; // Static for now; in real app, fetch last incremental and add 1
+    const incrementalStr = incremental.toString().padStart(2, '0');
+    this.codigo = `PYI-${year}-${incrementalStr}`;
+    console.log('Generated codigo:', this.codigo);
+  }
 
   addCoInvestigador() {
     this.coInvestigadores.push({ nroIdentificacion: '', nombresApellidos: '', horasDedicacion: 0, institucion: '' });
@@ -184,16 +226,4 @@ export class RegistroProyectoComponent implements OnInit {
   fechaFinActividad: string = '';
 
   centroCosto: string = '';
-
-  ngOnInit() {
-    this.generarCodigo();
-  }
-
-  generarCodigo() {
-    const year = new Date().getFullYear();
-    const incremental = 1; // Static for now; in real app, fetch last incremental and add 1
-    const incrementalStr = incremental.toString().padStart(2, '0');
-    this.codigo = `PYI-${year}-${incrementalStr}`;
-    console.log('Generated codigo:', this.codigo);
-  }
 }
