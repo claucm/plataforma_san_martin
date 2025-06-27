@@ -35,7 +35,7 @@
 }
 
 .filters .btn-primary {
-  background-color: #007bff;
+  background-color: #0a2e4c;
   color: white;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .role-table th {
-  background-color: #007bff;
+  background-color: #0a2e4c;
   color: white;
   font-weight: 600;
 }
@@ -79,15 +79,15 @@
 
 .pagination button {
   background-color: white;
-  border: 1px solid #007bff;
-  color: #007bff;
+  border: 1px solid #0a2e4c;
+  color: #0a2e4c;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .pagination button:hover {
-  background-color: #007bff;
+  background-color: #0a2e4c;
   color: white;
 }
 
@@ -102,19 +102,19 @@
   gap: 1rem;
   padding-left: 0;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid #0a2e4c;
 }
 
 .tabs .tab {
   cursor: pointer;
   padding: 0.5rem 1rem;
   font-weight: 600;
-  color: #007bff;
+  color: #0a2e4c;
   border-bottom: 2px solid transparent;
 }
 
 .tabs .tab.active {
-  border-bottom-color: #007bff;
+  border-bottom-color: #0a2e4c;
   color: #0056b3;
 }
 
@@ -167,7 +167,7 @@
 }
 
 .form-actions button[type="submit"] {
-  background-color: #007bff;
+  background-color: #0a2e4c;
   color: white;
 }
 

@@ -1,136 +1,374 @@
 <div class="container mt-5">
-    <h2 class="text-left mb-4">Registro del proyecto</h2>
-    <form class="p-4 border rounded shadow-sm bg-white">
-      <!-- Primer Bloque: Convocatoria y Documento -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="convocatoria" class="form-label fw-bold">Convocatoria</label>
-          <input type="text" class="form-control" id="convocatoria" placeholder="Ingrese el nombre de la convocatoria" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="documento_convocatoria" class="form-label fw-bold">Documento Convocatoria</label>
-          <input type="file" class="form-control" id="documento_convocatoria" required>
+  <h2 class="text-left mb-4">Registro del proyecto</h2>
+  <form class="p-4 border rounded shadow-sm bg-white" (ngSubmit)="saveProject()">
+    <!-- Convocatoria y Documento -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="convocatoria" class="form-label fw-bold">Convocatoria</label>
+        <select class="form-select" id="convocatoria" [(ngModel)]="convocatoria" name="convocatoria" required>
+          <option value="" disabled>Seleccione una convocatoria</option>
+          <option *ngFor="let c of convocatorias" [value]="c">{{ c }}</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="documento_convocatoria" class="form-label fw-bold">Documento Convocatoria</label>
+        <input type="file" class="form-control" id="documento_convocatoria" (change)="onFileSelected($event)" accept="application/pdf" required>
+      </div>
+    </div>
+
+    <!-- Título, Código y Estado -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="titulo" class="form-label fw-bold">Título</label>
+        <input type="text" class="form-control" id="titulo" [(ngModel)]="titulo" name="titulo" placeholder="Ingrese el título" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="codigo" class="form-label fw-bold">Código</label>
+        <input type="text" class="form-control" id="codigo" [value]="codigo" readonly>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="estado" class="form-label fw-bold">Estado</label>
+        <select class="form-select" id="estado" [(ngModel)]="estado" name="estado" required>
+          <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="duracion" class="form-label fw-bold">Duración Prevista (Meses)</label>
+        <input type="number" class="form-control" id="duracion" [(ngModel)]="duracionPrevista" name="duracionPrevista" placeholder="Ingrese la duración prevista" required>
+      </div>
+    </div>
+
+    <!-- Área del Conocimiento -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="area_conocimiento" class="form-label fw-bold">Área del Conocimiento</label>
+        <select class="form-select" id="area_conocimiento" [(ngModel)]="areaConocimiento" name="areaConocimiento" required>
+          <option *ngFor="let area of areasConocimiento" [value]="area">{{ area }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Características del Proyecto -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="caracteristicas" class="form-label fw-bold">Características</label>
+        <textarea class="form-control" id="caracteristicas" [(ngModel)]="caracteristicas" name="caracteristicas" rows="5" placeholder="Escriba las características del proyecto" required></textarea>
+      </div>
+    </div>
+
+    <!-- Objetivos -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="objetivo_general" class="form-label fw-bold">Objetivo General</label>
+        <textarea class="form-control" id="objetivo_general" [(ngModel)]="objetivoGeneral" name="objetivoGeneral" rows="3" placeholder="Escriba el objetivo general" required></textarea>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="objetivos_especificos" class="form-label fw-bold">Objetivos Específicos</label>
+        <textarea class="form-control" id="objetivos_especificos" [(ngModel)]="objetivosEspecificos" name="objetivosEspecificos" rows="3" placeholder="Escriba los objetivos específicos" required></textarea>
+      </div>
+    </div>
+
+    <!-- Resumen del Proyecto -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <label for="resumen" class="form-label fw-bold">Resumen</label>
+        <textarea class="form-control" id="resumen" [(ngModel)]="resumen" name="resumen" rows="5" placeholder="Escriba el resumen del proyecto" required></textarea>
+      </div>
+    </div>
+
+    <!-- Investigador Principal -->
+    <div class="row mb-3">
+      <h4>Investigador Principal</h4>
+      <div class="col-md-4 mb-3">
+        <label for="ip_nroIdentificacion" class="form-label fw-bold">Nro. Identificación</label>
+        <input type="text" class="form-control" id="ip_nroIdentificacion" [(ngModel)]="investigadorPrincipal.nroIdentificacion" name="ip_nroIdentificacion" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ip_nombresApellidos" class="form-label fw-bold">Nombres y Apellidos</label>
+        <input type="text" class="form-control" id="ip_nombresApellidos" [(ngModel)]="investigadorPrincipal.nombresApellidos" name="ip_nombresApellidos" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="ip_horasDedicacion" class="form-label fw-bold">Horas de Dedicación</label>
+        <input type="number" class="form-control" id="ip_horasDedicacion" [(ngModel)]="investigadorPrincipal.horasDedicacion" name="ip_horasDedicacion" required>
+      </div>
+    </div>
+
+    <!-- Co-investigadores -->
+    <div class="row mb-3">
+      <h4>Co-investigadores</h4>
+      <button type="button" class="btn btn-secondary mb-2" (click)="addCoInvestigador()">Agregar Co-investigador</button>
+      <div *ngFor="let co of coInvestigadores; let i = index" class="border p-3 mb-2">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Nro. Identificación</label>
+            <input type="text" class="form-control" [(ngModel)]="co.nroIdentificacion" name="co_nroIdentificacion_{{i}}" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Nombres y Apellidos</label>
+            <input type="text" class="form-control" [(ngModel)]="co.nombresApellidos" name="co_nombresApellidos_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Horas de Dedicación</label>
+            <input type="number" class="form-control" [(ngModel)]="co.horasDedicacion" name="co_horasDedicacion_{{i}}" required>
+          </div>
+          <div class="col-md-2 mb-3 d-flex align-items-end">
+            <button type="button" class="btn btn-danger" (click)="removeCoInvestigador(i)">Eliminar</button>
+          </div>
         </div>
       </div>
-  
-      <!-- Titulo, Codigo y Estado -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="titulo" class="form-label fw-bold">Título</label>
-          <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="codigo" class="form-label fw-bold">Código</label>
-          <input type="text" class="form-control" id="codigo" placeholder="Ingrese el código" required>
-        </div>
-      </div>
-  
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="estado" class="form-label fw-bold">Estado</label>
-          <select class="form-select" id="estado" required>
-            <option value="pendiente">Pendiente</option>
-            <option value="aprobado">Aprobado</option>
-            <option value="rechazado">Rechazado</option>
-          </select>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="duracion" class="form-label fw-bold">Duración Prevista (Meses)</label>
-          <input type="number" class="form-control" id="duracion" placeholder="Ingrese la duración prevista" required>
+    </div>
+
+    <!-- Estudiantes Vinculados -->
+    <div class="row mb-3">
+      <h4>Estudiantes Vinculados</h4>
+      <button type="button" class="btn btn-secondary mb-2" (click)="addEstudiante()">Agregar Estudiante</button>
+      <div *ngFor="let est of estudiantesVinculados; let i = index" class="border p-3 mb-2">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Nro. Identificación</label>
+            <input type="text" class="form-control" [(ngModel)]="est.nroIdentificacion" name="est_nroIdentificacion_{{i}}" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Nombres y Apellidos</label>
+            <input type="text" class="form-control" [(ngModel)]="est.nombresApellidos" name="est_nombresApellidos_{{i}}" required>
+          </div>
+          <div class="col-md-2 mb-3 d-flex align-items-end">
+            <button type="button" class="btn btn-danger" (click)="removeEstudiante(i)">Eliminar</button>
+          </div>
         </div>
       </div>
-  
-      <!-- Área del Conocimiento -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="area_conocimiento" class="form-label fw-bold">Área del Conocimiento</label>
-          <select class="form-select" id="area_conocimiento" required>
-            <option value="">Seleccione un área</option>
-            <!-- Agrega las opciones de áreas según sea necesario -->
-            <option value="ciencias-sociales">Ciencias Sociales</option>
-            <option value="ingenieria">Ingeniería</option>
-            <option value="salud">Salud</option>
-          </select>
+    </div>
+
+    <!-- Lugares / Institución de Ejecución -->
+    <div class="row mb-3">
+      <h4>Lugares / Institución de Ejecución</h4>
+      <button type="button" class="btn btn-secondary mb-2" (click)="addLugarEjecucion()">Agregar Lugar</button>
+      <div *ngFor="let lugar of lugaresEjecucion; let i = index" class="border p-3 mb-2">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Departamento</label>
+            <input type="text" class="form-control" [(ngModel)]="lugar.departamento" name="lugar_departamento_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Ciudad</label>
+            <input type="text" class="form-control" [(ngModel)]="lugar.ciudad" name="lugar_ciudad_{{i}}" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Institución</label>
+            <input type="text" class="form-control" [(ngModel)]="lugar.institucion" name="lugar_institucion_{{i}}" required>
+          </div>
+          <div class="col-md-2 mb-3">
+            <label class="form-label fw-bold">Duración (Meses)</label>
+            <input type="number" class="form-control" [(ngModel)]="lugar.duracion" name="lugar_duracion_{{i}}" required>
+          </div>
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-danger" (click)="removeLugarEjecucion(i)">Eliminar</button>
+          </div>
         </div>
       </div>
-  
-      <!-- Características del Proyecto -->
-      <div class="row mb-3">
-        <div class="col-12">
-          <label for="caracteristicas" class="form-label fw-bold">Características</label>
-          <textarea class="form-control" id="caracteristicas" rows="5" placeholder="Escriba las características del proyecto" required></textarea>
+    </div>
+
+    <!-- Descripción de la Propuesta -->
+    <div class="row mb-3">
+      <h4>Descripción de la Propuesta</h4>
+      <div class="col-12 mb-3">
+        <label for="planteamiento_problema" class="form-label fw-bold">Planteamiento del Problema</label>
+        <textarea class="form-control" id="planteamiento_problema" [(ngModel)]="planteamientoProblema" name="planteamientoProblema" rows="4" required></textarea>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="justificacion" class="form-label fw-bold">Justificación</label>
+        <textarea class="form-control" id="justificacion" [(ngModel)]="justificacion" name="justificacion" rows="4" required></textarea>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="pregunta_investigacion" class="form-label fw-bold">Pregunta de Investigación</label>
+        <textarea class="form-control" id="pregunta_investigacion" [(ngModel)]="preguntaInvestigacion" name="preguntaInvestigacion" rows="3" required></textarea>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="marco_teorico" class="form-label fw-bold">Marco Teórico</label>
+        <textarea class="form-control" id="marco_teorico" [(ngModel)]="marcoTeorico" name="marcoTeorico" rows="4" required></textarea>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="metodologia" class="form-label fw-bold">Metodología</label>
+        <textarea class="form-control" id="metodologia" [(ngModel)]="metodologia" name="metodologia" rows="4" required></textarea>
+      </div>
+      <div class="col-12 mb-3">
+        <label for="consideraciones_eticas" class="form-label fw-bold">Consideraciones Éticas</label>
+        <textarea class="form-control" id="consideraciones_eticas" [(ngModel)]="consideracionesEticas" name="consideracionesEticas" rows="3" required></textarea>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="requiere_comite_etica" class="form-label fw-bold">¿Requiere Comité de Ética?</label>
+        <select class="form-select" id="requiere_comite_etica" [(ngModel)]="requiereComiteEtica" name="requiereComiteEtica" required>
+          <option value="" disabled>Seleccione una opción</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3" *ngIf="requiereComiteEtica === 'si'">
+        <label for="archivo_comite_etica" class="form-label fw-bold">Archivo Comité de Ética</label>
+        <input type="file" class="form-control" id="archivo_comite_etica" (change)="onFileSelected($event)" accept="application/pdf">
+      </div>
+    </div>
+
+    <!-- Resultados Esperados -->
+    <div class="row mb-3">
+      <h4>Resultados Esperados</h4>
+      <button type="button" class="btn btn-secondary mb-2" (click)="addResultadoEsperado()">Agregar Resultado</button>
+      <div *ngFor="let resultado of resultadosEsperados; let i = index" class="border p-3 mb-2">
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Tipo de Producto</label>
+            <input type="text" class="form-control" [(ngModel)]="resultado.tipoProducto" name="resultado_tipoProducto_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Subtipo de Producto</label>
+            <input type="text" class="form-control" [(ngModel)]="resultado.subtipoProducto" name="resultado_subtipoProducto_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Producto</label>
+            <input type="text" class="form-control" [(ngModel)]="resultado.producto" name="resultado_producto_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Cantidad</label>
+            <input type="number" class="form-control" [(ngModel)]="resultado.cantidad" name="resultado_cantidad_{{i}}" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Beneficiario</label>
+            <input type="text" class="form-control" [(ngModel)]="resultado.beneficiario" name="resultado_beneficiario_{{i}}" required>
+          </div>
+          <div class="col-md-6 d-flex align-items-end">
+            <button type="button" class="btn btn-danger" (click)="removeResultadoEsperado(i)">Eliminar</button>
+          </div>
         </div>
       </div>
-  
-      <!--Objetivos -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="objetivo_general" class="form-label fw-bold">Objetivo General</label>
-          <textarea class="form-control" id="objetivo_general" rows="3" placeholder="Escriba el objetivo general" required></textarea>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="objetivos_especificos" class="form-label fw-bold">Objetivos Específicos</label>
-          <textarea class="form-control" id="objetivos_especificos" rows="3" placeholder="Escriba los objetivos específicos" required></textarea>
+    </div>
+
+    <!-- Impacto -->
+    <div class="row mb-3">
+      <h4>Impacto</h4>
+      <div class="col-md-6 mb-3">
+        <label for="tipo_impacto" class="form-label fw-bold">Tipo de Impacto</label>
+        <input type="text" class="form-control" id="tipo_impacto" [(ngModel)]="tipoImpacto" name="tipoImpacto" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="descripcion_impacto" class="form-label fw-bold">Descripción del Impacto</label>
+        <input type="text" class="form-control" id="descripcion_impacto" [(ngModel)]="descripcionImpacto" name="descripcionImpacto" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="anio_esperado" class="form-label fw-bold">Año Esperado</label>
+        <input type="number" class="form-control" id="anio_esperado" [(ngModel)]="anioEsperado" name="anioEsperado" required>
+      </div>
+    </div>
+
+    <!-- Permisos y Licencias -->
+    <div class="row mb-3">
+      <h4>Permisos y Licencias</h4>
+      <div class="col-md-6 mb-3">
+        <label for="permisos_ambientales" class="form-label fw-bold">Permisos Ambientales</label>
+        <input type="file" class="form-control" id="permisos_ambientales" (change)="onFileSelected($event)" accept="application/pdf">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="propiedad_intelectual" class="form-label fw-bold">Propiedad Intelectual</label>
+        <input type="file" class="form-control" id="propiedad_intelectual" (change)="onFileSelected($event)" accept="application/pdf">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="recoleccion_especimenes" class="form-label fw-bold">Recolección de Especímenes</label>
+        <input type="text" class="form-control" id="recoleccion_especimenes" [(ngModel)]="recoleccionEspecimenes" name="recoleccionEspecimenes" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="tipo_especimen" class="form-label fw-bold">Tipo de Especímen</label>
+        <input type="text" class="form-control" id="tipo_especimen" [(ngModel)]="tipoEspecimen" name="tipoEspecimen" required>
+      </div>
+    </div>
+
+    <!-- Evaluadores Sugeridos -->
+    <div class="row mb-3">
+      <h4>Evaluadores Sugeridos</h4>
+      <button type="button" class="btn btn-secondary mb-2" (click)="addEvaluadorSugerido()">Agregar Evaluador</button>
+      <div *ngFor="let eval of evaluadoresSugeridos; let i = index" class="border p-3 mb-2">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Nro. Identificación</label>
+            <input type="text" class="form-control" [(ngModel)]="eval.nroIdentificacion" name="eval_nroIdentificacion_{{i}}" required>
+          </div>
+          <div class="col-md-5 mb-3">
+            <label class="form-label fw-bold">Nombres y Apellidos</label>
+            <input type="text" class="form-control" [(ngModel)]="eval.nombresApellidos" name="eval_nombresApellidos_{{i}}" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">Institución</label>
+            <input type="text" class="form-control" [(ngModel)]="eval.institucion" name="eval_institucion_{{i}}" required>
+          </div>
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-danger" (click)="removeEvaluadorSugerido(i)">Eliminar</button>
+          </div>
         </div>
       </div>
-  
-      <!-- Resumen del Proyecto -->
-      <div class="row mb-3">
-        <div class="col-12">
-          <label for="resumen" class="form-label fw-bold">Resumen</label>
-          <textarea class="form-control" id="resumen" rows="5" placeholder="Escriba el resumen del proyecto" required></textarea>
-        </div>
+    </div>
+
+    <!-- Administración del Proyecto -->
+    <div class="row mb-3">
+      <h4>Administración del Proyecto</h4>
+      <div class="col-md-6 mb-3">
+        <label for="cronograma_archivo" class="form-label fw-bold">Archivo Cronograma</label>
+        <input type="file" class="form-control" id="cronograma_archivo" (change)="onFileSelected($event)" accept="application/pdf">
       </div>
-  
-      <!-- Tipo de Producto y Producto -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="tipo_producto" class="form-label fw-bold">Tipo de Producto</label>
-          <select class="form-select" id="tipo_producto" required>
-            <option value="articulo">Artículo</option>
-            <option value="libro">Libro</option>
-            <option value="informe">Informe</option>
-            <option value="patente">Patente</option>
-          </select>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="producto" class="form-label fw-bold">Producto</label>
-          <select class="form-select" id="producto" required>
-            <option value="producto1">Producto 1</option>
-            <option value="producto2">Producto 2</option>
-            <option value="producto3">Producto 3</option>
-          </select>
-        </div>
+      <div class="col-md-6 mb-3">
+        <label for="duracion_meses" class="form-label fw-bold">Duración (Meses)</label>
+        <input type="number" class="form-control" id="duracion_meses" [(ngModel)]="duracionMeses" name="duracionMeses" required>
       </div>
-  
-      <!-- Cronograma -->
-      <div class="row mb-3">
-        <div class="col-12">
-          <label for="cronograma" class="form-label fw-bold">Cronograma</label>
-          <textarea class="form-control" id="cronograma" rows="5" placeholder="Escriba el cronograma del proyecto" required></textarea>
-        </div>
+      <div class="col-md-6 mb-3">
+        <label for="nombre_actividad" class="form-label fw-bold">Nombre de la Actividad</label>
+        <input type="text" class="form-control" id="nombre_actividad" [(ngModel)]="nombreActividad" name="nombreActividad" required>
       </div>
-  
-      <!-- Presupuesto -->
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="total_solicitado" class="form-label fw-bold">Total Solicitado</label>
-          <input type="number" class="form-control" id="total_solicitado" placeholder="Ingrese el total solicitado" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="presupuesto_anual" class="form-label fw-bold">Presupuesto Anual Solicitado</label>
-          <input type="number" class="form-control" id="presupuesto_anual" placeholder="Ingrese el presupuesto anual solicitado" required>
-        </div>
+      <div class="col-md-6 mb-3">
+        <label for="fecha_inicio_actividad" class="form-label fw-bold">Fecha de Inicio</label>
+        <input type="date" class="form-control" id="fecha_inicio_actividad" [(ngModel)]="fechaInicioActividad" name="fechaInicioActividad" required>
       </div>
-  
-      <!-- Botones -->
-      <div class="row">
-        <div class="col-6 text-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">Guardar Parcial</button>
-        </div>
-        <div class="col-6 text-center">
-          <button type="submit" class="btn btn-success px-4 mt-3">Guardar y Enviar</button>
-        </div>
+      <div class="col-md-6 mb-3">
+        <label for="fecha_fin_actividad" class="form-label fw-bold">Fecha de Fin</label>
+        <input type="date" class="form-control" id="fecha_fin_actividad" [(ngModel)]="fechaFinActividad" name="fechaFinActividad" required>
       </div>
-    </form>
-  </div>
+      <div class="col-md-6 mb-3">
+        <label for="presupuesto_archivo" class="form-label fw-bold">Archivo Presupuesto</label>
+        <input type="file" class="form-control" id="presupuesto_archivo" (change)="onFileSelected($event)" accept="application/pdf">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="centro_costo" class="form-label fw-bold">Centro de Costo</label>
+        <input type="text" class="form-control" id="centro_costo" [(ngModel)]="centroCosto" name="centroCosto" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="aportes_institucion" class="form-label fw-bold">Aportes Institución</label>
+        <input type="number" class="form-control" id="aportes_institucion" [(ngModel)]="aportesInstitucion" name="aportesInstitucion" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="aportes_facultad" class="form-label fw-bold">Aportes Facultad</label>
+        <input type="number" class="form-control" id="aportes_facultad" [(ngModel)]="aportesFacultad" name="aportesFacultad" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="financiacion_entidades_externas" class="form-label fw-bold">Financiación Entidades Externas</label>
+        <input type="number" class="form-control" id="financiacion_entidades_externas" [(ngModel)]="financiacionEntidadesExternas" name="financiacionEntidadesExternas" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="contrapartida" class="form-label fw-bold">Contrapartida</label>
+        <input type="number" class="form-control" id="contrapartida" [(ngModel)]="contrapartida" name="contrapartida" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="valor_total_proyecto" class="form-label fw-bold">Valor Total Proyecto</label>
+        <input type="number" class="form-control" id="valor_total_proyecto" [value]="valorTotalProyecto" readonly>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="row">
+      <div class="col-6 text-center">
+        <button type="submit" class="btn btn-primary px-4 mt-3">Guardar Parcial</button>
+      </div>
+      <div class="col-6 text-center">
+        <button type="submit" class="btn btn-success px-4 mt-3">Guardar y Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>

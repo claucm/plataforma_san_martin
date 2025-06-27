@@ -35,15 +35,20 @@ import { LoginComponent } from './login/login.component';
 import { routes } from './app.routes';
 import { UsersComponent } from './users/users.component';
 
+import { ConvocatoriasComponent } from './investigacion/convocatorias/convocatorias.component';
+
 @NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UsersComponent,
+    ConvocatoriasComponent
+  ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
-    RouterModule.forRoot(routes),
-    AppComponent,
-    LoginComponent,
-    UsersComponent
+    RouterModule.forRoot(routes)
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor]))
@@ -55,3 +60,4 @@ export class AppModule { }
 export function bootstrap() {
   throw new Error('bootstrapApplication is not available. Please use traditional Angular bootstrap method.');
 }
+</create_file>

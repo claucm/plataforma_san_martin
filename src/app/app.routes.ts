@@ -16,6 +16,7 @@ import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
 
 //Investigación
 import { AperturaConvocatoriaComponent } from './investigacion/apertura-convocatoria/apertura-convocatoria.component';
+import { ConvocatoriasComponent } from './investigacion/convocatorias/convocatorias.component';
 import { RegistroProyectoComponent } from './investigacion/registro-proyecto/registro-proyecto.component';
 import { ActasInicioComponent } from './investigacion/actas-inicio/actas-inicio.component';
 import { GruposInvestigacionComponent } from './investigacion/grupos-investigacion/grupos-investigacion.component';
@@ -68,6 +69,7 @@ export const routes: Routes = [
     { path: 'eliminar-usuario', component: EliminarUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'roles-usuario', component: RolesUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'apertura-convocatoria', component: AperturaConvocatoriaComponent, canActivate: [AuthGuard] },
+    { path: 'convocatorias', component: ConvocatoriasComponent, canActivate: [AuthGuard] },
     { path: 'registro-proyecto', component: RegistroProyectoComponent, canActivate: [AuthGuard] },
     { path: 'actas-inicio', component: ActasInicioComponent, canActivate: [AuthGuard] },
     { path: 'gestion-ginvestigacion', component: GestionGinvestigacionComponent, canActivate: [AuthGuard] },

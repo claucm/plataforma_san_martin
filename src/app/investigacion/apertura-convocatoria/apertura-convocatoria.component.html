@@ -1,47 +1,54 @@
 <div class="container mt-5">
     <h2 class="text-start mb-4">Definición y apertura de Convocatorias</h2>
-    <form class="p-4 border rounded shadow-sm bg-white">
+    <form class="p-4 border rounded shadow-sm bg-white" (ngSubmit)="createConvocatoria()">
       <div class="row">
         <!-- Columna Izquierda -->
         <div class="col-md-6">
+          <!-- Campo Código de Convocatoria -->
+          <div class="mb-3">
+            <label for="codigoConvocatoria" class="form-label fw-bold">Código de Convocatoria</label>
+            <input type="text" class="form-control" id="codigoConvocatoria" [(ngModel)]="codigoConvocatoria" name="codigoConvocatoria" readonly>
+          </div>
+
           <!-- Campo Título de la Convocatoria -->
           <div class="mb-3">
             <label for="titulo" class="form-label fw-bold">Título de la Convocatoria</label>
-            <input type="text" class="form-control" id="titulo" placeholder="Ingrese el título de la convocatoria" required>
-          </div>
-
-          <!-- Campo Cantidad de Pares -->
-          <div class="mb-3">
-            <label for="cantidadPares" class="form-label fw-bold">Cantidad de Pares</label>
-            <input type="number" class="form-control" id="cantidadPares" placeholder="Ingrese la cantidad de pares" required>
+            <input type="text" class="form-control" id="titulo" [(ngModel)]="titulo" name="titulo" placeholder="Ingrese el título de la convocatoria" required>
           </div>
   
-          <!-- Campo Fecha de Inicio -->
+          <!-- Campo Fecha de Creación -->
           <div class="mb-3">
-            <label for="fechaInicio" class="form-label fw-bold">Fecha de Inicio</label>
-            <input type="date" class="form-control" id="fechaInicio" required>
+            <label for="fechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
+            <input type="date" class="form-control" id="fechaCreacion" [value]="fechaCreacion" readonly>
           </div>
   
-          <!-- Campo Fecha de Finalización -->
+          <!-- Campo Fecha de Apertura -->
           <div class="mb-3">
-            <label for="fechaFin" class="form-label fw-bold">Fecha de Finalización</label>
-            <input type="date" class="form-control" id="fechaFin" required>
+            <label for="fechaApertura" class="form-label fw-bold">Fecha de Apertura</label>
+            <input type="date" class="form-control" id="fechaApertura" [(ngModel)]="fechaApertura" name="fechaApertura" required>
+          </div>
+  
+          <!-- Campo Fecha de Cierre -->
+          <div class="mb-3">
+            <label for="fechaCierre" class="form-label fw-bold">Fecha de Cierre</label>
+            <input type="date" class="form-control" id="fechaCierre" [(ngModel)]="fechaCierre" name="fechaCierre" required>
           </div>
   
           <!-- Campo Presupuesto -->
           <div class="mb-3">
-            <label for="presupuesto" class="form-label fw-bold">Presupuesto</label>
-            <input type="number" class="form-control" id="presupuesto" placeholder="Ingrese el presupuesto" required>
+            <label for="presupuesto" class="form-label fw-bold">Presupuesto por proyecto</label>
+            <input type="number" class="form-control" id="presupuesto" [(ngModel)]="presupuesto" name="presupuesto" placeholder="Ingrese el presupuesto" required>
           </div>
 
-          <!-- Campo Tipo de Convocatoria -->
+          <!-- Campo Estado -->
           <div class="mb-3">
-            <label for="tipoConvocatoria" class="form-label fw-bold">Tipo de Convocatoria</label>
-            <select class="form-select" id="tipoConvocatoria" required>
-              <option value="" selected disabled>Seleccione un tipo</option>
-              <!-- Options to be populated dynamically -->
+            <label for="estado" class="form-label fw-bold">Estado</label>
+            <select class="form-select" id="estado" [(ngModel)]="estado" name="estado" required>
+              <option value="" disabled>Seleccione un estado</option>
+              <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
             </select>
           </div>
+
         </div>
   
         <!-- Columna Derecha -->
@@ -49,37 +56,19 @@
           <!-- Campo Descripción -->
           <div class="mb-3">
             <label for="descripcion" class="form-label fw-bold">Descripción</label>
-            <textarea class="form-control" id="descripcion" rows="4" placeholder="Ingrese una descripción detallada" required></textarea>
+            <textarea class="form-control" id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="4" placeholder="Ingrese una descripción detallada" required></textarea>
           </div>
   
           <!-- Campo Documento de Convocatoria -->
           <div class="mb-3">
             <label for="documento" class="form-label fw-bold">Documento de Convocatoria</label>
-            <input type="file" class="form-control" id="documento" required>
+            <input type="file" class="form-control" id="documento" (change)="onFileSelected($event)" accept="application/pdf" required>
           </div>
 
-          <!-- Campo Requisitos -->
+          <!-- Campo Criterios de Evaluación -->
           <div class="mb-3">
-            <label for="requisitos" class="form-label fw-bold">Requisitos</label>
-            <textarea class="form-control" id="requisitos" rows="3" placeholder="Ingrese los requisitos" required></textarea>
-          </div>
-
-          <!-- Campo Criterios Selección Generales -->
-          <div class="mb-3">
-            <label for="criteriosGenerales" class="form-label fw-bold">Criterios de Selección Generales</label>
-            <textarea class="form-control" id="criteriosGenerales" rows="3" placeholder="Ingrese los criterios generales" required></textarea>
-          </div>
-
-          <!-- Campo Criterios Selección Específicos -->
-          <div class="mb-3">
-            <label for="criteriosEspecificos" class="form-label fw-bold">Criterios de Selección Específicos</label>
-            <textarea class="form-control" id="criteriosEspecificos" rows="3" placeholder="Ingrese los criterios específicos" required></textarea>
-          </div>
-
-          <!-- Campo Criterios Evaluación -->
-          <div class="mb-3">
-            <label for="criteriosEvaluacion" class="form-label fw-bold">Criterios de Evaluación</label>
-            <textarea class="form-control" id="criteriosEvaluacion" rows="3" placeholder="Ingrese los criterios de evaluación" required></textarea>
+            <label class="form-label fw-bold">Criterios de Evaluación</label>
+            <button type="button" class="btn btn-secondary d-block w-100" (click)="openCriteriosModal()">Abrir Criterios de Evaluación</button>
           </div>
         </div>
       </div>
@@ -90,5 +79,49 @@
           <button type="submit" class="btn btn-primary px-4 mt-3">Crear Convocatoria</button>
         </div>
       </div>
+
+
     </form>
+
+    <!-- Modal Criterios de Evaluación -->
+    <div class="modal" tabindex="-1" [ngClass]="{'show d-block': showCriteriosModal}" *ngIf="showCriteriosModal" style="background: rgba(0,0,0,0.5);">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Criterios de Evaluación</h5>
+            <button type="button" class="btn-close" (click)="closeCriteriosModal()"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Factores de Evaluación</th>
+                  <th style="width: 150px;">Puntaje Máximo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let criterio of criteriosEvaluacion; let i = index">
+                  <td>{{ criterio.factor }}</td>
+                  <td>
+                    <input type="number" class="form-control" [(ngModel)]="criteriosEvaluacion[i].puntajeMaximo" (ngModelChange)="updatePuntaje(i, criteriosEvaluacion[i].puntajeMaximo)" min="0" max="100" />
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Total</th>
+                  <th>{{ totalPuntaje }}</th>
+                </tr>
+              </tfoot>
+            </table>
+            <div *ngIf="errorPuntaje" class="alert alert-danger">
+              {{ errorPuntaje }}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeCriteriosModal()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
