@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <h2>Proyectos</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Título</th>
+        <th>Estado</th>
+        <th>Área de Conocimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proyecto of proyectos">
+        <td>{{ proyecto.codigo }}</td>
+        <td>{{ proyecto.titulo }}</td>
+        <td>{{ proyecto.estado }}</td>
+        <td>{{ proyecto.areaConocimiento }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="openModal(proyecto)">Ver Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" [ngClass]="{'show d-block': showModal}" (click)="closeModal()">
+    <div class="modal-dialog modal-xl" (click)="$event.stopPropagation()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles del Proyecto</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body" *ngIf="selectedProyecto && !showGantt">
+          <p><strong>Código:</strong> {{ selectedProyecto?.codigo }}</p>
+          <p><strong>Título:</strong> {{ selectedProyecto?.titulo }}</p>
+          <p><strong>Estado:</strong> {{ selectedProyecto?.estado }}</p>
+          <p><strong>Área de Conocimiento:</strong> {{ selectedProyecto?.areaConocimiento }}</p>
+          <p><strong>Características:</strong> {{ selectedProyecto?.caracteristicas }}</p>
+          <p><strong>Objetivo General:</strong> {{ selectedProyecto?.objetivoGeneral }}</p>
+          <p><strong>Objetivos Específicos:</strong> {{ selectedProyecto?.objetivosEspecificos }}</p>
+          <p><strong>Resumen:</strong> {{ selectedProyecto?.resumen }}</p>
+          <h5>Investigador Principal</h5>
+          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Nro. Identificación:</strong> {{ selectedProyecto.investigadorPrincipal.nroIdentificacion }}</p>
+          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Nombres y Apellidos:</strong> {{ selectedProyecto.investigadorPrincipal.nombresApellidos }}</p>
+          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Horas de Dedicación:</strong> {{ selectedProyecto.investigadorPrincipal.horasDedicacion }}</p>
+
+          <h5>Cronograma</h5>
+          <button class="btn btn-info mb-3" (click)="showGantt = true">Ver Diagrama de Gantt</button>
+          <ul>
+            <li *ngFor="let act of selectedProyecto?.cronograma">
+              {{ act.nombre }}: {{ act.fechaInicio }} - {{ act.fechaFin }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="modal-body gantt-chart" *ngIf="selectedProyecto && showGantt">
+          <h5>Diagrama de Gantt - Cronograma</h5>
+          <div class="gantt-grid">
+            <div class="gantt-header">
+              <div class="gantt-task-label">Actividad</div>
+              <div class="gantt-month" *ngFor="let month of months">{{ month }}</div>
+            </div>
+            <div class="gantt-row" *ngFor="let task of ganttData">
+              <div class="gantt-task-label" [style.backgroundColor]="task.color">{{ task.name }}</div>
+              <div class="gantt-bar-container">
+                <div class="gantt-bar" 
+                     [style.gridColumnStart]="task.start" 
+                     [style.gridColumnEnd]="task.end" 
+                     [style.backgroundColor]="task.color"></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-secondary mt-3" (click)="showGantt = false">Cerrar Diagrama</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

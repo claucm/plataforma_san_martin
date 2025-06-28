@@ -1,0 +1,76 @@
+/* Styles for ProyectosComponent */
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+  max-width: 900px;
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 0.3rem;
+  padding: 1rem;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.btn {
+  margin: 0.2rem;
+}
+
+/* Gantt Chart Styles */
+.gantt-chart {
+  font-family: Arial, sans-serif;
+}
+
+.gantt-grid {
+  display: grid;
+  grid-template-columns: 150px repeat(7, 1fr);
+  gap: 2px;
+  border: 1px solid #ccc;
+  user-select: none;
+}
+
+.gantt-header {
+  display: contents;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.gantt-task-label {
+  padding: 8px;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gantt-month {
+  padding: 8px;
+  border-left: 1px solid #ccc;
+  background-color: #e0e0e0;
+}
+
+.gantt-row {
+  display: contents;
+}
+
+.gantt-bar-container {
+  grid-column: 2 / 9;
+  display: contents;
+}
+
+.gantt-bar {
+  height: 30px;
+  border-radius: 15px;
+  margin: 5px 2px;
+}

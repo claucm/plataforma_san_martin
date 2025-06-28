@@ -113,11 +113,53 @@ export class RegistroProyectoComponent implements OnInit {
     }
   }
 
+  showCronogramaModal: boolean = false;
+  actividades: { nombre: string; fechaInicio: string; fechaFin: string; fechaPorDefecto: string }[] = [];
+
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.generarCodigo();
     this.loadConvocatorias();
+    this.addActividad(); // Initialize with one activity by default
+  }
+
+  openCronogramaModal() {
+    this.showCronogramaModal = true;
+  }
+
+  closeCronogramaModal(event: any) {
+    if (event) {
+      this.showCronogramaModal = false;
+    }
+  }
+
+  addActividad() {
+    this.actividades.push({
+      nombre: '',
+      fechaInicio: '',
+      fechaFin: '',
+      fechaPorDefecto: ''
+    });
+  }
+
+  removeActividad(index: number) {
+    this.actividades.splice(index, 1);
+  }
+
+  updateDefaultDate(index: number) {
+    const actividad = this.actividades[index];
+    if (actividad.fechaInicio && actividad.fechaFin) {
+      actividad.fechaPorDefecto = `${actividad.fechaInicio} - ${actividad.fechaFin}`;
+    } else {
+      actividad.fechaPorDefecto = '';
+    }
+  }
+
+  guardarCronograma() {
+    // Here you can implement the logic to save the activities data
+    console.log('Cronograma guardado:', this.actividades);
+    this.showCronogramaModal = false;
   }
 
   loadConvocatorias() {

@@ -24,6 +24,7 @@ import { GestionGinvestigacionComponent } from './investigacion/grupos/gestion-g
 
 import { ProyectosInvestigacionComponent } from './investigacion/proyectos-investigacion/proyectos-investigacion.component';
 import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consulta-tablas.component';
+import { ProyectosComponent } from './investigacion/proyectos/proyectos.component';
 import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
 
 //Extensión
@@ -77,6 +78,7 @@ export const routes: Routes = [
     { path: 'proyectos-investigacion', component: ProyectosInvestigacionComponent, canActivate: [AuthGuard] },
     { path: 'consulta-tablas', component: ConsultaTablasComponent, canActivate: [AuthGuard] },
     { path: 'modulo-extension', component: ModuloExtensionComponent, canActivate: [AuthGuard] },
+    { path: 'proyectos', component: ProyectosComponent, canActivate: [AuthGuard] },
     { path: 'practicas-pasantias', component: PracticasPasantiasComponent, canActivate: [AuthGuard] },
     { path: 'convenios-form', component: ConveniosFormComponent, canActivate: [AuthGuard] },
     { path: 'convenios-docencia', component: ConveniosDocenciaComponent, canActivate: [AuthGuard] },
