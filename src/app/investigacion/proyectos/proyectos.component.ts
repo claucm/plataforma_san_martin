@@ -21,6 +21,13 @@ interface Proyecto {
   cronograma: { nombre: string; fechaInicio: string; fechaFin: string }[];
 }
 
+interface Tarea {
+  nombre: string;
+  inicio: number; // month index 0-6
+  duracion: number; // in months
+  color: string;
+}
+
 @Component({
   selector: 'app-proyectos',
   standalone: true,
@@ -39,6 +46,8 @@ export class ProyectosComponent implements OnInit, AfterViewInit {
   private ganttModalInstance: any;
 
   private isBrowser: boolean;
+
+  meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
 
   constructor(private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -109,37 +118,37 @@ export class ProyectosComponent implements OnInit, AfterViewInit {
     }
   }
 
-  calculateDuration(fechaInicio: string, fechaFin: string): number {
-    const start = new Date(fechaInicio);
-    const end = new Date(fechaFin);
-    const diffTime = Math.abs(end.getTime() - start.getTime());
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // duration in days
+  get tareas(): Tarea[] {
+    if (!this.selectedProyecto) {
+      return [];
+    }
+    const colors = ['#b39ddb', '#80cbc4', '#e6b86a', '#f48fb1', '#90caf9', '#ef9a9a', '#a5d6a7'];
+    return this.selectedProyecto.cronograma.map((tarea, index) => {
+      const inicioDate = new Date(tarea.fechaInicio);
+      const finDate = new Date(tarea.fechaFin);
+      const inicio = inicioDate.getMonth(); // 0-based month index
+      // Calculate duration in months, rounding up partial months
+      let duracion = finDate.getMonth() - inicio + 1;
+      if (duracion <= 0) duracion = 1;
+      return {
+        nombre: tarea.nombre,
+        inicio,
+        duracion,
+        color: colors[index % colors.length]
+      };
+    });
   }
 
-  // Check if task overlaps the given month (1-based month number)
-  isTaskInMonth(tarea: { fechaInicio: string; fechaFin: string }, month: number): boolean {
-    const taskStart = new Date(tarea.fechaInicio);
-    const taskEnd = new Date(tarea.fechaFin);
-    const monthStart = new Date(taskStart.getFullYear(), month - 1, 1);
-    const monthEnd = new Date(taskStart.getFullYear(), month, 0); // last day of month
-    return taskStart <= monthEnd && taskEnd >= monthStart;
-  }
-
-  // Return a color for the task based on index
   getColor(index: number): string {
-    const colors = ['#9b59b6', '#1abc9c', '#f39c12', '#e67e22', '#3498db', '#2ecc71', '#e74c3c'];
+    const colors = ['#b39ddb', '#80cbc4', '#e6b86a', '#f48fb1', '#90caf9', '#ef9a9a', '#a5d6a7'];
     return colors[index % colors.length];
   }
 
-  // Calculate grid column start based on task start month (1-based)
-  getStartColumn(tarea: { fechaInicio: string }): number {
-    const date = new Date(tarea.fechaInicio);
-    return date.getMonth() + 2; // +2 because grid columns start at 2 (1 is for task label)
+  getStartColumn(tarea: Tarea): number {
+    return tarea.inicio + 2; // +2 because grid columns start at 2 (1 is for task label)
   }
 
-  // Calculate grid column end based on task end month (1-based)
-  getEndColumn(tarea: { fechaFin: string }): number {
-    const date = new Date(tarea.fechaFin);
-    return date.getMonth() + 3; // +3 to cover the month span correctly
+  getEndColumn(tarea: Tarea): number {
+    return tarea.inicio + tarea.duracion + 2; // +2 to cover the month span correctly
   }
 }

@@ -69,23 +69,19 @@
           <button type="button" class="btn-close" (click)="closeGanttModal()"></button>
         </div>
         <div class="modal-body" *ngIf="selectedProyecto">
-          <div class="gantt-chart">
-            <div class="gantt-header">
-              <div class="gantt-cell label-cell"></div>
-              <div class="gantt-cell month-cell">Enero</div>
-              <div class="gantt-cell month-cell">Febrero</div>
-              <div class="gantt-cell month-cell">Marzo</div>
-              <div class="gantt-cell month-cell">Abril</div>
-              <div class="gantt-cell month-cell">Mayo</div>
-              <div class="gantt-cell month-cell">Junio</div>
-              <div class="gantt-cell month-cell">Julio</div>
+          <div class="gantt-container">
+            <div class="header">
+              <div class="task-cell empty"></div>
+              <div class="month-cell" *ngFor="let mes of meses">{{ mes }}</div>
             </div>
-            <div class="gantt-body">
-              <div class="gantt-row" *ngFor="let tarea of selectedProyecto.cronograma; let i = index">
-                <div class="gantt-cell label-cell">{{ tarea.nombre }}</div>
+            <div class="task-row" *ngFor="let tarea of tareas">
+              <div class="task-name" [style.background]="tarea.color">{{ tarea.nombre }}</div>
+              <div class="month-cell" *ngFor="let mes of meses; let i = index">
                 <div
-                  class="gantt-bar"
-                  [ngStyle]="{'background-color': getColor(i), 'grid-column-start': getStartColumn(tarea), 'grid-column-end': getEndColumn(tarea)}"
+                  class="bar"
+                  *ngIf="i === tarea.inicio"
+                  [style.width.%]="tarea.duracion * 100"
+                  [style.background]="tarea.color"
                 ></div>
               </div>
             </div>

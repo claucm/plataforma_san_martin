@@ -1,46 +1,39 @@
-/* Gantt Chart Styles */
-.gantt-chart {
-  display: grid;
-  grid-template-columns: 150px repeat(7, 1fr);
-  gap: 4px;
+.gantt-container {
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
-  font-size: 14px;
 }
 
-.gantt-header {
-  display: contents;
-  font-weight: bold;
-  text-align: center;
-  background-color: #f0f0f0;
-  border-bottom: 2px solid #ccc;
+.header,
+.task-row {
+  display: flex;
+  align-items: center;
 }
 
-.gantt-cell {
-  padding: 6px 8px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-}
-
-.label-cell {
-  background-color: #fafafa;
-  font-weight: 600;
+.task-cell.empty,
+.task-name {
+  width: 100px;
   text-align: left;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 4px;
 }
 
 .month-cell {
-  background-color: #fafafa;
+  flex: 1;
+  height: 40px;
+  position: relative;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
 }
 
-.gantt-body {
-  display: contents;
-}
-
-.gantt-row {
-  display: contents;
-}
-
-.gantt-bar {
-  height: 24px;
-  border-radius: 12px;
-  margin: 4px 0;
+.bar {
+  height: 30px;
+  border-radius: 15px;
+  position: absolute;
+  left: 0;
+  top: 5px;
 }
