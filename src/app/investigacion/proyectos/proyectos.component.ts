@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 interface Proyecto {
@@ -11,6 +11,8 @@ interface Proyecto {
   objetivoGeneral: string;
   objetivosEspecificos: string;
   resumen: string;
+  fechaInicio: string;
+  fechaFin: string;
   investigadorPrincipal: {
     nroIdentificacion: string;
     nombresApellidos: string;
@@ -26,17 +28,23 @@ interface Proyecto {
   templateUrl: './proyectos.component.html',
   styleUrls: ['./proyectos.component.css']
 })
-export class ProyectosComponent implements OnInit {
+export class ProyectosComponent implements OnInit, AfterViewInit {
   proyectos: Proyecto[] = [];
-  showModal: boolean = false;
   selectedProyecto: Proyecto | null = null;
-  showGantt: boolean = false;
 
-  months: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
-  ganttData: { name: string; start: number; end: number; color: string }[] = [];
+  @ViewChild('projectModal') projectModalRef!: ElementRef;
+  private projectModalInstance: any;
+
+  @ViewChild('ganttModal') ganttModalRef!: ElementRef;
+  private ganttModalInstance: any;
+
+  private isBrowser: boolean;
+
+  constructor(private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
-    // Example project data
     this.proyectos = [
       {
         codigo: 'PYI-2025-01',
@@ -47,6 +55,8 @@ export class ProyectosComponent implements OnInit {
         objetivoGeneral: 'Objetivo general ejemplo',
         objetivosEspecificos: 'Objetivos específicos ejemplo',
         resumen: 'Resumen del proyecto ejemplo',
+        fechaInicio: '2025-01-01',
+        fechaFin: '2025-07-31',
         investigadorPrincipal: {
           nroIdentificacion: '123456789',
           nombresApellidos: 'Juan Pérez',
@@ -65,43 +75,38 @@ export class ProyectosComponent implements OnInit {
     ];
   }
 
+  async ngAfterViewInit() {
+    if (this.isBrowser) {
+      const { Modal } = await import('bootstrap');
+      this.projectModalInstance = new Modal(this.projectModalRef.nativeElement);
+      this.ganttModalInstance = new Modal(this.ganttModalRef.nativeElement);
+    }
+  }
+
   openModal(proyecto: Proyecto) {
-    this.selectedProyecto = proyecto;
-    this.showModal = true;
-    this.showGantt = false;
+    if (this.isBrowser) {
+      this.selectedProyecto = proyecto;
+      this.projectModalInstance.show();
+    }
   }
 
   closeModal() {
-    this.showModal = false;
-    this.selectedProyecto = null;
-    this.showGantt = false;
+    if (this.isBrowser) {
+      this.projectModalInstance.hide();
+      this.selectedProyecto = null;
+    }
   }
 
-  openGantt() {
-    console.log('Opening Gantt modal...');
-    this.showGantt = true;
-    this.prepareGanttData();
+  openGanttModal() {
+    if (this.isBrowser) {
+      this.ganttModalInstance.show();
+    }
   }
 
-  prepareGanttData() {
-    if (!this.selectedProyecto) return;
-
-    const colors = ['#9c27b0', '#4caf50', '#ff9800', '#2196f3', '#e91e63', '#00bcd4', '#8bc34a'];
-
-    this.ganttData = this.selectedProyecto.cronograma.map((act, index) => {
-      const startMonth = new Date(act.fechaInicio).getMonth() + 1; // Months are 0-based
-      const endMonth = new Date(act.fechaFin).getMonth() + 1;
-      return {
-        name: act.nombre,
-        start: startMonth,
-        end: endMonth + 1, // gridColumnEnd is exclusive
-        color: colors[index % colors.length]
-      };
-    });
-  }
-
-  closeGantt() {
-    this.showGantt = false;
+  closeGanttModal() {
+    if (this.isBrowser) {
+      this.ganttModalInstance.hide();
+    }
   }
 
   calculateDuration(fechaInicio: string, fechaFin: string): number {
@@ -111,71 +116,30 @@ export class ProyectosComponent implements OnInit {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // duration in days
   }
 
-  renderGanttChart() {
-    try {
-      if (!this.selectedProyecto) {
-        console.warn('No proyecto selected for Gantt chart rendering.');
-        return;
-      }
+  // Check if task overlaps the given month (1-based month number)
+  isTaskInMonth(tarea: { fechaInicio: string; fechaFin: string }, month: number): boolean {
+    const taskStart = new Date(tarea.fechaInicio);
+    const taskEnd = new Date(tarea.fechaFin);
+    const monthStart = new Date(taskStart.getFullYear(), month - 1, 1);
+    const monthEnd = new Date(taskStart.getFullYear(), month, 0); // last day of month
+    return taskStart <= monthEnd && taskEnd >= monthStart;
+  }
 
-      const anychart = (window as any).anychart;
-      if (!anychart) {
-        console.error('AnyChart library is not loaded.');
-        return;
-      }
+  // Return a color for the task based on index
+  getColor(index: number): string {
+    const colors = ['#9b59b6', '#1abc9c', '#f39c12', '#e67e22', '#3498db', '#2ecc71', '#e74c3c'];
+    return colors[index % colors.length];
+  }
 
-      console.log('Rendering Gantt chart for proyecto:', this.selectedProyecto);
+  // Calculate grid column start based on task start month (1-based)
+  getStartColumn(tarea: { fechaInicio: string }): number {
+    const date = new Date(tarea.fechaInicio);
+    return date.getMonth() + 2; // +2 because grid columns start at 2 (1 is for task label)
+  }
 
-      // Prepare data for simpler Gantt chart (range bar chart style)
-      const colors = ['#9c27b0', '#4caf50', '#ff9800', '#2196f3', '#e91e63', '#00bcd4', '#8bc34a'];
-      const data = this.selectedProyecto.cronograma.map((act, index) => {
-        return {
-          x: act.nombre,
-          low: new Date(act.fechaInicio).getTime(),
-          high: new Date(act.fechaFin).getTime(),
-          fill: colors[index % colors.length]
-        };
-      });
-
-      // Create chart instance
-      const chart = anychart.ganttProject();
-
-      // Set chart title
-      chart.title('Diagrama de Gantt - Cronograma');
-
-      // Log container element and size
-      const container = document.getElementById('ganttContainer');
-      if (container) {
-        console.log('Gantt container found:', container);
-        console.log('Container size:', container.offsetWidth, 'x', container.offsetHeight);
-      } else {
-        console.warn('Gantt container not found');
-      }
-
-      // Set container
-      chart.container('ganttContainer');
-
-      // Set data
-      chart.data(data);
-
-      // Configure data grid columns: hide code column, show name and dates
-      const dataGrid = chart.dataGrid();
-      dataGrid.column(0).enabled(false);
-      dataGrid.column(1).labels().hAlign('left').width(180);
-      dataGrid.column(2).title('Fechas').width(150).labels().hAlign('center').format(() => {
-        return '';
-      });
-
-      // Draw chart
-      chart.draw();
-
-      // Force redraw/resize
-      chart.invalidate();
-      chart.resize();
-
-      console.log('Simplified Gantt chart rendered successfully.');
-    } catch (error) {
-      console.error('Error rendering simplified Gantt chart:', error);
-    }
+  // Calculate grid column end based on task end month (1-based)
+  getEndColumn(tarea: { fechaFin: string }): number {
+    const date = new Date(tarea.fechaFin);
+    return date.getMonth() + 3; // +3 to cover the month span correctly
   }
 }

@@ -1,12 +1,13 @@
 <div class="container mt-4">
   <h2>Proyectos</h2>
-  <table class="table table-striped">
-    <thead>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
       <tr>
-        <th>Código</th>
-        <th>Título</th>
+        <th>Código Proyecto</th>
+        <th>Nombre</th>
         <th>Estado</th>
-        <th>Área de Conocimiento</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -15,7 +16,8 @@
         <td>{{ proyecto.codigo }}</td>
         <td>{{ proyecto.titulo }}</td>
         <td>{{ proyecto.estado }}</td>
-        <td>{{ proyecto.areaConocimiento }}</td>
+        <td>{{ proyecto.fechaInicio }}</td>
+        <td>{{ proyecto.fechaFin }}</td>
         <td>
           <button class="btn btn-primary btn-sm" (click)="openModal(proyecto)">Ver Detalles</button>
         </td>
@@ -24,54 +26,73 @@
   </table>
 
   <!-- Modal -->
-  <div class="modal" tabindex="-1" [ngClass]="{'show d-block': showModal}" (click)="closeModal()">
-    <div class="modal-dialog modal-xl" (click)="$event.stopPropagation()">
+  <div #projectModal class="modal fade" tabindex="-1" aria-hidden="true" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Detalles del Proyecto</h5>
-          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
         </div>
-        <div class="modal-body" *ngIf="selectedProyecto && !showGantt">
+        <div class="modal-body" *ngIf="selectedProyecto">
           <p><strong>Código:</strong> {{ selectedProyecto?.codigo }}</p>
-          <p><strong>Título:</strong> {{ selectedProyecto?.titulo }}</p>
+          <p><strong>Nombre:</strong> {{ selectedProyecto?.titulo }}</p>
           <p><strong>Estado:</strong> {{ selectedProyecto?.estado }}</p>
           <p><strong>Área de Conocimiento:</strong> {{ selectedProyecto?.areaConocimiento }}</p>
           <p><strong>Características:</strong> {{ selectedProyecto?.caracteristicas }}</p>
           <p><strong>Objetivo General:</strong> {{ selectedProyecto?.objetivoGeneral }}</p>
           <p><strong>Objetivos Específicos:</strong> {{ selectedProyecto?.objetivosEspecificos }}</p>
           <p><strong>Resumen:</strong> {{ selectedProyecto?.resumen }}</p>
-          <h5>Investigador Principal</h5>
-          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Nro. Identificación:</strong> {{ selectedProyecto.investigadorPrincipal.nroIdentificacion }}</p>
-          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Nombres y Apellidos:</strong> {{ selectedProyecto.investigadorPrincipal.nombresApellidos }}</p>
-          <p *ngIf="selectedProyecto && selectedProyecto.investigadorPrincipal"><strong>Horas de Dedicación:</strong> {{ selectedProyecto.investigadorPrincipal.horasDedicacion }}</p>
-
-          <h5>Cronograma</h5>
-          <button class="btn btn-info mb-3" (click)="showGantt = true">Ver Diagrama de Gantt</button>
+          <p><strong>Fecha Inicio:</strong> {{ selectedProyecto?.fechaInicio }}</p>
+          <p><strong>Fecha Fin:</strong> {{ selectedProyecto?.fechaFin }}</p>
+          <p><strong>Investigador Principal:</strong> {{ selectedProyecto?.investigadorPrincipal?.nombresApellidos }} (ID: {{ selectedProyecto?.investigadorPrincipal?.nroIdentificacion }})</p>
+          <h6>Cronograma:</h6>
           <ul>
-            <li *ngFor="let act of selectedProyecto?.cronograma">
-              {{ act.nombre }}: {{ act.fechaInicio }} - {{ act.fechaFin }}
+            <li *ngFor="let tarea of selectedProyecto?.cronograma">
+              {{ tarea.nombre }}: {{ tarea.fechaInicio }} - {{ tarea.fechaFin }}
             </li>
           </ul>
+          <button class="btn btn-info btn-sm" (click)="openGanttModal()">Ver Cronograma</button>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="modal-body gantt-chart" *ngIf="selectedProyecto && showGantt">
-          <h5>Diagrama de Gantt - Cronograma</h5>
-          <div class="gantt-grid">
+  <!-- Gantt Chart Modal -->
+  <div #ganttModal class="modal fade" tabindex="-1" aria-hidden="true" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Diagrama de Gantt - Cronograma</h5>
+          <button type="button" class="btn-close" (click)="closeGanttModal()"></button>
+        </div>
+        <div class="modal-body" *ngIf="selectedProyecto">
+          <div class="gantt-chart">
             <div class="gantt-header">
-              <div class="gantt-task-label">Actividad</div>
-              <div class="gantt-month" *ngFor="let month of months">{{ month }}</div>
+              <div class="gantt-cell label-cell"></div>
+              <div class="gantt-cell month-cell">Enero</div>
+              <div class="gantt-cell month-cell">Febrero</div>
+              <div class="gantt-cell month-cell">Marzo</div>
+              <div class="gantt-cell month-cell">Abril</div>
+              <div class="gantt-cell month-cell">Mayo</div>
+              <div class="gantt-cell month-cell">Junio</div>
+              <div class="gantt-cell month-cell">Julio</div>
             </div>
-            <div class="gantt-row" *ngFor="let task of ganttData">
-              <div class="gantt-task-label" [style.backgroundColor]="task.color">{{ task.name }}</div>
-              <div class="gantt-bar-container">
-                <div class="gantt-bar" 
-                     [style.gridColumnStart]="task.start" 
-                     [style.gridColumnEnd]="task.end" 
-                     [style.backgroundColor]="task.color"></div>
+            <div class="gantt-body">
+              <div class="gantt-row" *ngFor="let tarea of selectedProyecto.cronograma; let i = index">
+                <div class="gantt-cell label-cell">{{ tarea.nombre }}</div>
+                <div
+                  class="gantt-bar"
+                  [ngStyle]="{'background-color': getColor(i), 'grid-column-start': getStartColumn(tarea), 'grid-column-end': getEndColumn(tarea)}"
+                ></div>
               </div>
             </div>
           </div>
-          <button class="btn btn-secondary mt-3" (click)="showGantt = false">Cerrar Diagrama</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeGanttModal()">Cerrar</button>
         </div>
       </div>
     </div>
