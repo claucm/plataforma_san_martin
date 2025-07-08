@@ -3,92 +3,99 @@
   <div class="user-list-section">
     <div class="filters">
       <button class="btn btn-primary export-btn" (click)="exportToExcel()">Exportar</button>
-<button class="btn btn-warning create-user-btn" (click)="openCreateUserModal()">Crear Usuario</button>
-</div>
+      <button class="btn btn-warning create-user-btn" (click)="openCreateUserModal()">Crear Usuario</button>
+    </div>
 
-<div class="modal" *ngIf="showCreateUserModal">
-  <div class="modal-content">
-    <span class="close" (click)="closeCreateUserModal()">&times;</span>
-    <h3 class="modal-title">Crear Usuario</h3>
-    <form (ngSubmit)="createUser()">
-      <div class="form-row">
-        <label>Código</label>
-        <input type="number" [(ngModel)]="newUser.codigo" name="codigo" readonly />
+    <div class="modal" *ngIf="showCreateUserModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeCreateUserModal()">&times;</span>
+        <h3 class="modal-title">Crear Usuario</h3>
+        <form (ngSubmit)="createUser()">
+          <div class="form-row">
+            <label>Código</label>
+            <input type="number" [(ngModel)]="newUser.codigo" name="codigo" readonly />
+          </div>
+          <div class="form-row">
+            <label>Tipo de Identificación</label>
+            <select [(ngModel)]="newUser.tipoIdentificacion" name="tipoIdentificacion" required>
+              <option value="CC">CC - Cedula de Ciudadanía</option>
+              <option value="TE">TE - Tarjeta de Extranjería</option>
+              <option value="CE">CE - Cedula de Extranjería</option>
+              <option value="NIT">NIT</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Identificación</label>
+            <input type="text" [(ngModel)]="newUser.identificacion" name="identificacion" required />
+          </div>
+          <div class="form-row">
+            <label>Estado</label>
+            <select [(ngModel)]="newUser.estado" name="estado" required>
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Sede</label>
+            <select [(ngModel)]="newUser.sede" name="sede" required (ngModelChange)="onSedeChange()">
+              <option value="Bogotá">Bogotá</option>
+              <option value="Cali">Cali</option>
+              <option value="Pasto">Pasto</option>
+              <option value="Puerto Colombia">Puerto Colombia</option>
+              <option value="Sabaneta">Sabaneta</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Facultad</label>
+            <select [(ngModel)]="newUser.facultad" name="facultad" required [disabled]="facultadesFiltered.length === 0" (ngModelChange)="onFacultadChange()">
+              <option value="" disabled selected>Seleccione una facultad</option>
+              <option *ngFor="let facultad of facultadesFiltered" [value]="facultad">{{ facultad }}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Programa</label>
+            <select [(ngModel)]="newUser.programa" name="programa" required [disabled]="programsFiltered.length === 0">
+              <option value="" disabled selected>Seleccione un programa</option>
+              <option *ngFor="let programa of programsFiltered" [value]="programa">{{ programa }}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Cargo</label>
+            <select [(ngModel)]="newUser.cargo" name="cargo" required>
+              <option value="Docente">Docente</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Investigación">Investigación</option>
+              <option value="Financiera">Financiera</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Primer nombre</label>
+            <input type="text" [(ngModel)]="newUser.primerNombre" name="primerNombre" required />
+          </div>
+          <div class="form-row">
+            <label>Segundo nombre</label>
+            <input type="text" [(ngModel)]="newUser.segundoNombre" name="segundoNombre" />
+          </div>
+          <div class="form-row">
+            <label>Primer apellido</label>
+            <input type="text" [(ngModel)]="newUser.primerApellido" name="primerApellido" required />
+          </div>
+          <div class="form-row">
+            <label>Segundo apellido</label>
+            <input type="text" [(ngModel)]="newUser.segundoApellido" name="segundoApellido" />
+          </div>
+          <div class="form-row">
+            <label>Correo Electrónico</label>
+            <input type="email" [(ngModel)]="newUser.email" name="email" required />
+          </div>
+          <div class="form-actions">
+            <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
+            <button type="submit">Crear</button>
+          </div>
+        </form>
       </div>
-      <div class="form-row">
-        <label>Tipo de Identificación</label>
-        <select [(ngModel)]="newUser.tipoIdentificacion" name="tipoIdentificacion" required>
-          <option value="CC">CC - Cedula de Ciudadanía</option>
-          <option value="TE">TE - Tarjeta de Extranjería</option>
-          <option value="CE">CE - Cedula de Extranjería</option>
-          <option value="NIT">NIT</option>
-          <option value="Pasaporte">Pasaporte</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Identificación</label>
-        <input type="text" [(ngModel)]="newUser.identificacion" name="identificacion" required />
-      </div>
-      <div class="form-row">
-        <label>Estado</label>
-        <select [(ngModel)]="newUser.estado" name="estado" required>
-          <option>Activo</option>
-          <option>Inactivo</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Sede</label>
-        <select [(ngModel)]="newUser.sede" name="sede" required (ngModelChange)="onSedeChange()">
-          <option value="Bogotá">Bogotá</option>
-          <option value="Cali">Cali</option>
-          <option value="Pasto">Pasto</option>
-          <option value="Puerto Colombia">Puerto Colombia</option>
-          <option value="Sabaneta">Sabaneta</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Facultad</label>
-        <select [(ngModel)]="newUser.facultad" name="facultad" required [disabled]="facultadesFiltered.length === 0">
-          <option value="" disabled selected>Seleccione una facultad</option>
-          <option *ngFor="let facultad of facultadesFiltered" [value]="facultad">{{ facultad }}</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Cargo</label>
-        <select [(ngModel)]="newUser.cargo" name="cargo" required>
-          <option value="Docente">Docente</option>
-          <option value="Administrativo">Administrativo</option>
-          <option value="Investigación">Investigación</option>
-          <option value="Financiera">Financiera</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Primer nombre</label>
-        <input type="text" [(ngModel)]="newUser.primerNombre" name="primerNombre" required />
-      </div>
-      <div class="form-row">
-        <label>Segundo nombre</label>
-        <input type="text" [(ngModel)]="newUser.segundoNombre" name="segundoNombre" />
-      </div>
-      <div class="form-row">
-        <label>Primer apellido</label>
-        <input type="text" [(ngModel)]="newUser.primerApellido" name="primerApellido" required />
-      </div>
-      <div class="form-row">
-        <label>Segundo apellido</label>
-        <input type="text" [(ngModel)]="newUser.segundoApellido" name="segundoApellido" />
-      </div>
-      <div class="form-row">
-        <label>Correo Electrónico</label>
-        <input type="email" [(ngModel)]="newUser.email" name="email" required />
-      </div>
-      <div class="form-actions">
-        <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
-        <button type="submit">Crear</button>
-      </div>
-    </form>
-  </div>
-</div>
+    </div>
     <table class="user-table">
       <thead>
         <tr>
@@ -212,18 +219,25 @@
             <label>Facultad</label>
             <select [(ngModel)]="selectedUser.facultad" name="facultad" [disabled]="facultadesFilteredForSelectedUser.length === 0" required>
               <option value="" disabled selected>Seleccione una facultad</option>
-              <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Cargo</label>
-            <select [(ngModel)]="selectedUser.cargo" name="cargo">
-              <option value="Docente">Docente</option>
-              <option value="Administrativo">Administrativo</option>
-              <option value="Investigación">Investigación</option>
-              <option value="Financiera">Financiera</option>
-            </select>
-          </div>
+          <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Programa</label>
+        <select [(ngModel)]="selectedUser.programa" name="programa" [disabled]="programsFilteredForSelectedUser.length === 0" (ngModelChange)="onSelectedUserFacultadChange()">
+          <option value="" disabled selected>Seleccione un programa</option>
+          <option *ngFor="let programa of programsFilteredForSelectedUser" [value]="programa">{{ programa }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cargo</label>
+        <select [(ngModel)]="selectedUser.cargo" name="cargo">
+          <option value="Docente">Docente</option>
+          <option value="Administrativo">Administrativo</option>
+          <option value="Investigación">Investigación</option>
+          <option value="Financiera">Financiera</option>
+        </select>
+      </div>
         </div>
         <div class="form-row two-columns">
           <div class="form-group">
@@ -324,6 +338,37 @@
     </div>
     <div class="tab-content" [class.active]="activeTab === 'user-permissions'" id="user-permissions">
       <div class="permission-assignment-container">
+        <div class="user-info-section" *ngIf="selectedUser">
+          <h4>Información del Usuario</h4>
+          <div *ngFor="let entry of selectedUserAdditionalInfo; let i = index" class="form-row two-columns additional-info-entry">
+            <div class="form-group">
+              <label>Sede</label>
+              <select [(ngModel)]="entry.sede" name="sede{{i}}" (ngModelChange)="onSelectedUserSedeChange()">
+                <option value="Bogotá">Bogotá</option>
+                <option value="Cali">Cali</option>
+                <option value="Pasto">Pasto</option>
+                <option value="Puerto Colombia">Puerto Colombia</option>
+                <option value="Sabaneta">Sabaneta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Facultad</label>
+              <select [(ngModel)]="entry.facultad" name="facultad{{i}}" [disabled]="facultadesFilteredForSelectedUser.length === 0" (ngModelChange)="onSelectedUserFacultadChange()">
+                <option value="" disabled selected>Seleccione una facultad</option>
+                <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Programa</label>
+              <select [(ngModel)]="entry.programa" name="programa{{i}}" [disabled]="programsFilteredForSelectedUser.length === 0">
+                <option value="" disabled selected>Seleccione un programa</option>
+                <option *ngFor="let programa of programsFilteredForSelectedUser" [value]="programa">{{ programa }}</option>
+              </select>
+            </div>
+            <button type="button" (click)="removeAdditionalInfo(i)">Eliminar</button>
+          </div>
+          <button type="button" (click)="openAddAdditionalInfoModal()">Agregar Sede</button>
+        </div>
         <div class="permissions-table unassigned-permissions">
           <div class="table-header">
             <span>Sin asignación</span>
@@ -388,5 +433,5 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+>>>>>>> REPLACE
+</edit_file>

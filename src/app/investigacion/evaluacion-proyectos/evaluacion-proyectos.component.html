@@ -1,0 +1,109 @@
+<h2>Evaluación de Proyectos</h2>
+
+<form (ngSubmit)="guardarEvaluacion(evaluacionActual)" class="evaluacion-form">
+
+  <!-- Asignación de Evaluadores -->
+  <fieldset class="form-section">
+    <legend>Asignación de Evaluadores</legend>
+
+    <div class="form-group">
+      <label for="propuestaId">ID de Propuesta:</label>
+      <input type="number" id="propuestaId" [(ngModel)]="propuestaId" name="propuestaId" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="minEvaluadores">Número mínimo de evaluadores (mínimo 2):</label>
+      <input type="number" id="minEvaluadores" [(ngModel)]="minEvaluadores" name="minEvaluadores" min="1" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="evaluadoresSeleccionados">Seleccionar Evaluadores:</label>
+      <select id="evaluadoresSeleccionados" [(ngModel)]="evaluacionActual.evaluadorId" name="evaluadoresSeleccionados" class="form-control">
+        <option *ngFor="let evaluador of evaluadoresDisponibles" [value]="evaluador.id">
+          {{ evaluador.nombre }} - {{ evaluador.areaConocimiento }}
+        </option>
+      </select>
+      <p *ngIf="evaluadoresSeleccionados.length < minEvaluadores" class="error-text">
+        Se requiere al menos {{ minEvaluadores }} evaluadores.
+      </p>
+    </div>
+
+    <p *ngIf="evaluadoresSeleccionados.length < minEvaluadores" class="error-text">
+      Se requiere al menos {{ minEvaluadores }} evaluadores.
+    </p>
+  </fieldset>
+
+  <!-- Evaluación y Carga de Conceptos -->
+  <fieldset class="form-section">
+    <legend>Evaluación y Carga de Conceptos</legend>
+
+    <div class="form-group">
+      <label for="evaluadorId">Evaluador:</label>
+      <select id="evaluadorId" [(ngModel)]="evaluacionActual.evaluadorId" name="evaluadorId" required class="form-control">
+        <option *ngFor="let evaluador of evaluadoresSeleccionados" [value]="evaluador.id">{{ evaluador.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="criterios-group">
+      <div *ngFor="let criterio of criteriosEvaluacion" class="form-group criterio-item">
+        <label>{{ criterio.nombre }} (Max: {{ criterio.maxPuntaje }} pts):</label>
+        <input type="number" [(ngModel)]="criterio.puntaje" name="criterio{{criterio.id}}" min="0" [max]="criterio.maxPuntaje" required class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado de Evaluación:</label>
+      <select id="estado" [(ngModel)]="evaluacionActual.estado" name="estado" required class="form-control">
+        <option value="pendiente">Pendiente</option>
+        <option value="en evaluación">En Evaluación</option>
+        <option value="evaluada">Evaluada</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="razonesVeredicto">Observaciones:</label>
+      <textarea id="razonesVeredicto" [(ngModel)]="evaluacionActual.razonesVeredicto" name="razonesVeredicto" class="form-control"></textarea>
+    </div>
+  </fieldset>
+
+  <!-- Consolidación de Resultados -->
+  <fieldset class="form-section">
+    <legend>Consolidación de Resultados</legend>
+
+    <button type="button" (click)="consolidarResultados(propuestaId!)" class="btn btn-primary">Consolidar Resultados</button>
+
+    <div *ngIf="conceptoConsolidado" class="consolidado-result">
+      <p><strong>Puntaje Total:</strong> {{ conceptoConsolidado?.puntajeTotal }}</p>
+      <p><strong>Clasificación:</strong> {{ conceptoConsolidado?.clasificacionFinal }}</p>
+      <p><strong>Sugerencia Final:</strong> {{ conceptoConsolidado?.sugerenciaFinal }}</p>
+      <p><strong>Razones:</strong> {{ conceptoConsolidado?.razonesSugerencia }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="sugerenciaFinal">Sugerencia Final del Evaluador:</label>
+      <select id="sugerenciaFinal" [(ngModel)]="evaluacionActual.veredicto" name="sugerenciaFinal" required class="form-control">
+        <option value="Aceptar el proyecto sin modificaciones">Aceptar el proyecto sin modificaciones</option>
+        <option value="Aceptar el proyecto con modificaciones">Aceptar el proyecto con modificaciones</option>
+        <option value="Rechazar proyecto">Rechazar proyecto</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="razonesVeredictoFinal">Razones de la Sugerencia:</label>
+      <textarea id="razonesVeredictoFinal" [(ngModel)]="evaluacionActual.razonesVeredicto" name="razonesVeredictoFinal" class="form-control"></textarea>
+    </div>
+  </fieldset>
+
+  <!-- Notificación y Trazabilidad -->
+  <fieldset class="form-section">
+    <legend>Notificación y Trazabilidad</legend>
+
+    <button type="button" (click)="notificarEvaluacion(propuestaId!)" class="btn btn-secondary">Enviar Notificación</button>
+
+    <div class="historial-acciones">
+      <p>Historial y registro de acciones estarán aquí.</p>
+    </div>
+  </fieldset>
+
+  <button type="submit" class="btn btn-success">Guardar Evaluación</button>
+</form>

@@ -6,6 +6,8 @@ interface Convocatoria {
   titulo: string;
   fechaInicio: string;
   fechaFin: string;
+  estado: string;
+  proyectos: number;
   descripcion?: string;
   documento?: string;
   criteriosEvaluacion?: { factor: string; puntajeMaximo: number }[];
@@ -37,6 +39,8 @@ export class ConvocatoriasComponent implements OnInit {
         titulo: 'Convocatoria de Prueba',
         fechaInicio: '2023-01-01',
         fechaFin: '2023-03-31',
+        estado: 'Activo',
+        proyectos: 5,
         descripcion: 'Descripción completa de la convocatoria de prueba.',
         documento: 'documento-prueba.pdf',
         criteriosEvaluacion: [
@@ -59,6 +63,8 @@ export class ConvocatoriasComponent implements OnInit {
         titulo: 'Convocatoria Ficticia 2',
         fechaInicio: '2023-04-01',
         fechaFin: '2023-06-30',
+        estado: 'Cerrado',
+        proyectos: 3,
         descripcion: 'Descripción de la convocatoria ficticia 2.',
         documento: 'documento-ficticio2.pdf',
         criteriosEvaluacion: [
@@ -81,6 +87,8 @@ export class ConvocatoriasComponent implements OnInit {
         titulo: 'Convocatoria Ficticia 3',
         fechaInicio: '2023-07-01',
         fechaFin: '2023-09-30',
+        estado: 'Activo',
+        proyectos: 7,
         descripcion: 'Descripción de la convocatoria ficticia 3.',
         documento: 'documento-ficticio3.pdf',
         criteriosEvaluacion: [

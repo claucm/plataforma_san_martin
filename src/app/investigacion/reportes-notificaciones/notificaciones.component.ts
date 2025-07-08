@@ -53,7 +53,7 @@ import { FormsModule } from '@angular/forms';
       background-color: transparent;
       border-radius: 8px;
       box-shadow: none;
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
     h2 {
       color: #0a2e4c;

@@ -36,6 +36,7 @@ import { routes } from './app.routes';
 import { UsersComponent } from './users/users.component';
 
 import { ConvocatoriasComponent } from './investigacion/convocatorias/convocatorias.component';
+import { InvestigacionModule } from './investigacion/investigacion.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ConvocatoriasComponent } from './investigacion/convocatorias/convocator
     BrowserModule,
     CommonModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    InvestigacionModule
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor]))

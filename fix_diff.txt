@@ -1,12 +1,184 @@
+import * as XLSX from 'xlsx';
+
+interface User {
+  codigo: number;
+  documento: string;
+  tipoIdentificacion: string;
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  sede: string;
+  facultad: string;
+  programa?: string;
+  cargo: string;
+  fullName: string;
+  status: 'Activo' | 'Inactivo';
+  email: string;
+  creationDate: string; // ISO date string
+  lastActive: string; // ISO time string
+  photoUrl: string;
+}
+
+...
+
+  onSelectedUserSedeChange() {
+    if (this.selectedUser && this.selectedUser.sede && this.facultadesBySede[this.selectedUser.sede]) {
+      this.facultadesFilteredForSelectedUser = this.facultadesBySede[this.selectedUser.sede];
+      if (!this.facultadesFilteredForSelectedUser.includes(this.selectedUser.facultad)) {
+        this.selectedUser.facultad = '';
+        this.selectedUser.programa = '';
+        this.programsFilteredForSelectedUser = [];
+      } else {
+        this.onSelectedUserFacultadChange();
+      }
+    } else {
+      this.facultadesFilteredForSelectedUser = [];
+      if (this.selectedUser) {
+        this.selectedUser.facultad = '';
+        this.selectedUser.programa = '';
+        this.programsFilteredForSelectedUser = [];
+      }
+    }
+  }
+
+  onFacultadChange() {
+    if (this.newUser.facultad && this.programsByFacultad[this.newUser.facultad]) {
+      this.programsFiltered = this.programsByFacultad[this.newUser.facultad];
+      if (!this.programsFiltered.includes(this.newUser.programa ?? '')) {
+        this.newUser.programa = '';
+      }
+    } else {
+      this.programsFiltered = [];
+      this.newUser.programa = '';
+    }
+  }
+
+  onSelectedUserFacultadChange() {
+    if (this.selectedUser && this.selectedUser.facultad && this.programsByFacultad[this.selectedUser.facultad]) {
+      this.programsFilteredForSelectedUser = this.programsByFacultad[this.selectedUser.facultad];
+      if (!this.programsFilteredForSelectedUser.includes(this.selectedUser.programa ?? '')) {
+        this.selectedUser.programa = '';
+      }
+    } else {
+      this.programsFilteredForSelectedUser = [];
+      if (this.selectedUser) {
+        this.selectedUser.programa = '';
+      }
+    }
+  }
+
+  createUser() {
+    const maxCodigo = this.users.reduce((max, user) => user.codigo > max ? user.codigo : max, 0);
+    this.newUser.codigo = maxCodigo + 1;
+
+    const fullName = [this.newUser.primerNombre, this.newUser.segundoNombre, this.newUser.primerApellido, this.newUser.segundoApellido]
+      .filter(name => !!name)
+      .join(' ');
+
+    this.users.push({
+      codigo: this.newUser.codigo,
+      documento: this.newUser.identificacion,
+      sede: this.newUser.sede,
+      facultad: this.newUser.facultad,
+      programa: this.newUser.programa ?? '',
+      cargo: this.newUser.cargo,
+      fullName: fullName,
+      tipoIdentificacion: this.newUser.tipoIdentificacion,
+      primerNombre: this.newUser.primerNombre,
+      segundoNombre: this.newUser.segundoNombre,
+      primerApellido: this.newUser.primerApellido,
+      segundoApellido: this.newUser.segundoApellido,
+      status: this.newUser.estado === 'Activo' ? 'Activo' : 'Inactivo',
+      email: this.newUser.email,
+      creationDate: new Date().toISOString().split('T')[0],
+      lastActive: new Date().toLocaleTimeString(),
+      photoUrl: 'assets/student.png'
+    });
+
+    console.log('Crear usuario:', this.newUser);
+    this.closeCreateUserModal();
+
+    this.newUser = {
+      codigo: 0,
+      tipoIdentificacion: 'CC',
+      identificacion: '',
+      estado: 'Activo',
+      sede: '',
+      facultad: '',
+      programa: '',
+      cargo: '',
+      primerNombre: '',
+      segundoNombre: '',
+      primerApellido: '',
+      segundoApellido: '',
+      email: ''
+    };
+  }
+
+  saveUser() {
+    if (!this.selectedUser) return;
+
+    this.selectedUser.fullName = [
+      this.selectedUser.primerNombre,
+      this.selectedUser.segundoNombre,
+      this.selectedUser.primerApellido,
+      this.selectedUser.segundoApellido
+    ].filter(name => !!name).join(' ');
+
+    const index = this.users.findIndex(u => u.codigo === this.selectedUser!.codigo);
+    if (index !== -1) {
+      this.users[index] = { ...this.selectedUser };
+    }
+    console.log('Usuario guardado:', this.selectedUser);
+  }
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface Investigador {
+@Component({
+  selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
+})
+export class UsersComponent {
+  activeTab: string = 'basic-info';
+
 =======
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ConvocatoriasComponent } from '../convocatorias/convocatorias.component';
 
-interface Investigador {
+import { Component } from '@angular/core';
+import * as XLSX from 'xlsx';
+
+interface User {
+  codigo: number;
+  documento: string;
+  tipoIdentificacion: string;
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  sede: string;
+  facultad: string;
+  programa?: string;
+  cargo: string;
+  fullName: string;
+  status: 'Activo' | 'Inactivo';
+  email: string;
+  creationDate: string; // ISO date string
+  lastActive: string; // ISO time string
+  photoUrl: string;
+}
+
+@Component({
+  selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
+})
+export class UsersComponent {
+  activeTab: string = 'basic-info';

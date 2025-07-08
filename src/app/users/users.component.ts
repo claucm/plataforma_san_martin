@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import * as XLSX from 'xlsx';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface User {
   codigo: number;
@@ -11,6 +13,7 @@ interface User {
   segundoApellido: string;
   sede: string;
   facultad: string;
+  programa?: string;
   cargo: string;
   fullName: string;
   status: 'Activo' | 'Inactivo';
@@ -19,9 +22,6 @@ interface User {
   lastActive: string; // ISO time string
   photoUrl: string;
 }
-
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -106,6 +106,7 @@ export class UsersComponent {
     estado: 'Activo',
     sede: '',
     facultad: '',
+    programa: '',
     cargo: '',
     primerNombre: '',
     segundoNombre: '',
@@ -121,71 +122,91 @@ export class UsersComponent {
     'Puerto Colombia': ['Facultad de Ciencias Básicas'],
     'Sabaneta': ['Facultad de Arquitectura', 'Facultad de Artes']
   };
+
+  programsByFacultad: { [key: string]: string[] } = {
+    'Facultad de Ingeniería': ['Ingeniería Civil', 'Ingeniería de Sistemas', 'Ingeniería Electrónica'],
+    'Facultad de Ciencias Sociales': ['Sociología', 'Trabajo Social'],
+    'Facultad de Medicina': ['Medicina General', 'Enfermería'],
+    'Facultad de Derecho': ['Derecho Penal', 'Derecho Civil'],
+    'Facultad de Ciencias Económicas': ['Economía', 'Administración de Empresas'],
+    'Facultad de Ciencias Agrarias': ['Agronomía', 'Zootecnia'],
+    'Facultad de Educación': ['Educación Básica', 'Educación Infantil'],
+    'Facultad de Ciencias Básicas': ['Matemáticas', 'Física'],
+    'Facultad de Arquitectura': ['Arquitectura', 'Diseño Urbano'],
+    'Facultad de Artes': ['Artes Plásticas', 'Música']
+  };
   
   facultadesFiltered: string[] = [];
   facultadesFilteredForSelectedUser: string[] = [];
-  
-  onSedeChange() {
+
+  programsFiltered: string[] = [];
+  programsFilteredForSelectedUser: string[] = [];
+
+  onSedeChange(): void {
     if (this.newUser.sede && this.facultadesBySede[this.newUser.sede]) {
       this.facultadesFiltered = this.facultadesBySede[this.newUser.sede];
-      // Reset facultad if it is not in the new list
       if (!this.facultadesFiltered.includes(this.newUser.facultad)) {
         this.newUser.facultad = '';
+        this.newUser.programa = '';
+        this.programsFiltered = [];
+      } else {
+        this.onFacultadChange();
       }
     } else {
       this.facultadesFiltered = [];
       this.newUser.facultad = '';
+      this.newUser.programa = '';
+      this.programsFiltered = [];
     }
   }
   
-  onSelectedUserSedeChange() {
+  onSelectedUserSedeChange(): void {
     if (this.selectedUser && this.selectedUser.sede && this.facultadesBySede[this.selectedUser.sede]) {
       this.facultadesFilteredForSelectedUser = this.facultadesBySede[this.selectedUser.sede];
       if (!this.facultadesFilteredForSelectedUser.includes(this.selectedUser.facultad)) {
         this.selectedUser.facultad = '';
+        this.selectedUser.programa = '';
+        this.programsFilteredForSelectedUser = [];
+      } else {
+        this.onSelectedUserFacultadChange();
       }
     } else {
       this.facultadesFilteredForSelectedUser = [];
       if (this.selectedUser) {
         this.selectedUser.facultad = '';
+        this.selectedUser.programa = '';
+        this.programsFilteredForSelectedUser = [];
       }
     }
   }
 
-  get filteredUsers(): User[] {
-    return this.users.filter(user => {
-      const matchesDocumento = this.filterDocumento ? user.documento.toLowerCase().includes(this.filterDocumento.toLowerCase()) : true;
-      const matchesName = user.fullName.toLowerCase().includes(this.filterName.toLowerCase());
-      const matchesStatus = this.filterStatus ? user.status === this.filterStatus : true;
-      const matchesEmail = user.email.toLowerCase().includes(this.filterEmail.toLowerCase());
-      const matchesCreationDate = this.filterCreationDate ? user.creationDate === this.filterCreationDate : true;
-      const matchesLastActive = this.filterLastActive ? user.lastActive === this.filterLastActive : true;
-      return matchesDocumento && matchesName && matchesStatus && matchesEmail && matchesCreationDate && matchesLastActive;
-    });
+  onFacultadChange(): void {
+    if (this.newUser.facultad && this.programsByFacultad[this.newUser.facultad]) {
+      this.programsFiltered = this.programsByFacultad[this.newUser.facultad];
+      if (!this.programsFiltered.includes(this.newUser.programa ?? '')) {
+        this.newUser.programa = '';
+      }
+    } else {
+      this.programsFiltered = [];
+      this.newUser.programa = '';
+    }
   }
 
-  selectedUser: User | null = null;
-
-  selectUser(user: User) {
-    this.selectedUser = {
-      ...user,
-      sede: user.sede || '',
-      cargo: user.cargo || ''
-    };
-    console.log('Seleccionar usuario:', this.selectedUser);
+  onSelectedUserFacultadChange(): void {
+    if (this.selectedUser && this.selectedUser.facultad && this.programsByFacultad[this.selectedUser.facultad]) {
+      this.programsFilteredForSelectedUser = this.programsByFacultad[this.selectedUser.facultad];
+      if (!this.programsFilteredForSelectedUser.includes(this.selectedUser.programa ?? '')) {
+        this.selectedUser.programa = '';
+      }
+    } else {
+      this.programsFilteredForSelectedUser = [];
+      if (this.selectedUser) {
+        this.selectedUser.programa = '';
+      }
+    }
   }
-
-  openCreateUserModal() {
-    console.log('openCreateUserModal called');
-    this.showCreateUserModal = true;
-  }
-
-  closeCreateUserModal() {
-    console.log('closeCreateUserModal called');
-    this.showCreateUserModal = false;
-  }
-
-  createUser() {
+  
+  createUser(): void {
     const maxCodigo = this.users.reduce((max, user) => user.codigo > max ? user.codigo : max, 0);
     this.newUser.codigo = maxCodigo + 1;
 
@@ -198,6 +219,7 @@ export class UsersComponent {
       documento: this.newUser.identificacion,
       sede: this.newUser.sede,
       facultad: this.newUser.facultad,
+      programa: this.newUser.programa,
       cargo: this.newUser.cargo,
       fullName: fullName,
       tipoIdentificacion: this.newUser.tipoIdentificacion,
@@ -222,6 +244,7 @@ export class UsersComponent {
       estado: 'Activo',
       sede: '',
       facultad: '',
+      programa: '',
       cargo: '',
       primerNombre: '',
       segundoNombre: '',
@@ -231,7 +254,7 @@ export class UsersComponent {
     };
   }
 
-  saveUser() {
+  saveUser(): void {
     if (!this.selectedUser) return;
 
     this.selectedUser.fullName = [
@@ -248,7 +271,61 @@ export class UsersComponent {
     console.log('Usuario guardado:', this.selectedUser);
   }
 
-  cancelEdit() {
+  get filteredUsers(): User[] {
+    return this.users.filter(user => {
+      const matchesDocumento = this.filterDocumento ? user.documento.toLowerCase().includes(this.filterDocumento.toLowerCase()) : true;
+      const matchesName = user.fullName.toLowerCase().includes(this.filterName.toLowerCase());
+      const matchesStatus = this.filterStatus ? user.status === this.filterStatus : true;
+      const matchesEmail = user.email.toLowerCase().includes(this.filterEmail.toLowerCase());
+      const matchesCreationDate = this.filterCreationDate ? user.creationDate === this.filterCreationDate : true;
+      const matchesLastActive = this.filterLastActive ? user.lastActive === this.filterLastActive : true;
+      return matchesDocumento && matchesName && matchesStatus && matchesEmail && matchesCreationDate && matchesLastActive;
+    });
+  }
+
+  selectedUser: User | null = null;
+
+  selectedUserAdditionalInfo: { sede: string; facultad: string; programa: string }[] = [];
+  showAddAdditionalInfoModal: boolean = false;
+  newAdditionalInfo = {
+    sede: '',
+    facultad: '',
+    programa: ''
+  };
+  additionalFacultadesFiltered: string[] = [];
+  additionalProgramsFiltered: string[] = [];
+
+  selectUser(user: User): void {
+    this.selectedUser = {
+      ...user,
+      sede: user.sede || '',
+      facultad: user.facultad || '',
+      programa: user.programa || '',
+      cargo: user.cargo || ''
+    };
+    // Initialize additional info array from user data if available
+    this.selectedUserAdditionalInfo = [];
+    if (this.selectedUser.sede && this.selectedUser.facultad && this.selectedUser.programa) {
+      this.selectedUserAdditionalInfo.push({
+        sede: this.selectedUser.sede,
+        facultad: this.selectedUser.facultad,
+        programa: this.selectedUser.programa
+      });
+    }
+    console.log('Seleccionar usuario:', this.selectedUser);
+  }
+
+  openCreateUserModal(): void {
+    console.log('openCreateUserModal called');
+    this.showCreateUserModal = true;
+  }
+
+  closeCreateUserModal(): void {
+    console.log('closeCreateUserModal called');
+    this.showCreateUserModal = false;
+  }
+
+  cancelEdit(): void {
     if (!this.selectedUser) return;
     const original = this.users.find(u => u.codigo === this.selectedUser!.codigo);
     if (original) {
@@ -280,7 +357,7 @@ export class UsersComponent {
   selectedUnassignedPermissions: any[] = [];
   selectedAssignedPermissions: any[] = [];
 
-  exportToExcel() {
+  exportToExcel(): void {
     const worksheet = XLSX.utils.json_to_sheet(this.users);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
@@ -295,7 +372,7 @@ export class UsersComponent {
     return this.selectedAssignedRoles.includes(role);
   }
 
-  onUnassignedRoleCheckboxChange(event: any, role: any) {
+  onUnassignedRoleCheckboxChange(event: any, role: any): void {
     if (event.target.checked) {
       this.selectedUnassignedRoles.push(role);
     } else {
@@ -303,7 +380,7 @@ export class UsersComponent {
     }
   }
 
-  onAssignedRoleCheckboxChange(event: any, role: any) {
+  onAssignedRoleCheckboxChange(event: any, role: any): void {
     if (event.target.checked) {
       this.selectedAssignedRoles.push(role);
     } else {
@@ -311,7 +388,7 @@ export class UsersComponent {
     }
   }
 
-  assignRole() {
+  assignRole(): void {
     if (this.selectedUnassignedRoles.length > 0) {
       this.assignedRoles.push(...this.selectedUnassignedRoles);
       this.unassignedRoles = this.unassignedRoles.filter(role => !this.selectedUnassignedRoles.includes(role));
@@ -319,7 +396,7 @@ export class UsersComponent {
     }
   }
 
-  unassignRole() {
+  unassignRole(): void {
     if (this.selectedAssignedRoles.length > 0) {
       this.unassignedRoles.push(...this.selectedAssignedRoles);
       this.assignedRoles = this.assignedRoles.filter(role => !this.selectedAssignedRoles.includes(role));
@@ -339,11 +416,11 @@ export class UsersComponent {
     return parts.length > 1 ? parts[parts.length - 1] : '';
   }
 
-  setActiveTab(tab: string) {
+  setActiveTab(tab: string): void {
     this.activeTab = tab;
   }
 
-  assignPermission() {
+  assignPermission(): void {
     if (this.selectedUnassignedPermissions.length > 0) {
       this.assignedPermissions.push(...this.selectedUnassignedPermissions);
       this.unassignedPermissions = this.unassignedPermissions.filter(permission => !this.selectedUnassignedPermissions.includes(permission));
@@ -351,7 +428,7 @@ export class UsersComponent {
     }
   }
 
-  unassignPermission() {
+  unassignPermission(): void {
     if (this.selectedAssignedPermissions.length > 0) {
       this.unassignedPermissions.push(...this.selectedAssignedPermissions);
       this.assignedPermissions = this.assignedPermissions.filter(permission => !this.selectedAssignedPermissions.includes(permission));
@@ -367,7 +444,7 @@ export class UsersComponent {
     return this.selectedAssignedPermissions.includes(permission);
   }
 
-  onUnassignedPermissionCheckboxChange(event: any, permission: any) {
+  onUnassignedPermissionCheckboxChange(event: any, permission: any): void {
     if (event.target.checked) {
       this.selectedUnassignedPermissions.push(permission);
     } else {
@@ -375,7 +452,7 @@ export class UsersComponent {
     }
   }
 
-  onAssignedPermissionCheckboxChange(event: any, permission: any) {
+  onAssignedPermissionCheckboxChange(event: any, permission: any): void {
     if (event.target.checked) {
       this.selectedAssignedPermissions.push(permission);
     } else {

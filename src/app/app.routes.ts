@@ -25,6 +25,7 @@ import { GestionGinvestigacionComponent } from './investigacion/grupos/gestion-g
 import { ProyectosInvestigacionComponent } from './investigacion/proyectos-investigacion/proyectos-investigacion.component';
 import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consulta-tablas.component';
 import { ProyectosComponent } from './investigacion/proyectos/proyectos.component';
+import { EvaluacionProyectosComponent } from './investigacion/evaluacion-proyectos/evaluacion-proyectos.component';
 import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
 
 //Extensión
@@ -100,7 +101,8 @@ export const routes: Routes = [
     { path: 'poblacion-grupo', component: PoblacionGrupoComponent, canActivate: [AuthGuard] },
     { path: 'educacion-continuada', component: EducacionContinuadaComponent, canActivate: [AuthGuard] },
     { path: 'tablero-indicadores/investigacion', component: InvestigacionDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'investigacion/reportes-notificaciones', loadChildren: () => import('./investigacion/reportes-notificaciones/reportes-notificaciones.module').then(m => m.ReportesNotificacionesModule), canActivate: [AuthGuard] }
+    { path: 'investigacion/reportes-notificaciones', loadChildren: () => import('./investigacion/reportes-notificaciones/reportes-notificaciones.module').then(m => m.ReportesNotificacionesModule), canActivate: [AuthGuard] },
+    { path: 'evaluacion-proyectos', component: EvaluacionProyectosComponent, canActivate: [AuthGuard] }
 ];
 
 

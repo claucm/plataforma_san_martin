@@ -7,6 +7,8 @@
         <th>Título Convocatoria</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
+        <th>Estado</th>
+        <th>Proyectos</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -16,6 +18,8 @@
         <td>{{ convocatoria.titulo }}</td>
         <td>{{ convocatoria.fechaInicio }}</td>
         <td>{{ convocatoria.fechaFin }}</td>
+        <td>{{ convocatoria.estado }}</td>
+        <td>{{ convocatoria.proyectos }}</td>
         <td>
           <button class="btn btn-primary btn-sm" (click)="viewDetails(convocatoria.codigo)">Ver Detalles</button>
         </td>
@@ -36,6 +40,8 @@
           <p><strong>Título:</strong> {{ selectedConvocatoria?.titulo }}</p>
           <p><strong>Fecha Inicio:</strong> {{ selectedConvocatoria?.fechaInicio }}</p>
           <p><strong>Fecha Fin:</strong> {{ selectedConvocatoria?.fechaFin }}</p>
+          <p><strong>Estado:</strong> {{ selectedConvocatoria?.estado }}</p>
+          <p><strong>Proyectos:</strong> {{ selectedConvocatoria?.proyectos }}</p>
           <p><strong>Descripción:</strong> {{ selectedConvocatoria?.descripcion }}</p>
           <p><strong>Documento:</strong> <a href="assets/{{ selectedConvocatoria?.documento }}" target="_blank">{{ selectedConvocatoria?.documento }}</a></p>
           <h6>Criterios de Evaluación:</h6>
