@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-roles-usuario',
   templateUrl: './roles-usuario.component.html',
-  styleUrls: ['./roles-usuario.component.css']
+  styleUrls: ['./roles-usuario.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class RolesUsuarioComponent {
   activeTab: string = 'basic-info';
@@ -46,8 +50,85 @@ export class RolesUsuarioComponent {
     deletePermission: false
   };
 
+  showCreateRoleForm: boolean = false;
+
+  newRole = {
+    code: '',
+    creationDate: '',
+    name: '',
+    description: '',
+    status: 'Activo'
+  };
+
+  selectedRole: any = null;
+
+  filterStatus: string = '';
+
+  filteredRoles = this.roles;
+
   setActiveTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  filterRoles(): void {
+    if (!this.filterStatus) {
+      this.filteredRoles = this.roles;
+    } else {
+      this.filteredRoles = this.roles.filter(role => role.status === this.filterStatus);
+    }
+  }
+
+  openCreateRoleForm(): void {
+    this.showCreateRoleForm = true;
+    this.newRole.code = this.generateNextCode();
+    this.newRole.creationDate = this.getCurrentDate();
+    this.newRole.name = '';
+    this.newRole.description = '';
+    this.newRole.status = 'Activo';
+  }
+
+  generateNextCode(): string {
+    if (this.roles.length === 0) {
+      return '00001';
+    }
+    const maxCode = this.roles.reduce((max, role) => {
+      const codeNum = parseInt(role.code, 10);
+      return codeNum > max ? codeNum : max;
+    }, 0);
+    const nextCodeNum = maxCode + 1;
+    return nextCodeNum.toString().padStart(5, '0');
+  }
+
+  getCurrentDate(): string {
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+
+  saveRole(): void {
+    if (this.showCreateRoleForm) {
+      this.roles.push({ ...this.newRole });
+      this.showCreateRoleForm = false;
+      this.selectRole(this.newRole);
+      this.setActiveTab('basic-info');
+    } else if (this.selectedRole) {
+      // Update the selected role in the roles array
+      const index = this.roles.findIndex(role => role.code === this.selectedRole.code);
+      if (index !== -1) {
+        this.roles[index] = { ...this.selectedRole };
+      }
+    }
+  }
+
+  cancelCreateRole(): void {
+    this.showCreateRoleForm = false;
+  }
+
+  selectRole(role: any): void {
+    this.selectedRole = role;
+    this.setActiveTab('basic-info');
   }
 
   selectModule(module: any) {

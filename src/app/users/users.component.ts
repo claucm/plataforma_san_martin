@@ -459,4 +459,55 @@ export class UsersComponent {
       this.selectedAssignedPermissions = this.selectedAssignedPermissions.filter(p => p !== permission);
     }
   }
+
+  removeAdditionalInfo(index: number): void {
+    this.selectedUserAdditionalInfo.splice(index, 1);
+  }
+
+  openAddAdditionalInfoModal(): void {
+    this.showAddAdditionalInfoModal = true;
+  }
+
+  facultadesFilteredForEntry: string[][] = [];
+  programsFilteredForEntry: string[][] = [];
+
+  addAdditionalInfo(): void {
+    this.selectedUserAdditionalInfo.push({
+      sede: '',
+      facultad: '',
+      programa: ''
+    });
+    this.facultadesFilteredForEntry.push([]);
+    this.programsFilteredForEntry.push([]);
+  }
+
+  onEntrySedeChange(index: number): void {
+    const entry = this.selectedUserAdditionalInfo[index];
+    if (entry.sede && this.facultadesBySede[entry.sede]) {
+      this.facultadesFilteredForEntry[index] = this.facultadesBySede[entry.sede];
+      if (!this.facultadesFilteredForEntry[index].includes(entry.facultad)) {
+        entry.facultad = '';
+        entry.programa = '';
+        this.programsFilteredForEntry[index] = [];
+      }
+    } else {
+      this.facultadesFilteredForEntry[index] = [];
+      entry.facultad = '';
+      entry.programa = '';
+      this.programsFilteredForEntry[index] = [];
+    }
+  }
+
+  onEntryFacultadChange(index: number): void {
+    const entry = this.selectedUserAdditionalInfo[index];
+    if (entry.facultad && this.programsByFacultad[entry.facultad]) {
+      this.programsFilteredForEntry[index] = this.programsByFacultad[entry.facultad];
+      if (!this.programsFilteredForEntry[index].includes(entry.programa)) {
+        entry.programa = '';
+      }
+    } else {
+      this.programsFilteredForEntry[index] = [];
+      entry.programa = '';
+    }
+  }
 }

@@ -219,25 +219,25 @@
             <label>Facultad</label>
             <select [(ngModel)]="selectedUser.facultad" name="facultad" [disabled]="facultadesFilteredForSelectedUser.length === 0" required>
               <option value="" disabled selected>Seleccione una facultad</option>
-          <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Programa</label>
-        <select [(ngModel)]="selectedUser.programa" name="programa" [disabled]="programsFilteredForSelectedUser.length === 0" (ngModelChange)="onSelectedUserFacultadChange()">
-          <option value="" disabled selected>Seleccione un programa</option>
-          <option *ngFor="let programa of programsFilteredForSelectedUser" [value]="programa">{{ programa }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Cargo</label>
-        <select [(ngModel)]="selectedUser.cargo" name="cargo">
-          <option value="Docente">Docente</option>
-          <option value="Administrativo">Administrativo</option>
-          <option value="Investigación">Investigación</option>
-          <option value="Financiera">Financiera</option>
-        </select>
-      </div>
+              <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Programa</label>
+            <select [(ngModel)]="selectedUser.programa" name="programa" [disabled]="programsFilteredForSelectedUser.length === 0" (ngModelChange)="onSelectedUserFacultadChange()">
+              <option value="" disabled selected>Seleccione un programa</option>
+              <option *ngFor="let programa of programsFilteredForSelectedUser" [value]="programa">{{ programa }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Cargo</label>
+            <select [(ngModel)]="selectedUser.cargo" name="cargo">
+              <option value="Docente">Docente</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Investigación">Investigación</option>
+              <option value="Financiera">Financiera</option>
+            </select>
+          </div>
         </div>
         <div class="form-row two-columns">
           <div class="form-group">
@@ -340,10 +340,12 @@
       <div class="permission-assignment-container">
         <div class="user-info-section" *ngIf="selectedUser">
           <h4>Información del Usuario</h4>
-          <div *ngFor="let entry of selectedUserAdditionalInfo; let i = index" class="form-row two-columns additional-info-entry">
+          <form>
+            <div *ngFor="let entry of selectedUserAdditionalInfo; let i = index" class="form-row two-columns additional-info-entry">
             <div class="form-group">
               <label>Sede</label>
-              <select [(ngModel)]="entry.sede" name="sede{{i}}" (ngModelChange)="onSelectedUserSedeChange()">
+              <select [(ngModel)]="entry.sede" name="sede{{i}}" (ngModelChange)="onEntrySedeChange(i)">
+                <option value="" disabled selected>Seleccione una sede</option>
                 <option value="Bogotá">Bogotá</option>
                 <option value="Cali">Cali</option>
                 <option value="Pasto">Pasto</option>
@@ -353,85 +355,23 @@
             </div>
             <div class="form-group">
               <label>Facultad</label>
-              <select [(ngModel)]="entry.facultad" name="facultad{{i}}" [disabled]="facultadesFilteredForSelectedUser.length === 0" (ngModelChange)="onSelectedUserFacultadChange()">
+              <select [(ngModel)]="entry.facultad" name="facultad{{i}}" [disabled]="!facultadesFilteredForEntry[i] || facultadesFilteredForEntry[i].length === 0" (ngModelChange)="onEntryFacultadChange(i)">
                 <option value="" disabled selected>Seleccione una facultad</option>
-                <option *ngFor="let facultad of facultadesFilteredForSelectedUser" [value]="facultad">{{ facultad }}</option>
+                <option *ngFor="let facultad of facultadesFilteredForEntry[i]" [value]="facultad">{{ facultad }}</option>
               </select>
             </div>
             <div class="form-group">
               <label>Programa</label>
-              <select [(ngModel)]="entry.programa" name="programa{{i}}" [disabled]="programsFilteredForSelectedUser.length === 0">
+              <select [(ngModel)]="entry.programa" name="programa{{i}}" [disabled]="!programsFilteredForEntry[i] || programsFilteredForEntry[i].length === 0">
                 <option value="" disabled selected>Seleccione un programa</option>
-                <option *ngFor="let programa of programsFilteredForSelectedUser" [value]="programa">{{ programa }}</option>
+                <option *ngFor="let programa of programsFilteredForEntry[i]" [value]="programa">{{ programa }}</option>
               </select>
             </div>
-            <button type="button" (click)="removeAdditionalInfo(i)">Eliminar</button>
-          </div>
-          <button type="button" (click)="openAddAdditionalInfoModal()">Agregar Sede</button>
-        </div>
-        <div class="permissions-table unassigned-permissions">
-          <div class="table-header">
-            <span>Sin asignación</span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Tipo</th>
-                <th>Código</th>
-                <th>Nombre</th>
-              </tr>
-              <tr>
-                <th></th>
-                <th><input type="text" placeholder="Filtrar Tipo" /></th>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let permission of unassignedPermissions">
-                <td><input type="checkbox" [value]="permission" (change)="onUnassignedPermissionCheckboxChange($event, permission)" [checked]="isUnassignedPermissionSelected(permission)" /></td>
-                <td>{{ permission.type }}</td>
-                <td>{{ permission.code }}</td>
-                <td>{{ permission.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="permission-assignment-buttons">
-          <button type="button" (click)="assignPermission()">></button>
-          <button type="button" (click)="unassignPermission()"><</button>
-        </div>
-        <div class="permissions-table assigned-permissions">
-          <div class="table-header">
-            <span>Asignado</span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Tipo</th>
-                <th>Código</th>
-                <th>Nombre</th>
-              </tr>
-              <tr>
-                <th></th>
-                <th><input type="text" placeholder="Filtrar Tipo" /></th>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let permission of assignedPermissions">
-                <td><input type="checkbox" [value]="permission" (change)="onAssignedPermissionCheckboxChange($event, permission)" [checked]="isAssignedPermissionSelected(permission)" /></td>
-                <td>{{ permission.type }}</td>
-                <td>{{ permission.code }}</td>
-                <td>{{ permission.name }}</td>
-              </tr>
-            </tbody>
-          </table>
+            </div>
+            <button type="button" class="btn logout-btn" style="background-color:#0a2e4c; color:#ffb90b; font-weight:700; font-family:'Montserrat', sans-serif;" (click)="addAdditionalInfo()">Agregar sede</button>
+          </form>
         </div>
       </div>
     </div>
->>>>>>> REPLACE
-</edit_file>
+  </div>
+</div>

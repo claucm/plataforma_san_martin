@@ -4,7 +4,7 @@
     <div class="filters">
       <input type="text" placeholder="Search" class="search-input" />
       <button class="btn btn-primary export-btn">Export</button>
-      <button class="btn btn-warning create-role-btn">+ Crear Rol</button>
+      <button class="btn btn-warning create-role-btn" (click)="openCreateRoleForm()">+ Crear Rol</button>
     </div>
     <table class="role-table">
       <thead>
@@ -14,19 +14,32 @@
           <th>Descripción</th>
           <th>Fecha de creación</th>
           <th>Estado</th>
-          <th>Acciones</th>
         </tr>
         <tr>
           <th><input type="text" placeholder="Filtrar Código" /></th>
           <th><input type="text" placeholder="Filtrar Nombre" /></th>
           <th><input type="text" placeholder="Filtrar Descripción" /></th>
           <th><input type="text" placeholder="Filtrar Fecha" /></th>
-          <th><input type="text" placeholder="Filtrar Estado" /></th>
-          <th></th>
+          <th>
+            <select [(ngModel)]="filterStatus" (ngModelChange)="filterRoles()">
+              <option value="">Todos</option>
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <!-- Role rows will be dynamically generated here -->
+        <tr *ngFor="let role of roles" (click)="selectRole(role)" [class.selected]="selectedRole?.code === role.code" style="cursor: pointer;">
+          <td>{{ role.code }}</td>
+          <td>{{ role.name }}</td>
+          <td>{{ role.description }}</td>
+          <td>{{ role.creationDate }}</td>
+          <td>{{ role.status }}</td>
+          <td>
+            <!-- Actions like edit/delete can be added here -->
+          </td>
+        </tr>
       </tbody>
     </table>
     <div class="pagination">
@@ -46,6 +59,37 @@
     </div>
   </div>
 
+  <!-- Modal for create role form -->
+  <div *ngIf="showCreateRoleForm" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Crear Nuevo Rol</h3>
+      <form (ngSubmit)="saveRole()">
+        <div class="form-row">
+          <label>Código</label>
+          <input type="text" [(ngModel)]="newRole.code" name="code" readonly />
+          <label>Fecha de creación</label>
+          <input type="text" [(ngModel)]="newRole.creationDate" name="creationDate" readonly />
+        </div>
+        <div class="form-row">
+          <label>Nombre</label>
+          <input type="text" [(ngModel)]="newRole.name" name="name" required />
+          <label>Estado</label>
+          <select [(ngModel)]="newRole.status" name="status">
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Descripción</label>
+          <textarea [(ngModel)]="newRole.description" name="description"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" (click)="cancelCreateRole()">Cancelar</button>
+          <button type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="role-form-section">
     <ul class="tabs">
       <li class="tab" [class.active]="activeTab === 'basic-info'" (click)="setActiveTab('basic-info')">Información básica</li>
@@ -53,28 +97,28 @@
       <li class="tab" [class.active]="activeTab === 'permission-assignment'" (click)="setActiveTab('permission-assignment')">Asignación de permisos</li>
     </ul>
     <div class="tab-content" [class.active]="activeTab === 'basic-info'" id="basic-info">
-      <form>
+      <form *ngIf="selectedRole" (ngSubmit)="saveRole()">
         <div class="form-row">
           <label>Código</label>
-          <input type="text" />
+          <input type="text" [(ngModel)]="selectedRole.code" name="code" readonly />
           <label>Fecha de creación</label>
-          <input type="date" />
+          <input type="text" [(ngModel)]="selectedRole.creationDate" name="creationDate" readonly />
         </div>
         <div class="form-row">
           <label>Nombre</label>
-          <input type="text" />
+          <input type="text" [(ngModel)]="selectedRole.name" name="name" required />
           <label>Estado</label>
-          <select>
+          <select [(ngModel)]="selectedRole.status" name="status">
             <option>Activo</option>
             <option>Inactivo</option>
           </select>
         </div>
         <div class="form-row">
           <label>Descripción</label>
-          <textarea></textarea>
+          <textarea [(ngModel)]="selectedRole.description" name="description"></textarea>
         </div>
         <div class="form-actions">
-          <button type="reset">Limpiar</button>
+          <button type="button" (click)="cancelCreateRole()">Cancelar</button>
           <button type="submit">Guardar</button>
         </div>
       </form>
