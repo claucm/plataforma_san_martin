@@ -183,12 +183,30 @@
             <option *ngFor="let module of modules" [ngValue]="module">{{ module.name }}</option>
           </select>
         </div>
-        <div *ngIf="selectedModule" class="permissions-toggle" style="margin-top: 5px;">
-          <label><input type="checkbox" [(ngModel)]="permissions.view" /> Ver</label>
-          <label><input type="checkbox" [(ngModel)]="permissions.edit" /> Editar</label>
-          <label><input type="checkbox" [(ngModel)]="permissions.modify" /> Modificar</label>
-          <label><input type="checkbox" [(ngModel)]="permissions.delete" /> Eliminar</label>
+        <div *ngIf="selectedModule" style="margin-top: 5px;">
+          <table class="permissions-table">
+            <thead>
+              <tr>
+                <th>Permiso</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ selectedModule.name }}</td>
+                <td><input type="checkbox" [(ngModel)]="permissions.view" /></td>
+                <td><input type="checkbox" [(ngModel)]="permissions.edit" /></td>
+                <td><input type="checkbox" [(ngModel)]="permissions.modify" /></td>
+                <td><input type="checkbox" [(ngModel)]="permissions.delete" /></td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
           <button (click)="addModuleWithPermissions()">Agregar módulo</button>
+          <br>
         </div>
         <div *ngIf="assignedModules.length > 0" class="assigned-modules">
           <h5>Módulos asignados</h5>
@@ -202,11 +220,26 @@
               <button (click)="removeAssignedModule(mod.name)">Eliminar</button>
               <ul>
                 <li *ngFor="let sub of mod.submodules">
-                  {{ sub.name }} -
-                  <label><input type="checkbox" [checked]="sub.permissions.view" (change)="toggleSubmodulePermission(mod.name, sub.name, 'view')" /> Ver</label>
-                  <label><input type="checkbox" [checked]="sub.permissions.edit" (change)="toggleSubmodulePermission(mod.name, sub.name, 'edit')" /> Editar</label>
-                  <label><input type="checkbox" [checked]="sub.permissions.modify" (change)="toggleSubmodulePermission(mod.name, sub.name, 'modify')" /> Modificar</label>
-                  <label><input type="checkbox" [checked]="sub.permissions.delete" (change)="toggleSubmodulePermission(mod.name, sub.name, 'delete')" /> Eliminar</label>
+                  <table class="permissions-table submodule-permissions-table">
+                    <thead>
+                      <tr>
+                        <th>Submódulo</th>
+                        <th>Ver</th>
+                        <th>Editar</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ sub.name }}</td>
+                        <td><input type="checkbox" [checked]="sub.permissions.view" (change)="toggleSubmodulePermission(mod.name, sub.name, 'view')" /></td>
+                        <td><input type="checkbox" [checked]="sub.permissions.edit" (change)="toggleSubmodulePermission(mod.name, sub.name, 'edit')" /></td>
+                        <td><input type="checkbox" [checked]="sub.permissions.modify" (change)="toggleSubmodulePermission(mod.name, sub.name, 'modify')" /></td>
+                        <td><input type="checkbox" [checked]="sub.permissions.delete" (change)="toggleSubmodulePermission(mod.name, sub.name, 'delete')" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </li>
               </ul>
             </li>
