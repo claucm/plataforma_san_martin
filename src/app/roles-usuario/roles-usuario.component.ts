@@ -43,12 +43,30 @@ export class RolesUsuarioComponent {
   selectedModule: any = null;
 
   permissions = {
-    executeOption: false,
-    readPermission: true,
-    insertPermission: false,
-    updatePermission: true,
-    deletePermission: false
+    view: false,
+    edit: false,
+    modify: false,
+    delete: false
   };
+
+  assignedModules: {
+    name: string;
+    permissions: {
+      view: boolean;
+      edit: boolean;
+      modify: boolean;
+      delete: boolean;
+    };
+    submodules: {
+      name: string;
+      permissions: {
+        view: boolean;
+        edit: boolean;
+        modify: boolean;
+        delete: boolean;
+      };
+    }[];
+  }[] = [];
 
   showCreateRoleForm: boolean = false;
 
@@ -68,6 +86,71 @@ export class RolesUsuarioComponent {
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  selectModule(module: any) {
+    this.selectedModule = module;
+    // Reset permissions when module changes
+    this.permissions = {
+      view: false,
+      edit: false,
+      modify: false,
+      delete: false
+    };
+  }
+
+  togglePermission(permission: keyof typeof this.permissions) {
+    this.permissions[permission] = !this.permissions[permission];
+  }
+
+  addModuleWithPermissions() {
+    if (!this.selectedModule) return;
+
+    // Initialize submodules with default permissions
+    const submodulesWithPermissions = (this.selectedModule.children || []).map((sub: any) => ({
+      name: sub.name,
+      permissions: {
+        view: false,
+        edit: false,
+        modify: false,
+        delete: false
+      }
+    }));
+
+    // Check if module already assigned
+    const exists = this.assignedModules.find(m => m.name === this.selectedModule.name);
+    if (exists) {
+      // Update permissions and submodules
+      exists.permissions = { ...this.permissions };
+      exists.submodules = submodulesWithPermissions;
+    } else {
+      this.assignedModules.push({
+        name: this.selectedModule.name,
+        permissions: { ...this.permissions },
+        submodules: submodulesWithPermissions
+      });
+    }
+
+    // Reset selection and permissions
+    this.selectedModule = null;
+    this.permissions = {
+      view: false,
+      edit: false,
+      modify: false,
+      delete: false
+    };
+  }
+
+  toggleSubmodulePermission(moduleName: string, submoduleName: string, permission: keyof typeof this.permissions) {
+    const module = this.assignedModules.find(m => m.name === moduleName);
+    if (!module) return;
+    const submodule = module.submodules.find((s: any) => s.name === submoduleName);
+    if (!submodule) return;
+    submodule.permissions[permission] = !submodule.permissions[permission];
+  }
+
+  removeAssignedModule(moduleName: string) {
+    this.assignedModules = this.assignedModules.filter(m => m.name !== moduleName);
   }
 
   filterRoles(): void {
@@ -129,17 +212,6 @@ export class RolesUsuarioComponent {
   selectRole(role: any): void {
     this.selectedRole = role;
     this.setActiveTab('basic-info');
-  }
-
-  selectModule(module: any) {
-    this.selectedModule = module;
-    // TODO: Load permissions for the selected module and role
-    console.log('Selected module:', module);
-  }
-
-  togglePermission(permission: keyof typeof this.permissions) {
-    this.permissions[permission] = !this.permissions[permission];
-    console.log('Toggled permission:', permission, 'New value:', this.permissions[permission]);
   }
 
   assignUser() {

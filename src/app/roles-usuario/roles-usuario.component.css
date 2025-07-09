@@ -1,6 +1,804 @@
 .role-management-container {
-  padding: 1rem;
+  padding: 2rem;
   font-family: 'Montserrat', sans-serif;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 1200px;
+  margin: 1rem auto;
+}
+
+.role-management-container h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #0a2e4c;
+  border-bottom: 3px solid #0056b3;
+  padding-bottom: 0.5rem;
+}
+
+.role-list-section {
+  margin-bottom: 2rem;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters input.search-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  width: 250px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.filters input.search-input:focus {
+  border-color: #0a2e4c;
+  outline: none;
+}
+
+.filters button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.filters .btn-primary {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.filters .btn-primary:hover {
+  background-color: #004080;
+}
+
+.filters .btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.filters .btn-warning:hover {
+  background-color: #e6ac00;
+}
+
+.role-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.role-table th,
+.role-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.role-table th {
+  background-color: #0a2e4c;
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
+.role-table tr {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.role-table tr:hover {
+  background-color: #e3f2fd;
+  cursor: pointer;
+}
+
+.role-table tr.selected {
+  background-color: #bbdefb;
+}
+
+.role-table td {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  justify-content: flex-end;
+}
+
+.pagination select {
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #b0bec5;
+  font-size: 1rem;
+}
+
+.pagination button {
+  background-color: white;
+  border: 1px solid #0a2e4c;
+  color: #0a2e4c;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.role-form-section {
+  border-top: 2px solid #0a2e4c;
+  padding-top: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding-bottom: 2rem;
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #0a2e4c;
+}
+
+.tabs .tab {
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  color: #0a2e4c;
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+  border-radius: 6px 6px 0 0;
+}
+
+.tabs .tab.active {
+  border-bottom-color: #0056b3;
+  color: #0056b3;
+  background-color: #e3f2fd;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  flex: 0 0 160px;
+  font-weight: 700;
+  align-self: center;
+  color: #0a2e4c;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  flex: 1 1 auto;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: #0a2e4c;
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.form-actions button {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.form-actions button[type="reset"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.form-actions button[type="reset"]:hover {
+  background-color: #5a6268;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #004080;
+}
+
+/* User assignment tab styles */
+.user-assignment-container {
+  display: flex;
+  gap: 1.5rem;
+  background-color: #c1d9e0;
+  padding: 1.25rem;
+  border-radius: 10px;
+}
+
+.users-table {
+  flex: 1;
+  background-color: #f9f6f6;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.users-table .table-header {
+  background-color: #f7e6b5;
+  padding: 0.6rem 1.25rem;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.user-assignment-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.user-assignment-buttons button {
+  width: 44px;
+  height: 44px;
+  font-size: 1.75rem;
+  background-color: #f7e6b5;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.user-assignment-buttons button:hover {
+  background-color: #e0d18a;
+}
+
+/* Permission assignment tab styles */
+.permission-assignment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: #c1d9e0;
+  padding: 1.25rem;
+  border-radius: 10px;
+}
+
+.permission-assignment-container > div:first-child {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #0a2e4c;
+}
+
+.permissions-toggle {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.permissions-toggle label {
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #0a2e4c;
+}
+
+.permissions-toggle input[type="checkbox"] {
+  margin-right: 0.4rem;
+  width: 18px;
+  height: 18px;
+}
+
+.assigned-modules {
+  background-color: #f9f6f6;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 1.25rem;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.assigned-modules h5 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: #0a2e4c;
+}
+
+.assigned-modules ul {
+  list-style: none;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.assigned-modules ul li {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #0a2e4c;
+}
+
+.assigned-modules ul li ul {
+  list-style: none;
+  padding-left: 1.25rem;
+  margin-top: 0.3rem;
+}
+
+.assigned-modules ul li ul li {
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.assigned-modules ul li ul li label {
+  cursor: pointer;
+  user-select: none;
+  font-weight: 400;
+  color: #333;
+  margin-right: 1rem;
+  white-space: nowrap;
+}
+
+.assigned-modules ul li ul li label input[type="checkbox"] {
+  margin-right: 0.4rem;
+  width: 18px;
+  height: 18px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #0a2e4c;
+}
+
+.role-management-container h2 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.role-list-section {
+  margin-bottom: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.filters input.search-input {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filters button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filters .btn-primary {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.filters .btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.role-table th,
+.role-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.role-table th {
+  background-color: #0a2e4c;
+  color: white;
+  font-weight: 600;
+}
+
+.role-table tr.selected {
+  background-color: #e0f0ff;
+}
+
+.role-table tr:hover {
+  background-color: #f0f8ff;
+  cursor: pointer;
+}
+
+.pagination {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.pagination select {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.pagination button {
+  background-color: white;
+  border: 1px solid #0a2e4c;
+  color: #0a2e4c;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.role-form-section {
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #0a2e4c;
+}
+
+.tabs .tab {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: #0a2e4c;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.tabs .tab.active {
+  border-bottom-color: #0056b3;
+  color: #0056b3;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  flex: 0 0 150px;
+  font-weight: 600;
+  align-self: center;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  flex: 1 1 auto;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: #0a2e4c;
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.form-actions button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-actions button[type="reset"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.form-actions button[type="reset"]:hover {
+  background-color: #5a6268;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #0a2e4c;
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #004080;
+}
+
+/* User assignment tab styles */
+.user-assignment-container {
+  display: flex;
+  gap: 1rem;
+  background-color: #c1d9e0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.users-table {
+  flex: 1;
+  background-color: #f9f6f6;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.users-table .table-header {
+  background-color: #f7e6b5;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+}
+
+.users-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.users-table th,
+.users-table td {
+  border: 1px solid #ddd;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.user-assignment-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.user-assignment-buttons button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  background-color: #f7e6b5;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.user-assignment-buttons button:hover {
+  background-color: #e0d18a;
+}
+
+/* Permission assignment tab styles */
+.permission-assignment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #c1d9e0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.permissions-toggle {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.permissions-toggle label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.permissions-toggle input[type="checkbox"] {
+  margin-right: 0.3rem;
+}
+
+.assigned-modules {
+  background-color: #f9f6f6;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  padding: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.assigned-modules h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.assigned-modules ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+.assigned-modules ul li {
+  margin-bottom: 0.5rem;
+}
+
+.assigned-modules ul li ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+
+.assigned-modules ul li ul li {
+  margin-bottom: 0.25rem;
+}
+
+.assigned-modules ul li ul li label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.assigned-modules ul li ul li label input[type="checkbox"] {
+  margin-right: 0.3rem;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #0a2e4c;
 }
 
 .role-management-container h2 {

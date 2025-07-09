@@ -36,9 +36,6 @@
           <td>{{ role.description }}</td>
           <td>{{ role.creationDate }}</td>
           <td>{{ role.status }}</td>
-          <td>
-            <!-- Actions like edit/delete can be added here -->
-          </td>
         </tr>
       </tbody>
     </table>
@@ -178,41 +175,42 @@
       </div>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'permission-assignment'" id="permission-assignment">
-      <div class="permission-assignment-container" style="display: flex; gap: 1rem; background-color: #c1d9e0; padding: 1rem; border-radius: 8px;">
-        <div class="modules-list" style="flex: 1; background-color: #f9f6f6; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); overflow: auto; max-height: 300px; padding: 1rem;">
-          <h5>Módulos del sistema</h5>
-          <ul style="list-style: none; padding-left: 0;">
-            <li><strong>Inicio</strong></li>
-            <li><strong>Seguridad</strong>
-              <ul style="list-style: none; padding-left: 1rem;">
-                <li>Gestión de usuarios</li>
-                <li>Gestión de roles</li>
-                <li>Auditoría</li>
+      <div class="permission-assignment-container">
+        <div>
+          <label>Seleccione módulo:</label>&ensp;&nbsp;&nbsp;&nbsp;
+          <select [(ngModel)]="selectedModule" (ngModelChange)="selectModule(selectedModule)">
+            <option [ngValue]="null">--Seleccione un módulo--</option>
+            <option *ngFor="let module of modules" [ngValue]="module">{{ module.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="selectedModule" class="permissions-toggle" style="margin-top: 5px;">
+          <label><input type="checkbox" [(ngModel)]="permissions.view" /> Ver</label>
+          <label><input type="checkbox" [(ngModel)]="permissions.edit" /> Editar</label>
+          <label><input type="checkbox" [(ngModel)]="permissions.modify" /> Modificar</label>
+          <label><input type="checkbox" [(ngModel)]="permissions.delete" /> Eliminar</label>
+          <button (click)="addModuleWithPermissions()">Agregar módulo</button>
+        </div>
+        <div *ngIf="assignedModules.length > 0" class="assigned-modules">
+          <h5>Módulos asignados</h5>
+          <ul>
+            <li *ngFor="let mod of assignedModules">
+              {{ mod.name }} -
+              <span *ngIf="mod.permissions.view">Ver </span>
+              <span *ngIf="mod.permissions.edit">Editar </span>
+              <span *ngIf="mod.permissions.modify">Modificar </span>
+              <span *ngIf="mod.permissions.delete">Eliminar </span>
+              <button (click)="removeAssignedModule(mod.name)">Eliminar</button>
+              <ul>
+                <li *ngFor="let sub of mod.submodules">
+                  {{ sub.name }} -
+                  <label><input type="checkbox" [checked]="sub.permissions.view" (change)="toggleSubmodulePermission(mod.name, sub.name, 'view')" /> Ver</label>
+                  <label><input type="checkbox" [checked]="sub.permissions.edit" (change)="toggleSubmodulePermission(mod.name, sub.name, 'edit')" /> Editar</label>
+                  <label><input type="checkbox" [checked]="sub.permissions.modify" (change)="toggleSubmodulePermission(mod.name, sub.name, 'modify')" /> Modificar</label>
+                  <label><input type="checkbox" [checked]="sub.permissions.delete" (change)="toggleSubmodulePermission(mod.name, sub.name, 'delete')" /> Eliminar</label>
+                </li>
               </ul>
             </li>
-            <li><strong>Investigación</strong></li>
-            <li><strong>Extensión</strong></li>
-            <li><strong>Indicadores</strong></li>
           </ul>
-        </div>
-        <div class="permissions-toggle" style="flex: 1; background-color: #f9f6f6; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); padding: 1rem;">
-          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" /> Ejecuta Opción
-            </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" checked /> Permiso Lectura
-            </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" /> Permiso Inserción
-            </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" checked /> Permiso Actualización
-            </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
-              <input type="checkbox" /> Permiso Eliminación
-            </label>
-          </div>
         </div>
       </div>
     </div>
