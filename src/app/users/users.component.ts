@@ -510,4 +510,15 @@ export class UsersComponent {
       entry.programa = '';
     }
   }
+
+  deactivateSede(index: number): void {
+    // Implement the logic to deactivate the site (sede) for the entry at the given index
+    // For now, just log the action
+    console.log(`Desactivar sede for entry at index ${index}`, this.selectedUserAdditionalInfo[index]);
+    // Example: mark the entry as deactivated or remove it, depending on requirements
+    // Here, we just add a property 'deactivated' to the entry
+    if (this.selectedUserAdditionalInfo[index]) {
+      (this.selectedUserAdditionalInfo[index] as any).deactivated = true;
+    }
+  }
 }

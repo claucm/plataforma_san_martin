@@ -367,6 +367,10 @@
                 <option *ngFor="let programa of programsFilteredForEntry[i]" [value]="programa">{{ programa }}</option>
               </select>
             </div>
+            <div class="form-group buttons-group" style="display: flex; align-items: center; gap: 15x; padding-top: 23px;">
+              <button type="button" class="btn btn-danger" title="Eliminar sede" (click)="removeAdditionalInfo(i)">Eliminar</button>
+              <button type="button" class="btn btn-warning" title="Desactivar sede" (click)="deactivateSede(i)">Desactivar sede</button>
+            </div>
             </div>
             <button type="button" class="btn logout-btn" style="background-color:#0a2e4c; color:#ffb90b; font-weight:700; font-family:'Montserrat', sans-serif;" (click)="addAdditionalInfo()">Agregar sede</button>
           </form>

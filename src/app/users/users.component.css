@@ -459,3 +459,99 @@ form {
   color: white;
   cursor: default;
 }
+
+/* Scoped CSS for Agregar sede section in user-permissions tab */
+.permission-assignment-container .user-info-section form .additional-info-entry {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Reduce width for Sede and Facultad fields */
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:nth-child(1),
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:nth-child(2) {
+  max-width: 180px;
+  flex: 0 0 auto;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group.label-sede,
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group.label-facultad {
+  max-width: 180px; /* Reduce width for Sede and Facultad */
+  flex: 0 0 auto;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group label {
+  width: 160px;
+  font-weight: 600;
+  min-width: 140px;
+  margin-bottom: 4px;
+  align-self: flex-start;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group select,
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group input {
+  flex: 1 1 auto;
+  min-width: 120px;
+  height: 32px;
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* For the Programa group with buttons */
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child > div {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child > div select {
+  max-width: 200px;
+  white-space: nowrap;
+}
+
+/* Style the buttons inside the last form-group (Programa) */
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child button {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Specific button colors */
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child button.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child button.btn-warning {
+  background-color: #ffc107;
+  color: #0a2e4c;
+}
+
+/* Add margin between buttons */
+.permission-assignment-container .user-info-section form .additional-info-entry .form-group:last-child button + button {
+  margin-left: 8px;
+}

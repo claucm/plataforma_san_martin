@@ -801,6 +801,37 @@
   color: #0a2e4c;
 }
 
+/* Make submodule permission tables smaller and equal in size */
+.submodule-permissions-table {
+  width: 600px;
+  max-width: 100%;
+  table-layout: fixed;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  background-color: #f9f6f6;
+  overflow: hidden;
+}
+
+.submodule-permissions-table th,
+.submodule-permissions-table td {
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.submodule-permissions-table th:first-child,
+.submodule-permissions-table td:first-child {
+  width: 250px;
+  font-weight: 600;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
 .role-management-container h2 {
   margin-bottom: 1rem;
   font-weight: 700;
