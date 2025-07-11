@@ -8,6 +8,9 @@ interface Convocatoria {
   fechaFin: string;
   estado: string;
   proyectos: number;
+  sede?: string;
+  facultad?: string;
+  programa?: string;
   descripcion?: string;
   documento?: string;
   criteriosEvaluacion?: { factor: string; puntajeMaximo: number }[];
@@ -15,16 +18,31 @@ interface Convocatoria {
 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-convocatorias',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './convocatorias.component.html',
   styleUrls: ['./convocatorias.component.css']
 })
 export class ConvocatoriasComponent implements OnInit {
   convocatorias: Convocatoria[] = [];
+
+  filterCodigo: string = '';
+  filterTitulo: string = '';
+  filterFechaInicio: string = '';
+  filterFechaFin: string = '';
+  filterEstado: string = '';
+  filterProyectos: string = '';
+  filterSede: string = '';
+  filterFacultad: string = '';
+  filterPrograma: string = '';
+
+  sedes: string[] = [];
+  facultades: string[] = [];
+  programas: string[] = [];
 
   selectedConvocatoria: Convocatoria | null = null;
   showModal: boolean = false;
@@ -41,6 +59,9 @@ export class ConvocatoriasComponent implements OnInit {
         fechaFin: '2023-03-31',
         estado: 'Activo',
         proyectos: 5,
+        sede: 'Sede A',
+        facultad: 'Facultad de Ciencias',
+        programa: 'Programa 1',
         descripcion: 'Descripción completa de la convocatoria de prueba.',
         documento: 'documento-prueba.pdf',
         criteriosEvaluacion: [
@@ -65,6 +86,9 @@ export class ConvocatoriasComponent implements OnInit {
         fechaFin: '2023-06-30',
         estado: 'Cerrado',
         proyectos: 3,
+        sede: 'Sede B',
+        facultad: 'Facultad de Ingeniería',
+        programa: 'Programa 2',
         descripcion: 'Descripción de la convocatoria ficticia 2.',
         documento: 'documento-ficticio2.pdf',
         criteriosEvaluacion: [
@@ -89,6 +113,9 @@ export class ConvocatoriasComponent implements OnInit {
         fechaFin: '2023-09-30',
         estado: 'Activo',
         proyectos: 7,
+        sede: 'Sede A',
+        facultad: 'Facultad de Ciencias',
+        programa: 'Programa 3',
         descripcion: 'Descripción de la convocatoria ficticia 3.',
         documento: 'documento-ficticio3.pdf',
         criteriosEvaluacion: [
@@ -107,6 +134,26 @@ export class ConvocatoriasComponent implements OnInit {
         ]
       }
     ];
+
+    this.sedes = Array.from(new Set(this.convocatorias.map(c => c.sede || ''))).filter(s => s !== '');
+    this.facultades = Array.from(new Set(this.convocatorias.map(c => c.facultad || ''))).filter(f => f !== '');
+    this.programas = Array.from(new Set(this.convocatorias.map(c => c.programa || ''))).filter(p => p !== '');
+  }
+
+  get filteredConvocatorias(): Convocatoria[] {
+    return this.convocatorias.filter(c => {
+      return (
+        c.codigo.toLowerCase().includes(this.filterCodigo.toLowerCase()) &&
+        c.titulo.toLowerCase().includes(this.filterTitulo.toLowerCase()) &&
+        c.fechaInicio.toLowerCase().includes(this.filterFechaInicio.toLowerCase()) &&
+        c.fechaFin.toLowerCase().includes(this.filterFechaFin.toLowerCase()) &&
+        c.estado.toLowerCase().includes(this.filterEstado.toLowerCase()) &&
+        c.proyectos.toString().includes(this.filterProyectos) &&
+        c.sede?.toLowerCase().includes(this.filterSede.toLowerCase()) &&
+        c.facultad?.toLowerCase().includes(this.filterFacultad.toLowerCase()) &&
+        c.programa?.toLowerCase().includes(this.filterPrograma.toLowerCase())
+      );
+    });
   }
 
   viewDetails(codigo: string) {

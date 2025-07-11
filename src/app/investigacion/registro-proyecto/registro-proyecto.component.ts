@@ -58,7 +58,6 @@ export class RegistroProyectoComponent implements OnInit {
   fechaCreacion: string = new Date().toISOString().split('T')[0];
   fechaPresentacion: string = '';
   titulo: string = '';
-  estado: string = '';
   duracionPrevista: number | null = null;
   areaConocimiento: string = '';
   facultad: string = '';
@@ -88,7 +87,6 @@ export class RegistroProyectoComponent implements OnInit {
 
   convocatorias: string[] = [];
 
-  estados: string[] = ['Guardado', 'Pendiente', 'Aprobado', 'Rechazado'];
   areasConocimiento: string[] = ['Ciencias Sociales', 'Ingeniería', 'Salud'];
   facultades: string[] = ['Facultad 1', 'Facultad 2', 'Facultad 3'];
   programas: string[] = ['Programa 1', 'Programa 2', 'Programa 3'];

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CampusService } from '../../services/campus.service';
+import { FacultyService } from '../../services/faculty.service';
+import { ProgramService } from '../../services/program.service';
+import { Campus } from '../../models/campus.model';
+import { Faculty } from '../../models/faculty.model';
+import { Program } from '../../models/program.model';
+import { ApiResponse } from '../../models/api-response.model';
 
 @Component({
   selector: 'app-apertura-convocatoria',
@@ -23,16 +30,84 @@ export class AperturaConvocatoriaComponent implements OnInit {
 
   estados: string[] = ['Activo', 'Publicado', 'Inactivo'];
   tiposConvocatoria: string[] = ['interna, externa, seguimiento']; // opciones
+
+  sedes: Campus[] = [];
+  facultades: Faculty[] = [];
+  programas: Program[] = [];
+
+  selectedSede?: Campus;
+  selectedFacultad?: Faculty;
+  selectedPrograma?: Program;
+
+  constructor(
+    private campusService: CampusService,
+    private facultyService: FacultyService,
+    private programService: ProgramService
+  ) {}
+
   ngOnInit() {
     if (!this.codigoConvocatoria) {
       this.generarCodigoConvocatoria();
     }
+    this.loadSedes();
   }
 
   generarCodigoConvocatoria() {
     const incremental = 1; // For now, static 1; in real app, fetch last incremental and add 1
     this.codigoConvocatoria = incremental.toString();
     console.log('Generated codigoConvocatoria:', this.codigoConvocatoria);
+  }
+
+  loadSedes() {
+    this.campusService.getAll().subscribe((response: ApiResponse<Campus[]>) => {
+      this.sedes = response.data;
+    });
+  }
+
+  onSedeChange() {
+    if (this.selectedSede) {
+      this.loadFacultades(this.selectedSede.id);
+      this.selectedFacultad = undefined;
+      this.selectedPrograma = undefined;
+      this.programas = [];
+    } else {
+      this.facultades = [];
+      this.programas = [];
+      this.selectedFacultad = undefined;
+      this.selectedPrograma = undefined;
+    }
+  }
+
+  loadFacultades(sedeId?: number) {
+    this.facultyService.getAll().subscribe((response: ApiResponse<Faculty[]>) => {
+      if (sedeId) {
+        // Filter faculties by sedeId if possible, else show all
+        // Since Faculty model has no sedeId, show all for now
+        this.facultades = response.data;
+      } else {
+        this.facultades = [];
+      }
+    });
+  }
+
+  onFacultadChange() {
+    if (this.selectedFacultad) {
+      this.loadProgramas(this.selectedFacultad.id);
+      this.selectedPrograma = undefined;
+    } else {
+      this.programas = [];
+      this.selectedPrograma = undefined;
+    }
+  }
+
+  loadProgramas(facultadId?: number) {
+    this.programService.getAll().subscribe((response: ApiResponse<Program[]>) => {
+      if (facultadId) {
+        this.programas = response.data.filter(p => p.faculty?.id === facultadId);
+      } else {
+        this.programas = [];
+      }
+    });
   }
 
   onFileSelected(event: any) {
@@ -59,7 +134,10 @@ export class AperturaConvocatoriaComponent implements OnInit {
       estado: this.estado,
       tipoConvocatoria: this.tipoConvocatoria,
       documentoConvocatoria: this.documentoConvocatoria,
-      criteriosEvaluacion: this.criteriosEvaluacion
+      criteriosEvaluacion: this.criteriosEvaluacion,
+      sede: this.selectedSede,
+      facultad: this.selectedFacultad,
+      programa: this.selectedPrograma
     });
     // Reset form or navigate as needed
   }
