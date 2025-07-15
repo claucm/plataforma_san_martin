@@ -1,0 +1,77 @@
+.category-box {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 0.075);
+}
+
+.category-title {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #0a2e4c;
+}
+
+/* Smooth hover transition for buttons */
+button.btn, button.btn-primary, button.btn-danger, button.btn-outline-primary, button.btn-link {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+button.btn:hover, button.btn-primary:hover, button.btn-danger:hover, button.btn-outline-primary:hover, button.btn-link:hover {
+  filter: brightness(90%);
+  cursor: pointer;
+}
+
+/* Input and button inline grouping adjustments */
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group .form-control {
+  flex: 1 1 auto;
+  margin-right: 0.5rem;
+}
+
+.input-group .btn {
+  flex: 0 0 auto;
+}
+
+/* Custom button style for Usuarios and Investigación */
+.custom-btn {
+  background-color: #0a2e4c;
+  color: #ffb90b;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #0a2e4c;
+  color: #ffb84d;
+}
+
+/* Update btn-primary to use #0a2e4c */
+.btn-primary {
+  background-color: #0a2e4c !important;
+  border-color: #0a2e4c !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background-color: #07304a !important;
+  border-color: #07304a !important;
+  color: white !important;
+}
+
+/* Pencil icon color update */
+.fas.fa-pencil-alt,
+.far.fa-pencil-alt,
+.fa-pencil-alt {
+  color: #0a2e4c !important;
+  cursor: pointer;
+}

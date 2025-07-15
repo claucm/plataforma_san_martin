@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2>Parametrización</h2>
+
+  <div class="module-filters mb-3">
+    <button *ngFor="let module of modulesKeys" class="btn btn-outline-primary custom-btn me-2" [class.active]="selectedModule === module" (click)="selectModule(module)">
+      <i [ngClass]="getModuleIcon(module)" class="me-1"></i> {{ getModuleLabel(module) }}
+    </button>
+  </div>
+
+  <div *ngFor="let category of getCategories()" class="category-box mb-4 p-3 rounded shadow-sm bg-white">
+    <h4 class="category-title">
+      {{ getCategoryLabel(category) }}
+      <small class="text-muted d-block">{{ getCategoryDescription(category) }}</small>
+    </h4>
+    <ul class="list-group mb-2">
+      <li *ngFor="let option of getOptions(category); let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <span (dblclick)="enableEdit(category, i)" *ngIf="!isEditing(category, i)">{{ option }}</span>
+          <input *ngIf="isEditing(category, i)" type="text" class="form-control me-2" [(ngModel)]="editValue" (blur)="saveEdit(category, i)" (keydown.enter)="saveEdit(category, i)" />
+          <button class="btn btn-link btn-sm p-0 ms-2" title="Editar" *ngIf="!isEditing(category, i)" (click)="enableEdit(category, i)">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+        </div>
+        <button class="btn btn-danger btn-sm" (click)="confirmDelete(category, i)">Eliminar</button>
+      </li>
+    </ul>
+    <div class="input-group input-group-sm align-items-center">
+      <input type="text" class="form-control me-2" [(ngModel)]="newOption" placeholder="Nueva opción para {{ getCategoryLabel(category) }}">
+      <button class="btn btn-primary" (click)="addOption(category)">Agregar</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteLabel">Confirmar eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          ¿Está seguro que desea eliminar esta opción?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteConfirmed()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,6 +39,22 @@ export class ProyectosComponent implements OnInit, AfterViewInit {
   proyectos: Proyecto[] = [];
   selectedProyecto: Proyecto | null = null;
 
+  filterSede: string = '';
+  filterFacultad: string = '';
+  filterPrograma: string = '';
+
+  filterCodigo: string = '';
+  filterNombre: string = '';
+  filterEstado: string = '';
+  filterFechaInicio: string = '';
+  filterFechaFin: string = '';
+
+  sedes: string[] = ['Sede 1', 'Sede 2', 'Sede 3']; // Example sedes, replace with real data
+  facultades: string[] = ['Facultad 1', 'Facultad 2', 'Facultad 3']; // Example facultades
+  programas: string[] = ['Programa 1', 'Programa 2', 'Programa 3']; // Example programas
+
+  filteredProyectos: Proyecto[] = [];
+
   @ViewChild('projectModal') projectModalRef!: ElementRef;
   private projectModalInstance: any;
 
@@ -82,6 +98,29 @@ export class ProyectosComponent implements OnInit, AfterViewInit {
         ]
       }
     ];
+    this.filteredProyectos = this.proyectos;
+  }
+
+  applyFilters() {
+    this.filteredProyectos = this.proyectos.filter(proyecto => {
+      const matchSede = this.filterSede ? proyecto.areaConocimiento === this.filterSede : true;
+      const matchFacultad = this.filterFacultad ? proyecto.areaConocimiento === this.filterFacultad : true;
+      const matchPrograma = this.filterPrograma ? proyecto.areaConocimiento === this.filterPrograma : true;
+
+      const matchCodigo = proyecto.codigo.toLowerCase().includes(this.filterCodigo.toLowerCase());
+      const matchNombre = proyecto.titulo.toLowerCase().includes(this.filterNombre.toLowerCase());
+      const matchEstado = proyecto.estado.toLowerCase().includes(this.filterEstado.toLowerCase());
+
+      const fechaInicioFilter = this.filterFechaInicio ? new Date(this.filterFechaInicio) : null;
+      const fechaFinFilter = this.filterFechaFin ? new Date(this.filterFechaFin) : null;
+      const proyectoFechaInicio = new Date(proyecto.fechaInicio);
+      const proyectoFechaFin = new Date(proyecto.fechaFin);
+
+      const matchFechaInicio = fechaInicioFilter ? proyectoFechaInicio >= fechaInicioFilter : true;
+      const matchFechaFin = fechaFinFilter ? proyectoFechaFin <= fechaFinFilter : true;
+
+      return matchSede && matchFacultad && matchPrograma && matchCodigo && matchNombre && matchEstado && matchFechaInicio && matchFechaFin;
+    });
   }
 
   async ngAfterViewInit() {

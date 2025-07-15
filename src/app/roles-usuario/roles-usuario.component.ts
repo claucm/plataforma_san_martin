@@ -20,13 +20,45 @@ export class RolesUsuarioComponent {
   ];
 
   unassignedUsers = [
-    { code: 'U001', name: 'Usuario 1' },
-    { code: 'U002', name: 'Usuario 2' }
+    { cedula: '123456789', nombre: 'Usuario 1' },
+    { cedula: '987654321', nombre: 'Usuario 2' },
+    { cedula: '456789123', nombre: 'Usuario 3' }
   ];
 
   assignedUsers = [
-    { code: 'U003', name: 'Usuario 3' }
+    { cedula: '321654987', nombre: 'Usuario 4' }
   ];
+
+  selectedUnassignedUsers: Set<string> = new Set();
+  selectedAssignedUsers: Set<string> = new Set();
+
+  filterUnassignedCedula: string = '';
+  filterUnassignedNombre: string = '';
+  filterAssignedCedula: string = '';
+  filterAssignedNombre: string = '';
+
+  get filteredUnassignedUsers() {
+    return this.unassignedUsers.filter(user =>
+      user.cedula.toLowerCase().includes(this.filterUnassignedCedula.toLowerCase()) &&
+      user.nombre.toLowerCase().includes(this.filterUnassignedNombre.toLowerCase())
+    );
+  }
+
+  get filteredAssignedUsers() {
+    return this.assignedUsers.filter(user =>
+      user.cedula.toLowerCase().includes(this.filterAssignedCedula.toLowerCase()) &&
+      user.nombre.toLowerCase().includes(this.filterAssignedNombre.toLowerCase())
+    );
+  }
+
+
+  toggleAssignedUserSelection(cedula: string, event: any) {
+    if (event.target.checked) {
+      this.selectedAssignedUsers.add(cedula);
+    } else {
+      this.selectedAssignedUsers.delete(cedula);
+    }
+  }
 
   modules = [
     { name: 'Inicio', children: [] },
@@ -215,22 +247,32 @@ export class RolesUsuarioComponent {
   }
 
   assignUser() {
-    // TODO: Implement logic to assign selected user from unassignedUsers to assignedUsers
-    console.log('Assign user clicked');
+    this.selectedUnassignedUsers.forEach(cedula => {
+      const index = this.unassignedUsers.findIndex(u => u.cedula === cedula);
+      if (index !== -1) {
+        const user = this.unassignedUsers.splice(index, 1)[0];
+        this.assignedUsers.push(user);
+      }
+    });
+    this.selectedUnassignedUsers.clear();
   }
 
   unassignUser() {
-    // TODO: Implement logic to unassign selected user from assignedUsers to unassignedUsers
-    console.log('Unassign user clicked');
+    this.selectedAssignedUsers.forEach(cedula => {
+      const index = this.assignedUsers.findIndex(u => u.cedula === cedula);
+      if (index !== -1) {
+        const user = this.assignedUsers.splice(index, 1)[0];
+        this.unassignedUsers.push(user);
+      }
+    });
+    this.selectedAssignedUsers.clear();
   }
 
-  assignPermission() {
-    // TODO: Implement logic to assign selected permission from unassignedPermissions to assignedPermissions
-    console.log('Assign permission clicked');
-  }
-
-  unassignPermission() {
-    // TODO: Implement logic to unassign selected permission from assignedPermissions to unassignedPermissions
-    console.log('Unassign permission clicked');
+  toggleUnassignedUserSelection(cedula: string, event: any) {
+    if (event.target.checked) {
+      this.selectedUnassignedUsers.add(cedula);
+    } else {
+      this.selectedUnassignedUsers.delete(cedula);
+    }
   }
 }

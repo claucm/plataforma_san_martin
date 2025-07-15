@@ -32,6 +32,11 @@
               <i class="fas fa-file-alt me-2"></i> Reportes y Notificaciones
             </a>
           </li>
+          <li>
+            <a *ngIf="!selectedModule || selectedModule === 'users'" [routerLink]="'/administracion/parametrizacion'" class="nav-link text-white">
+              <i class="fas fa-sliders-h me-2"></i> Parametrización
+            </a>
+          </li>
         </ul>
       </div>
     </li>

@@ -1,18 +1,58 @@
 <div class="container mt-4">
   <h2>Proyectos</h2>
+
+  <div class="filter-container mb-3">
+    <div class="filter-group">
+      <label for="filterSede">Sede</label>
+      <select id="filterSede" [(ngModel)]="filterSede" (change)="applyFilters()" class="form-select">
+        <option value="">Todas</option>
+        <option *ngFor="let sede of sedes" [value]="sede">{{ sede }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filterFacultad">Facultad</label>
+      <select id="filterFacultad" [(ngModel)]="filterFacultad" (change)="applyFilters()" class="form-select">
+        <option value="">Todas</option>
+        <option *ngFor="let facultad of facultades" [value]="facultad">{{ facultad }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filterPrograma">Programa</label>
+      <select id="filterPrograma" [(ngModel)]="filterPrograma" (change)="applyFilters()" class="form-select">
+        <option value="">Todos</option>
+        <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+      </select>
+    </div>
+  </div>
+
   <table class="table table-striped table-bordered">
     <thead class="table-dark">
       <tr>
-        <th>Código Proyecto</th>
-        <th>Nombre</th>
-        <th>Estado</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Fin</th>
+        <th>
+          Código Proyecto
+          <input type="text" [(ngModel)]="filterCodigo" (input)="applyFilters()" placeholder="Filtrar Código" class="form-control form-control-sm mt-1" />
+        </th>
+        <th>
+          Nombre
+          <input type="text" [(ngModel)]="filterNombre" (input)="applyFilters()" placeholder="Filtrar Nombre" class="form-control form-control-sm mt-1" />
+        </th>
+        <th>
+          Estado
+          <input type="text" [(ngModel)]="filterEstado" (input)="applyFilters()" placeholder="Filtrar Estado" class="form-control form-control-sm mt-1" />
+        </th>
+        <th>
+          Fecha Inicio
+          <input type="date" [(ngModel)]="filterFechaInicio" (change)="applyFilters()" class="form-control form-control-sm mt-1" />
+        </th>
+        <th>
+          Fecha Fin
+          <input type="date" [(ngModel)]="filterFechaFin" (change)="applyFilters()" class="form-control form-control-sm mt-1" />
+        </th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let proyecto of proyectos">
+      <tr *ngFor="let proyecto of filteredProyectos">
         <td>{{ proyecto.codigo }}</td>
         <td>{{ proyecto.titulo }}</td>
         <td>{{ proyecto.estado }}</td>
@@ -34,20 +74,20 @@
           <button type="button" class="btn-close" (click)="closeModal()"></button>
         </div>
         <div class="modal-body" *ngIf="selectedProyecto">
-          <p><strong>Código:</strong> {{ selectedProyecto?.codigo }}</p>
-          <p><strong>Nombre:</strong> {{ selectedProyecto?.titulo }}</p>
-          <p><strong>Estado:</strong> {{ selectedProyecto?.estado }}</p>
-          <p><strong>Área de Conocimiento:</strong> {{ selectedProyecto?.areaConocimiento }}</p>
-          <p><strong>Características:</strong> {{ selectedProyecto?.caracteristicas }}</p>
-          <p><strong>Objetivo General:</strong> {{ selectedProyecto?.objetivoGeneral }}</p>
-          <p><strong>Objetivos Específicos:</strong> {{ selectedProyecto?.objetivosEspecificos }}</p>
-          <p><strong>Resumen:</strong> {{ selectedProyecto?.resumen }}</p>
-          <p><strong>Fecha Inicio:</strong> {{ selectedProyecto?.fechaInicio }}</p>
-          <p><strong>Fecha Fin:</strong> {{ selectedProyecto?.fechaFin }}</p>
-          <p><strong>Investigador Principal:</strong> {{ selectedProyecto?.investigadorPrincipal?.nombresApellidos }} (ID: {{ selectedProyecto?.investigadorPrincipal?.nroIdentificacion }})</p>
+          <p><strong>Código:</strong> {{ selectedProyecto.codigo }}</p>
+          <p><strong>Nombre:</strong> {{ selectedProyecto.titulo }}</p>
+          <p><strong>Estado:</strong> {{ selectedProyecto.estado }}</p>
+          <p><strong>Área de Conocimiento:</strong> {{ selectedProyecto.areaConocimiento }}</p>
+          <p><strong>Características:</strong> {{ selectedProyecto.caracteristicas }}</p>
+          <p><strong>Objetivo General:</strong> {{ selectedProyecto.objetivoGeneral }}</p>
+          <p><strong>Objetivos Específicos:</strong> {{ selectedProyecto.objetivosEspecificos }}</p>
+          <p><strong>Resumen:</strong> {{ selectedProyecto.resumen }}</p>
+          <p><strong>Fecha Inicio:</strong> {{ selectedProyecto.fechaInicio }}</p>
+          <p><strong>Fecha Fin:</strong> {{ selectedProyecto.fechaFin }}</p>
+          <p><strong>Investigador Principal:</strong> {{ selectedProyecto.investigadorPrincipal.nombresApellidos }} (ID: {{ selectedProyecto.investigadorPrincipal.nroIdentificacion }})</p>
           <h6>Cronograma:</h6>
           <ul>
-            <li *ngFor="let tarea of selectedProyecto?.cronograma">
+            <li *ngFor="let tarea of selectedProyecto.cronograma">
               {{ tarea.nombre }}: {{ tarea.fechaInicio }} - {{ tarea.fechaFin }}
             </li>
           </ul>

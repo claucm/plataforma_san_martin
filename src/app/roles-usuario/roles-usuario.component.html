@@ -121,53 +121,59 @@
       </form>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'user-assignment'" id="user-assignment">
-      <div class="user-assignment-container">
-        <div class="users-table unassigned-users">
-          <div class="table-header">
-            <span>Usuarios sin asignar</span>
+      <div class="user-assignment-container d-flex justify-content-between">
+        <div class="users-table users-unassigned p-3 bg-light rounded">
+          <div class="table-header mb-2">
+            <strong>Usuarios sin asignar</strong>
           </div>
-          <table>
-            <thead>
+          <table class="table table-bordered table-sm">
+            <thead class="custom-table-header">
               <tr>
-                <th>Código</th>
+                <th style="width: 40px;"></th>
+                <th>Cédula</th>
                 <th>Nombre</th>
               </tr>
               <tr>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+                <th></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Cédula" [(ngModel)]="filterUnassignedCedula" /></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Nombre" [(ngModel)]="filterUnassignedNombre" /></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of unassignedUsers">
-                <td>{{ user.code }}</td>
-                <td>{{ user.name }}</td>
+              <tr *ngFor="let user of filteredUnassignedUsers">
+                <td><input type="checkbox" [checked]="selectedUnassignedUsers.has(user.cedula)" (change)="toggleUnassignedUserSelection(user.cedula, $event)" /></td>
+                <td>{{ user.cedula }}</td>
+                <td>{{ user.nombre }}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="user-assignment-buttons">
-          <button type="button" (click)="assignUser()">></button>
-          <button type="button" (click)="unassignUser()"><</button>
+        <div class="user-assignment-buttons d-flex flex-column justify-content-center mx-2">
+          <button type="button" class="btn btn-primary mb-2" (click)="assignUser()">></button>
+          <button type="button" class="btn btn-primary" (click)="unassignUser()"><</button>
         </div>
-        <div class="users-table assigned-users">
-          <div class="table-header">
-            <span>Usuarios asignados</span>
+        <div class="users-table users-assigned p-3 bg-light rounded">
+          <div class="table-header mb-2">
+            <strong>Usuarios asignados</strong>
           </div>
-          <table>
-            <thead>
+          <table class="table table-bordered table-sm">
+            <thead class="custom-table-header">
               <tr>
-                <th>Código</th>
+                <th style="width: 40px;"></th>
+                <th>Cédula</th>
                 <th>Nombre</th>
               </tr>
               <tr>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
+                <th></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Cédula" [(ngModel)]="filterAssignedCedula" /></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Nombre" [(ngModel)]="filterAssignedNombre" /></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of assignedUsers">
-                <td>{{ user.code }}</td>
-                <td>{{ user.name }}</td>
+              <tr *ngFor="let user of filteredAssignedUsers">
+                <td><input type="checkbox" [checked]="selectedAssignedUsers.has(user.cedula)" (change)="toggleAssignedUserSelection(user.cedula, $event)" /></td>
+                <td>{{ user.cedula }}</td>
+                <td>{{ user.nombre }}</td>
               </tr>
             </tbody>
           </table>

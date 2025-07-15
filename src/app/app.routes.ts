@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
@@ -6,7 +5,6 @@ import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-
 
 //Gestión de usuarios
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
@@ -27,6 +25,8 @@ import { ConsultaTablasComponent } from './investigacion/consulta-tablas/consult
 import { ProyectosComponent } from './investigacion/proyectos/proyectos.component';
 import { EvaluacionProyectosComponent } from './investigacion/evaluacion-proyectos/evaluacion-proyectos.component';
 import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
+
+import { ParametrizacionComponent } from './administracion/parametrizacion/parametrizacion.component';
 
 //Extensión
 import { PracticasPasantiasComponent } from './extension/practicas/practicas-pasantias/practicas-pasantias.component';
@@ -55,7 +55,6 @@ import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicio
 import { EducacionContinuadaComponent } from './extension/educacion-continuada/educacion-continuada.component';
 import { InvestigacionDashboardComponent } from './tablero-indicadores/investigacion-dashboard.component';
 
-
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
@@ -69,7 +68,7 @@ export const routes: Routes = [
     { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'eliminar-usuario', component: EliminarUsuarioComponent, canActivate: [AuthGuard] },
-    { path: 'roles-usuario', component: RolesUsuarioComponent, canActivate: [AuthGuard] },
+{ path: 'roles-usuario', component: RolesUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'apertura-convocatoria', component: AperturaConvocatoriaComponent, canActivate: [AuthGuard] },
     { path: 'convocatorias', component: ConvocatoriasComponent, canActivate: [AuthGuard] },
     { path: 'registro-proyecto', component: RegistroProyectoComponent, canActivate: [AuthGuard] },
@@ -102,7 +101,6 @@ export const routes: Routes = [
     { path: 'educacion-continuada', component: EducacionContinuadaComponent, canActivate: [AuthGuard] },
     { path: 'tablero-indicadores/investigacion', component: InvestigacionDashboardComponent, canActivate: [AuthGuard] },
     { path: 'investigacion/reportes-notificaciones', loadChildren: () => import('./investigacion/reportes-notificaciones/reportes-notificaciones.module').then(m => m.ReportesNotificacionesModule), canActivate: [AuthGuard] },
-    { path: 'evaluacion-proyectos', component: EvaluacionProyectosComponent, canActivate: [AuthGuard] }
+    { path: 'evaluacion-proyectos', component: EvaluacionProyectosComponent, canActivate: [AuthGuard] },
+    { path: 'administracion/parametrizacion', component: ParametrizacionComponent, canActivate: [AuthGuard] }
 ];
-
-
