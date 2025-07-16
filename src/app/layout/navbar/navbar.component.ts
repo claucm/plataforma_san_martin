@@ -12,6 +12,13 @@ import { ModuleSelectionService } from '../../services/module-selection.service'
 })
 export class NavbarComponent {
   showNavbar: boolean = true;
+  showNotifications: boolean = false;
+
+  notifications = [
+    { id: 1, message: 'Sistema actualizado correctamente.', time: 'Hace 5 minutos' },
+    { id: 2, message: 'Nuevo usuario registrado.', time: 'Hace 10 minutos' },
+    { id: 3, message: 'Backup realizado con éxito.', time: 'Hace 1 hora' }
+  ];
 
   constructor(
     private router: Router,
@@ -22,6 +29,10 @@ export class NavbarComponent {
     ).subscribe((event: NavigationEnd) => {
       this.showNavbar = event.url !== '/login';
     });
+  }
+
+  toggleNotifications(): void {
+    this.showNotifications = !this.showNotifications;
   }
 
   navigateTo(route: string): void {

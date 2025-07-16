@@ -19,6 +19,15 @@ export class RolesUsuarioComponent {
     { code: '00004', name: 'Director investigación', description: 'Rol encargado de consultar y gestionar proyectos', creationDate: '21-05-2025', status: 'Activo' }
   ];
 
+  sedes = [
+    { code: '001', name: 'Sede Bogotá' },
+    { code: '002', name: 'Sede Cali' },
+    { code: '003', name: 'Sede Medellín' }
+  ];
+
+  selectedRoleForAssignment: string = '';
+  selectedSedeForAssignment: string = '';
+
   unassignedUsers = [
     { cedula: '123456789', nombre: 'Usuario 1' },
     { cedula: '987654321', nombre: 'Usuario 2' },
@@ -58,6 +67,21 @@ export class RolesUsuarioComponent {
     } else {
       this.selectedAssignedUsers.delete(cedula);
     }
+  }
+
+  eliminar() {
+    console.log('Eliminar clicked for role:', this.selectedRoleForAssignment, 'and sede:', this.selectedSedeForAssignment);
+    // Implement eliminar logic here
+  }
+
+  desactivarRol() {
+    console.log('Desactivar rol clicked for role:', this.selectedRoleForAssignment, 'and sede:', this.selectedSedeForAssignment);
+    // Implement desactivar rol logic here
+  }
+
+  anadirRol() {
+    console.log('Añadir rol clicked');
+    // Implement añadir rol logic here
   }
 
   modules = [

@@ -1,68 +1,116 @@
-.logout-btn {
-  color: #ffb90b;
-  border: 2px solid #0a2e4c;
-  background-color: #0a2e4c;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1050;
+  animation: slideDown 0.3s ease forwards;
+  transform-origin: top center;
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border-radius: 0.375rem;
+  border: 1px solid #ffb90b;
 }
 
-.btn-outline-secondary.position-relative.me-3 {
-  color: #ffb90b;
-  border: 2px solid #0a2e4c;
-  background-color: #0a2e4c;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+.notification-item:last-child {
+  border-bottom: none;
 }
 
-.logout-btn:hover,
-.logout-btn:focus {
-  background-color: #ffb90b;
-  color: #0a2e4c;
-  border-color: #0a2e4c;
-  outline: none;
+.notification-item {
+  color: #ffb90b !important;
 }
 
-.btn-outline-secondary.dropdown-toggle {
-  color: #ffb90b;
-  border-color: #0a2e4c;
-  background-color: #0a2e4c;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+.notification-item:hover {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
+  cursor: pointer;
 }
 
-.btn-outline-secondary.dropdown-toggle:hover,
-.btn-outline-secondary.dropdown-toggle:focus,
-.btn-outline-secondary.dropdown-toggle[aria-expanded="true"] {
-  background-color: #ffb90b;
-  color: #0a2e4c;
-  border-color: #0a2e4c;
-  outline: none;
+.dropdown-menu {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border-radius: 0.375rem;
+  border: 1px solid #ffb90b;
 }
 
-.dropdown-menu.dropdown-menu-end {
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0;
-  font-size: 1rem;
-  color: #0a2e4c;
-  text-align: left;
-  list-style: none;
-  background-color: #0a2e4c;
-  background-clip: padding-box;
-  border: 2px solid #ffb90b;
-  border-radius: 0.25rem;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.175);
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+.dropdown-item {
+  color: #ffb90b !important;
 }
 
-.dropdown-menu.dropdown-menu-end .dropdown-item {
-  color: #ffb90b;
-  transition: background-color 0.3s, color 0.3s;
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
 }
 
-.dropdown-menu.dropdown-menu-end .dropdown-item:hover,
-.dropdown-menu.dropdown-menu-end .dropdown-item:focus {
-  background-color: #ffb90b;
-  color: #0a2e4c;
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-hamburger {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border: 2px solid #ffb90b !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1.25rem !important;
+  border-radius: 0.375rem !important;
+}
+
+.btn-hamburger:hover, .btn-hamburger:focus {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
+  border-color: #0a2e4c !important;
+  box-shadow: 0 0 0 0.25rem rgba(10, 46, 76, 0.5) !important;
+}
+
+.btn-notifications {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border: 2px solid #ffb90b !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1.25rem !important;
+  border-radius: 0.375rem !important;
+  position: relative !important;
+}
+
+.btn-notifications:hover, .btn-notifications:focus {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
+  border-color: #0a2e4c !important;
+  box-shadow: 0 0 0 0.25rem rgba(10, 46, 76, 0.5) !important;
+}
+
+.btn-notifications .badge {
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 0.25em 0.5em !important;
+  border-radius: 9999px !important;
+  background-color: #dc3545 !important; /* Bootstrap danger red */
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-logout {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border: 2px solid #ffb90b !important;
+  padding: 0.375rem 1rem !important;
+  font-size: 1rem !important;
+  border-radius: 0.375rem !important;
+  font-weight: 700 !important;
+}
+
+.btn-logout:hover, .btn-logout:focus {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
+  border-color: #0a2e4c !important;
+  box-shadow: 0 0 0 0.25rem rgba(10, 46, 76, 0.5) !important;
 }
