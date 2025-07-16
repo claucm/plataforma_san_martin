@@ -5,6 +5,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { InvestigadorWelcomeComponent } from './welcome/investigador-welcome.component';
 
 //Gestión de usuarios
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
@@ -65,10 +66,11 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'welcome', component: WelcomeComponent },
+    { path: 'welcome-investigador', component: InvestigadorWelcomeComponent },
     { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'eliminar-usuario', component: EliminarUsuarioComponent, canActivate: [AuthGuard] },
-{ path: 'roles-usuario', component: RolesUsuarioComponent, canActivate: [AuthGuard] },
+    { path: 'roles-usuario', component: RolesUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'apertura-convocatoria', component: AperturaConvocatoriaComponent, canActivate: [AuthGuard] },
     { path: 'convocatorias', component: ConvocatoriasComponent, canActivate: [AuthGuard] },
     { path: 'registro-proyecto', component: RegistroProyectoComponent, canActivate: [AuthGuard] },

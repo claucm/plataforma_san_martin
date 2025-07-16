@@ -12,11 +12,13 @@ export class AuthService {
   private _user = signal<any>(null);
   private _isLoggedIn = signal<boolean>(false);
   private _isAdmin = signal<boolean>(false);
+  private _isInvestigador = signal<boolean>(false);
 
   // Exponer las signals como señales de solo lectura
   user = this._user.asReadonly();
   isLoggedIn = this._isLoggedIn.asReadonly();
   isAdmin = this._isAdmin.asReadonly();
+  isInvestigador = this._isInvestigador.asReadonly();
 
   private googleScriptLoaded: Promise<void>;
 
@@ -46,9 +48,23 @@ export class AuthService {
       this._user.set(user);
       this._isLoggedIn.set(true);
       this._isAdmin.set(true);
+      this._isInvestigador.set(false);
       if (isPlatformBrowser(this.platformId)) {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('isAdmin', 'true');
+        localStorage.setItem('isInvestigador', 'false');
+      }
+      return true;
+    } else if (cedula === '123456789' && password === '123456') {
+      const user = { cedula, name: 'Docente Investigador' };
+      this._user.set(user);
+      this._isLoggedIn.set(true);
+      this._isAdmin.set(false);
+      this._isInvestigador.set(true);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('isAdmin', 'false');
+        localStorage.setItem('isInvestigador', 'true');
       }
       return true;
     } else {

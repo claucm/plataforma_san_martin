@@ -11,7 +11,7 @@
     </li>
 
     <!-- Administración Module -->
-    <li *ngIf="!selectedModule || selectedModule === 'users'">
+    <li *ngIf="(isAdmin && (!selectedModule || selectedModule === 'users'))">
       <a class="nav-link text-white">
         <i class="fas fa-cogs me-2"></i> Administración
       </a>
@@ -42,7 +42,7 @@
     </li>
 
   <!-- Tablero de Indicadores Module -->
-  <li *ngIf="!selectedModule || selectedModule === 'tablero-indicadores/investigacion'">
+  <li *ngIf="(isAdmin || isInvestigador) && (!selectedModule || selectedModule === 'tablero-indicadores/investigacion')">
   <a class="nav-link text-white" >
     <i class="fas fa-tachometer-alt me-2"></i> Tablero de Indicadores
   </a>
@@ -58,65 +58,65 @@
   </li>
 
   <!-- Investigación Modulo -->
-  <li *ngIf="!selectedModule || selectedModule === 'investigacion'">
+  <li *ngIf="(isAdmin || isInvestigador) && (!selectedModule || selectedModule === 'investigacion')">
   <a class="nav-link text-white" >
     <i class="fas fa-file-alt me-2"></i> Investigación
   </a>
   <div class="collapse show" id="investigationMenu">
-      <ul class="nav nav-pills flex-column ms-3">
-        <li>
-          <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
-            <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/convocatorias'" class="nav-link text-white">
-            <i class="fas fa-list me-2"></i> Convocatorias
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
-            <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/proyectos'" class="nav-link text-white">
-            <i class="fas fa-folder-open me-2"></i> Proyectos
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/evaluacion-proyectos'" class="nav-link text-white">
-            <i class="fas fa-check-circle me-2"></i> Evaluación Proyectos
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
-            <i class="fas fa-file-signature me-2"></i> Actas de Inicio
-          </a>
-        </li>
+        <ul class="nav nav-pills flex-column ms-3">
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
+              <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/convocatorias'" class="nav-link text-white">
+              <i class="fas fa-list me-2"></i> Convocatorias
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
+              <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
+            </a>
+          </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/proyectos'" class="nav-link text-white">
+              <i class="fas fa-folder-open me-2"></i> Proyectos
+            </a>
+          </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/evaluacion-proyectos'" class="nav-link text-white">
+              <i class="fas fa-check-circle me-2"></i> Evaluación Proyectos
+            </a>
+          </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
+              <i class="fas fa-file-signature me-2"></i> Actas de Inicio
+            </a>
+          </li>
 
-        <li>
-          <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
-            <i class="fas fa-users me-2"></i> Grupos Investigación
-          </a>
-        </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Grupos Investigación
+            </a>
+          </li>
 
-        <li>
-          <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
-            <i class="fas fa-users me-2"></i> Grupos Investigación
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
-            <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
-            <i class="fas fa-table me-2"></i> Consultas
-          </a>
-        </li>
-      </ul>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Grupos Investigación
+            </a>
+          </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
+              <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
+            </a>
+          </li>
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
+              <i class="fas fa-table me-2"></i> Consultas
+            </a>
+          </li>
+        </ul>
     </div>
   </li>
 

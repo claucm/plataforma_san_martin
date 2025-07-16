@@ -30,21 +30,11 @@ import './models/role.model';
 import './models/submodule.model';
 import './models/user.model';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { routes } from './app.routes';
-import { UsersComponent } from './users/users.component';
 
-import { ConvocatoriasComponent } from './investigacion/convocatorias/convocatorias.component';
 import { InvestigacionModule } from './investigacion/investigacion.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    UsersComponent,
-    ConvocatoriasComponent
-  ],
   imports: [
     BrowserModule,
     CommonModule,
@@ -55,7 +45,7 @@ import { InvestigacionModule } from './investigacion/investigacion.module';
   providers: [
     provideHttpClient(withInterceptors([authInterceptor]))
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
 

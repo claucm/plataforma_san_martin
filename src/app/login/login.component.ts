@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit {
     if (!success) {
       alert('Cédula o contraseña inválidos');
     } else {
-      this.router.navigate(['/welcome']);
+      if (this.cedula === '123456789') {
+        this.router.navigate(['/welcome-investigador']);
+      } else {
+        this.router.navigate(['/welcome']);
+      }
     }
   }
 
