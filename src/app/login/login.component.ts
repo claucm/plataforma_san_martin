@@ -5,6 +5,8 @@ import { AuthService } from '../auth.service';
 
 import { FormsModule } from '@angular/forms';
 
+declare var grecaptcha: any;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,28 +17,39 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent implements OnInit {
   cedula: string = '';
   password: string = '';
+  captchaToken: string | null = null;
+  recaptchaWidgetId: any;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Clear user and isAdmin on login component init to show login form
       localStorage.removeItem('user');
       localStorage.removeItem('isAdmin');
+
+      // Render the reCAPTCHA widget
+      this.recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+        sitekey: '6LdC3YUrAAAAAO2XFurbg6qAmJ1Bz1fGOcH59nzU',
+        callback: (response: string) => {
+          this.captchaToken = response;
+        },
+        'expired-callback': () => {
+          this.captchaToken = null;
+        }
+      });
     }
   }
 
-  ngOnInit(): void {
-    // Removed Google login rendering
-  }
-
-  signInWithGoogle(): void {
-    // No longer needed since button is removed
-  }
-
   onSubmit(): void {
+    if (!this.captchaToken) {
+      alert('Por favor, complete el captcha antes de iniciar sesión.');
+      return;
+    }
     const success = this.authService.loginManual(this.cedula, this.password);
     if (!success) {
       alert('Cédula o contraseña inválidos');
