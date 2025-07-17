@@ -52,4 +52,3 @@ export class AppModule { }
 export function bootstrap() {
   throw new Error('bootstrapApplication is not available. Please use traditional Angular bootstrap method.');
 }
-</create_file>

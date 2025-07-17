@@ -1,0 +1,111 @@
+<div class="semilleros-container">
+  <h2>Estadísticas de Semilleros de Investigación</h2>
+
+  <div class="filters">
+    <label>Facultad:</label>
+    <select [(ngModel)]="selectedFacultad" (change)="onFilterChange()">
+      <option value="">Todas</option>
+      <option *ngFor="let facultad of facultades" [value]="facultad">{{ facultad }}</option>
+    </select>
+
+    <label>Sede:</label>
+    <select [(ngModel)]="selectedSede" (change)="onFilterChange()">
+      <option value="">Todas</option>
+      <option *ngFor="let sede of sedes" [value]="sede">{{ sede }}</option>
+    </select>
+
+    <label>Programa:</label>
+    <select [(ngModel)]="selectedPrograma" (change)="onFilterChange()">
+      <option value="">Todos</option>
+      <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="stats" class="stats">
+    <h3>Resumen General</h3>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Total Semilleros</th>
+          <th>Total Participantes</th>
+          <th>Total Proyectos</th>
+          <th>Total Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ stats.totalSemilleros }}</td>
+          <td>{{ stats.totalParticipantes }}</td>
+          <td>{{ stats.totalProyectos }}</td>
+          <td>{{ stats.totalProductos }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Productos por Tipología MINCIENCIAS</h3>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Tipología</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tipologia of (stats.productosPorTipologia | keyvalue)">
+          <td>{{ tipologia.key }}</td>
+          <td>{{ tipologia.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Productos por Participante</h3>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Participante</th>
+          <th>Tipo de Producto</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of stats.productosPorParticipante">
+          <td>{{ producto.participante }}</td>
+          <td>{{ producto.tipoProducto }}</td>
+          <td>{{ producto.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Nivel de Formación de Participantes</h3>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nivel of stats.nivelFormacionParticipantes">
+          <td>{{ nivel.nivel }}</td>
+          <td>{{ nivel.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Participantes Nacionales e Internacionales</h3>
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>Participantes Nacionales</th>
+          <th>Participantes Internacionales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ stats.participantesNacionales }}</td>
+          <td>{{ stats.participantesInternacionales }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

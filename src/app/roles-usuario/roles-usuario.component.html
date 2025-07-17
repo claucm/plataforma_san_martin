@@ -3,7 +3,7 @@
   <div class="role-list-section">
     <div class="filters">
       <input type="text" placeholder="Search" class="search-input" />
-      <button class="btn btn-primary export-btn">Export</button>
+      <button class="btn btn-primary export-btn" (click)="exportToExcel()">Export</button>
       <button class="btn btn-warning create-role-btn" (click)="openCreateRoleForm()">+ Crear Rol</button>
     </div>
     <table class="role-table">

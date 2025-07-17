@@ -164,7 +164,7 @@
     <ul class="tabs">
       <li class="tab" [class.active]="activeTab === 'basic-info'" (click)="setActiveTab('basic-info')">Información básica</li>
       <li class="tab" [class.active]="activeTab === 'role-assignment'" (click)="setActiveTab('role-assignment')">Asignación de roles</li>
-      <li class="tab" [class.active]="activeTab === 'user-permissions'" (click)="setActiveTab('user-permissions')">Permisos por usuario</li>
+     <!-- <li class="tab" [class.active]="activeTab === 'user-permissions'" (click)="setActiveTab('user-permissions')">Permisos por usuario</li> -->
     </ul>
     <div class="tab-content" [class.active]="activeTab === 'basic-info'" id="basic-info">
       <!-- Basic user info form fields -->
@@ -277,63 +277,24 @@
       </div>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'role-assignment'" id="role-assignment">
-      <div class="role-assignment-container">
-        <div class="roles-table unassigned-roles">
-          <div class="table-header">
-            <span>Roles sin asignar</span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Código</th>
-                <th>Nombre</th>
-              </tr>
-              <tr>
-                <th></th>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let role of unassignedRoles">
-                <td><input type="checkbox" [value]="role" (change)="onUnassignedRoleCheckboxChange($event, role)" [checked]="isUnassignedRoleSelected(role)" /></td>
-                <td>{{ role.code }}</td>
-                <td>{{ role.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="role-assignment-buttons">
-          <button type="button" (click)="assignRole()">></button>
-          <button type="button" (click)="unassignRole()"><</button>
-        </div>
-        <div class="roles-table assigned-roles">
-          <div class="table-header">
-            <span>Roles asignados</span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Código</th>
-                <th>Nombre</th>
-              </tr>
-              <tr>
-                <th></th>
-                <th><input type="text" placeholder="Filtrar Código" /></th>
-                <th><input type="text" placeholder="Filtrar Nombre" /></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let role of assignedRoles">
-                <td><input type="checkbox" [value]="role" (change)="onAssignedRoleCheckboxChange($event, role)" [checked]="isAssignedRoleSelected(role)" /></td>
-                <td>{{ role.code }}</td>
-                <td>{{ role.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="role-assignment-container" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px;">
+        <label for="roleSelect">Seleccione un rol:</label>
+        <select id="roleSelect" [(ngModel)]="selectedRole" name="selectedRole" required>
+          <option [ngValue]="null" disabled selected>Seleccione un rol</option>
+          <option *ngFor="let role of roles" [ngValue]="role">{{ role.name }}</option>
+        </select>
+
+        <label for="sedeSelect">Seleccione una sede:</label>
+        <select id="sedeSelect" [(ngModel)]="selectedSede" name="selectedSede" required>
+          <option value="" disabled selected>Seleccione una sede</option>
+          <option value="Bogotá">Bogotá</option>
+          <option value="Cali">Cali</option>
+          <option value="Pasto">Pasto</option>
+          <option value="Puerto Colombia">Puerto Colombia</option>
+          <option value="Sabaneta">Sabaneta</option>
+        </select>
+
+        <button type="button" (click)="addRoleToUser()" class="btn logout-btn" style="align-self: flex-start; background-color:#0a2e4c; color:#ffb90b; border: 2px solid #ffb90b; font-weight: 700; font-family: 'Montserrat', sans-serif;">Añadir rol</button>
       </div>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'user-permissions'" id="user-permissions">

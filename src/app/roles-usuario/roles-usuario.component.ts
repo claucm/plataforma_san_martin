@@ -1,3 +1,4 @@
+import * as XLSX from 'xlsx';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -298,5 +299,12 @@ export class RolesUsuarioComponent {
     } else {
       this.selectedUnassignedUsers.delete(cedula);
     }
+  }
+
+  exportToExcel(): void {
+    const worksheet = XLSX.utils.json_to_sheet(this.roles);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Roles');
+    XLSX.writeFile(workbook, 'roles.xlsx');
   }
 }

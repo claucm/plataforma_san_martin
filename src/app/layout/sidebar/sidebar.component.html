@@ -65,18 +65,18 @@
   <div class="collapse show" id="investigationMenu">
         <ul class="nav nav-pills flex-column ms-3">
           <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/apertura-convocatoria'" class="nav-link text-white">
-              <i class="fas fa-bullhorn me-2"></i> Apertura Convocatorias
+            <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Grupos de investigación
             </a>
           </li>
-          <li>
-            <a [routerLink]="'/convocatorias'" class="nav-link text-white">
-              <i class="fas fa-list me-2"></i> Convocatorias
+          <li *ngIf="!isInvestigador">
+            <a [routerLink]="'/semilleros-investigacion'" class="nav-link text-white">
+              <i class="fas fa-users me-2"></i> Semilleros de investigación
             </a>
           </li>
           <li>
             <a [routerLink]="'/registro-proyecto'" class="nav-link text-white">
-              <i class="fas fa-pencil-alt me-2"></i> Registro del Proyecto
+              <i class="fas fa-pencil-alt me-2"></i> Registro del proyecto
             </a>
           </li>
           <li *ngIf="!isInvestigador">
@@ -84,37 +84,22 @@
               <i class="fas fa-folder-open me-2"></i> Proyectos
             </a>
           </li>
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/evaluacion-proyectos'" class="nav-link text-white">
-              <i class="fas fa-check-circle me-2"></i> Evaluación Proyectos
+          <li>
+            <a [routerLink]="'/convocatorias'" class="nav-link text-white">
+              <i class="fas fa-list me-2"></i> Convocatoria
             </a>
-          </li>
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
-              <i class="fas fa-file-signature me-2"></i> Actas de Inicio
-            </a>
-          </li>
-
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/gestion-ginvestigacion'" class="nav-link text-white">
-              <i class="fas fa-users me-2"></i> Grupos Investigación
-            </a>
-          </li>
-
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/grupos-investigacion'" class="nav-link text-white">
-              <i class="fas fa-users me-2"></i> Grupos Investigación
-            </a>
-          </li>
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/proyectos-investigacion'" class="nav-link text-white">
-              <i class="fas fa-project-diagram me-2"></i> Proyectos Investigación
-            </a>
-          </li>
-          <li *ngIf="!isInvestigador">
-            <a [routerLink]="'/consulta-tablas'" class="nav-link text-white">
-              <i class="fas fa-table me-2"></i> Consultas
-            </a>
+            <ul class="nav nav-pills flex-column ms-3">
+              <li>
+                <a [routerLink]="'/evaluacion-proyectos'" class="nav-link text-white">
+                  <i class="fas fa-check-circle me-2"></i> Evaluación de proyectos
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="'/actas-inicio'" class="nav-link text-white">
+                  <i class="fas fa-file-signature me-2"></i> Acta de inicio
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
     </div>

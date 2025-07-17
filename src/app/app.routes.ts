@@ -28,6 +28,7 @@ import { EvaluacionProyectosComponent } from './investigacion/evaluacion-proyect
 import { ModuloExtensionComponent } from './extension/modulo-extension/modulo-extension.component';
 
 import { ParametrizacionComponent } from './administracion/parametrizacion/parametrizacion.component';
+import { SemillerosInvestigacionComponent } from './semilleros-investigacion/semilleros-investigacion.component';
 
 //Extensión
 import { PracticasPasantiasComponent } from './extension/practicas/practicas-pasantias/practicas-pasantias.component';
@@ -51,6 +52,7 @@ import { FuenteInternacionalComponent } from './extension/servicios-docentes/ser
 import { OtrasEntidadesComponent } from './extension/servicios-docentes/servicios-extension/otras-entidades/otras-entidades.component';
 import { PoblacionCondicionComponent } from './extension/servicios-docentes/servicios-extension/poblacion-condicion/poblacion-condicion.component';
 import { PoblacionGrupoComponent } from './extension/servicios-docentes/servicios-extension/poblacion-grupo/poblacion-grupo.component';
+
 
 //Educación continuada
 import { EducacionContinuadaComponent } from './extension/educacion-continuada/educacion-continuada.component';
@@ -77,6 +79,7 @@ export const routes: Routes = [
     { path: 'actas-inicio', component: ActasInicioComponent, canActivate: [AuthGuard] },
     { path: 'gestion-ginvestigacion', component: GestionGinvestigacionComponent, canActivate: [AuthGuard] },
     { path: 'grupos-investigacion', component: GruposInvestigacionComponent, canActivate: [AuthGuard] },
+    { path: 'semilleros-investigacion', component: SemillerosInvestigacionComponent, canActivate: [AuthGuard] },
     { path: 'proyectos-investigacion', component: ProyectosInvestigacionComponent, canActivate: [AuthGuard] },
     { path: 'consulta-tablas', component: ConsultaTablasComponent, canActivate: [AuthGuard] },
     { path: 'modulo-extension', component: ModuloExtensionComponent, canActivate: [AuthGuard] },
