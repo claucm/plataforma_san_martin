@@ -169,14 +169,27 @@
       <div *ngFor="let lugar of lugaresEjecucion; let i = index" class="border p-3 mb-2">
         <div class="row">
           <div class="col-md-3 mb-3">
+            <label class="form-label fw-bold">País</label>
+            <select class="form-select" [(ngModel)]="lugar.pais" name="lugar_pais_{{i}}" (change)="onCountryChange(i)" required>
+              <option value="" disabled selected>Seleccione un país</option>
+              <option *ngFor="let pais of countries" [value]="pais">{{ pais }}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Departamento</label>
-            <input type="text" class="form-control" [(ngModel)]="lugar.departamento" name="lugar_departamento_{{i}}" required>
+            <select class="form-select" [(ngModel)]="lugar.departamento" name="lugar_departamento_{{i}}" (change)="onDepartmentChange(i)" required>
+              <option value="" disabled selected>Seleccione un departamento</option>
+              <option *ngFor="let dept of dynamicDepartments[i]" [value]="dept">{{ dept }}</option>
+            </select>
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Ciudad</label>
-            <input type="text" class="form-control" [(ngModel)]="lugar.ciudad" name="lugar_ciudad_{{i}}" required>
+            <select class="form-select" [(ngModel)]="lugar.ciudad" name="lugar_ciudad_{{i}}" required>
+              <option value="" disabled selected>Seleccione una ciudad</option>
+              <option *ngFor="let city of dynamicCities[i]" [value]="city">{{ city }}</option>
+            </select>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Institución</label>
             <input type="text" class="form-control" [(ngModel)]="lugar.institucion" name="lugar_institucion_{{i}}" required>
           </div>
@@ -240,11 +253,17 @@
         <div class="row">
           <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Tipo de Producto</label>
-            <input type="text" class="form-control" [(ngModel)]="resultado.tipoProducto" name="resultado_tipoProducto_{{i}}" required>
+            <select class="form-select" [(ngModel)]="resultado.tipoProducto" name="resultado_tipoProducto_{{i}}" required (change)="resultado.subtipoProducto = ''">
+              <option value="" disabled selected>Seleccione un tipo de producto</option>
+              <option *ngFor="let tipo of tipoProductoOptions" [value]="tipo">{{ tipo }}</option>
+            </select>
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Subtipo de Producto</label>
-            <input type="text" class="form-control" [(ngModel)]="resultado.subtipoProducto" name="resultado_subtipoProducto_{{i}}" required>
+            <select class="form-select" [(ngModel)]="resultado.subtipoProducto" name="resultado_subtipoProducto_{{i}}" required [disabled]="!resultado.tipoProducto">
+              <option value="" disabled selected>Seleccione un subtipo de producto</option>
+              <option *ngFor="let subtipo of subtipoProductoOptions[resultado.tipoProducto]" [value]="subtipo">{{ subtipo }}</option>
+            </select>
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label fw-bold">Producto</label>
@@ -270,7 +289,15 @@
       <h4>Impacto</h4>
       <div class="col-md-6 mb-3">
         <label for="tipo_impacto" class="form-label fw-bold">Tipo de Impacto</label>
-        <input type="text" class="form-control" id="tipo_impacto" [(ngModel)]="tipoImpacto" name="tipoImpacto" required>
+        <select class="form-select" id="tipo_impacto" [(ngModel)]="tipoImpacto" name="tipoImpacto" required>
+          <option value="" disabled selected>Seleccione un tipo de impacto</option>
+          <option value="tecnológicos">Tecnológicos</option>
+          <option value="institucionales">Institucionales</option>
+          <option value="económicos">Económicos</option>
+          <option value="políticos">Políticos</option>
+          <option value="socioculturales">Socioculturales</option>
+          <option value="ambientales">Ambientales</option>
+        </select>
       </div>
       <div class="col-md-6 mb-3">
         <label for="descripcion_impacto" class="form-label fw-bold">Descripción del Impacto</label>
@@ -278,7 +305,10 @@
       </div>
       <div class="col-md-6 mb-3">
         <label for="anio_esperado" class="form-label fw-bold">Año Esperado</label>
-        <input type="number" class="form-control" id="anio_esperado" [(ngModel)]="anioEsperado" name="anioEsperado" required>
+        <select class="form-select" id="anio_esperado" [(ngModel)]="anioEsperado" name="anioEsperado" required>
+          <option value="" disabled selected>Seleccione un año</option>
+          <option *ngFor="let year of expectedYears" [value]="year">{{ year }}</option>
+        </select>
       </div>
     </div>
 

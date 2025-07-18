@@ -295,6 +295,19 @@
         </select>
 
         <button type="button" (click)="addRoleToUser()" class="btn logout-btn" style="align-self: flex-start; background-color:#0a2e4c; color:#ffb90b; border: 2px solid #ffb90b; font-weight: 700; font-family: 'Montserrat', sans-serif;">Añadir rol</button>
+      
+      <div *ngIf="assignedRoles.length > 0" style="margin-top: 20px;">
+        <h4>Roles asignados</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li *ngFor="let assignedRole of assignedRoles" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; border: 1px solid #ccc; padding: 8px; border-radius: 4px;">
+            <span>{{ assignedRole.name }} - {{ assignedRole.sede }}</span>
+            <div>
+              <button type="button" (click)="removeAssignedRole(assignedRole)" class="btn btn-danger" style="margin-right: 10px;">Eliminar</button>
+              <button type="button" (click)="deactivateAssignedRole(assignedRole)" class="btn btn-warning">Desactivar rol</button>
+            </div>
+          </li>
+        </ul>
+      </div>
       </div>
     </div>
     <div class="tab-content" [class.active]="activeTab === 'user-permissions'" id="user-permissions">

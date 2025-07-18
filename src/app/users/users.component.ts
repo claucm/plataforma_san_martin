@@ -30,6 +30,7 @@ interface AssignedRole {
   name: string;
   sede: string;
   userCodigo: number;
+  active?: boolean;
 }
 
 @Component({
@@ -230,7 +231,8 @@ export class UsersComponent implements OnInit {
         id: this.selectedRole.id!,
         name: this.selectedRole.name,
         sede: this.selectedSede,
-        userCodigo: this.selectedUser.codigo
+        userCodigo: this.selectedUser.codigo,
+        active: true
       };
       this.assignedRoles.push(newAssignedRole);
       alert(`Rol "${this.selectedRole.name}" asignado a la sede "${this.selectedSede}" para el usuario.`);
@@ -239,6 +241,18 @@ export class UsersComponent implements OnInit {
       this.selectedSede = '';
     } else {
       alert('Por favor seleccione un usuario, un rol y una sede antes de añadir.');
+    }
+  }
+
+  removeAssignedRole(role: AssignedRole): void {
+    this.assignedRoles = this.assignedRoles.filter(r => r !== role);
+  }
+
+  deactivateAssignedRole(role: AssignedRole): void {
+    const index = this.assignedRoles.findIndex(r => r === role);
+    if (index !== -1) {
+      this.assignedRoles[index].active = false;
+      alert(`Rol "${role.name}" desactivado para la sede "${role.sede}".`);
     }
   }
 

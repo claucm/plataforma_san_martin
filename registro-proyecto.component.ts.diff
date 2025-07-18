@@ -1,0 +1,49 @@
+<<<<<<<
+  onFileSelected: any = (event: any) => {
+    const file: File = event.target.files[0];
+    // Implement file handling logic here
+    console.log('Archivo seleccionado:', file);
+  };
+
+  onDocumentosAdicionalesSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.documentosAdicionales = file;
+    } else {
+      alert('Por favor seleccione un archivo PDF válido.');
+      event.target.value = null;
+      this.documentosAdicionales = null;
+    }
+  }
+=======
+  onFileSelected: any = (event: any) => {
+    const file: File = event.target.files[0];
+    // Implement file handling logic here
+    console.log('Archivo seleccionado:', file);
+  };
+
+  onCountryChange(index: number) {
+    const selectedCountry = this.lugaresEjecucion[index].pais;
+    this.dynamicDepartments[index] = this.departmentsByCountry[selectedCountry] || [];
+    this.lugaresEjecucion[index].departamento = '';
+    this.dynamicCities[index] = [];
+    this.lugaresEjecucion[index].ciudad = '';
+  }
+
+  onDepartmentChange(index: number) {
+    const selectedDepartment = this.lugaresEjecucion[index].departamento;
+    this.dynamicCities[index] = this.citiesByDepartment[selectedDepartment] || [];
+    this.lugaresEjecucion[index].ciudad = '';
+  }
+
+  onDocumentosAdicionalesSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.documentosAdicionales = file;
+    } else {
+      alert('Por favor seleccione un archivo PDF válido.');
+      event.target.value = null;
+      this.documentosAdicionales = null;
+    }
+  }
+>>>>>>>
