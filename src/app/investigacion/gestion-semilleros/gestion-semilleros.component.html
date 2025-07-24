@@ -1,0 +1,316 @@
+<div class="gestion-semilleros-container">
+  <button (click)="toggleCreateForm()" class="btn btn-primary mb-3">
+    {{ showCreateForm ? 'Cancelar' : 'Crear Semillero' }}
+  </button>
+
+  <div *ngIf="showCreateForm" class="create-form">
+    <h3>Crear Semillero de Investigación</h3>
+
+    <!-- Sección 1: Información general -->
+    <fieldset>
+      <legend>Información general sobre el semillero de investigación</legend>
+      <div class="form-row">
+        <label>Nombre del Semillero:</label>
+        <input type="text" [(ngModel)]="newSemillero.nombre" />
+      </div>
+      <div class="form-row">
+        <label>Fecha de creación:</label>
+        <input type="date" [value]="newSemillero.fechaCreacion" disabled />
+      </div>
+      <div class="form-row">
+        <label>Sede:</label>
+        <select [(ngModel)]="selectedSede" (change)="onSedeChange()">
+          <option value="">Seleccione una sede</option>
+          <option *ngFor="let sede of sedes" [value]="sede">{{ sede }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Facultad:</label>
+        <select [(ngModel)]="newSemillero.facultad" [disabled]="!selectedSede">
+          <option value="">Seleccione una facultad</option>
+          <option *ngFor="let facultad of availableFacultades" [value]="facultad">{{ facultad }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Grupo de investigación al que está adscrito el semillero (opcional):</label>
+        <input type="text" [(ngModel)]="newSemillero.grupoInvestigacion" />
+      </div>
+      <div class="form-row">
+        <label>Misión y visión del semillero:</label>
+        <textarea [(ngModel)]="newSemillero.misionVision"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Objetivo general del semillero:</label>
+        <textarea [(ngModel)]="newSemillero.objetivoGeneral"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Objetivos específicos del semillero:</label>
+        <textarea [(ngModel)]="newSemillero.objetivosEspecificos"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Justificación:</label>
+        <textarea [(ngModel)]="newSemillero.justificacion"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Resultados esperados a corto, mediano y largo plazo:</label>
+        <textarea [(ngModel)]="newSemillero.resultadosEsperados"></textarea>
+      </div>
+      <div class="form-row">
+        <label>Estrategias de trabajo del semillero:</label>
+        <textarea [(ngModel)]="newSemillero.estrategiasTrabajo"></textarea>
+      </div>
+    </fieldset>
+
+    <!-- Sección 2: Docentes -->
+    <fieldset>
+      <legend>Docentes que dirigen, aportan y/o acompañan el semillero de investigación</legend>
+      <button (click)="addDocente()" class="btn btn-secondary mb-2">Añadir docente</button>
+      <div *ngFor="let docente of newSemillero.docentes; let i = index" class="docente-entry">
+        <h4>Docente {{ i + 1 }}</h4>
+        <div class="form-row">
+          <label>Nombre completo:</label>
+          <input type="text" [(ngModel)]="docente.nombreCompleto" />
+        </div>
+        <div class="form-row">
+          <label>Número de identificación:</label>
+          <input type="number" [(ngModel)]="docente.numeroIdentificacion" />
+        </div>
+        <div class="form-row">
+          <label>Título profesional:</label>
+          <input type="text" [(ngModel)]="docente.tituloProfesional" />
+        </div>
+        <div class="form-row">
+          <label>Programa:</label>
+          <select [(ngModel)]="docente.programa">
+            <option value="">Seleccione un programa</option>
+            <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Teléfono de contacto:</label>
+          <input type="number" [(ngModel)]="docente.telefonoContacto" />
+        </div>
+        <div class="form-row">
+          <label>Correo electrónico:</label>
+          <input type="email" [(ngModel)]="docente.correoElectronico" />
+        </div>
+        <button (click)="removeDocente(i)" class="btn btn-danger">Eliminar docente</button>
+        <hr />
+      </div>
+    </fieldset>
+
+    <!-- Sección 3: Estudiantes -->
+    <fieldset>
+      <legend>Estudiantes que integran el semillero de investigación</legend>
+      <button (click)="addEstudiante()" class="btn btn-secondary mb-2">Agregar estudiantes</button>
+      <div *ngFor="let estudiante of newSemillero.estudiantes; let i = index" class="estudiante-entry">
+        <h4>Estudiante {{ i + 1 }}</h4>
+        <div class="form-row">
+          <label>Número de identificación:</label>
+          <input type="number" [(ngModel)]="estudiante.numeroIdentificacion" />
+        </div>
+        <div class="form-row">
+          <label>Nombres:</label>
+          <input type="text" [(ngModel)]="estudiante.nombres" />
+        </div>
+        <div class="form-row">
+          <label>Apellidos:</label>
+          <input type="text" [(ngModel)]="estudiante.apellidos" />
+        </div>
+        <div class="form-row">
+          <label>Programa académico:</label>
+          <select [(ngModel)]="estudiante.programaAcademico">
+            <option value="">Seleccione un programa</option>
+            <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Semestre:</label>
+          <input type="number" [(ngModel)]="estudiante.semestre" />
+        </div>
+        <div class="form-row">
+          <label>Fecha de ingreso o vinculación al semillero:</label>
+          <input type="date" [(ngModel)]="estudiante.fechaIngreso" />
+        </div>
+        <div class="form-row">
+          <label>Teléfono de contacto:</label>
+          <input type="number" [(ngModel)]="estudiante.telefonoContacto" />
+        </div>
+        <div class="form-row">
+          <label>Correo electrónico:</label>
+          <input type="email" [(ngModel)]="estudiante.correoElectronico" />
+        </div>
+        <button (click)="removeEstudiante(i)" class="btn btn-danger">Eliminar estudiante</button>
+        <hr />
+      </div>
+    </fieldset>
+
+    <button (click)="createSemillero()" class="btn btn-success mt-3">Guardar Semillero</button>
+  </div>
+
+  <!-- Tabla de semilleros -->
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>Seleccionar</th>
+        <th>Nombre Semillero</th>
+        <th>Sede</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let semillero of semilleros" (click)="selectSemillero(semillero)" [class.selected]="selectedSemillero === semillero" style="cursor: pointer;">
+          <td><input type="checkbox" /></td>
+          <td>{{ semillero.nombre }}</td>
+          <td>{{ semillero.sede }}</td>
+          <td>{{ semillero.estado }}</td>
+        </tr>
+      </tbody>
+  </table>
+
+  <div *ngIf="selectedSemillero" class="tabs-container">
+    <nav class="tabs-nav">
+      <button [class.active]="activeTab === 'informacion'" (click)="setActiveTab('informacion')">Información General</button>
+      <button [class.active]="activeTab === 'docentes'" (click)="setActiveTab('docentes')">Docentes</button>
+      <button [class.active]="activeTab === 'estudiantes'" (click)="setActiveTab('estudiantes')">Estudiantes</button>
+    </nav>
+
+    <div class="tab-content">
+      <div *ngIf="activeTab === 'informacion'">
+        <h3>Información General</h3>
+        <div class="form-row">
+          <label>Nombre del Semillero:</label>
+          <input type="text" [(ngModel)]="selectedSemillero.nombre" />
+        </div>
+        <div class="form-row">
+          <label>Fecha de creación:</label>
+          <input type="date" [(ngModel)]="selectedSemillero.fechaCreacion" />
+        </div>
+        <div class="form-row">
+          <label>Sede:</label>
+          <select [(ngModel)]="selectedSemillero.sede" (change)="onSedeChange()">
+            <option value="">Seleccione una sede</option>
+            <option *ngFor="let sede of sedes" [value]="sede">{{ sede }}</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Facultad:</label>
+          <select [(ngModel)]="selectedSemillero.facultad" [disabled]="!selectedSemillero.sede">
+            <option value="">Seleccione una facultad</option>
+            <option *ngFor="let facultad of facultadesPorSede[selectedSemillero.sede]" [value]="facultad">{{ facultad }}</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Grupo de investigación al que está adscrito el semillero (opcional):</label>
+          <input type="text" [(ngModel)]="selectedSemillero.grupoInvestigacion" />
+        </div>
+        <div class="form-row">
+          <label>Misión y visión del semillero:</label>
+          <textarea [(ngModel)]="selectedSemillero.misionVision"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Objetivo general del semillero:</label>
+          <textarea [(ngModel)]="selectedSemillero.objetivoGeneral"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Objetivos específicos del semillero:</label>
+          <textarea [(ngModel)]="selectedSemillero.objetivosEspecificos"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Justificación:</label>
+          <textarea [(ngModel)]="selectedSemillero.justificacion"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Resultados esperados a corto, mediano y largo plazo:</label>
+          <textarea [(ngModel)]="selectedSemillero.resultadosEsperados"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Estrategias de trabajo del semillero:</label>
+          <textarea [(ngModel)]="selectedSemillero.estrategiasTrabajo"></textarea>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'docentes'">
+        <h3>Docentes que dirigen, aportan y/o acompañan el semillero de investigación</h3>
+        <button (click)="addDocente()" class="btn btn-secondary mb-2">Añadir docente</button>
+        <div *ngFor="let docente of selectedSemillero.docentes; let i = index" class="docente-entry">
+          <h4>Docente {{ i + 1 }}</h4>
+          <div class="form-row">
+            <label>Nombre completo:</label>
+            <input type="text" [(ngModel)]="docente.nombreCompleto" />
+          </div>
+          <div class="form-row">
+            <label>Número de identificación:</label>
+            <input type="number" [(ngModel)]="docente.numeroIdentificacion" />
+          </div>
+          <div class="form-row">
+            <label>Título profesional:</label>
+            <input type="text" [(ngModel)]="docente.tituloProfesional" />
+          </div>
+          <div class="form-row">
+            <label>Programa:</label>
+            <select [(ngModel)]="docente.programa">
+              <option value="">Seleccione un programa</option>
+              <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Teléfono de contacto:</label>
+            <input type="number" [(ngModel)]="docente.telefonoContacto" />
+          </div>
+          <div class="form-row">
+            <label>Correo electrónico:</label>
+            <input type="email" [(ngModel)]="docente.correoElectronico" />
+          </div>
+          <button (click)="removeDocente(i)" class="btn btn-danger">Eliminar docente</button>
+          <hr />
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'estudiantes'">
+        <h3>Estudiantes que integran el semillero de investigación</h3>
+        <button (click)="addEstudiante()" class="btn btn-secondary mb-2">Agregar estudiantes</button>
+        <div *ngFor="let estudiante of selectedSemillero.estudiantes; let i = index" class="estudiante-entry">
+          <h4>Estudiante {{ i + 1 }}</h4>
+          <div class="form-row">
+            <label>Número de identificación:</label>
+            <input type="number" [(ngModel)]="estudiante.numeroIdentificacion" />
+          </div>
+          <div class="form-row">
+            <label>Nombres:</label>
+            <input type="text" [(ngModel)]="estudiante.nombres" />
+          </div>
+          <div class="form-row">
+            <label>Apellidos:</label>
+            <input type="text" [(ngModel)]="estudiante.apellidos" />
+          </div>
+          <div class="form-row">
+            <label>Programa académico:</label>
+            <select [(ngModel)]="estudiante.programaAcademico">
+              <option value="">Seleccione un programa</option>
+              <option *ngFor="let programa of programas" [value]="programa">{{ programa }}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Semestre:</label>
+            <input type="number" [(ngModel)]="estudiante.semestre" />
+          </div>
+          <div class="form-row">
+            <label>Fecha de ingreso o vinculación al semillero:</label>
+            <input type="date" [(ngModel)]="estudiante.fechaIngreso" />
+          </div>
+          <div class="form-row">
+            <label>Teléfono de contacto:</label>
+            <input type="number" [(ngModel)]="estudiante.telefonoContacto" />
+          </div>
+          <div class="form-row">
+            <label>Correo electrónico:</label>
+            <input type="email" [(ngModel)]="estudiante.correoElectronico" />
+          </div>
+          <button (click)="removeEstudiante(i)" class="btn btn-danger">Eliminar estudiante</button>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
