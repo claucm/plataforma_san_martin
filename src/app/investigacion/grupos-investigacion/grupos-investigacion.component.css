@@ -1,0 +1,61 @@
+/* Button color classes */
+.btn-color1 {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border: 2px solid #ffb90b !important;
+}
+
+.btn-color1:hover, .btn-color1:focus {
+  background-color: #08304a !important;
+  color: #ffb90b !important;
+  border-color: #ffb90b !important;
+}
+
+.btn-color2 {
+  background-color: #ffb90b !important;
+  color: #0a2e4c !important;
+  border: 2px solid #0a2e4c !important;
+}
+
+.btn-color2:hover, .btn-color2:focus {
+  background-color: #e6a800 !important;
+  color: #0a2e4c !important;
+  border-color: #0a2e4c !important;
+}
+
+/* Tabs styling */
+.nav-tabs .nav-link {
+  color: #ffb90b;
+  background-color: #0a2e4c;
+  border: 1px solid #ffb90b;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0a2e4c;
+  background-color: #ffb90b;
+  border-color: #ffb90b #ffb90b #fff;
+}
+
+/* Nav-pills styling for Productos, Proyectos, Semilleros tabs */
+.nav-pills .nav-link {
+  color: #ffb90b;
+  background-color: #0a2e4c;
+  border: 1px solid #ffb90b;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.nav-pills .nav-link.active {
+  color: #0a2e4c;
+  background-color: #ffb90b;
+  border-color: #ffb90b #ffb90b #fff;
+}
+
+/* Table header styling */
+table.table thead th {
+  background-color: #0a2e4c !important;
+  color: #ffb90b !important;
+  border: 2px solid #ffb90b !important;
+}

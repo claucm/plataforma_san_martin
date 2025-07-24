@@ -21,10 +21,7 @@
           <option *ngFor="let c of convocatorias" [value]="c">{{ c }}</option>
         </select>
       </div>
-      <div class="col-md-6 mb-3">
-        <label for="documento_convocatoria" class="form-label fw-bold">Documento Convocatoria</label>
-        <input type="file" class="form-control" id="documento_convocatoria" (change)="onFileSelected($event)" accept="application/pdf" required>
-      </div>
+      
     </div>
 
     <div class="row" *ngIf="tipoConvocatoria === 'Externa'">

@@ -49,32 +49,6 @@
             </select>
           </div>
 
-          <!-- Campo Sede -->
-          <div class="mb-3">
-            <label for="sede" class="form-label fw-bold">Sede</label>
-            <select class="form-select" id="sede" [(ngModel)]="selectedSede" name="sede" (change)="onSedeChange()">
-              <option value="" selected>Seleccione una sede</option>
-              <option *ngFor="let sede of sedes" [ngValue]="sede">{{ sede.name }}</option>
-            </select>
-          </div>
-
-          <!-- Campo Facultad -->
-          <div class="mb-3">
-            <label for="facultad" class="form-label fw-bold">Facultad</label>
-            <select class="form-select" id="facultad" [(ngModel)]="selectedFacultad" name="facultad" (change)="onFacultadChange()" [disabled]="!selectedSede">
-              <option value="" selected>Seleccione una facultad</option>
-              <option *ngFor="let facultad of facultades" [ngValue]="facultad">{{ facultad.name }}</option>
-            </select>
-          </div>
-
-          <!-- Campo Programa -->
-          <div class="mb-3">
-            <label for="programa" class="form-label fw-bold">Programa</label>
-            <select class="form-select" id="programa" [(ngModel)]="selectedPrograma" name="programa" [disabled]="!selectedFacultad">
-              <option value="" selected>Seleccione un programa</option>
-              <option *ngFor="let programa of programas" [ngValue]="programa">{{ programa.name }}</option>
-            </select>
-          </div>
 
         </div>
   

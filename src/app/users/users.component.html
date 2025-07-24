@@ -89,6 +89,10 @@
             <label>Correo Electrónico</label>
             <input type="email" [(ngModel)]="newUser.email" name="email" required />
           </div>
+          <div class="form-row">
+            <label>Teléfono</label>
+            <input type="number" [(ngModel)]="newUser.phone" name="phone" placeholder="Ingrese teléfono" />
+          </div>
           <div class="form-actions">
             <button type="button" (click)="closeCreateUserModal()">Cancelar</button>
             <button type="submit">Crear</button>
@@ -262,6 +266,10 @@
         <div class="form-row">
           <label>Correo Electrónico</label>
           <input type="email" [(ngModel)]="selectedUser.email" name="email" required />
+        </div>
+        <div class="form-row">
+          <label>Teléfono</label>
+          <input type="text" [(ngModel)]="selectedUser.phone" name="phone" />
         </div>
         <div class="form-actions">
           <button type="reset" (click)="cancelEdit()">Cancelar</button>

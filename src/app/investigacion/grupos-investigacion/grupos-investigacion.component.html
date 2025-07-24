@@ -1,112 +1,780 @@
 <div class="container mt-5">
-    <h2 class="text-start mb-4">Creación y Gestión de Grupos de Investigación</h2>
-    <form class="p-4 border rounded shadow-sm bg-white">
-        <div class="row">
-            <!-- Columna Izquierda -->
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="codigoFUSM" class="form-label fw-bold">Código FUSM</label>
-                    <input type="text" class="form-control" id="codigoFUSM" placeholder="Ingrese el código FUSM" required>
-                </div>
+  <h2 class="text-start mb-4">Creación y Gestión de Grupos de Investigación</h2>
 
-                <div class="mb-3">
-                    <label for="estado" class="form-label fw-bold">Estado</label>
-                    <select class="form-select" id="estado">
-                        <option>Activo</option>
-                        <option>Inactivo</option>
-                    </select>
-                </div>
+  <!-- Button to toggle create group form -->
+  <div class="mb-3">
+    <button class="btn" [ngClass]="isButtonToggled('toggleCreateForm') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('toggleCreateForm'); toggleCreateForm()">
+      {{ showCreateForm ? 'Ocultar Formulario' : 'Crear Grupo de Investigación' }}
+    </button>
+  </div>
 
-                <div class="mb-3">
-                    <label for="clasificacion" class="form-label fw-bold">Clasificación</label>
-                    <select class="form-select" id="clasificacion">
-                        <option>A1</option>
-                        <option>A2</option>
-                        <option>B</option>
-                        <option>C</option>
-                    </select>
-                </div>
+  <!-- Create group form, shown conditionally -->
+  <div *ngIf="showCreateForm" class="p-4 border rounded shadow-sm bg-white mb-4">
+    <form>
+      <div class="row">
+        <!-- Left column -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="codigoFUSM" class="form-label fw-bold">Código FUSM</label>
+            <input type="text" class="form-control" id="codigoFUSM" placeholder="Ingrese el código FUSM" required>
+          </div>
 
-                <div class="mb-3">
-                    <label for="lineaInvestigacion" class="form-label fw-bold">Línea de Investigación FUSM</label>
-                    <select multiple class="form-select" id="lineaInvestigacion">
-                        <option>Línea 1</option>
-                        <option>Línea 2</option>
-                    </select>
-                </div>
-            </div>
+          <div class="mb-3">
+            <label for="estado" class="form-label fw-bold">Estado</label>
+            <select class="form-select" id="estado">
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
 
-            <!-- Columna Derecha -->
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="nombreGrupo" class="form-label fw-bold">Nombre del Grupo</label>
-                    <input type="text" class="form-control" id="nombreGrupo" placeholder="Ingrese el nombre del grupo" required>
-                </div>
+          <div class="mb-3">
+            <label for="clasificacion" class="form-label fw-bold">Clasificación</label>
+            <select class="form-select" id="clasificacion">
+              <option>A1</option>
+              <option>A2</option>
+              <option>B</option>
+              <option>C</option>
+            </select>
+          </div>
 
-                <div class="mb-3">
-                    <label for="fechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
-                    <input type="date" class="form-control" id="fechaCreacion" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingrese una descripción" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label for="areaEstrategica" class="form-label fw-bold">Área Estratégica</label>
-                    <select class="form-select" id="areaEstrategica">
-                        <option>Área 1</option>
-                        <option>Área 2</option>
-                    </select>
-                </div>
-            </div>
+          <div class="mb-3">
+            <label for="lineaInvestigacion" class="form-label fw-bold">Línea de Investigación FUSM</label>
+            <select multiple class="form-select" id="lineaInvestigacion">
+              <option>Línea 1</option>
+              <option>Línea 2</option>
+            </select>
+          </div>
         </div>
 
-        <div class="mb-3">
-            <label for="nombreProducto" class="form-label fw-bold">Nombre Producto</label>
-            <input type="text" class="form-control" id="nombreProducto" placeholder="Ingrese el nombre del producto">
-        </div>
+        <!-- Right column -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="nombreGrupo" class="form-label fw-bold">Nombre del Grupo</label>
+            <input type="text" class="form-control" id="nombreGrupo" placeholder="Ingrese el nombre del grupo" required>
+          </div>
 
-        <div class="row">
-            <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary px-4 mt-3">Crear Grupo</button>
-            </div>
+          <div class="mb-3">
+            <label for="fechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
+            <input type="date" class="form-control" id="fechaCreacion" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingrese una descripción" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="areaEstrategica" class="form-label fw-bold">Área Estratégica</label>
+            <select class="form-select" id="areaEstrategica">
+              <option>Área 1</option>
+              <option>Área 2</option>
+            </select>
+          </div>
         </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombreProducto" class="form-label fw-bold">Nombre Producto</label>
+        <input type="text" class="form-control" id="nombreProducto" placeholder="Ingrese el nombre del producto">
+      </div>
+
+      <div class="row">
+      <div class="col-12 text-center">
+        <button type="submit" class="btn px-4 mt-3" [ngClass]="isButtonToggled('crearGrupo') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('crearGrupo')">Crear Grupo</button>
+      </div>
+      </div>
     </form>
+  </div>
 
-    <!-- Botones -->
-    <div class="row mt-4 text-center">
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalDatosBasicos">Datos Básicos</button>
+  <!-- Table of groups -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Seleccionar</th>
+        <th>Nombre grupo</th>
+        <th>Categoría</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groups">
+        <td>
+<input type="checkbox" [checked]="selectedGroupId === group.id" (change)="onGroupCheckboxChange(group.id, $any($event.target).checked)">
+        </td>
+        <td>{{ group.nombre }}</td>
+        <td>{{ group.categoria }}</td>
+        <td>{{ group.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Tabbed interface for selected group -->
+  <div *ngIf="selectedGroupId !== null" class="mt-4">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'datosBasicos'" href="#" (click)="$event.preventDefault(); setActiveTab('datosBasicos')">Datos básicos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'lineasInvestigacion'" href="#" (click)="$event.preventDefault(); setActiveTab('lineasInvestigacion')">Líneas de investigación</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'integrantes'" href="#" (click)="$event.preventDefault(); setActiveTab('integrantes')">Integrantes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'productosProyectosSemilleros'" href="#" (click)="$event.preventDefault(); setActiveTab('productosProyectosSemilleros')">Productos, proyectos y semilleros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'vinculosExternos'" href="#" (click)="$event.preventDefault(); setActiveTab('vinculosExternos')">Vínculos externos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'documentos'" href="#" (click)="$event.preventDefault(); setActiveTab('documentos')">Documentos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'solicitudes'" href="#" (click)="$event.preventDefault(); setActiveTab('solicitudes')">Solicitudes</a>
+      </li>
+    </ul>
+
+    <div class="tab-content p-3 border border-top-0">
+      <div *ngIf="activeTab === 'datosBasicos'">
+        <h5>Datos básicos</h5>
+        <p>Información básica del grupo seleccionado.</p>
+      </div>
+      <div *ngIf="activeTab === 'lineasInvestigacion'">
+        <h5>Líneas de investigación</h5>
+        <button class="btn btn-sm" [ngClass]="isButtonToggled('agregarLinea') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarLinea'); addLineaInvestigacion()">Agregar Línea</button>
+        <div *ngFor="let linea of lineasInvestigacion; let i = index" class="border p-3 mb-2 rounded">
+          <div class="mb-2">
+            <label>Tipo de línea</label>
+            <select class="form-select" [(ngModel)]="linea.tipo" name="tipo{{i}}">
+              <option *ngFor="let tipo of tiposLinea" [value]="tipo">{{ tipo }}</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label>Nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="linea.nombre" name="nombre{{i}}">
+          </div>
+          <div class="mb-2">
+            <label>Descripción</label>
+            <textarea class="form-control" [(ngModel)]="linea.descripcion" name="descripcion{{i}}"></textarea>
+          </div>
+          <div class="mb-2">
+            <label>Estado</label>
+            <select class="form-select" [(ngModel)]="linea.estado" name="estado{{i}}">
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
         </div>
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalLineaInvestigacion">Línea de Investigación</button>
+      </div>
+      <div *ngIf="activeTab === 'integrantes'">
+        <h5>Integrantes</h5>
+        <button class="btn btn-sm" [ngClass]="isButtonToggled('agregarIntegrante') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarIntegrante'); addIntegrante()">Agregar Integrante</button>
+        <div *ngFor="let integrante of integrantes; let i = index" class="border p-3 mb-2 rounded">
+          <div class="mb-2">
+            <label>Documento de identidad</label>
+            <select class="form-select" [(ngModel)]="integrante.documento" name="documento{{i}}">
+              <option *ngFor="let doc of documentosIdentidad" [value]="doc">{{ doc }}</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label>Nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="integrante.nombre" name="nombre{{i}}">
+          </div>
+          <div class="mb-2">
+            <label>Fecha de vinculación</label>
+            <input type="date" class="form-control" [(ngModel)]="integrante.fechaVinculacion" name="fechaVinculacion{{i}}">
+          </div>
+          <div class="mb-2">
+            <label>Rol</label>
+            <select class="form-select" [(ngModel)]="integrante.rol" name="rol{{i}}">
+              <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <label>Estado</label>
+            <select class="form-select" [(ngModel)]="integrante.estado" name="estado{{i}}">
+              <option>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
         </div>
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalIntegrantes">Integrantes</button>
-        </div>
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalProductos">Productos</button>
+      </div>
+      <div *ngIf="activeTab === 'productosProyectosSemilleros'">
+        <h5>Productos, proyectos y semilleros</h5>
+        <ul class="nav nav-pills mb-3">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeSubTab === 'productos'" href="#" (click)="$event.preventDefault(); setActiveSubTab('productos')">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeSubTab === 'proyectos'" href="#" (click)="$event.preventDefault(); setActiveSubTab('proyectos')">Proyectos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeSubTab === 'semilleros'" href="#" (click)="$event.preventDefault(); setActiveSubTab('semilleros')">Semilleros</a>
+          </li>
+        </ul>
+
+        <div *ngIf="activeSubTab === 'productos'">
+          <button class="btn btn-sm" [ngClass]="isButtonToggled('agregarProducto') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarProducto'); addProducto()">Agregar Producto</button>
+          <input type="text" class="form-control mb-2" placeholder="Filtrar productos" [(ngModel)]="filtroProducto" />
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Fecha de creación</th>
+                <th>Estado</th>
+                <th>Origen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos" (click)="selectProduct(producto)" [class.table-active]="selectedProduct?.codigo === producto.codigo" style="cursor:pointer;">
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.titulo }}</td>
+                <td>{{ producto.fechaCreacion }}</td>
+                <td>{{ producto.estado }}</td>
+                <td>{{ producto.origen }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="selectedProduct" class="border p-3 mt-3 rounded bg-light">
+            <h6>Detalle del Producto</h6>
+            <form>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Código de proyecto o del semillero</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.codigo" name="codigoProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Producto</label>
+                <select class="form-select" [(ngModel)]="selectedProduct.producto" name="productoTipo">
+                  <option value="Tipo 1">Tipo 1</option>
+                  <option value="Tipo 2">Tipo 2</option>
+                  <option value="Tipo 3">Tipo 3</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Tipo de producto</label>
+                <select class="form-select" [(ngModel)]="selectedProduct.tipoProducto" name="tipoProducto">
+                  <option value="Tipo A">Tipo A</option>
+                  <option value="Tipo B">Tipo B</option>
+                  <option value="Tipo C">Tipo C</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Título</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.titulo" name="tituloProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Fecha inicio</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedProduct.fechaInicio" name="fechaInicioProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Fecha terminación</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedProduct.fechaTerminacion" name="fechaTerminacionProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Contenido publicado</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.contenidoPublicado" name="contenidoPublicadoProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">ISBN o ISSN</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.isbnIssn" name="isbnIssnProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">ISI</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.isi" name="isiProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">SCOPUS</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.scopus" name="scopusProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Cuartil</label>
+                <input type="number" class="form-control" [(ngModel)]="selectedProduct.cuartil" name="cuartilProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Página inicial</label>
+                <input type="number" class="form-control" [(ngModel)]="selectedProduct.paginaInicial" name="paginaInicialProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Página final</label>
+                <input type="number" class="form-control" [(ngModel)]="selectedProduct.paginaFinal" name="paginaFinalProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Fecha publicación memorias</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedProduct.fechaPublicacionMemorias" name="fechaPublicacionMemoriasProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Editorial de las memorias</label>
+                <input type="text" class="form-control" [(ngModel)]="selectedProduct.editorialMemorias" name="editorialMemoriasProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">País</label>
+                <select class="form-select" [(ngModel)]="selectedProduct.pais" name="paisProducto">
+                  <option value="Colombia">Colombia</option>
+                  <option value="Argentina">Argentina</option>
+                  <option value="Chile">Chile</option>
+                  <option value="Perú">Perú</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Cargar anexos</label>
+                <input type="file" class="form-control" name="anexosProducto">
+              </div>
+              <div class="mb-2">
+                <label class="form-label fw-bold">Valoración en puntos</label>
+                <input type="number" class="form-control" [(ngModel)]="selectedProduct.valoracionPuntos" name="valoracionPuntosProducto">
+              </div>
+            </form>
+          </div>
         </div>
 
-    
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalVinculos">Vínculos Externos</button>
+        <div *ngIf="activeSubTab === 'proyectos'">
+          <button class="btn btn-sm" [ngClass]="isButtonToggled('agregarProyecto') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarProyecto'); addProyecto()">Agregar Proyecto</button>
+          <input type="text" class="form-control mb-2" placeholder="Filtrar proyectos" [(ngModel)]="filtroProyecto" />
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Fecha de creación</th>
+                <th>Estado</th>
+                <th>Origen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let proyecto of proyectos" (click)="selectProject(proyecto)" [class.table-active]="selectedProject?.codigo === proyecto.codigo" style="cursor:pointer;">
+                <td>{{ proyecto.codigo }}</td>
+                <td>{{ proyecto.titulo }}</td>
+                <td>{{ proyecto.fechaCreacion }}</td>
+                <td>{{ actualizarEstado(proyecto) }}</td>
+                <td>{{ proyecto.origen }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="selectedProject" class="border p-3 mt-3 rounded bg-light">
+            <h6>Detalle del Proyecto</h6>
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Código Proyecto</label>
+                    <input type="text" class="form-control" [value]="selectedProject.codigo" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Título</label>
+                    <input type="text" class="form-control" [value]="selectedProject.titulo" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Estado</label>
+                    <select class="form-select" [(ngModel)]="selectedProject.estado" name="estadoProyecto">
+                      <option>Activo</option>
+                      <option>Finalizado</option>
+                      <option>Expirado</option>
+                    </select>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Convocatoria</label>
+                    <input type="text" class="form-control" [value]="selectedProject.convocatoria" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Duración prevista</label>
+                    <input type="text" class="form-control" [value]="calcularDuracionPrevista(selectedProject)" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Duración más prorrogas</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.duracionProrrogas" name="duracionProrrogas">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Fecha inicio</label>
+                    <input type="date" class="form-control" [value]="selectedProject.fechaInicio" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Fecha terminación</label>
+                    <input type="date" class="form-control" [value]="selectedProject.fechaTerminacion" readonly>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Cumplimiento</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.cumplimiento" name="cumplimiento">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Código Externo</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.codigoExterno" name="codigoExterno">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Investigación formativa</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.investigacionFormativa" name="investigacionFormativa">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Interdisciplinario</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.interdisciplinario" name="interdisciplinario">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Intergrupos</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.intergrupos" name="intergrupos">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Monografías</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.monografias" name="monografias">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Rol FUSM</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedProject.rolFUSM" name="rolFUSM">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Objetivo General</label>
+                    <textarea class="form-control" [(ngModel)]="selectedProject.objetivoGeneral" name="objetivoGeneral"></textarea>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Palabras clave</label>
+                    <textarea class="form-control" [(ngModel)]="selectedProject.palabrasClave" name="palabrasClave"></textarea>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Resumen</label>
+                    <textarea class="form-control" [(ngModel)]="selectedProject.resumen" name="resumen"></textarea>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label fw-bold">Observaciones generales</label>
+                    <textarea class="form-control" [(ngModel)]="selectedProject.observacionesGenerales" name="observacionesGenerales"></textarea>
+                  </div>
+                  <div class="mb-2 text-end">
+                        <button type="button" class="btn" [ngClass]="isButtonToggled('guardarCambios') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('guardarCambios'); saveSelectedProject()">Guardar Cambios</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Modal for creating new project -->
+          <div *ngIf="showCreateProjectForm" class="modal d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Crear Nuevo Proyecto</h5>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="cancelCreateProject()"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Título</label>
+                      <input type="text" class="form-control" [(ngModel)]="newProject.titulo" name="tituloNuevoProyecto" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Fecha inicio</label>
+                      <input type="date" class="form-control" [(ngModel)]="newProject.startDate" name="fechaInicioNuevoProyecto" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Fecha terminación</label>
+                      <input type="date" class="form-control" [(ngModel)]="newProject.endDate" name="fechaTerminacionNuevoProyecto" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Convocatoria</label>
+                      <input type="text" class="form-control" [(ngModel)]="newProject.convocatoria" name="convocatoriaNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Duración más prorrogas</label>
+                      <input type="number" class="form-control" [(ngModel)]="newProject.duracionProrrogas" name="duracionProrrogasNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Código Externo</label>
+                      <input type="text" class="form-control" [(ngModel)]="newProject.codigoExterno" name="codigoExternoNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Investigación formativa</label>
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="newProject.investigacionFormativa" name="investigacionFormativaNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Interdisciplinario</label>
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="newProject.interdisciplinario" name="interdisciplinarioNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Intergrupos</label>
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="newProject.intergrupos" name="intergruposNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Monografías</label>
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="newProject.monografias" name="monografiasNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Rol FUSM</label>
+                      <input type="text" class="form-control" [(ngModel)]="newProject.rolFUSM" name="rolFUSMNuevoProyecto">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Objetivo General</label>
+                      <textarea class="form-control" [(ngModel)]="newProject.objetivoGeneral" name="objetivoGeneralNuevoProyecto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Palabras clave</label>
+                      <textarea class="form-control" [(ngModel)]="newProject.palabrasClave" name="palabrasClaveNuevoProyecto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Resumen</label>
+                      <textarea class="form-control" [(ngModel)]="newProject.resumen" name="resumenNuevoProyecto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Observaciones generales</label>
+                      <textarea class="form-control" [(ngModel)]="newProject.observacionesGenerales" name="observacionesGeneralesNuevoProyecto"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="cancelCreateProject()">Cancelar</button>
+                  <button type="button" class="btn" [ngClass]="isButtonToggled('guardarProyecto') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('guardarProyecto'); saveNewProject()">Guardar Proyecto</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalRedes">Redes</button>
-        </div>
+        <div *ngIf="activeSubTab === 'semilleros'">
+          <button class="btn btn-sm" [ngClass]="isButtonToggled('agregarSemillero') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarSemillero'); addSemillero()">Agregar Semillero</button>
+          <input type="text" class="form-control mb-2" placeholder="Filtrar semilleros" [(ngModel)]="filtroSemillero" />
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Fecha de creación</th>
+                <th>Estado</th>
+                <th>Origen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let semillero of semilleros" (click)="onSelectSemillero(semillero)" style="cursor:pointer;">
+                <td>{{ semillero.codigo }}</td>
+                <td>{{ semillero.titulo }}</td>
+                <td>{{ semillero.fechaCreacion }}</td>
+                <td>{{ semillero.estado }}</td>
+                <td>{{ semillero.origen }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalDocumentos">Documentos</button>
+          <!-- Semillero detail and creation form modal -->
+          <div *ngIf="showCreateSemilleroForm" class="modal d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{ newSemillero.codigo ? 'Editar Semillero' : 'Crear Nuevo Semillero' }}</h5>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="cancelCreateSemillero()"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Código</label>
+                          <input type="number" class="form-control" [(ngModel)]="newSemillero.codigo" name="codigoSemillero" [readonly]="newSemillero.codigo !== null">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Nombre semillero</label>
+                          <input type="text" class="form-control" [(ngModel)]="newSemillero.nombre" name="nombreSemillero">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Fecha de creación</label>
+                          <input type="date" class="form-control" [(ngModel)]="newSemillero.fechaCreacion" name="fechaCreacionSemillero">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Sede</label>
+                          <select class="form-select" [(ngModel)]="newSemillero.sede" name="sedeSemillero">
+                            <option value="">Seleccione</option>
+                            <option value="Sede 1">Sede 1</option>
+                            <option value="Sede 2">Sede 2</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Facultad</label>
+                          <select class="form-select" [(ngModel)]="newSemillero.facultad" name="facultadSemillero">
+                            <option value="">Seleccione</option>
+                            <option value="Facultad 1">Facultad 1</option>
+                            <option value="Facultad 2">Facultad 2</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Estado</label>
+                          <select class="form-select" [(ngModel)]="newSemillero.estado" name="estadoSemillero">
+                            <option>Activo</option>
+                            <option>Inactivo</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Misión</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.mision" name="misionSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Visión</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.vision" name="visionSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Objetivo General</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.objetivoGeneral" name="objetivoGeneralSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Objetivos específicos</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.objetivosEspecificos" name="objetivosEspecificosSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Justificación</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.justificacion" name="justificacionSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Resultados esperados a corto plazo</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.resultadosCortoPlazo" name="resultadosCortoPlazoSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Resultados esperados a mediano plazo</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.resultadosMedianoPlazo" name="resultadosMedianoPlazoSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Resultados esperados a largo plazo</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.resultadosLargoPlazo" name="resultadosLargoPlazoSemillero"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Estrategias de trabajo del semillero</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.estrategiasTrabajo" name="estrategiasTrabajoSemillero"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <h6>Docentes que dirigen, apoyan y/o acompañan el semillero</h6>
+                        <button type="button" class="btn btn-sm btn-primary mb-2" (click)="addDocente()">Agregar Docente</button>
+                        <div *ngFor="let docente of newSemillero.docentes; let i = index" class="border p-2 mb-2 rounded">
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Nro identificación</label>
+                            <input type="text" class="form-control" [(ngModel)]="docente.nroIdentificacion" name="nroIdentificacion{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Nombre completo</label>
+                            <input type="text" class="form-control" [(ngModel)]="docente.nombreCompleto" name="nombreCompleto{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Programa/Facultad</label>
+                            <input type="text" class="form-control" [(ngModel)]="docente.programaFacultad" name="programaFacultad{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Teléfono de contacto</label>
+                            <input type="text" class="form-control" [(ngModel)]="docente.telefonoContacto" name="telefonoContacto{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Correo Electrónico</label>
+                            <input type="email" class="form-control" [(ngModel)]="docente.correoElectronico" name="correoElectronico{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Título profesional</label>
+                            <input type="text" class="form-control" [(ngModel)]="docente.tituloProfesional" name="tituloProfesional{{i}}">
+                          </div>
+                          <button type="button" class="btn btn-danger btn-sm" (click)="removeDocente(i)">Eliminar Docente</button>
+                        </div>
+                        <h6>Estudiantes que integran el semillero</h6>
+                        <button type="button" class="btn btn-sm btn-primary mb-2" (click)="addEstudiante()">Agregar Estudiante</button>
+                        <div *ngFor="let estudiante of newSemillero.estudiantes; let i = index" class="border p-2 mb-2 rounded">
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Nro identificación</label>
+                            <input type="text" class="form-control" [(ngModel)]="estudiante.nroIdentificacion" name="nroIdentificacionEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Nombre completo</label>
+                            <input type="text" class="form-control" [(ngModel)]="estudiante.nombreCompleto" name="nombreCompletoEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Facultad/Programa</label>
+                            <input type="text" class="form-control" [(ngModel)]="estudiante.facultadPrograma" name="facultadProgramaEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Correo electrónico</label>
+                            <input type="email" class="form-control" [(ngModel)]="estudiante.correoElectronico" name="correoElectronicoEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Teléfono</label>
+                            <input type="text" class="form-control" [(ngModel)]="estudiante.telefono" name="telefonoEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Semestre</label>
+                            <input type="number" class="form-control" [(ngModel)]="estudiante.semestre" name="semestreEst{{i}}">
+                          </div>
+                          <div class="mb-2">
+                            <label class="form-label fw-bold">Fecha de ingreso al semillero</label>
+                            <input type="date" class="form-control" [(ngModel)]="estudiante.fechaIngreso" name="fechaIngresoEst{{i}}">
+                          </div>
+                          <button type="button" class="btn btn-danger btn-sm" (click)="removeEstudiante(i)">Eliminar Estudiante</button>
+                        </div>
+                        <h6>Rubrica de evaluación</h6>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Estado</label>
+                          <select class="form-select" [(ngModel)]="newSemillero.rubricStatus" name="rubricStatus">
+                            <option value="">Seleccione</option>
+                            <option value="Cumple">Cumple</option>
+                            <option value="No cumple">No cumple</option>
+                            <option value="Cumple parcialmente">Cumple parcialmente</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label fw-bold">Observaciones</label>
+                          <textarea class="form-control" [(ngModel)]="newSemillero.rubricObservations" name="rubricObservations"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="cancelCreateSemillero()">Cancelar</button>
+                <button type="button" class="btn" [ngClass]="isButtonToggled('guardarSemillero') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('guardarSemillero'); saveNewSemillero()">Guardar Semillero</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-3 mb-2">
-            <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#modalSolicitudes">Solicitudes</button>
+      </div>
+      <div *ngIf="activeTab === 'vinculosExternos'">
+        <h5>Vínculos externos</h5>
+        <form>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="aplicaSwitch" [(ngModel)]="vinculosExternosData.aplica" name="aplica">
+            <label class="form-check-label" for="aplicaSwitch">Sí aplica</label>
+          </div>
+          <div class="mb-3">
+            <label for="entidadExterna" class="form-label">Entidad externa</label>
+            <input type="text" class="form-control" id="entidadExterna" [(ngModel)]="vinculosExternosData.entidadExterna" name="entidadExterna" placeholder="Ingrese entidad externa">
+          </div>
+          <div class="mb-3">
+            <label for="codigoProyecto" class="form-label">Código proyecto</label>
+            <input type="number" class="form-control" id="codigoProyecto" [(ngModel)]="vinculosExternosData.codigoProyecto" name="codigoProyecto" placeholder="Ingrese código del proyecto">
+          </div>
+          <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" [(ngModel)]="vinculosExternosData.titulo" name="titulo" placeholder="Ingrese título">
+          </div>
+          <div class="mb-3">
+            <label for="tipoEntidadExterna" class="form-label">Tipo de entidad externa</label>
+            <select class="form-select" id="tipoEntidadExterna" [(ngModel)]="vinculosExternosData.tipoEntidadExterna" name="tipoEntidadExterna">
+              <option *ngFor="let tipo of tiposEntidadExterna" [value]="tipo">{{ tipo }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="activeTab === 'documentos'">
+        <h5>Documentos</h5>
+        <div class="mb-3">
+          <label for="documentoCarga" class="form-label fw-bold">Cargar Documento</label>
+          <input type="file" class="form-control" id="documentoCarga" name="documentoCarga">
         </div>
+        <button type="button" class="btn" [ngClass]="isButtonToggled('cargarDocumento') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('cargarDocumento')">Cargar Documento</button>
+        <button type="button" class="btn ms-2" [ngClass]="isButtonToggled('agregarDocumento') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('agregarDocumento')">Añadir Más Documentos</button>
+      </div>
+      <div *ngIf="activeTab === 'solicitudes'">
+        <h5>Solicitudes</h5>
+        <form>
+          <div class="mb-3">
+            <label for="textareaSolicitudes" class="form-label fw-bold">Revisión Dirección de Investigación y Extensión</label>
+            <textarea class="form-control" id="textareaSolicitudes" rows="4" placeholder="Escriba su solicitud aquí"></textarea>
+          </div>
+          <button type="button" class="btn" [ngClass]="isButtonToggled('guardarSolicitud') ? 'btn-color2' : 'btn-color1'" (click)="toggleButtonColor('guardarSolicitud')">Enviar Solicitud</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Modal Documentos -->

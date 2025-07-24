@@ -1,3 +1,43 @@
+.gantt-container {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.header,
+.task-row {
+  display: flex;
+  align-items: center;
+}
+
+.task-cell.empty,
+.task-name {
+  width: 100px;
+  text-align: left;
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 4px;
+}
+
+.month-cell {
+  flex: 1;
+  height: 40px;
+  position: relative;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.bar {
+  height: 30px;
+  border-radius: 15px;
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
 .filter-container {
   display: flex;
   gap: 1rem;

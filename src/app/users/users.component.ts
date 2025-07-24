@@ -20,6 +20,7 @@ interface User {
   fullName: string;
   status: 'Activo' | 'Inactivo';
   email: string;
+  phone?: string;
   creationDate: string; // ISO date string
   lastActive: string; // ISO time string
   photoUrl: string;
@@ -124,7 +125,8 @@ export class UsersComponent implements OnInit {
     segundoNombre: '',
     primerApellido: '',
     segundoApellido: '',
-    email: ''
+    email: '',
+    phone: ''
   };
 
   facultadesBySede: { [key: string]: string[] } = {
@@ -457,7 +459,8 @@ export class UsersComponent implements OnInit {
       segundoNombre: '',
       primerApellido: '',
       segundoApellido: '',
-      email: ''
+      email: '',
+      phone: ''
     };
     this.filterUsers();
   }

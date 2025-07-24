@@ -1,19 +1,21 @@
 <div class="container mt-5">
     <h2 class="text-start mb-4">Crear Usuario</h2>
-    <form class="p-4 border rounded shadow-sm bg-white">
+    <form #userForm="ngForm" class="p-4 border rounded shadow-sm bg-white" (ngSubmit)="crearUsuario(userForm)">
       <div class="row">
         <!-- Columna Izquierda -->
         <div class="col-md-6">
           <!-- Campo Nombre -->
           <div class="mb-3">
             <label for="nombre" class="form-label fw-bold">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required [(ngModel)]="nombre" name="nombre" #nombre="ngModel">
+            <div *ngIf="nombre.invalid && nombre.touched" class="text-danger">El nombre es requerido.</div>
           </div>
   
           <!-- Campo Contraseña -->
           <div class="mb-3">
             <label for="password" class="form-label fw-bold">Contraseña</label>
-            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
+            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required [(ngModel)]="password" name="password" #password="ngModel">
+            <div *ngIf="password.invalid && password.touched" class="text-danger">La contraseña es requerida.</div>
           </div>
         </div>
   
@@ -22,13 +24,21 @@
           <!-- Campo Email -->
           <div class="mb-3">
             <label for="email" class="form-label fw-bold">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Ingrese su email" required>
+            <input type="email" class="form-control" id="email" placeholder="Ingrese su email" required [(ngModel)]="email" name="email" #email="ngModel">
+            <div *ngIf="email.invalid && email.touched" class="text-danger">El email es requerido y debe ser válido.</div>
+          </div>
+
+          <!-- Campo Teléfono -->
+          <div class="mb-3">
+            <label for="telefono" class="form-label fw-bold">Teléfono</label>
+<input type="tel" class="form-control" id="telefono" placeholder="Ingrese su teléfono" required [(ngModel)]="telefono" name="telefono" #telefono="ngModel">
+            <div *ngIf="telefono.invalid && telefono.touched" class="text-danger">El teléfono es requerido.</div>
           </div>
   
           <!-- Campo Rol -->
           <div class="mb-3">
             <label for="rol" class="form-label fw-bold">Rol</label>
-            <select class="form-select" id="rol" required>
+            <select class="form-select" id="rol" required [(ngModel)]="rol" name="rol" #rol="ngModel">
               <option value="" disabled selected>Seleccione un rol</option>
               <option value="admin-general">Administrador General de Investigación</option>
               <option value="admin-tecnico">Administrador Técnico</option>
@@ -37,6 +47,7 @@
               <option value="estudiante">Estudiante</option>
               <option value="directivo">Directivo</option>
             </select>
+            <div *ngIf="rol.invalid && rol.touched" class="text-danger">El rol es requerido.</div>
           </div>
         </div>
       </div>
@@ -44,7 +55,7 @@
       <!-- Botón Crear Usuario -->
       <div class="row">
         <div class="col-12 text-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">Crear Usuario</button>
+          <button type="submit" class="btn btn-primary px-4 mt-3" [disabled]="userForm.invalid">Crear Usuario</button>
         </div>
       </div>
     </form>

@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
+import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+
 // Import models to ensure TypeScript recognizes them
 import './models/budget-execution.model';
 import './models/budget-status.model';
@@ -41,6 +43,9 @@ import { InvestigacionModule } from './investigacion/investigacion.module';
     FormsModule,
     RouterModule.forRoot(routes),
     InvestigacionModule
+  ],
+  declarations: [
+    CrearUsuarioComponent
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor]))

@@ -13,7 +13,7 @@ export class ParametrizacionComponent {
   modules = {
     'Usuarios': {
       'tipoIdentificacion': ['CC', 'Pasaporte'],
-      'estado': ['Activo', 'Inactivo'],
+      'estado': ['Abierto', 'Cerrado'],
       'sede': ['Bogotá', 'Cali', 'Pasto', 'Puerto Colombia', 'Sabaneta'],
       'facultad': [
         'Facultad de Ingeniería',
